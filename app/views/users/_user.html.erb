@@ -1,0 +1,66 @@
+<li>
+    
+<%= gravatar_for user, size: 50 %>
+<%= link_to user.name, user %>
+
+<!-- 以下がdeleteボタンと、 -->
+<!-- 自分自身が、管理者　としてログインしてる時に、 -->
+<!-- 自分自身のユーザー名以外の棚に現れる -->
+<!-- 設定。 -->
+
+
+<% if current_user.admin? && !current_user?(user) %>
+
+<!-- ーーーーーー  -->
+<!-- ーー前提ーー  -->
+<!-- ーーーーーー  -->
+
+<!-- admin = value on table (真偽)  -->
+
+<!-- user = variable  -->
+<!-- variableの中に入ってる情報はhush。  -->
+<!-- sessionコントローラーで設定したユーザーの全情報  -->
+
+<!-- current_user = 会員証があるかないかのチェックするアクション(method) -->
+<!-- ではなく、 -->
+<!-- current_user = 相応わしい会員証を、引っ張ってくるアクション(method)  -->
+<!-- つまり、current_user = hush -->
+<!-- current_user.admin?　=　今ログインしてる貴方のhushのadminは、TRUE? FALSE? -->
+
+<!-- ーーーーーー  -->
+<!-- ーー前提ーー  -->
+<!-- ーーーーーー  -->
+
+
+
+<!-- ーーーーーーーーーーー  -->
+<!-- ーーMethodの使い方ーー  -->
+<!-- ーーーーーーーーーーー  -->
+
+<!-- もし、自分自身のvalue がTRUEかFALSEかを確認したい時は、 -->
+<!-- Method(hush).value? -->
+<!-- animal.eye? = "monkey" の "eye"は TRUE ?? -->
+<!-- つまり、 -->
+<!-- current_user.admin?　= "admin" of "current_user" is TRUE ??  -->
+
+
+<!-- もし、２つのvariable(hush) が同じものかを、確認したい時は、 -->
+<!-- A?(B) -->
+<!-- 例：animalが今に相応わしい動物を出力するMethodの場合  -->
+<!-- animal?(monkey) = "monkey" is "animal" ?? (same??) -->
+<!-- つまり、 -->
+<!-- !current_user?(user)　= "user" is not current_user , right ??  -->
+
+<!-- ーーーーーーーーーーー  -->
+<!-- ーーMethodの使い方ーー  -->
+<!-- ーーーーーーーーーーー  -->
+
+
+
+
+| <%= link_to "delete" , user ,method: :delete, data: { confirm: "you sure?" } %>
+<!-- deleteボタン -->
+
+<% end %>
+
+</li>
