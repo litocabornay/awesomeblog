@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+ruby '2.3.4'
+#ルビーのバージョン決める
+
 #CSSとjquery
 gem 'bootstrap'
 gem 'jquery-rails'
@@ -58,7 +61,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+# gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -96,4 +99,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
+  
+  gem 'puma', '2.11.1'
 end
