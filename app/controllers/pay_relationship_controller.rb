@@ -1,6 +1,7 @@
 class PayRelationshipController < ApplicationController
 
-class RelationshipsController < ApplicationController
+#class RelationshipsController < ApplicationController
+ 
   before_action :logged_in_user
   #まずログインしてないと駄目。
 
