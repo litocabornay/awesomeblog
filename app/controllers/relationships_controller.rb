@@ -6,22 +6,13 @@ class RelationshipsController < ApplicationController
   #まずログインしてないと駄目。
 
 
-#ユーザーコントローラーのfollow()と連結
-#実際に実行するのがこっちで、何をするのか決めているがユーザーコントローラー
+
+
   def create
-   user = User.find(params[:followed_id])
-   #followed_id - 誰か
-   current_user.follow(@user)
-   #ユーザーコントローラーのfollow()
-   
-   #java script---
-   respond_to do |format|
-    format.html { redirect_to @user }
-    #作った後、リダイレクト
-    format.js
-   #java script---
-   
-   end
+   @user = User.find(params[:followed_id])
+   current_user.buying(@user)
+   redirect_to @user
+
   end
 
 

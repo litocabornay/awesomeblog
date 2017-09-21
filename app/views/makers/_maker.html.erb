@@ -1,0 +1,7 @@
+<% if current_user.admin? && !current_user?(user) %>
+<li>
+<%= link_to maker.name, maker %>
+| <%= link_to "delete" , maker ,method: :delete, data: { confirm: "you sure?" } %>
+<!-- deleteボタン -->
+</li>
+<% end %>

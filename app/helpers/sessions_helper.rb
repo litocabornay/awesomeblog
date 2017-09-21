@@ -45,7 +45,13 @@ module SessionsHelper
             user = User.find_by(id: user_id)
             # 左に、引数を入れれる
             
-            if user && user.authenticated?(cookies[:remember_token])
+            #if user && user.authenticated?(cookies[:remember_token])
+            # ↓↓↓
+            if user && user.authenticated?(:remember, cookies[:remember_token])
+            #メール認証のための変更
+
+            
+            
             
             #check
             #if user && user.authenticated?(:remember, cookies[:remember_token])        
@@ -62,17 +68,23 @@ module SessionsHelper
                 
             end
         end
+    end  
         
-            
-        #Comment: 
-        #Masa, this causes error
-        #You type: session[:use_id]
-        #it must be--  session[:user_id]
-        #@current_user ||= User.find_by(id: session[:use_id])
-        # @current_user ||= User.find_by(id: session[:user_id])
-        
-        
-    end
+    # def current_detail
+    #     if(user_id = session[:user_id])
+    #         @current_detail ||= Detail.where("user_id = user_id")
+    #     elsif (user_id = cookies.signed[:user_id])
+    #         detail = Detail.where("user_id = user_id")
+    #         if detail
+    #             @current_detail = detail
+    #         end
+    #     end
+    # end
+    
+    
+    
+    
+    
     
     # Return true if the user is logged in, false otherwise.
     #already session in or not(for session)
@@ -106,7 +118,9 @@ module SessionsHelper
         user == current_user
     end
     
-    
+    # def current_detail?(detail)
+    #     detail == current_detail
+    # end
     
     
     
@@ -139,6 +153,9 @@ module SessionsHelper
         # request.get? - GETのアクション(HTTP verbs)を要求したか確認
 
     end
+
+    
+    
     
     
     

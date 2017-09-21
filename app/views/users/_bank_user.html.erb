@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+<% if current_user.admin? && !current_user?(user) %>
+
+<%= user.name %>
+<%= user.money %>
+
+<br>
+<% end %>
+<% end %>

@@ -1,0 +1,344 @@
+<!--<div class="row">-->
+<!--<div class="col-md-6 col-md-offset-3">-->
+<!-- -- -->
+<!--<%#= form_for (@detail) do |f| %>-->
+<!--urlいらない　→　ただのリフレッシュだから-->
+<!-- -- -->
+<%#= render 'shared/error_message', object: f.object  %>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :会社名 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_name, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :会社名【ふりがな】 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_name_sounds, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :代表者名】 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_president, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :代表者名【ふりがな】 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_president_sound, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :郵便番号 %>
+     <b style="color:red;">*</b>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_post_number, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :本社都道府県 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_place, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :本社住所【都道府県以下の住所】 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_place_detail, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :本社tel %>
+     <b style="color:red;">*</b>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :本社fax %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_fax_number, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :支店・店舗名等 %>
+        <%= f.text_field :company_branch, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :区分 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_type, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :所属組合 %>
+     <b style="color:red;">*</b>
+     <small>　所属組合複数の場合は追加分を会社PRに記入</small>
+        <%= f.text_field :company_union, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :ご連絡先担当者名 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_reception, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :ご連絡先担当者名【ふりがな】 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_reception_sound, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者の役職 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_position, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先郵便番号 %>
+     <b style="color:red;">*</b>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_post_number_contact, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先都道府県 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_name_sounds, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先住所 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_place_detail_contact, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先tel %>
+        <b style="color:red;">*</b>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者① %>
+        <%= f.text_field :company_call_number_contact_name_1, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者①連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_1, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者② %>
+        <%= f.text_field :company_call_number_contact_name_2, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者②連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_2, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者③ %>
+        <%= f.text_field :company_call_number_contact_name_3, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者③連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_3, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者④ %>
+        <%= f.text_field :company_call_number_contact_name_4, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者④連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_4, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者⑤ %>
+        <%= f.text_field :company_call_number_contact_name_5, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者⑤連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_5, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者⑥ %>
+        <%= f.text_field :company_call_number_contact_name_6, class: 'form-control' %>
+    </div>
+  </div>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :担当者⑥連絡先電話番号 %>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_contact_tel_6, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+  
+  
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :受付時間 %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_call_time_from_1, class: 'form-control' %>
+        <%= f.text_field :company_call_time_from_2, class: 'form-control' %>
+        <%= f.text_field :company_call_time_to_1, class: 'form-control' %>
+        <%= f.text_field :company_call_time_to_2, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先fax %>
+        <%= f.text_field :company_fax_number_contact, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :緊急連絡先 %>
+     <b style="color:red;">*</b>
+     <small>　半角数字及びハイフン(-)　例123-0001</small>
+        <%= f.text_field :company_call_number_emergency, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :会社ホームページＵＲＬ %>
+        <%= f.text_field :company_url, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :連絡先メールアドレス %>
+     <b style="color:red;">*</b>
+        <%= f.text_field :company_mail_address, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+<!-- -- -->
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :会社ＰＲ %>
+        <%= f.text_field :company_pr, class: 'form-control' %>
+    </div>
+  </div>
+  <br>
+
+<!--    <%#= f.submit "登録する", class: "btn btn-primary" %>-->
+<!-- -- -->
+<!--<%# end %>-->
+<!-- -- -->
+<!--</div>-->
+<!--</div>-->

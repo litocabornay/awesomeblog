@@ -1,0 +1,46 @@
+
+<%= fields_for @flow, new_flow_path do |c| %>
+
+
+<p>現在の残高　<%= @user.money %>　円</p>
+<br>
+<p>会社名　<%= @user.company_name %></p>
+<br>
+<p>口座情報　あとでやる、</p>
+<br>
+
+<%= hidden_field_tag 'company', @user.name  %>
+
+<%= hidden_field_tag 'before_price', @user.money  %>
+
+<p>入金日　
+<%= c.text_field :year_date %>
+　年　
+<%= c.text_field :month_date %>
+　月　
+<%= c.text_field :day_date %>
+　日</p>
+<br>
+
+<p>入金額　
+<%= c.text_field :price %>
+　円</p>
+<br>
+
+<p>担当者名　
+<%= c.text_field :staff %>
+</p>
+<br>
+
+<p>メモ(任意)
+<%= c.text_field :memo %>
+</p>
+<br>
+
+<!--<p>after priceだよん -->
+<!--<%#= c.text_field :after_price %>-->
+<!--</p>-->
+<!--<br>-->
+
+
+<% end %>  

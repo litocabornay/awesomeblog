@@ -1,3 +1,73 @@
-<% provide(:title,"About") %>
-<h1>StaticPages#about</h1>
-<p>Find me in app/views/static_pages/about.html.erb</p>
+<% provide(:title,"詳細") %>
+
+<%= render 'sells/detail' %>
+
+<%= render 'sells/company' %>
+
+<p>
+  種別:　<strong><%= @sell.type_machine %></strong>
+</p>
+<p>
+  機種名:　<strong><%= @sell.name %></strong>
+</p>
+<p>
+  メーカー:　<strong><%= @sell.maker %></strong>
+</p>
+
+<br>
+
+<p>
+  数量:　<strong><%= @sell.number %></strong>
+</p>
+<p>
+  販売価格:　<strong><%= @sell.price %></strong>
+</p>
+<p>
+  １台あたりの価格:　<strong><%= @division %></strong>
+</p>
+
+<br>
+
+<p>
+撤去日:　<strong><%= @sell.remnant %></strong>
+</p>
+<p>
+残債:　<strong><%= @sell.remnant %></strong>
+</p>
+<p>
+前設置:　<strong><%= @sell.place %></strong>
+</p>
+<p>
+使用次:　<strong><%= @sell.stage %></strong>
+</p>
+<p>
+状態:　<strong><%= @sell.condition %></strong>
+</p>
+
+<br>
+
+<p>
+備考:　<strong><%= @sell.remarks %></strong>
+</p>
+
+<br>
+
+<p>
+  状況:　<strong><%= @sell.status %></strong>
+</p>
+
+<p>
+  更新日:　<strong><%= @sell.created_at.strftime("%y年%m月%d日") %></strong>
+</p>
+
+
+
+<p>
+  更:　<strong><%= @details.where("user_id = '1'").company_name %></strong>
+</p>
+
+<!--<p>-->
+<!--  <strong>会社名:</strong>-->
+   <!--<span class="user"><%#= link_to sell.user.name, sell.user %></span>-->
+<!--  <%#= sell.user.name %>-->
+<!--</p>-->

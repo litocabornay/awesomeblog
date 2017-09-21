@@ -1,0 +1,49 @@
+<!--セル情報の一覧のフォーム(並び替え可能)-->
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+      <th width="120">ID<%#= sortable "id", "ID" %></th>
+      <th width="200">開始日時<%#= sortable "create_at", "開始日時" %></th>
+      
+      <th width="200">商品名<%#= sortable "seller_id", "売り手" %></th>
+
+      <th width="200">販売者様<%#= sortable "seller_id", "売り手" %></th>
+
+      <th width="200">希望到着予定日<%#= sortable "date_of_arrive", "到着予定日" %></th>
+      <th width="200">希望個数<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th width="200">希望価格<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th width="200">希望検品納期<%#= sortable "limit_of_inspection", "検品納期" %></th>
+
+    
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+   <% @buyer_one_safes.each do |safe| %>
+   <%# if safe.buyer_id == @current_user %>
+   <% if safe.buyer_id == @user.id %>
+   
+      <tr scope="row">
+       
+        <td><%= safe.id %></td>
+        <td><%= safe.created_at.strftime("%m/%d") %></td>
+        
+        <td><%= @user.company_name %></td>
+        <td><%= safe.sell_id %></td>
+
+        <td><%= safe.date_of_arrive %></td>
+        <td><%= safe.confirm_number %></td>
+        <td><%= safe.confirm_price %></td>
+        <td><%= safe.limit_of_inspection %></td>
+
+ 
+      </tr>
+    <% end %>
+    <% end %>
+    
+ </tbody>
+</table>
+</div>

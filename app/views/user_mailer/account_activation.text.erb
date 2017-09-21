@@ -1,0 +1,13 @@
+<!--メールの中身-->
+
+<%= @user.name %>様、
+
+この度はご登録ありがとうございます。
+
+以下のリンクから、メールアドレスの認証を完了させてください。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
+
+ーーーーー
+発行者：　株式会社 C Relation
+ーーーーー

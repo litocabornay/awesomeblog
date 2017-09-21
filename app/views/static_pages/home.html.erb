@@ -2,49 +2,93 @@
 
 <% if logged_in? %>
   <div class="row">
-    <aside class="col-md-4">
+    <!--<aside class="col-md-4">-->
       
-      <section class="user-info">
-        <%= render 'shared/user_info'%>
-      </section>
+    <!--  <section class="user-info">-->
+    <!--    <%#= render 'shared/user_info'%>-->
+    <!--  </section>-->
       
       
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
+    <!--  <section class="stats">-->
+    <!--    <%#= render 'shared/stats' %>-->
+    <!--  </section>-->
       <!--フォロー、フォロワーのカウント-->
       
       
-      <section class="micropost_form">
-        <%= render 'shared/micropost_form' %>
-      </section>
-    </aside>
+    <!--  <section class="micropost_form">-->
+    <!--    <%#= render 'shared/micropost_form' %>-->
+    <!--  </section>-->
+    <!--</aside>-->
     
-    <div class="col-md-8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
+    
+    
+    
+    
+    <!--<div class="col-md-8">-->
+    <!--  <h3>Micropost Feed</h3>-->
+    <!--  <%#= render 'shared/feed' %>-->
+    <!--</div>-->
+<!--  --  -->
+<!-- sell用 -->
+<!--  --  -->
+
+<div style="width:100%;">
+<h3>パチンコを探す</h3>
+<div class="float">
+<%= link_to '新規投稿', new_sell_path %>
+</div>
+</div>
+
+
+
+<div class="padding1-20"> 
+<%= form_tag(root_url, method: "get") do %>
+<%= label_tag :maker, "メーカーから検索" %>
+<%= select_tag :maker, options_for_select(Sell.makers), include_blank: true %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+<div class="padding1-20"> 
+<%= form_tag(root_url, method: "get") do %>
+<%= label_tag :name, "機器名から検索" %><%= text_field_tag :name, params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+
+
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+
       
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'sells/sell' %>
+    </div>
+     <%#= render 'more' %>
+    <%#= will_paginate @sells %>
+    </div>
+ </div>
+ 
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+
+<!--crrent user自身のデータの表示-->
+<!--  --  -->
+
  </div>
 <!--crrent user自身のデータの表示-->
 <% else %>
 
 <div class="center jumbotron">
-  <h1>Awesome Blog App</h1>
-<%= link_to "Sigh up now!", signup_path, class:"btn btn-lg btn-primary" %>
+<center>
+  <h1>パチンコ売買掲示板！</h1>
+  <br>
+<%= link_to "今すぐ会員登録", signup_path, class:"btn btn-lg btn-primary" %>
 <!--未ログインの場合に-->
-<% end %>
-
-  <p>
-    This is the home page for the Awesome Blog. 
-    <br>
-    This is a project under the <a href="https://kredo.jp/">Kredo Japan</a> and 
-    <a href="http://framgia.ph/">Framgia Philippines</a> training. 
-  </p>
+</center>
 </div>
-
-<%= link_to image_tag("kredo-logo.gif", alt: "KREDO Logo"),
-            'http://kredo.jp/' %>
-
-<%= link_to image_tag("framgia-logo.png", alt: "FRAMGIA Logo"),
-            'http://framgia.ph/' %>
+<% end %>

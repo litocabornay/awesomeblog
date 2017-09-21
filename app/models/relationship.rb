@@ -11,5 +11,6 @@ class Relationship < ActiveRecord::Base
   validates :follower_id, presence: true
   validates :followed_id, presence: true
   #フォローする方もされる方も存在してないといけない
+  #基本的にvalidationってVC-MVCのMVCのMに必ず１つずつある
   
 end

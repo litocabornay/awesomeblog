@@ -1,0 +1,46 @@
+<!--セル情報の一覧のフォーム(並び替え可能)-->
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+      <th width="120"><%= sortable "id", "ID" %></th>
+      <th width="200"><%= sortable "create_at", "開始日時" %></th>
+      <th width="200"><%= sortable "archive", "アーカイブ" %></th>
+      <th width="100"><%= sortable "status", "状況" %></th>
+      <th width="200"><%= sortable "seller_id", "売り手" %></th>
+      <th width="200"><%= sortable "buyer_id", "買い手" %></th>
+      <th width="200"><%= sortable "date_of_arrive", "到着予定日" %></th>
+      <th width="200"><%= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th width="200"><%= sortable "limit_of_inspection", "検品納期" %></th>
+
+      
+      <th colspan="1" width="100"></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% @safes.each do |safe| %>
+      <tr scope="row">
+       
+        <td><%= safe.id %></td>
+        <td><%= safe.created_at.strftime("%m/%d") %></td>
+        <td><%= safe.archive %></td>
+        <td><%= safe.status %></td>
+        <td><%= safe.seller_id %></td>
+        <td><%= safe.buyer_id %></td>
+        <td><%= safe.date_of_arrive %></td>
+        <td><%= safe.confirm_price %></td>
+        <td><%= safe.limit_of_inspection %></td>
+
+ 
+        
+        <td class="red zoom15"><%= link_to 'ＯＫ', edit_safe_path(safe) %></td>
+     
+      
+      </tr>
+    <% end %>
+    
+ </tbody>
+</table>
+</div>

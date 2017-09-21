@@ -1,0 +1,257 @@
+<% provide(:title,"Home") %>
+
+  <div class="row">
+
+<div style="width:100%;">
+<h3>現在、売買進行中の案件</h3>
+<div class="float">
+<%= link_to '新規投稿', new_safe_path %>
+</div>
+</div>
+
+<%= link_to 'show1', user_path(current_user) %>
+
+<h5>①買ー　購入希望中の案件</h5>
+<br>
+
+<br>
+<p>
+販売者様のアクション待ちです。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <!--セル情報の一覧のフォーム(並び替え可能)-->
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+      <th width="120">ID<%#= sortable "id", "ID" %></th>
+      <th width="200">開始日時<%#= sortable "create_at", "開始日時" %></th>
+      <th width="200">アーカイブ<%#= sortable "archive", "アーカイブ" %></th>
+      <th width="100">状況<%#= sortable "status", "状況" %></th>
+      <th width="200">販売者様<%#= sortable "seller_id", "売り手" %></th>
+      <th width="200">購入者様<%#= sortable "buyer_id", "買い手" %></th>
+      <th width="200">到着予定日<%#= sortable "date_of_arrive", "到着予定日" %></th>
+      <th width="200">確定価格<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th width="200">検品納期<%#= sortable "limit_of_inspection", "検品納期" %></th>
+
+      
+      <th colspan="1" width="100"></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+   <% @buyer_one_safes.each do |safe| %>
+   <%# if safe.buyer_id == @current_user %>
+   <% if safe.buyer_id == @user.id %>
+   
+      <tr scope="row">
+       
+        <td><%= safe.id %></td>
+        <td><%= safe.created_at.strftime("%m/%d") %></td>
+        <td><%= safe.archive %></td>
+        <td><%= safe.status %></td>
+        <td><%= safe.seller_id %></td>
+        <td><%= safe.buyer_id %></td>
+        <td><%= safe.date_of_arrive %></td>
+        <td><%= safe.confirm_price %></td>
+        <td><%= safe.limit_of_inspection %></td>
+
+ 
+        
+        <td class="red zoom15"><%= link_to 'ＯＫ', edit_safe_path(safe) %></td>
+     
+      
+      </tr>
+    <% end %>
+    <% end %>
+    
+ </tbody>
+</table>
+</div>
+
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+<h5>①売ー　購入希望一覧</h5>
+<br>
+<p>
+売却許可を出しますか？<br>
+購入者様が購入条件を受けた場合、商品売却となりますので、
+購入者様との直接のやりとりをお勧めいたします。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/seller_one_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+
+
+<h5>②買ー　提案されてる案件</h5>
+<br>
+<p>
+販売者様から提案されている商品を購入されますか？<br>
+購入する場合は"使用可能残高"にお金が入ってる必要があります。<br>
+また購入にあたっては、商品在庫がまだ存在するかを販売者様と直接のやりとりで確認してください。<br>
+万一、間違って購入してしまった場合は、販売者様と連絡を取り返品処理を行ってください。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/buyer_two_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+<h5>②売ー　提案中の案件</h5>
+ <br>
+<p>
+購入者様のアクション待ちです。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/seller_two_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+
+
+
+
+
+<h5>③買ー　検品待ちの案件</h5>
+<br>
+<p>
+商品受け取り後は、検品納期までに検品を行い、
+問題がなければOKボタン、返品する場合はNGボタンを押してください。<br>
+OKボタンを押した時点で販売者様に商品代金が振り込まれ、売買成立となります。<br>
+売買成立後の返品は不可となります。<br>
+また何らかの要因で返品される際は、
+トラブルを避けるために販売者様と直接ご連絡を取るようお願いいたします。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/buyer_three_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+<h5>③売ー　検品待ちの案件</h5>
+ <br>
+<p>
+売却が完了しました。<br>
+到着予定日に届くよう、商品を購入者様の住所へ運送してください。<br>
+運送後は、購入者様のアクション待ちです。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/seller_three_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+
+
+
+
+
+
+
+<h5>④買ー　返品待ちの案件</h5>
+<br>
+<p>
+販売者様との話し合いの後、返品してください。<br>
+商品返品後は、販売者様のアクション待ちです。<br>
+お預かり中の購入代金は、販売者様の返品確認が取れた時点で弊社より返金させていただきます。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/buyer_returner_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+<h5>④売ー　返品待ちの案件</h5>
+<br>
+<p>
+購入者様より商品返品の希望が提出されました。<br>
+返品を確認しましたら、完了ボタンを押してください。<br>
+弊社より購入者様に、預かり済みの購入代金が払い戻しされます。
+</p>
+
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+    <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'safes/seller_returner_safe' %>
+    </div>
+ </div>
+<div class="center padding2" style="width:100%;">
+<%#= paginate @safes %>
+</div>
+
+
+
+
+
+</div>

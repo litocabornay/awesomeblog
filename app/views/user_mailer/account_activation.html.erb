@@ -1,0 +1,17 @@
+<h1>メール認証</h1>
+
+<p><%= @user.name %>様、</p>
+
+<p>
+この度はご登録ありがとうございます。<br>
+以下のリンクから、メールアドレスの認証を完了させてください。
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
+                                                    
+<pre>                                                
+ーーーーー
+発行者：　株式会社 C Relation
+ーーーーー
+</pre> 

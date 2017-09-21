@@ -1,3 +1,37 @@
-<% provide(:title,"Hplp") %>
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<% provide(:title,"index") %>
+<h1>All users</h1>
+
+
+<table class="table sampleTable 
+user">
+  <thead class="thead-inverse">
+    <tr scope="row">
+      
+      <th width="30">ID</th>
+      <th width="150">名前</th>
+      <th width="150">残高</th>
+      <%# if current_user.admin? && !current_user?(user) %>
+      <th width="70">課金</th>
+      <%# end %>
+      
+    </tr>
+  </thead>
+  
+  <tbody>
+   <% @users.each do |user| %>
+   
+      <tr scope="row">
+        
+      <th width="30"><%= user.id %></th>
+      <th width="150"><%= link_to user.name, user %></th>
+      <th width="150">残高：<%= current_user.money %> 円</th>
+      <%# if current_user.admin? && !current_user?(user) %>
+      <th width="70"><%= link_to '課金する', edit_path(user) %></th>
+      <%# end %>
+      
+      </tr>
+      
+    <% end %>
+ </tbody>
+ 
+</table>

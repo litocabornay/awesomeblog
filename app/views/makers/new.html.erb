@@ -1,0 +1,26 @@
+<% provide(:title,"会社情報の登録") %>
+
+<h4>御社様の会社情報をご記入ください。</h4>
+<div class="container">
+  <div class="form-center">
+    <div class="box-whitesmoke">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-3">
+          
+          <% provide(:title,"index") %>
+          <h1>メーカー一覧</h1>
+          <ul class="makers">
+          <%= will_paginate %>
+          <% @makers.each do |user| %>
+          <%= render "makers/maker" %>
+          <% end %>
+          <%= will_paginate %>
+          </ul>
+
+        <%= render 'shared/makers_form' %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

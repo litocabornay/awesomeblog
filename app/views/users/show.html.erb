@@ -1,54 +1,10 @@
-<% provide(:title,"Show") %>
+<% provide(:title,@title) %>
 
-<div class="row">
-  
-  <aside class="col-md4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-    
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
+  <div class="row">
 
-    <!-- フォロー -->
-    
-  </aside>
-        
-        
-  <div class="col-md-8">
-    
-    <%= render 'follow_form' if logged_in? %>
-    
-    <!-- フォローボタン(ログインしてるなら) -->
-    
-    <% if @user.microposts.any? %>
-    <h3>Microposts (<%= @user.microposts.count %>)</h3>
-        <!-- 投稿の数 -->
-    <!-- @user - 今いるページのIDのユーザーの、、 -->
-    
-    <ol class="microposts">
-      
-    <%= render @microposts %>
-    <!-- @micropostは、　@user.microposts.paginate(page: params[:page])　 --> 
-    <!-- つまり、microposts(メイン)の全ての情報--> 
-    <!-- これをrailsが、自動的に、viewのmicropostと繋げる--> 
-    <!-- なぜ判別可能かというと、renderの使い道が、particleファイルのenbeddedのみだから。--> 
-      
-    <!-- 別の方法 --> 
-    <!--%= render "microposts/micropost" %-->
-    
-      
-    </ol>
-    
-    <%= will_paginate @microposts %>
-    <!-- will_paginate @user.microposts.pagenate(page: params[:page])　と同じ意味。 -->
-    
-    
-  <% end %>
-  </div>
-  
+
+<%= render @embedded %>
+
+
+
 </div>

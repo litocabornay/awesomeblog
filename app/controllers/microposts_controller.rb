@@ -62,7 +62,7 @@ end
   # loginする　=　sessionにユーザーIDが入る
   
     
-    def destroy
+def destroy
     # @micropost = current_user.micropost.find(params[:id])
     # ここに直で書いてしまうとバリデーションが効かない。
     
@@ -74,8 +74,9 @@ end
     
     redirect_to request.referrer || root_url
     #どのページでもリダイレクトするためのコピペテンプレ。
+    #request.referrerメソッド
     
-    end
+end
 
 private
 

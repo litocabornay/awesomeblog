@@ -1,0 +1,12 @@
+<% provide(:title,"index") %>
+<h1>金フロー 一覧</h1>
+
+<ul class="users">
+<%#= will_paginate %>
+<% @flows.each do |flow| %>
+
+<%= render flow %>
+
+<% end %>
+<%#= will_paginate %>
+</ul>

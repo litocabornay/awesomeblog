@@ -1,0 +1,123 @@
+<% provide(:title, "Edit user") %>
+<h1>仮想BANK入金</h1>
+<h4>リアル銀行振込を仮想BANKへ、手動で入金反映させるページ</h4>
+<br>
+<div class="container">
+  <div class="form-center">
+    <div class="box-whitesmoke">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-3">
+     
+     
+     
+<%#= form_for @hoge, url: '/hoge_create' do |f| %>
+    <%#= f.hidden_field :befo, :value => "@user.money" %>
+    <%#= f.text_field :afte %>
+    <%#= f.hidden_field :money, :value => :befo + :afte %>
+    <%#= f.submit %>
+<%# end %>
+
+
+
+
+<%= form_for(@user) do |f| %>
+<%= render 'shared/error_message', object: f.object %>
+
+<p>会社名　<%= @user.name %></p>
+<br>
+
+<%#= fields_for @flow, new_flow_params do |c| %>
+<%#= c.hidden_field :user, :name, :class = 'company' %>
+<%# end %> 
+
+<p>口座情報　あとでやる、</p>
+<br>
+
+<p>現在の使用可能額　<%= @user.money %>　円</p>
+<br>
+
+<%#= fields_for @flow, new_flow_params do |c| %>
+<%#= c.hidden_field :user, :money, :class = 'before_price' %>
+<%# end %> 
+
+
+<%#= @user.reccent_deposit %>
+<%#= f.hidden_field :befo, :value => "@user.money" %>
+<%#= f.text_field :reccent_deposit %>
+
+<p>入金日　
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :year_date %>
+<% end %> 
+　年　
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :month_date %>
+<% end %> 
+　月　
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :day_date %>
+<% end %> 
+　日</p>
+<br>
+
+<p>入金額　
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :price %>
+<% end %>
+　円</p>
+<br>
+
+<p>変更後の額　
+<%#= f.text_field :money %>
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :after_price %>
+<% end %> 
+　円</p>
+<br>
+
+
+
+<p>担当者名　
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :staff %>
+<% end %> 
+</p>
+<br>
+
+<p>メモ(任意)
+<%= fields_for @flow, new_flow_params do |c| %>
+<%= c.text_field :memo %>
+<% end %>
+　円</p>
+<br>
+
+<%#= f.hidden_field :money, :value => add(:befo,:money) %>
+<%= f.submit "変更する", class: "btn btn-primary" %>
+<% end %>     
+
+<br>
+<br>
+<%= link_to '戻る', "/bss/" %>
+
+              
+          <%#= form_for(@user) do |f| %>
+            <!--%= render 'shared/error_messages' %-->
+          <%#= @user.name %>
+          <%#= render 'shared/error_message', object: f.object %>
+          
+          
+          <%#= f.label :money %>
+          <%#= f.text_field :money, class: 'form-control' %>
+          
+          
+          <%#= f.submit "加算する", class: "btn btn-primary" %>
+          <%# end %>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

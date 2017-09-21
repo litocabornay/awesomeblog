@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  archive: false
+  status: 1
+  seller_id: 1
+  buyer_id: 1
+  date_of_arrive: MyString
+  confirm_price: 1
+  limit_of_inspection: MyString
+
+two:
+  archive: false
+  status: 1
+  seller_id: 1
+  buyer_id: 1
+  date_of_arrive: MyString
+  confirm_price: 1
+  limit_of_inspection: MyString

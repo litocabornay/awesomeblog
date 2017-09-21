@@ -1,0 +1,22 @@
+<h1>管理用サイト</h1>
+
+<h2>全会員詳細ページ</h2>
+
+<ul class="users">
+
+<%= will_paginate %>
+
+  <% @details.each do |detail| %>
+
+<%= render detail %>
+
+  <% end %>
+  
+  <%= will_paginate %>
+  
+</ul>
+
+<%= link_to '登録', new_detail_path %>
+
+
+

@@ -1,0 +1,48 @@
+<% provide(:title, "Edit user") %>
+<h1>仮想BANK入金</h1>
+<h6>リアル銀行振込を仮想BANKへ、手動で入金反映させるページ</h6>
+<br>
+<div class="container">
+  <div class="form-center">
+    <div class="box-whitesmoke">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-3">
+
+
+      <%= form_for @user, :url => "/static_pages/confirm" do |f| %>
+
+
+      <p>現在の残高　<%= @user.money %>　円</p>
+      <p>現在の未入金　<%= @user.money_yet %>　円</p>
+
+
+      <%= f.text_field :money %>
+
+      <%= f.button "送信", class: "btn btn-primary", html: {onclick: "this.form.txx2.value=this.form.txx1.value; this.form.txx3.value=this.form.txx1.value;"} %>
+      
+ 
+ 
+ <input name="txx1" type=text ><br>
+<input type="button" value="↓" onclick="this.form.money_yet.value=this.form.txx1.value;">
+
+
+      <%= f.text_field :money_yet %>
+      
+<input name="money_yet" type=text disabled="disabled" >
+
+<% end %> 
+
+
+
+
+
+<br>
+<br>
+<%= link_to '戻る', "/bss/" %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

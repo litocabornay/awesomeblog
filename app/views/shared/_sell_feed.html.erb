@@ -1,0 +1,34 @@
+
+<table class="type06">
+  <thead>
+    <tr>
+      <th>Isbn</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Publish</th>
+      <th>Published</th>
+      <th>Publish</th>
+      <th>Published</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+
+
+  <tbody>
+    
+    <tr>
+        <td><%= @sell.name %></td>
+        <td><%= @sell.maker %></td>
+        <td><%= @sell.user.name %></td>
+        <td><%= @sell.user.email %></td>
+        <td><%= @sell.number %></td>
+        <td><%= link_to 'Show', @sell %></td>
+        <td><%#= link_to 'Edit', edit_sell_path(@sell.id) %></td>
+        <td><%= link_to 'Destroy', @sell, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+
+
+
+</tbody>
+</table>

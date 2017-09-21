@@ -1,0 +1,31 @@
+<% @sells.each do |sell| %>
+      <tr scope="row">
+        <%#= sell.user.name %>
+        <%#= sell.user.detail.company_name %>
+        <%#= sell.created_at %>
+        <%#= I18n.l(sell.created_at, format: :long) %>
+        <td><%= sell.created_at.strftime("%m/%d") %></td>
+        <td><%= sell.status %></td>
+        <td><%= sell.place %></td>
+        <td><%= sell.maker %></td>
+        <td><%= sell.name %></td>
+        <td><%= sell.number %></td>
+        <td><%= sell.type_machine %></td>
+        <td><%= sell.price %></td>
+        <td><%= sell.removal_date %></td>
+        <td><%= sell.remnant %></td>
+        <td><%= sell.stage %></td>
+        <td><%= sell.condition %></td>
+        <td><%= sell.remarks %></td>
+        
+     
+        <td class="red"><%= link_to '詳細', sell %></td>
+        
+      <% if current_user.admin? %>
+        <td><%= link_to '編集', edit_sell_path(sell) %></td>
+        
+      <% end %>
+     
+      
+      </tr>
+    <% end %>

@@ -1,0 +1,23 @@
+<% provide(:title,"index") %>
+<h1>All users</h1>
+
+<ul class="users">
+
+<%= will_paginate %>
+
+  <% @users.each do |user| %>
+
+<li>
+<%= link_to user.id, user %>
+<%= link_to user.name, user %>
+<%= link_to user.money, user %>
+<% if current_user.admin? && !current_user?(user) %>
+| <%= link_to '課金する', edit_sell_path(sell) %>
+<% end %>
+</li>
+
+  <% end %>
+  
+  <%= will_paginate %>
+  
+</ul>

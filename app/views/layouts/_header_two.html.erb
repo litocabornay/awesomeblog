@@ -1,0 +1,55 @@
+<nav class="navbar navbar-toggleable-sm bg-faded navbar-light fixed-top fixed-top-2">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar1">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand">One</a>
+    <div class="navbar-collapse collapse" id="navbar1">
+        <ul class="navbar-nav">
+            
+             <% if logged_in? %>
+                      <li class="nav-item money_box">
+                        使用可能残高：  <%= current_user.money %> 円
+                        <%#= link_to "Help", help_path %>
+                      </li>
+                      <li class="nav-item money_box">
+                        入金予定残高：  <%= current_user.money_yet %> 円
+                        <%#= link_to "Help", help_path %>
+                      </li>
+             <% end %>
+                      
+                      
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 
+dark
+-->
+<nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand">Two</a>
+    <div class="navbar-collapse collapse" id="navbar2">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">リンク <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Linっっっs</a>
+            </li>
+        </ul>
+    </div>
+</nav>
