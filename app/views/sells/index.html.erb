@@ -1,2 +1,40 @@
-<% provide(:title,"ind") %>
-<h1>sellのtop</h1>
+<% provide(:title,"機器一覧") %>
+
+<h1>機器一覧</h1>
+<div class="row">
+   
+<div class="padding1-20"> 
+<%= form_tag(root_url, method: "get") do %>
+<%= label_tag :maker, "メーカーから検索" %>
+<%= select_tag :maker, options_for_select(Sell.makers), include_blank: true %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+<div class="padding1-20"> 
+<%= form_tag(root_url, method: "get") do %>
+<%= label_tag :name, "機器名から検索" %><%= text_field_tag :name, params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+
+
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+
+      
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'sells/sell' %>
+    </div>
+     <%#= render 'more' %>
+    <%#= will_paginate @sells %>
+    </div>
+ </div>
+ 
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+</div>
