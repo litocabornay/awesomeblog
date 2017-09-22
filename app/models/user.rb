@@ -170,32 +170,32 @@ class User < ActiveRecord::Base
   # ただし、既存ユーザーはすでにデータが存在するため、
   # allow_nil: true　でemptyでもOK。
   
-  validates :company_name, presence: true
-  validates :company_name_sounds, presence: true
-  validates :company_reception, presence: true
-  validates :company_president, presence: true
-  validates :company_president_sound, presence: true
-  validates :company_post_number, presence: true
-  validates :company_place, presence: true
-  validates :company_place_detail, presence: true
-  validates :company_call_number, presence: true
-# validates :company_fax_number, presence: true
-# validates :company_branch, presence: true
-  validates :company_type, presence: true
-  validates :company_union, presence: true
-  validates :company_reception_sound, presence: true
-  validates :company_position, presence: true
-  validates :company_post_number_contact, presence: true
-  validates :company_call_time_from_1, presence: true
-  validates :company_call_time_from_2, presence: true
-  validates :company_call_time_to_1, presence: true
-  validates :company_call_time_to_2, presence: true
-# validates :company_fax_number_contact, presence: true
-  validates :company_call_number_emergency, presence: true
-# validates :company_url, presence: true
-  validates :company_mail_address, presence: true
-  validates :company_place_detail_contact, presence: true
-# validates :company_pr, presence: true
+#   validates :company_name, presence: true
+#   validates :company_name_sounds, presence: true
+#   validates :company_reception, presence: true
+#   validates :company_president, presence: true
+#   validates :company_president_sound, presence: true
+#   validates :company_post_number, presence: true
+#   validates :company_place, presence: true
+#   validates :company_place_detail, presence: true
+#   validates :company_call_number, presence: true
+# # validates :company_fax_number, presence: true
+# # validates :company_branch, presence: true
+#   validates :company_type, presence: true
+#   validates :company_union, presence: true
+#   validates :company_reception_sound, presence: true
+#   validates :company_position, presence: true
+#   validates :company_post_number_contact, presence: true
+#   validates :company_call_time_from_1, presence: true
+#   validates :company_call_time_from_2, presence: true
+#   validates :company_call_time_to_1, presence: true
+#   validates :company_call_time_to_2, presence: true
+# # validates :company_fax_number_contact, presence: true
+#   validates :company_call_number_emergency, presence: true
+# # validates :company_url, presence: true
+#   validates :company_mail_address, presence: true
+#   validates :company_place_detail_contact, presence: true
+# # validates :company_pr, presence: true
 
   # after
 
