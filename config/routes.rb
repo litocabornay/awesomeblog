@@ -1,14 +1,32 @@
 Rails.application.routes.draw do
 
-  # get 'pay_relationship/create'
-  # get 'pay_relationship/destroy'
+get '/signup', to: 'users#new'
+post '/signup', to: 'users#create'
+#userでsignupというアドレスを作る
+
+get '/login', to:'sessions#new'
+post '/login', to:'sessions#create'
+delete '/logout', to:'sessions#destroy'
+#sessionsでlogin、logoutというアドレスを作る
 
 root 'static_pages#home'
+get '/slot', to: 'static_pages#slot', as:'slot'
+get '/extra', to: 'static_pages#extra', as:'extra'
+
+get 'sells/slot', to: 'sells#slot', as:'slot_sells'
+get 'sells/extra', to: 'sells#extra', as:'extra_sells'
+
+
+get '/sells/:id/show', to: 'sells#show', as:'show'
+get '/sells/show_slot/:id/', to: 'sells#show_slot', as:'show_slot'
+get '/sells/show_extra/:id/', to: 'sells#show_extra', as:'show_extra'
+
+
+
 
 get '/sells/:id/make_safe', to:'sells#make_safe', as:'edit_sells'
 
-
-get 'users/:id/show_safe', to:'users#show_safe', as:'show'
+# get 'users/:id/show_safe', to:'users#show_safe', as:'show'
 
 get '/selluser/:id/', to:'sellusers#show', as:'sellshow'
 
@@ -20,46 +38,35 @@ get '/bss/', to:'static_pages#index', as:'index'
 get '/about/:id/', to: 'static_pages#about' ,as:'about'
 
 
-
-
 get 'inquiry' => 'inquiry#index'              # 入力画面
 post 'inquiry/confirm' => 'inquiry#confirm'   # 確認画面
 post 'inquiry/thanks' => 'inquiry#thanks'     # 送信完了画面
   
   
   
-  
-
 get 'users/:id/moneyedit', to: 'users#moneyedit' ,as:'moneyedit'
 
-
-get '/suggestion/:id/', to: 'sells#home' ,as:'home'
-
-
-get '/contact', to: 'static_pages#contact' ,as:'contact'
+# get 'pay_relationship/create'
+# get 'pay_relationship/destroy'
+# get '/suggestion/:id/', to: 'sells#home' ,as:'home'
+#get '/contact', to: 'static_pages#contact' ,as:'contact'
 #static_pagesはresourcesがないから、１つずつ設定しないといけない
+# controller :portal do
+#   get "index" => :index
+#   get "more"  => :more
+# end
 
-get '/signup', to: 'users#new'
-post '/signup', to: 'users#create'
-#userでsignupというアドレスを作る
 
-get '/login', to:'sessions#new'
-post '/login', to:'sessions#create'
-delete '/logout', to:'sessions#destroy'
-#sessionsでlogin、logoutというアドレスを作る
 
 
 get '/', to:'sells#new'
 post '/', to:'sells#create'
-delete '/', to:'sells#destroy'
+# delete '/', to:'sells#destroy'
 
 get '/admin/money', to:'bank#users'
 
 
-  # controller :portal do
-  #   get "index" => :index
-  #   get "more"  => :more
-  # end
+
    
 
 resources :users do
@@ -130,7 +137,6 @@ resources :password_resets,     only: [:new, :create, :edit, :update]
   
   resources :users
   resources :sells
-  resources :safes
   resources :banks
   
   resources :deposits, only: [:index, :edit, :update]

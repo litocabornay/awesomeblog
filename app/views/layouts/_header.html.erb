@@ -34,9 +34,9 @@
                       <!--  <li class="right_menu menu_box"><%#= link_to "管理画面", "/admin" %></li> -->
                       <!--<%# end %>-->
                        
-                        <li class="right_menu menu_box"><%= link_to "機器を探す", "/" %></li> 
+                        <li class="right_menu menu_box"><%= link_to "探す", "/" %></li> 
                         
-                        <li class="right_menu menu_box"><%= link_to "投稿する", new_sell_path %></li> 
+                        <li class="right_menu menu_box"><%= link_to "投稿", new_sell_path %></li> 
                        
                         <!--<li class="dropdown">-->
                         <!--  <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
@@ -86,7 +86,7 @@
                       
                       <% if logged_in? %>
 
-                      <div class="right_menu menu_box"><%= link_to "ＵＳＥＲ承認", "/admin/", :class => 'orange' %></div> 
+                      <!--<div class="right_menu menu_box"><%#= link_to "ＵＳＥＲ承認", "/admin/", :class => 'orange' %></div> -->
                             
                       <div class="right_menu menu_box"><%= link_to "ＢＡＮＫ反映", "/bss/", :class => 'orange' %></div> 
                       
@@ -131,8 +131,9 @@
    
                       
                       <% if logged_in? %>
-                      
-                      <div class="right_menu menu_box"></div> 
+<div class="right_menu menu_box"></div> 
+
+                      <div class="right_menu menu_box"><%= link_to "投稿する", "/sells/new" , :class => 'orange' %></div>
 
                       <div class="right_menu menu_box"><%= link_to "進行中の売買", buyer_user_path(current_user) , :class => 'orange' %></div> 
                       <!--safe-->

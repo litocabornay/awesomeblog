@@ -1,8 +1,5 @@
 <!--セル情報の一覧のフォーム(並び替え可能)-->
 <div class="width_table">
-
-
-   
 <table class="table font-small sampleTable small-zoom">
   <thead class="thead-inverse">
     <tr scope="row">
@@ -14,7 +11,14 @@
       <th width="170"><%= sortable "maker", "メーカー" %></th>
       <th width="300"><%= sortable "name", "物件名" %></th>
       <th width="100"><%= sortable "number", "数量" %></th>
-      <th width="100"><%= sortable "type_machine", "種別" %></th>
+      <th width="100">
+        
+        <%#= sortable "type_machine", "種別" %>
+        <%= sortable "cylinder", "シリンダー" %>
+        
+        </th>
+      
+      
       <th width="150"><%= sortable "price", "価格" %></th>
       <th width="150"><%= sortable "removal_date", "撤去日" %></th>
       <th width="100"><%= sortable "remnant", "残債" %></th>
@@ -24,13 +28,16 @@
       
       <th colspan="1" width="100"></th>
       
-
+      <% if current_user.admin? %>
+      <th colspan="1" width="100"></th>
+      <% end %>
       
     </tr>
   </thead>
   <tbody>
+   <% @sells.each do |sell| %>
+
    
- <% @sells.each do |sell| %>  
       <tr scope="row">
         <%#= sell.user.name %>
         <%#= sell.user.detail.company_name %>
@@ -42,7 +49,7 @@
         <td><%= sell.maker %></td>
         <td><%= sell.name %></td>
         <td><%= sell.number %></td>
-        <td><%= sell.type_machine %></td>
+        <td><%= sell.cylinder %></td>
         <td><%= sell.price.to_s(:delimited) %>円</td>
         <td><%= sell.removal_date %></td>
         <td><%= sell.remnant %></td>
@@ -53,13 +60,15 @@
      
         <td class="red zoom15"><%= link_to '詳細', sell %></td>
         
-      <% if sell.id == current_user %>
+      <% if current_user.admin? %>
         <td class="red zoom15"><%= link_to '編集', edit_sell_path(sell) %></td>
+        
       <% end %>
+     
+      
       </tr>
       
       
-
     <% end %>
     
  </tbody>

@@ -2,7 +2,7 @@ class SafesController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :edit, :update]
   # before_action :correct_user, only: [:index, :show, :new, :create, :edit, :edit, :update]
   
-  before_action :set_current_user, only: [:index]
+  # before_action :set_current_user, only: [:index]
   
 # def set_current_user
 #     User.current = current_user
@@ -12,17 +12,20 @@ class SafesController < ApplicationController
 
 
 def index
-  # @safes = Safe.all
+  @safes = Safe.paginate(page: params[:page]) 
+  
+  # @seller = Safe.seller_id
+  # @buyer = Safe.buyer_id
+  # @sell =  Safe.sell_id
+  
+  # @seller = User.find(@seller)
+  # @buyer = User.find(@buyer)
+  # @sell = Sell.find(@sell)
 
   # def set_current_user
   #     User.current = current_user
   # end
 
-  #使えない
-  #@user = User.find(params[:id])
-  
-  #使える
-  #@users =User.paginate(page: params[:page]) 
 
   
   # @safes = Safe.one.seller_correct_user
@@ -31,14 +34,14 @@ def index
 # @safe.current_user = current_user
 
  
-  @seller_one_safes = Safe.one.seller_correct_user
-  @buyer_one_safes = Safe.one.buyer_correct_user
-  @seller_two_safes = Safe.two.seller_correct_user
-  @buyer_two_safes = Safe.two.buyer_correct_user
-  @seller_three_safes = Safe.three.seller_correct_user
-  @buyer_three_safes = Safe.three.buyer_correct_user
-  @seller_returner_safes = Safe.returner.seller_correct_user
-  @buyer_returner_safes = Safe.returner.buyer_correct_user
+  @seller_one_safes = Safe.one
+  @buyer_one_safes = Safe.one
+  @seller_two_safes = Safe.two
+  @buyer_two_safes = Safe.two
+  @seller_three_safes = Safe.three
+  @buyer_three_safes = Safe.three
+  @seller_returner_safes = Safe.returner
+  @buyer_returner_safes = Safe.returner
   
   store_location
 

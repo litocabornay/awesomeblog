@@ -168,7 +168,7 @@ class UsersController < ApplicationController
     
     if @flow.save
       
-    # @money = @flow.after_price
+      @money = @flow.after_price
       @money1 = @flow.price
       @price = @user.money
       @money2 = @money1 + @price

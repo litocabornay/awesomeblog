@@ -1,14 +1,45 @@
 <% provide(:title,"ユーザー一覧") %>
-<h1>All users</h1>
+<h1>ユーザー一覧</h1>
 
-<ul class="users">
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
+
+<thead>
+
+<tr scope="row"> 
+
+
+  <th width="400">社名</th>
+  
+  <td width="400">代表</td></td>
+  
+  <td width="400">TEL</td>
+  
+  <td width="400">登録日</td>
+  
+  <td width="100">
+詳細
+  </td>
+  
+<%# if current_user.admin? %>
+<!--  <td width="100">-->
+<!--削除-->
+<!--  </td>-->
+<%# end %>
+
+
+</thead>
+
 
 <%#= will_paginate %>
-
+<tbody>
 <% @users.each do |user| %>
+</tbody>
 <%= render user %>
+
 <% end %>
   
 <%#= will_paginate %>
   
-</ul>
+</table>
+</div>

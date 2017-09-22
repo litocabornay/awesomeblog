@@ -270,12 +270,17 @@ padding: 0 7% 0 0;
   padding: 0 8px;
 }
 
+
 .navbar a {
   color: #D5D5D5;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
   margin-right: 8px;
+}
+
+.navbar_center a {
+  color: gray;
 }
 
 .navbar-fixed-top {
@@ -507,3 +512,58 @@ padding: 8px;
 //   float:right;
 // }
 
+
+
+.parent{
+  float: left;
+  // border: 1px solid #aaa;
+    position: relative;
+    height: 150px;
+    width: 350px;
+}
+
+.parent_air{
+  float: left;
+  // border: 1px solid #aaa;
+    position: relative;
+    height: 1px;
+    width: 350px;
+}
+
+
+.box {
+	float: left;
+ width:250px;
+ height:100px;
+ text-align: center;
+// border: 1px solid #aaa;
+ top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: auto;
+}
+
+.boxContainer {
+	overflow: hidden;
+ text-align: center;
+      margin: auto;
+}
+
+
+/* clearfix */
+.boxContainer:before,
+.boxContainer:after {
+    content: "";
+    display: table;
+}
+ 
+.boxContainer:after {
+    clear: both;
+}
+ 
+/* For IE 6/7 (trigger hasLayout) */
+.boxContainer {
+    zoom: 1;
+}

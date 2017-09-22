@@ -1,5 +1,5 @@
 
-<h4>パチンコ機器の詳細</h4>
+<h4>スロット機器の詳細</h4>
 
 <!--セル情報の一覧のフォーム(並び替え可能)-->
 <div class="width_table">
@@ -43,7 +43,7 @@
       <!--<th>ユーザーの会社名前</th>-->
 
       <th width="80"><%= sortable "number", "数量" %></th>
-      <th width="80"><%= sortable "type_machine", "種別" %></th>
+      <th width="80"><%= sortable "cylinder", "シリンダー" %></th>
       <th width="120"><%= sortable "price", "価格" %></th>
       <th width="150"><%= sortable "removal_date", "撤去日" %></th>
       <th width="80"><%= sortable "remnant", "残債" %></th>
@@ -60,7 +60,7 @@
         <%#= I18n.l(sell.created_at, format: :long) %>
 
         <td><%= @sell.number %></td>
-        <td><%= @sell.type_machine %></td>
+        <td><%= @sell.cylinder %></td>
         <td><%= @sell.price %></td>
         <td><%= @sell.removal_date %></td>
         <td><%= @sell.remnant %></td>

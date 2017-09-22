@@ -16,52 +16,96 @@
   <br>
   <div class="row">
     <div class="large-12 columns width100">
-     <%= f.label :メーカー %>
+     <%= f.label :メーカーから検索 %>
      <br>
        <%#= f.collection_select :maker, Maker.all, :name, :name %>
 
        <%= f.select :maker, 
        [
-       ["愛喜", "愛喜"], 
-       ["アビリット", "アビリット"], 
-       ["アムテックス", "アムテックス"],
-       ["エース電研", "エース電研"],
-       ["Aーgon", "Aーgon"],
+       ["アイウィル", "アイウィル"], 
+       ["ＩＧＴ", "ＩＧＴ"], 
+       ["アイ電子", "アイ電子"],
+       ["アクロス", "アクロス"],
+       ["アスワン東京", "アスワン東京"],
+       ["アトム", "アトム"],
+       ["アビリット", "アビリット"],
+       ["アリストクラート", "アリストクラート"],
+       ["アルゼ", "アルゼ"],
+       ["アルチザン", "アルチザン"],
+       ["イープレイ", "イープレイ"],
+       ["イレブン", "イレブン"],
+       ["エール", "エール"],
        ["ＥＸＣＩＴＥ", "ＥＸＣＩＴＥ"],
-       ["奥村", "奥村"],
-       ["オッケー", "オッケー"],
+       ["ＳＮＫプレイモア", "ＳＮＫプレイモア"],
+       ["エマ", "エマ"],
+       ["エレコ", "エレコ"],
+       ["エンターライズ", "エンターライズ"],
+       ["オーイズミ", "オーイズミ"],
+       ["岡崎産業", "岡崎産業"],
        ["オリンピア", "オリンピア"],
+       ["オルカ", "オルカ"],
+       ["北電子", "北電子"],
        ["京楽", "京楽"],
        ["銀座", "銀座"],
+       ["KPE", "KPE"],
+       ["コルモ", "コルモ"],
        ["サミー", "サミー"],
        ["三共", "三共"],
-       ["サンスリー", "サンスリー"],
-       ["サンケイR＆D", "サンケイR＆D"],
+       ["三協電子", "三協電子"],
+       ["SANKO", "SANKO"],
        ["三洋", "三洋"],
-       ["ジェイビー", "ジェイビー"],
+       ["ＪＳＩ", "ＪＳＩ"],
+       ["ジェイピーエス", "ジェイピーエス"],
+       ["ＪＩＮ", "ＪＩＮ"],
+       ["スター", "スター"],
+       ["スパイキー", "スパイキー"],
+       ["清龍ジャパン", "清龍ジャパン"],
+       ["ソフィア", "ソフィア"],
        ["大一", "大一"],
-       ["大都技研", "大都技研"],
+       ["大都技研", "大都技研"], 
+       ["タイヨー", "タイヨー"], 
        ["タイヨーエレック", "タイヨーエレック"],
-       ["高尾", "高尾"],
        ["高砂電器産業", "高砂電器産業"],
-       ["竹屋", "竹屋"],
-       ["大和工業", "大和工業"],
-       ["大和製作所", "大和製作所"],
-       ["トビー", "トビー"],
-       ["豊丸", "豊丸"],
+       ["DAXEL", "DAXEL"],
+       ["中京遊技", "中京遊技"],
+       ["デージー", "デージー"],
+       ["ディ・ライト", "ディ・ライト"],
+       ["デンケン販売", "デンケン販売"],
+       ["トリビー", "トリビー"],
+       ["トロージャン", "トロージャン"],
        ["七匠", "七匠"],
+       ["ニイガタ電子", "ニイガタ電子"],
        ["西陣", "西陣"],
+       ["ニュー・モンキー", "ニュー・モンキー"],
        ["ニューギン", "ニューギン"],
-       ["PーCUBE", "PーCUBE"],
+       ["ネイチャー・アセスメント", "ネイチャー・アセスメント"],
+       ["ネット", "ネット"],
+       ["ハイライツ・エンタテインメント", "ハイライツ・エンタテインメント"],
+       ["バルテック", "バルテック"],
+       ["パイオニア", "パイオニア"],
+       ["パラジェーピー", "パラジェーピー"],
+       ["パレス興業", "パレス興業"],
+       ["ビーム", "ビーム"],
        ["ビスティ", "ビスティ"],
+       ["ファースト", "ファースト"],
+       ["フォープ", "フォープ"],
+       ["藤興", "藤興"],
        ["藤商事", "藤商事"],
+       ["ブリッジ", "ブリッジ"],
        ["平和", "平和"],
        ["ベルコ", "ベルコ"],
-       ["まさむら", "まさむら"],
-       ["マルホン", "マルホン"],
+       ["マツヤ", "マツヤ"],
        ["ミズホ", "ミズホ"],
        ["メーシー", "メーシー"],
        ["メーシー販売", "メーシー販売"],
+       ["ヤーマ", "ヤーマ"],
+       ["山佐", "山佐"],
+       ["遊人", "遊人"],
+       ["ユニバーサルエンターテインメント", "ユニバーサルエンターテインメント"],
+       ["ユニバーサルブロス", "ユニバーサルブロス"],
+       ["ラスター", "ラスター"],
+       ["リックコーポレーション", "リックコーポレーション"],
+       ["ロデオ", "ロデオ"],
        ["その他", "その他"]
        ], :required => true %>
     </div>
@@ -76,15 +120,6 @@
   <br>
   <div class="row">
     <div class="large-12 columns">
-     <%= f.label :種別 %>
-     <br>
-        <%= f.radio_button :type_machine, "本体", {:checked => true}  %> 本体 </label>
-        <%= f.radio_button :type_machine, "セル" %> セル </label>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="large-12 columns">
      <%= f.label :数量〔半角英数字〕 %>
         <%= f.text_field :number, class: 'form-control', :required => true %>
     </div>
@@ -93,7 +128,7 @@
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :売却価格〔半角英数字〕 %>
-        <%= f.text_field :price, class: 'form-control', :required => true  %>
+        <%= f.text_field :price, class: 'form-control', :required => true %>
       <small class="red1">※１台あたりの価格ではございません。
       <br>上記でご入力いただいた数量の
       トータルの価格をご記入ください。</small>
@@ -113,42 +148,49 @@
        ["中国", "中国"],
        ["四国", "四国"],
        ["九州", "九州"]
-       ], :required => true  %>
+       ], :required => true %>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :撤去日（すでに撤去済みの場合は”撤去済み”と入力ください） %>
-        <%= f.text_field :removal_date, class: 'form-control', :required => true  %>
+        <%= f.text_field :removal_date, class: 'form-control', :required => true %>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :残債 %>
-        <%= f.radio_button :remnant, "あり", {:checked => true}  %> あり 
-        <%= f.radio_button :remnant, "無し" %> 無し 
+        <%= f.radio_button :remnant, "あり", {:checked => true}  %> あり </label>
+        <%= f.radio_button :remnant, "無し" %> 無し </label>
     </div>
   </div>
   <br>
   
+    <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :シリンダー %>
+        <%= f.radio_button :cylinder, "あり", {:checked => true}  %> あり </label>
+        <%= f.radio_button :cylinder, "無し" %> 無し </label>
+    </div>
+  </div>
+  <br>
   
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :使用次 %>
-        <%= f.radio_button :stage, "１次", {:checked => true}  %> １次 
-        <%= f.radio_button :stage, "２次" %> ２次 
+        <%= f.radio_button :stage, "１次", {:checked => true}  %> １次 </label>
+        <%= f.radio_button :stage, "２次" %> ２次 </label>
     </div>
   </div>
   <br>
-  
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :状態 %>
-        <%= f.radio_button :condition, "A", {:checked => true} %> A(ほぼ新品同様) 
-        <%= f.radio_button :condition, "B" %> B(多少汚れあり) 
-        <%= f.radio_button :condition, "C" %> C(多少整備必要) 
+        <%= f.radio_button :condition, "A", {:checked => true}  %> A(ほぼ新品同様) </label>
+        <%= f.radio_button :condition, "B" %> B(多少汚れあり) </label>
+        <%= f.radio_button :condition, "C" %> C(多少整備必要) </label>
     </div>
   </div>
   <br>

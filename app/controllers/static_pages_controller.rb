@@ -22,7 +22,7 @@ class StaticPagesController < ApplicationController
     
     #@sells = Sell.all.order(sort_column + ' ' + sort_direction)
     #@users =User.where(all: ort_column + ' ' + sort_direction)   
-    @sells = Sell.all.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    @sells = Sell.where("content_type = 'パチンコ'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     #@sells =Sell.paginate(page: params[:page]) 
     
     
@@ -78,8 +78,25 @@ class StaticPagesController < ApplicationController
 
   end
   
-      
+  def slot
+    @sells = Sell.where("content_type = 'スロット'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    if params[:name].present? 
+    @sells = @sells.get_by_name params[:name]
+    end
+    if params[:maker].present?
+    @sells = @sells.get_by_maker params[:maker]
+    end
+  end  
 
+  def extra
+    @sells = Sell.where("content_type = 'その他'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    if params[:name].present? 
+    @sells = @sells.get_by_name params[:name]
+    end
+    if params[:maker].present?
+    @sells = @sells.get_by_maker params[:maker]
+    end
+  end  
 
   def about
     @sell = Sell.find(params[:id])

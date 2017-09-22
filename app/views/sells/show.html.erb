@@ -1,9 +1,13 @@
-<% provide(:title,"詳細") %>
+<% provide(:title,"パチンコ機器の詳細") %>
 
-<%= render 'sells/detail' %>
+
+
+<%#= @sell.content_type %>
+<%= render @embeded_place %>
 <%= render 'sells/company' %>
 
-
+<%= link_to '戻る', "/" %>
+<%= link_to '戻る', sell_make_safe_path(current_user) %>
 
 <!--<p>-->
 <!--  <strong>会社名:</strong>-->

@@ -1,17 +1,40 @@
-<% provide(:title,"index") %>
-<h1>ユーザー 一覧　(バンク)</h1>
+<% provide(:title,"BANK反映") %>
+<h1>仮想BANK入金</h1>
+<h6>リアル銀行振込を仮想BANKへ、手動で入金反映させるページ</h6>
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
 
-<ul class="users">
+<thead>
 
+<tr scope="row"> 
+  <th width="100"></th>
+
+  <th width="600">社名</th>
+  
+  <td width="200">使用可能残高</td>
+  
+  <td width="200">入金予定残高</td>
+  
+  <td width="200">入金</td>
+
+</thead>
+
+
+<tbody>
+ 
 <% @users.each do |user| %>
 <% if current_user.admin? && !current_user?(user) %>
-<%= user.name %>
-<%= user.money %>
-<%= link_to "入金", edit_static_page_path(user) %>
-
-<br>
+<tr scope="row"> 
+  <th width="200" class="zoom15"><%= user.id %></th>
+  <th width="600" class="zoom15"><%= link_to user.company_name, user %></th>
+  <td width="200" class="zoom15"><%= user.money.to_s(:delimited) %>円</td>
+  <td width="200" class="zoom15"><%= user.money_yet.to_s(:delimited) %>円</td>
+  <td width="200" class="zoom15"><%= link_to "入金", edit_static_page_path(user) %></td>
+<tr>
 <% end %>
 <% end %>
 
-  
-</ul>
+</tbody>
+
+</table>
+</div>

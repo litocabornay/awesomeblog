@@ -1,7 +1,7 @@
 #class User < ApplicationRecord
 class User < ActiveRecord::Base
  
- before_update :calculate_profit
+# before_update :calculate_profit
  
 # def self.current
 #     Thread.current[:user]
@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
 #   end
 
 
-  def calculate_profit
-    self.money ||= self.money + self.reccent_deposit
+  # def calculate_profit
+  #   self.money ||= self.money + self.reccent_deposit
 
-  end
+  # end
   
   
   

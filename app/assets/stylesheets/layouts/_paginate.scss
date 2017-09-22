@@ -1,6 +1,5 @@
 .pagination { padding: 0px; margin: 0px; zoom:0.6; } 
-.pagination a { padding: 10px 15px 10px 15px; margin: 2px; border: 1px solid #aaaadd; text-decoration: none; color: #000099; } 
+.pagination a { padding: 10px 15px 10px 15px; margin: 2px; border: 1px solid #e9573f; text-decoration: none; color: #e9573f; } 
 .pagination a:hover, 
-.pagination a:active { border: 1px solid #000099; color: #000; } 
-.pagination span.current { padding: 10px 15px 10px 15px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; } 
-// .pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd; }
+.pagination a:active { border: 1px solid #e9573f; color: #000; } 
+.pagination span.current { padding: 10px 15px 10px 15px; margin: 2px; border: 1px solid #e9573f; font-weight: bold; background-color: #e9573f; color: #FFF; } 

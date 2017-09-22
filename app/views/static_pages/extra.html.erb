@@ -1,0 +1,120 @@
+<% provide(:title,"その他を探す") %>
+
+<% if logged_in? %>
+  <div class="row">
+
+<div style="width:90%; margin:0 5% 0 5%; ">
+
+<h3>その他を探す</h3>
+
+
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2">
+<nav class="navbar nav_wide navbar_center">
+
+<div class="right_menu menu_box"></div> 
+
+<div class="right_menu menu_box"><%= link_to "パチンコ", "/" , :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"><%= link_to "スロット", "/slot", :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"><%= link_to "その他", "/extra", :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"></div> 
+
+</nav>
+</div>
+</div>
+
+<br>
+
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+
+<div class="parent"> 
+<div class="box"> 
+<%= form_tag("/extra/", method: "get") do %>
+<%= label_tag :type_machine, "種目から検索　" %>
+<%= select :sell, :type_machine, [
+       ["両替・カード発券機関連", "両替・カード発券機関連"], 
+       ["ＣＲユニット・玉貸サンド関連", "ＣＲユニット・玉貸サンド関連"], 
+       ["メダルサンド関連", "メダルサンド関連"],
+       ["トランス関連", "トランス関連"],
+       ["データ表示機関連", "データ表示機関連"],
+       ["計数機関連", "計数機関連"],
+       ["洗浄機関連", "洗浄機関連"],
+       ["セキュリティ関連", "セキュリティ関連"],
+       ["ホールコンピュータ・ポス関連", "ホールコンピュータ・ポス関連"],
+       ["その他", "その他"]
+       ] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+</div>
+
+
+<div class="parent"> 
+<div class="box"> 
+<%= form_tag("/extra/", method: "get") do %>
+<%= label_tag :name, "機器名から検索　" %><%= text_field_tag :name, params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+</div>
+
+<div class="parent"> 
+<div class="box">
+<%= paginate @sells %>
+</div>
+</div>
+
+</div>
+
+
+      
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'sells/sell3' %>
+    </div>
+     <%#= render 'more' %>
+    <%#= will_paginate @sells %>
+    </div>
+ </div>
+ 
+ <div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+ 
+  <div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+ 
+ <div class="parent"> 
+<div class="box"> 
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+</div>
+</div>
+
+
+  <div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+
+</div>
+
+<!--crrent user自身のデータの表示-->
+<!--  --  -->
+
+ </div>
+<!--crrent user自身のデータの表示-->
+<% else %>
+
+<div class="center jumbotron">
+<center>
+  <h1>パチスロ売買掲示板！</h1>
+  <br>
+<%= link_to "今すぐ会員登録", signup_path, class:"btn btn-lg btn-primary" %>
+<!--未ログインの場合に-->
+</center>
+</div>
+<% end %>

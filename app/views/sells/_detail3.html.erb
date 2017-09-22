@@ -1,0 +1,64 @@
+
+<h4>その他物品の詳細</h4>
+
+<!--セル情報の一覧のフォーム(並び替え可能)-->
+<div class="width_table">
+<table class="table font-small sampleTable">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+
+      <th width="80"><%= sortable "status", "状況" %></th>
+
+      <th width="350"><%= sortable "type_machine", "種別" %></th>
+
+      <th width="350"><%= sortable "name", "物件名" %></th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+      <tr scope="row">
+
+
+        <td><%= @sell.status %></td>
+
+        <td><%= @sell.type_machine %></td>
+        
+        <td><%= @sell.name %></td>
+
+      </tr>
+ </tbody>
+</table>
+</div>
+
+
+<div class="width_table">
+<table class="table font-small sampleTable">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+      <th width="100"><%= sortable "created_at", "更新日" %></th>
+      <th width="100"><%= sortable "place", "前設置" %></th>
+      <th width="80"><%= sortable "number", "数量" %></th>
+      <th width="150"><%= sortable "price", "価格" %></th>
+      <th width="100"><%= sortable "removal_date", "撤去日" %></th>
+
+      <th width="200"><%= sortable "remarks", "備考" %></th>
+
+    </tr>
+  </thead>
+  <tbody>
+      <tr scope="row">
+
+        <td><%= @sell.created_at.strftime("%m/%d") %></td>
+        <td><%= @sell.place %></td>
+        <td><%= @sell.number %></td>
+        <td><%= @sell.price.to_s(:delimited) %>円</td>
+        <td><%= @sell.removal_date %></td>
+
+        <td><%= @sell.remarks %></td>
+      </tr>
+ </tbody>
+</table>
+</div>

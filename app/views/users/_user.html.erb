@@ -1,15 +1,29 @@
-<li>
-    
-<%#= gravatar_for user, size: 50 %>
-<%= link_to user.name, user %>
 
+<tr scope="row"> 
+  <th width="300"><%= link_to user.company_name, user %></th>
+  <td width="300"><%= user.company_president %></td>
+  <td width="300"><%= user.company_call_number %></td>
+  <td width="300"><%= user.created_at.strftime("%y/%m/%d") %></td>
+  <td width="300"><%= link_to "詳細", user %></td>
+  <!--<td width="300">-->
+<%# if current_user.admin? && !current_user?(user) %>
+<%#= link_to "BAN" , user ,method: :delete, data: { confirm: "本当にこのユーザーを削除しますか？" } %>
+<%# end %>
+  <!--</td>-->
+<tr>
+
+
+
+
+
+
+
+
+<%#= gravatar_for user, size: 50 %>
 <!-- 以下がdeleteボタンと、 -->
 <!-- 自分自身が、管理者　としてログインしてる時に、 -->
 <!-- 自分自身のユーザー名以外の棚に現れる -->
 <!-- 設定。 -->
-
-
-<% if current_user.admin? && !current_user?(user) %>
 
 <!-- ーーーーーー  -->
 <!-- ーー前提ーー  -->
@@ -57,10 +71,3 @@
 
 
 
-
-| <%= link_to "delete" , user ,method: :delete, data: { confirm: "you sure?" } %>
-<!-- deleteボタン -->
-
-<% end %>
-
-</li>

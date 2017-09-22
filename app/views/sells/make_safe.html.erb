@@ -9,7 +9,7 @@
 <%= f.text_field :confirm_number , :placeholder => '例：5'%>台</p>
 <br>
 
-<p>希望の商品価格（手数料２％を含めない）（梱包料・送料などを含める）
+<p>希望の商品価格（梱包料・送料などを含める）
 <%= f.text_field :confirm_price , :placeholder => '例：300,000'%>円</p>
 <br>
 
@@ -26,4 +26,4 @@
 <p>最終的な確定情報を決めるのは販売者様になりますで、<br>
 入力していただいた数値は、あくまでも提案の数値になります。</p>
 <br>
-<%= link_to '戻る', show_sell_path %>
+<%= link_to '戻る', "/safe" %>

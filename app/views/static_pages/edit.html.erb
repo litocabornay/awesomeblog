@@ -1,6 +1,6 @@
-<% provide(:title, "Edit user") %>
+<% provide(:title, "仮想BANK入金") %>
 <h1>仮想BANK入金</h1>
-<h4>リアル銀行振込を仮想BANKへ、手動で入金反映させるページ</h4>
+<h6>リアル銀行振込を仮想BANKへ、手動で入金反映させるページ</h6>
 <br>
 <div class="container">
   <div class="form-center">
@@ -13,13 +13,13 @@
 
 <%= render "flows/new" %>
 
-<p>変更後の額　
+<!--<p>変更後の額　-->
 <%#= f.text_field :money %>
-　円</p>
+　<!--円</p>-->
 <br>
 
 <!--フォームで何も送信されないとそれもバグになる-->
-<%= f.submit "変更する", class: "btn btn-primary" %>
+<%= f.submit "変更する", class: "btn btn-primary", data: { disable_with: "変更中..." } %>
 <% end %>     
 
 <br>

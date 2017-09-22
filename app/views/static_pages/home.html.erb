@@ -1,4 +1,4 @@
-<% provide(:title,"Home") %>
+<% provide(:title,"トップページ") %>
 
 <% if logged_in? %>
   <div class="row">
@@ -32,36 +32,123 @@
 <!-- sell用 -->
 <!--  --  -->
 
-<div style="width:100%;">
+<div style="width:90%; margin:0 5% 0 5%; ">
+
 <h3>パチンコを探す</h3>
-<div class="float">
-<%= link_to '新規投稿', new_sell_path %>
+
+
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2">
+<nav class="navbar nav_wide navbar_center">
+
+<div class="right_menu menu_box"></div> 
+
+<div class="right_menu menu_box"><%= link_to "パチンコ", "/", :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"><%= link_to "スロット", "/slot", :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"><%= link_to "その他", "/extra", :class => 'orange' %></div> 
+
+<div class="right_menu menu_box"></div> 
+
+</nav>
 </div>
+
 </div>
 
 
 
-<div class="padding1-20"> 
+<!--<div class="float">-->
+<%#= link_to '新規投稿', new_sell_path %>
+<!--</div>-->
+
+<br>
+
+
+
+
+
+
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+
+<div class="parent"> 
+<div class="box"> 
+
 <%= form_tag(root_url, method: "get") do %>
-<%= label_tag :maker, "メーカーから検索" %>
-<%= select_tag :maker, options_for_select(Sell.makers), include_blank: true %>
+<%= label_tag :maker, "メーカーから検索" %> <br>
+<%= select :sell, :maker, [
+       ["愛喜", "愛喜"], 
+       ["アビリット", "アビリット"], 
+       ["アムテックス", "アムテックス"],
+       ["エース電研", "エース電研"],
+       ["Aーgon", "Aーgon"],
+       ["ＥＸＣＩＴＥ", "ＥＸＣＩＴＥ"],
+       ["奥村", "奥村"],
+       ["オッケー", "オッケー"],
+       ["オリンピア", "オリンピア"],
+       ["京楽", "京楽"],
+       ["銀座", "銀座"],
+       ["サミー", "サミー"],
+       ["三共", "三共"],
+       ["サンスリー", "サンスリー"],
+       ["サンケイR＆D", "サンケイR＆D"],
+       ["三洋", "三洋"],
+       ["ジェイビー", "ジェイビー"],
+       ["大一", "大一"],
+       ["大都技研", "大都技研"],
+       ["タイヨーエレック", "タイヨーエレック"],
+       ["高尾", "高尾"],
+       ["高砂電器産業", "高砂電器産業"],
+       ["竹屋", "竹屋"],
+       ["大和工業", "大和工業"],
+       ["大和製作所", "大和製作所"],
+       ["トビー", "トビー"],
+       ["豊丸", "豊丸"],
+       ["七匠", "七匠"],
+       ["西陣", "西陣"],
+       ["ニューギン", "ニューギン"],
+       ["PーCUBE", "PーCUBE"],
+       ["ビスティ", "ビスティ"],
+       ["藤商事", "藤商事"],
+       ["平和", "平和"],
+       ["ベルコ", "ベルコ"],
+       ["まさむら", "まさむら"],
+       ["マルホン", "マルホン"],
+       ["ミズホ", "ミズホ"],
+       ["メーシー", "メーシー"],
+       ["メーシー販売", "メーシー販売"],
+       ["その他", "その他"]
+       ], include_blank: true %>
+  <%= submit_tag "検索" %>
+  <% end %>
+
+
+
+<%#= form_tag(root_url, method: "get") do %>
+<%#= label_tag :maker, "メーカーから検索　" %>
+<%#= select_tag :maker, options_for_select(Sell.makers), include_blank: true %>
+<%#= submit_tag "検索" %>
+
+</div>
+</div>
+
+
+<div class="parent"> 
+<div class="box"> 
+<%= form_tag(root_url, method: "get") do %>
+<%= label_tag :name, "機器名から検索　" %>
+<%= text_field_tag :name, params[:name] %>
 <%= submit_tag "検索" %>
 <% end %>
 </div>
-
-<div class="padding1-20"> 
-<%= form_tag(root_url, method: "get") do %>
-<%= label_tag :name, "機器名から検索" %><%= text_field_tag :name, params[:name] %>
-<%= submit_tag "検索" %>
-<% end %>
 </div>
 
-
-
-<div class="center padding2" style="width:100%;">
+<div class="parent"> 
+<div class="box"> 
 <%= paginate @sells %>
 </div>
+</div>
 
+</div>
       
    <div class="width_container">
     <div class="col-md-8 ">
@@ -72,8 +159,27 @@
     </div>
  </div>
  
+ <div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+ 
+  <div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+ 
+ <div class="parent"> 
+<div class="box"> 
 <div class="center padding2" style="width:100%;">
 <%= paginate @sells %>
+</div>
+</div>
+</div>
+
+
+  <div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+
 </div>
 
 <!--crrent user自身のデータの表示-->
@@ -85,7 +191,7 @@
 
 <div class="center jumbotron">
 <center>
-  <h1>パチンコ売買掲示板！</h1>
+  <h1>パチスロ売買掲示板！</h1>
   <br>
 <%= link_to "今すぐ会員登録", signup_path, class:"btn btn-lg btn-primary" %>
 <!--未ログインの場合に-->
