@@ -265,9 +265,6 @@ class User < ActiveRecord::Base
   end
   
   
-  
-  
-  
   def remember
    self.remember_token = User.new_token
   #

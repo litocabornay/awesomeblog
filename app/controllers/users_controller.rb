@@ -121,9 +121,7 @@ class UsersController < ApplicationController
     #　→これで、DBに情報入れれる状態にする
     
 
-    #Try1
-    # @user.save
-    #Try2
+
    if @user.save
 
     UserMailer.account_activation(@user).deliver_now

@@ -27,6 +27,7 @@ module SessionsHelper
     # SESSION持ってる　= loginしてる　=　current_user持ってる。
     # SESSION持ってない　= loginしてない　=　current_user持ってない。
     
+    
     def current_user
         
         if(user_id = session[:user_id])

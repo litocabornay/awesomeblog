@@ -45,7 +45,6 @@ class SessionsController < ApplicationController
   # end
   
   
-  
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     #該当するemail探す　→variableに入れる
