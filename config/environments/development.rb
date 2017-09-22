@@ -16,44 +16,20 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   #config.action_mailer.raise_delivery_errors = false
   
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  host = 'https://c-relation.herokuapp.com'
   
+  ####### MASA
   
-  config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
-  }
+  #   #メールは必ず送られないといけない
+  # config.action_mailer.raise_delivery_errors = true
   
+  # config.action_mailer.delivery_method = :test
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  #メールは必ず送られないといけない
-  config.action_mailer.raise_delivery_errors = true
-  
-  config.action_mailer.delivery_method = :test
-  
-  #送り先(俺ら)の情報
-  #host = 'practice-ruby-jizokm.c9users.io'     # Cloud IDE
-  #config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  #or
-  host = 'localhost:3000'                     # Local server
-  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+  # #送り先(俺ら)の情報
+  # #host = 'practice-ruby-jizokm.c9users.io'     # Cloud IDE
+  # #config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  # #or
+  # host = 'localhost:3000'                     # Local server
+  # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
 
 
