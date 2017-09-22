@@ -125,25 +125,34 @@ class UsersController < ApplicationController
     # @user.save
     #Try2
    if @user.save
-     # INSERTと同じ
+
+    UserMailer.account_activation(@user).deliver_now
+      
+    @user.send_activation_email  #SENDGRID
+      
+    flash[:info] = "Please check your email to activate your account."
+    redirect_to root_url
+
+    
+    # INSERTと同じ
     #.save →  DBに情報入れた
      
 
-    UserMailer.account_activation(@user).deliver_now
-    #メールを送る
+    # UserMailer.account_activation(@user).deliver_now
+    # #メールを送る
      
-    #log_in @user
-    #sessionヘルパーで定義したやつ
+    # #log_in @user
+    # #sessionヘルパーで定義したやつ
     
-    #remember @user 
+    # #remember @user 
 
-     flash[:success] = "認証メールを送信いたしました。ご確認ください。"
-    #ポップアップ
+    # flash[:success] = "認証メールを送信いたしました。ご確認ください。"
+    # #ポップアップ
      
      
-     redirect_to root_url
-    #前　ー　その情報のところにいく　=SHOWページにいく
-    #メール認証追加後　ー　トップへ飛ぶ設定
+    # redirect_to root_url
+    # #前　ー　その情報のところにいく　=SHOWページにいく
+    # #メール認証追加後　ー　トップへ飛ぶ設定
      
      
    else

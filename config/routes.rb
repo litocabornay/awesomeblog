@@ -122,10 +122,8 @@ resources :microposts, only: [:create, :destroy]
 resources :relationships, only: [:create, :destroy]
 
 resources :account_activations, only: [:edit]
-#メール認証
 
 resources :password_resets,     only: [:new, :create, :edit, :update]
-
 
   namespace :admin do
   # get '/admin/sells'
@@ -151,10 +149,6 @@ resources :password_resets,     only: [:new, :create, :edit, :update]
   #resources :users
   get '/users/:id/edit', to:'users#edit', as:'edit_users'
   end
-
-
-
-
 
 
 

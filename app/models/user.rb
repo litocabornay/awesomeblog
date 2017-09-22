@@ -32,9 +32,11 @@ class User < ActiveRecord::Base
 #以下はパスワード再設定のためです。—————
 #以下はメール認証のためです。—————
 #—————  
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   #メールアドレス小文字変換
+  
   before_create :create_activation_digest
   #一時的なランダム文字列（トークン）を発行
 
