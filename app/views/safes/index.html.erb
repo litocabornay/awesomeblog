@@ -16,16 +16,17 @@
   <thead class="thead-inverse">
     <tr scope="row">
 
-      <th class="width5vw smart2">ID<%#= sortable "id", "ID" %></th>
+      <th class="width5vw">ID</th>
       
-      <th class="width5vw smart2">機器番号<%#= sortable "id", "ID" %></th>
+      <!--<th class="width5vw smart2">機器番号</th>-->
       
-      <th class="width5vw smart2">登録日時<%#= sortable "create_at", "開始日時" %></th>
-      <th class="width20vw">最終更新<%#= sortable "seller_id", "売り手" %></th>
-      <th class="width10vw smart2">機種名<%#= sortable "seller_id", "売り手" %></th>
-      <th class="width5vw smart">タイプ<%#= sortable "date_of_arrive", "到着予定日" %></th>
+      <th class="width5vw">登録日時</th>
+      <!--<th class="width20vw">最終更新</th>-->
+      
+      <th class="width10vw">機種名<%#= sortable "seller_id", "売り手" %></th>
+      <!--<th class="width5vw smart">タイプ</th>-->
       <th class="width5vw">登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      <th colspan="1" width="80">出庫</th>
+      <th colspan="1" class="width5vw">出庫</th>
 
   </thead>
   <tbody>
@@ -37,17 +38,17 @@
    
       <tr scope="row">
        
-        <td class="width5vw smart2"><%= safe.id %></td>
-        <td class="width5vw smart2"><%= safe.created_at.strftime("%m/%d") %></td>
+        <td class="width5vw"><%= safe.id %></td>
+        <td class="width5vw"><%= safe.created_at.strftime("%m/%d") %></td>
 
-        <td class="width10vw smart2"><%= safe.updated_at.strftime("%m/%d") %></td>
+        <!--<td class="width10vw"><%#= safe.updated_at.strftime("%m/%d") %></td>-->
 
-        <td class="width5vw smart"><%= safe.name %></td>
-        <td class="width5vw"><%= safe.type_machine %></td>
+        <td class="width5vw"><%= safe.name.truncate(10) %></td>
+        <!--<td class="width5vw"><%#= safe.type_machine %></td>-->
       
 
         
-        <td class="width5vw smart"><%= safe.staff %></td>
+        <td class="width5vw"><%= safe.staff.truncate(5) %></td>
 
        <td class="100">
          
