@@ -23,7 +23,7 @@
 <tbody>
  
 <% @users.each do |user| %>
-<% if current_user.admin? && !current_user?(user) %>
+<% if current_user.admin?  %>
 <tr scope="row"> 
   <th width="200" class="zoom15"><%= user.id %></th>
   <th width="600" class="zoom15"><%= link_to user.company_name, user %></th>
@@ -35,6 +35,8 @@
 <% end %>
 
 </tbody>
+
+<%= paginate @users %>
 
 </table>
 </div>

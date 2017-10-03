@@ -6,14 +6,15 @@
 <div class="padding1-20"> 
 <%= form_tag(root_url, method: "get") do %>
 <%= label_tag :maker, "メーカーから検索" %>
-<%= select_tag :maker, options_for_select(Sell.makers), include_blank: true %>
+<%= text_field_tag :maker, params[:maker] %>
 <%= submit_tag "検索" %>
 <% end %>
 </div>
 
 <div class="padding1-20"> 
 <%= form_tag(root_url, method: "get") do %>
-<%= label_tag :name, "機器名から検索" %><%= text_field_tag :name, params[:name] %>
+<%= label_tag :name, "機器名から検索" %>
+<%= text_field_tag :name, params[:name] %>
 <%= submit_tag "検索" %>
 <% end %>
 </div>
@@ -27,7 +28,7 @@
       
    <div class="width_container">
     <div class="col-md-8 ">
-      <%= render 'sells/sell' %>
+      <%= render 'sells/sellall' %>
     </div>
      <%#= render 'more' %>
     <%#= will_paginate @sells %>

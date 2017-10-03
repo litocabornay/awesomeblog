@@ -1,14 +1,16 @@
 <% provide(:title, "Edit user") %>
 
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
+  <div class="col-md-6">
+   
+   
+    <%= form_for(@user, url: edit_user_path(current_user) ) do |f| %>
       <%= render 'shared/error_message', object: f.object %>
 
   <br>
      <%= f.label :ログイン用のユーザーネーム %>
       <%#= f.label :name %>
      <b style="color:red;">*</b>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control',:readonly => true %>
 
   <br>
      <%= f.label :ログイン用のメールアドレス %>
@@ -35,14 +37,14 @@
   <br>
      <%= f.label :会社名 %>
      <b style="color:red;">*</b>
-      <%= f.text_field :company_name, class: 'form-control' %>
+      <%= f.text_field :company_name, class: 'form-control',:readonly => true %>
   <br>
 <!-- -- -->
   
     
      <%= f.label :会社名【ふりがな】 %>
      <b style="color:red;">*</b>
-        <%= f.text_field :company_name_sounds, class: 'form-control' %>
+        <%= f.text_field :company_name_sounds, class: 'form-control',:readonly => true %>
 
   <br>
 <!-- -- -->
@@ -278,13 +280,7 @@
      <%= f.label :受付時間 %>
      <b style="color:red;">*</b>
      <br>
-        <%= f.text_field :company_call_time_from_1, class: 'form-control'  %>時
-        <%= f.text_field :company_call_time_from_2, class: 'form-control'  %>分
-        〜
-        <%= f.text_field :company_call_time_to_1, class: 'form-control'  %>時
-        <%= f.text_field :company_call_time_to_2, class: 'form-control'  %>分
-
-  <br><br>
+        <%= f.text_field :company_call_time_from_1, class: ' width20'  %>時 <%= f.text_field :company_call_time_from_2, class: ' width20'  %>分 〜 <%= f.text_field :company_call_time_to_1, class: ' width20'  %>時 <%= f.text_field :company_call_time_to_2, class: ' width20'  %> 分<br><br>
 <!-- -- -->
   
     
@@ -328,15 +324,61 @@
 
   <br>
 <!-- -- -->
+
+
+     <%= f.label :入出金用の銀行名 %>
+        <%= f.text_field :bank_name, class: 'form-control' %>
+
+  <br>
+<!-- -- -->
+
+
+     <%= f.label :銀行口座：支店名 %>
+        <%= f.text_field :bank_branch, class: 'form-control' %>
+
+  <br>
   
-    
-     <%= f.label :money %>
-        <%= f.text_field :money, class: 'form-control' %>
+  
+<!-- -- -->
+
+
+     <%= f.label :銀行口座：口座名義 %>
+        <%= f.text_field :bank_username, class: 'form-control' %>
+
+  <br>
+  
+<!-- -- -->
+
+
+     <%= f.label :銀行口座：口座種類 %>
+        <%= f.text_field :bank_type, class: 'form-control' %>
+
+  <br>
+  
+  
+<!-- -- -->
+
+
+     <%= f.label :銀行口座：口座番号 %>
+        <%= f.text_field :bank_number, class: 'form-control' %>
 
   <br>
 
 
+
+
+
+  
+    
+  <!--   <%#= f.label :money %>-->
+  <!--      <%#= f.text_field :money, class: 'form-control' %>-->
+
+  <!--<br>-->
+
+
       <%= f.submit "変更する", class: "btn btn-primary" %>
     <% end %>
+    
+    
   </div>
 </div>

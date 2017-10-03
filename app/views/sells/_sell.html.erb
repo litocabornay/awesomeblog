@@ -1,65 +1,76 @@
 <!--セル情報の一覧のフォーム(並び替え可能)-->
 <div class="width_table">
-
-
-   
 <table class="table font-small sampleTable small-zoom">
   <thead class="thead-inverse">
     <tr scope="row">
-      <!--<th width="60">投稿者</th>-->
-      <!--<th>ユーザーの会社名前</th>-->
-      <th width="120"><%= sortable "created_at", "更新日" %></th>
-      <th width="100"><%= sortable "status", "状況" %></th>
-      <th width="150"><%= sortable "place", "前設置" %></th>
-      <th width="170"><%= sortable "maker", "メーカー" %></th>
-      <th width="300"><%= sortable "name", "物件名" %></th>
-      <th width="100"><%= sortable "number", "数量" %></th>
-      <th width="100"><%= sortable "type_machine", "種別" %></th>
-      <th width="150"><%= sortable "price", "価格" %></th>
-      <th width="150"><%= sortable "removal_date", "撤去日" %></th>
-      <th width="100"><%= sortable "remnant", "残債" %></th>
-      <th width="120"><%= sortable "stage", "使用次" %></th>
-      <th width="100"><%= sortable "condition", "状態" %></th>
-      <th width="200"><%= sortable "remarks", "備考" %></th>
       
       <th colspan="1" width="100"></th>
+      <th width="120" class="smart"><%= sortable "created_at", "更新日" %></th>
+      <th width="100" class="smart"><%= sortable "status", "状況" %></th>
+      <th width="150" class="smart smart2"><%= sortable "place", "前設置" %></th>
+      <th width="170" class="smart"><%= sortable "maker", "メーカー" %></th>
+      <th width="300"><%= sortable "name", "物件名" %></th>
+      <th width="80"><%= sortable "number", "数量" %></th>
+      <th width="100" class="smart smart2"><%= sortable "type_machine", "種別" %> </th>
+      <th width="150"><%= sortable "price", "価格" %></th>
+      <th width="150" class="smart"><%= sortable "removal_date", "撤去日" %></th>
+      <th width="100" class="smart smart2"><%= sortable "remnant", "残債" %></th>
+      <th width="120" class="smart smart2"><%= sortable "stage", "使用次" %></th>
+      <th width="100" class="smart smart2"><%= sortable "condition", "状態" %></th>
+      <th width="200" class="smart smart2"><%= sortable "remarks", "備考" %></th>
+      
+      <th colspan="1" width="100" class="smart smart2"></th>
       
 
       
     </tr>
   </thead>
   <tbody>
+   <% @sells.each do |sell| %>
+<% if sell.status == "受付" or sell.status == "受付中" or @all == "all" %>
    
- <% @sells.each do |sell| %>  
       <tr scope="row">
-        <%#= sell.user.name %>
-        <%#= sell.user.detail.company_name %>
-        <%#= sell.created_at %>
-        <%#= I18n.l(sell.created_at, format: :long) %>
-        <td><%= sell.created_at.strftime("%m/%d") %></td>
-        <td><%= sell.status %></td>
-        <td><%= sell.place %></td>
-        <td><%= sell.maker %></td>
-        <td><%= sell.name %></td>
+
+      <td class="red zoom15">
+      <% if sell.user_id == current_user.id %> 
+        <b><%= link_to '編集', edit_sells_path(sell) %></b>
+      <% else %> 
+        <b><%= link_to '詳細', show_sells_path(sell) %></b>
+      <% end %>
+      </td>
+
+
+        <td class="smart"><%= sell.created_at.strftime("%m/%d").truncate(20) %></td>
+        <td class="smart"><%= sell.status.truncate(20) %></td>
+        <td class="smart smart2"><%= sell.place.truncate(20) %></td>
+        <td class="smart"><%= sell.maker.truncate(20) %></td>
+        <td><%= sell.name.truncate(20) %></td>
         <td><%= sell.number %></td>
-        <td><%= sell.type_machine %></td>
-        <td><%= sell.price.to_s(:delimited) %>円</td>
-        <td><%= sell.removal_date %></td>
-        <td><%= sell.remnant %></td>
-        <td><%= sell.stage %></td>
-        <td><%= sell.condition %></td>
-        <td><%= sell.remarks %></td>
+        <td class="smart smart2"><%= sell.type_machine %></td>
+        <td><%= sell.price.to_s(:delimited).truncate(20) %>円</td>
+        <td class="smart"><%= sell.removal_date.truncate(20) %></td>
+        <td class="smart smart2"><%= sell.remnant.truncate(20) %></td>
+        <td class="smart smart2"><%= sell.stage.truncate(20) %></td>
+        <td class="smart smart2"><%= sell.condition.truncate(20) %></td>
+        <td class="smart smart2"><%= sell.remarks.truncate(20) %></td>
         
      
-        <td class="red zoom15"><%= link_to '詳細', sell %></td>
+      <td class="red zoom15 smart smart2">
+      <% if sell.user_id == current_user.id %> 
+      
+      
+        <b><%= link_to '編集', edit_sells_path(sell) %></b>
         
-      <% if sell.id == current_user %>
-        <td class="red zoom15"><%= link_to '編集', edit_sell_path(sell) %></td>
+        
+      <% else %> 
+        <b><%= link_to '詳細', show_sells_path(sell) %></b>
       <% end %>
+      </td>
+     
+      
       </tr>
       
-      
-
+    <% end %>
     <% end %>
     
  </tbody>

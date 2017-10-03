@@ -1,6 +1,6 @@
 class SellsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :edit, :update, :delete]
-  before_action :correct_user, only: [:edit, :update, :delete]
+  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :update]
+  # before_action :correct_user, only: [:edit, :update, :delete]
 
   
   
@@ -12,15 +12,29 @@ class SellsController < ApplicationController
 
   def index
     
-    # @sells = Sell.all.order(sort_column + ': :' + sort_direction).paginate(page: params[:page])
-
+    @all = "all"
+    
+    
     if params[:sell]
-      #filter 
-      @sells = Sell.where(maker: params[:sell][:maker].downcase)
+     @sells = Sell.where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     else
-      #show all
-      @sells = Sell.all.order(sort_column + ': :' + sort_direction).paginate(page: params[:page])
+     @sells = Sell.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     end
+    store_location
+
+
+
+
+
+    # if params[:sell]
+    #   @sells = Sell.where(maker: params[:sell][:maker].downcase)
+    # elsif params[:maker]
+    #   #show all
+    #   @sells = Sell.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    # end
+    # store_location
     
     #@sells =Sell.paginate(page: params[:page]) 
     #@sells = Sell.order(params[:sort] + ': :' + params[:direction])
@@ -30,21 +44,39 @@ class SellsController < ApplicationController
   
   
   
-  def home
-  @sell = Sell.find(params[:id])
-  @division = @sell.price / @sell.number
-  @details = Details.all
-  end
   
-
+  # def own
+  #   @current = current_user.id
+    
+    
+  #   if params[:name]
+  #   @sells = Sell.where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  #   else
+  #   @sells = Sell.where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  #   end
+  #   store_location
+    
+    
+  # end  
+  
+  
+  
+  # def home
+  # @sell = Sell.find(params[:id])
+  # @division = @sell.price / @sell.number
+  # @details = Details.all
+  # store_location
+  # end
+  
   def show
     @sell = Sell.find(params[:id])
     
+    session.delete(:seller)
+    session[:seller] = @sell.id
     
-  # #  @sell = current_user.sells.find(sell_params)
-  #   @division = @sell.price / @sell.number
-  #   #@details = Details.all
-  #   # @detail = Sell.detail.find(params[:id])
+    session.delete(:seller_user)
+    session[:seller_user] = @sell.user_id
+    
     
     if @sell.content_type == "パチンコ"
       @embeded_place = 'sells/detail'
@@ -54,8 +86,17 @@ class SellsController < ApplicationController
       @embeded_place = 'sells/detail3'
     end
     
+
+    
   end
   
+  
+  
+  # #  @sell = current_user.sells.find(sell_params)
+  #   @division = @sell.price / @sell.number
+  #   #@details = Details.all
+  #   # @detail = Sell.detail.find(params[:id])
+
   # def show_slot
   #   @sell = Sell.find(params[:id])
   # end
@@ -65,45 +106,87 @@ class SellsController < ApplicationController
   # end
   
 
+
+
+
+
+
   def new
-    session[:pachinko] =  "パチンコ"
+    @new_one = "new"
+    # session[:pachinko] =  "パチンコ"
+    # content_type を決める用
+    
     # @cylinder = "無し"
     # @pachinko = "パチンコ"
     @sell = Sell.new
     store_location
+    session.delete(:pachinko)
+    session[:pachinko] = "new"
   end
   
   def slot
-    session[:pachinko] =  "スロット"
+    @new_one = "new"
+    # session[:pachinko] =  "スロット"
+    # content_type を決める用
+    
     # @type_machine = "無し"
     # @pachinko = "スロット"
     @sell = Sell.new
     store_location
+    session.delete(:pachinko)
+    session[:pachinko] = "slot"
   end
   
   def extra
-    session[:pachinko] =  "その他"
+    @new_one = "new"
+    # session[:pachinko] =  "その他"
+    # content_type を決める用
+    
     # @cylinder = "無し"
     # @maker = "無し"
     # @remnant = "無し"
     # @pachinko = "その他"
     @sell = Sell.new
     store_location
+    session.delete(:pachinko)
+    session[:pachinko] = "extra"
   end
+  
+  
+  
   
   def edit
     @sell = Sell.find(params[:id])
-  
+    session[:params] = params[:id]
+    store_location
   end
   
+  
+  def edit_slot
+    @sell = Sell.find(params[:id])
+    session[:params] = params[:id]
+    store_location
+  end
+  
+  
+  def edit_extra
+    @sell = Sell.find(params[:id])
+    session[:params] = params[:id]
+    store_location
+  end
+  
+  
+  
+  
+  
   def create
-     @sell = current_user.sells.build(sell_params)
+     @sell = Sell.new(sell_params)
      #@sell = Sell.build(sell_params)
      if @sell.save
        
-       @sell.update(:content_type => session[:pachinko])
+      @sell.update(:user_id => current_user.id)
        
-       session.delete(:pachinko)
+      # session.delete(:pachinko)
        
       # unless @maker.blank?
       #   @maker.update(:maker => @maker)
@@ -122,11 +205,24 @@ class SellsController < ApplicationController
       # end
        
        flash[:success] = "投稿が完了しました！"
-       redirect_to root_url
+       
+       if session[:pachinko] == "new"
+        redirect_to own_path
+        session.delete(:pachinko)
+       elsif session[:pachinko] == "slot"
+        redirect_to own_slot_path
+        session.delete(:pachinko)
+       elsif session[:pachinko] == "extra"
+        redirect_to own_extra_path
+        session.delete(:pachinko)
+       end
+        
+        
+        
      else
        @sell = []
        flash[:danger] = "未入力項目があります。"
-       redirect_back_or(new_sell_path)
+       redirect_back_or(root_url)
 
      end
   end
@@ -136,13 +232,23 @@ class SellsController < ApplicationController
 
 
   def update
-    @sell = Sell.find(params[:id])
+    @sell = Sell.find(session[:params])
     if @sell.update(sell_params) #通常、セキュリティ入れる
-      redirect_to root_url #通常、redirect_to ★url_path
+       flash[:success] = "更新に成功しました！"
+       session.delete(:fowarding_url)
+       redirect_to "/back"
     else
-      render 'edit'
+       flash[:danger] = "未入力項目があります。"
+       redirect_back_or(root_url)
     end
   end
+  
+  
+  def back
+    redirect_back_or(root_path)
+  end
+  
+  
   
   # def destroy
   #   @sell = Sell.find(params[:id])
@@ -150,21 +256,21 @@ class SellsController < ApplicationController
   #     redirect_to root_url
   # end
   
-  def destroy
-    # @micropost = current_user.micropost.find(params[:id])
-    # ここに直で書いてしまうとバリデーションが効かない。
+  # def destroy
+  #   # @micropost = current_user.micropost.find(params[:id])
+  #   # ここに直で書いてしまうとバリデーションが効かない。
     
-    @sell.destroy
-    flash[:success] = "投稿は削除されました"
+  #   @sell.destroy
+  #   flash[:success] = "投稿は削除されました"
     
-    # redirect_to users_path
-    #これだと、ユーザーページでもトップに飛んでしまう。
+  #   # redirect_to users_path
+  #   #これだと、ユーザーページでもトップに飛んでしまう。
     
-    redirect_to request.referrer || root_url
-    #どのページでもリダイレクトするためのコピペテンプレ。
-    #request.referrerメソッド
+  #   redirect_to request.referrer || root_url
+  #   #どのページでもリダイレクトするためのコピペテンプレ。
+  #   #request.referrerメソッド
     
-  end
+  # end
   
   
   # def detail
@@ -180,43 +286,53 @@ class SellsController < ApplicationController
     
 
   def make_safe
-    @sell = Sell.find(params[:id])
-    @safe = Safe.new
-    
-    @current = current_user.id
-    @seller = @sell.user_id
-    @one = "one"
-    
-    @safe.update(:sell_id => @sell.id)
-    @safe.update(:buyer_id => @current)
-    @safe.update(:seller_id => @seller)
-    @safe.update(:status => @one)
 
+    @safe = Safe.new
   end
+   
+   
+   
+
+    
     
 
   private
   
   
-   def correct_user
-     @sell = current_user.sells.find_by(id:params[:id])
-     redirect_to root_url if @sell.nil?
-   end
- 
-
-  def sell_params
-    params.require(:sell).permit(:user_id, :sell_id, :name, :maker, :number, :status, :place, :type_machine, :price, :removal_date, :remnant, :stage, :condition, :remarks)
-  end
-
+  
   def sort_column
-      Sell.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Sell.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
-  
-  
+
+
+
+
+  # def correct_user
+  #   @sell = current_user.sells.find_by(:params[:id])
+    
+  #   # @sell = Sell.find(params[:id])
+    
+  #   # if Sell.find(params[:id]).user_id = current_user.id
+      
+  #   # else
+  #   redirect_to root_url if @sell.nil?
+  #   # end
+    
+  # end
+ 
+
+  def sell_params
+    params.require(:sell).permit(:user_id, :content_type, :name, :maker, :number, :cylinder, :status, :place, :type_machine, :price, :removal_date, :remnant, :stage, :condition, :remarks)
+  end
+
+
+  # def safe_params
+  #   params.require(:safe).permit(:status, :seller_id, :sell_id, :buyer_id, :date_of_arrive, :confirm_price, :confirm_number, :limit_of_inspection)
+  # end
 
 
 

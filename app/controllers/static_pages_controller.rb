@@ -6,34 +6,39 @@ class StaticPagesController < ApplicationController
   
   helper_method :sort_column, :sort_direction
     
-    
-  # def more
-  #   index
-  # end
-  
-  
-  def suggestion
-    
-  end
-  
+
     
   def home
    
+    @all = "not_all"
     
     #@sells = Sell.all.order(sort_column + ' ' + sort_direction)
     #@users =User.where(all: ort_column + ' ' + sort_direction)   
-    @sells = Sell.where("content_type = 'パチンコ'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    
+    
+    
     #@sells =Sell.paginate(page: params[:page]) 
     
     
-    if params[:name].present? 
-    @sells = @sells.get_by_name params[:name]
-    end
-    if params[:maker].present?
-    @sells = @sells.get_by_maker params[:maker]
-    end
+    # if params[:name].present? 
+    # @sells = @sells.get_by_name params[:name]
+    # end
     
-
+    
+    
+    # if params[:maker].present?
+    # @sells = @sells.get_by_maker params[:maker]
+    # end
+    
+    
+    if params[:sell]
+     @sells = Sell.where("content_type = 'パチンコ'").where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'パチンコ'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'パチンコ'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
     
     #1
     #@micropost = current_user.microposts.build if logged_in?
@@ -79,25 +84,131 @@ class StaticPagesController < ApplicationController
   end
   
   def slot
-    @sells = Sell.where("content_type = 'スロット'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    if params[:name].present? 
-    @sells = @sells.get_by_name params[:name]
+    @all = "not_all"
+   
+    if params[:sell]
+     @sells = Sell.where("content_type = 'スロット'").where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'スロット'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'スロット'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     end
-    if params[:maker].present?
-    @sells = @sells.get_by_maker params[:maker]
-    end
+    store_location
   end  
 
   def extra
-    @sells = Sell.where("content_type = 'その他'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    if params[:name].present? 
-    @sells = @sells.get_by_name params[:name]
+    @all = "not_all"
+   
+    if params[:sell]
+     @sells = Sell.where("content_type = 'その他'").where(type_machine: params[:sell][:type_machine].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'その他'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'その他'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     end
-    if params[:maker].present?
-    @sells = @sells.get_by_maker params[:maker]
-    end
+    store_location
   end  
 
+
+
+
+
+  def own
+    @all = "not_all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  end  
+  
+  def own_slot
+    @all = "not_all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+    # @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+         @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  
+  end  
+   
+  def own_extra
+    @all = "not_all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).where(type_machine: params[:sell][:type_machine].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  end   
+  
+  
+  
+  def own_finish
+    @all = "all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'パチンコ'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  end  
+  
+  def own_slot_finish
+    @all = "all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+    # @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+         @sells = Sell.where("content_type = 'スロット'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  
+  end  
+   
+  def own_extra_finish
+    @all = "all"
+   
+    @current = current_user.id
+    if params[:sell]
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).where(type_machine: params[:sell][:type_machine].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @sells = Sell.where("content_type = 'その他'").where(user_id: @current).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+    store_location
+  end   
+  
+  
+  
+  
+  
+  
+  
   def about
     @sell = Sell.find(params[:id])
     @details = Detail.all
@@ -113,6 +224,7 @@ class StaticPagesController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @flow = Flow.new
+    @content = "リアル銀行からサイト内バンクへの入金"
     store_location
   end
   
@@ -145,15 +257,24 @@ class StaticPagesController < ApplicationController
   end
   
   
-  def update
-    @user = User.find(params[:id])
-    if @user.update(flow_params) #通常、セキュリティ入れる
-      redirect_to root_url #通常、redirect_to ★url_path
-    else
-      render 'edit'
-    end
+  # def update
+  #   @user = User.find(params[:id])
+  #   if @user.update(flow_params) #通常、セキュリティ入れる
+  #     redirect_to root_url #通常、redirect_to ★url_path
+  #   else
+  #     render 'edit'
+  #   end
+  # end
+  
+  
+  def analyze
+    @users = User.all
+    @flows = Flow.all
+    @safes = Safe.all
+    @sells = Sell.all
   end
   
+
   
   
   
@@ -177,9 +298,10 @@ class StaticPagesController < ApplicationController
     params.require(:sell).permit(:name, :maker, :number, :status, :place, :type_machine, :price, :removal_date, :remnant, :stage, :condition, :remarks)
   end
   
-  def flow_params
-      params.require(:flow).permit(:company, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo)
-  end
+  # def flow_params
+  #     params.require(:flow).permit(:content, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo, :pass_company, :recieve_company)
+
+  # end
   
  def correct_user
      @sell = current_user.sells.find_by(id:params[:id])
@@ -189,11 +311,11 @@ class StaticPagesController < ApplicationController
   
    
   def sort_column
-    Sell.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Sell.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
 
 

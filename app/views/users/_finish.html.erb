@@ -1,0 +1,27 @@
+<div style="width:100%;">
+<h3>終了したの案件履歴</h3>
+
+
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2">
+<nav class="navbar nav_wide navbar_center">
+
+<div class="right_menu menu_box"></div> 
+<!--safe-->
+
+<div class="right_menu menu_box"><%= link_to "買物件", buyer_finish_user_path(current_user) , :class => 'orange' %></div> 
+<!--safe-->
+
+<div class="right_menu menu_box"><%= link_to "売物件", seller_finish_user_path(current_user), :class => 'orange' %></div> 
+<!--sell-->
+
+<div class="right_menu menu_box"></div> 
+
+</nav>
+</div>
+
+
+
+</div>
+
+<%= render @embedded1 %>
+<%= render @embedded2 %>

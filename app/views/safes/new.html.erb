@@ -1,0 +1,65 @@
+<h3>新規在庫入力</h3>
+<br>
+<center>
+<div class="width_table">
+
+<div class="box2">
+
+<%= form_for(@safe, url: "/safes") do |f| %>
+<%= render 'shared/error_message', object: f.object %>
+
+
+<%#= f.hidden_field :staff, :value => @current_user %>
+<%#= f.hidden_field :buyer_id, :value => @current %>
+
+<%#= f.hidden_field :seller_id, :value => @seller %>
+<%#= f.hidden_field :status, :value => @one %>
+
+<p>機器番号<br>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622'%>
+<label class=qrcode-text-btn>
+<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);'%>
+<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+</label>
+<%#= f.text_field :number , :placeholder => '例：P1SS160135622' %></p>
+<br><br> 
+
+<p>在庫名<br>
+<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name] %></p>
+<br><br>
+
+<p>担当者<br>
+<%= f.text_field :staff , :placeholder => '例：山田太郎', :value => session[:staff] %></p>
+<br><br>
+
+<p>種別<br>
+<%= f.text_field :type_machine , :placeholder => '例：本体', :value => session[:type_machine]%>
+<br><br>
+
+
+
+
+
+
+
+
+
+<!--<p>FROM<br>-->
+<!--<%#= f.text_field :from , :placeholder => '例：藤商事', class: "width20vw"%></p>-->
+<!--<br>-->
+
+<!--<p>TO<br>-->
+<!--<%#= f.text_field :to , :placeholder => '例：タイヨー', class: "width20vw"%></p>-->
+<!--<br>-->
+
+<%= f.submit "登録", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
+<% end %>     
+
+</div>
+
+<%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>
+
+
+
+</div>
+</center>

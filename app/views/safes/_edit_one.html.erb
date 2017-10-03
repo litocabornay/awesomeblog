@@ -1,149 +1,173 @@
 
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
+
  
  
 <%= form_for(@safe) do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
-<h5>売買情報（条件は変更できます。）</h5>
-<h6>台情報</h6>
-<table class="table font-small sampleTable small-zoom">
-  <thead class="thead-inverse">
-    <tr scope="row">
-     
+<h3>条件確定ページ</h3>
 
-
-      <th width="200">前設置</th>
-      <th width="200">メーカー</th>
-      <th width="600">物件名</th>
-
-      <th width="150">種別</th>
-
-      <th width="150">撤去日</th>
-      <th width="150">残債</th>
-      <th width="150">使用次</th>
-      <th width="150">状態</th>
-      <th width="150">備考</th>
-      
-      
-    </tr>
-  </thead>
-  <tbody>
-      <tr scope="row">
-       
-        <td><%= @sell.place %></td>
-        <td><%= @sell.maker %></td>
-        <td><%= @sell.name %></td>
-
-        <td><%= @sell.type_machine %></td>
-
-        <td><%= @sell.removal_date %></td>
-        <td><%= @sell.remnant %></td>
-        <td><%= @sell.stage %></td>
-        <td><%= @sell.condition %></td>
-        <td><%= @sell.remarks %></td>
-
-      </tr>
- </tbody>
-</table>
+<h4>売買情報</h4>
+<h5>台情報</h5>
 
 
 
-<h6>希望条件</h6>
+
+
+<table class="table font-small sampleTable">
+
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">ID</th>
+  <td width="150" ><%= @safe.id %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">投稿日時</th>
+  <td width="150" ><%= @safe.created_at.strftime("%y年 %m月 %d日") %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">前設置</th>
+  <td width="150" ><%= @sell.place %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">メーカー</th>
+  <td width="150" ><%= @sell.maker %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">物件名</th>
+  <td width="150" ><%= @sell.name %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">種別</th>
+  <td width="150" ><%= @sell.type_machine %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">撤去日</th>
+  <td width="150" ><%= @sell.removal_date %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">残債</th>
+  <td width="150" ><%= @sell.remnant %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">使用次</th>
+  <td width="150" ><%= @sell.stage %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">状態</th>
+  <td width="150" ><%= @sell.condition %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">備考</th>
+  <td width="150" ><%= @sell.remarks %></td>
+<tr> 
+
+</table> 
+
+
+<h5>希望条件→確定条件</h5>
+<p>以下は購入希望をされた会社様の希望する条件です。</p>
+<p>条件はこのタイミングのみ変更できます。</p>
+
+
 
 <%#= f.hidden_field_tag 'status', @status %>
+<table class="table font-small sampleTable">
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">確定到着予定日</th>
+  <td width="150" ><%= f.text_field :date_of_arrive , :placeholder => @safe.date_of_arrive %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">確定購入台数</th>
+  <td width="150"><%= f.text_field :confirm_number , :placeholder => @safe.confirm_number %> 台</td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">確定合計価格</th>
+  <td width="150"><%= f.text_field :confirm_price , :placeholder => @place %> 円 (手数料２％込)</td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">確定検品納期</th>
+  <td width="150" ><%= f.text_field :limit_of_inspection , :placeholder => @safe.limit_of_inspection %></td>
+<tr> 
+
+</table> 
 
 
-<table class="table font-small sampleTable small-zoom">
-  <thead class="thead-inverse">
-    <tr scope="row">
-      <th width="100">ID<%#= sortable "id", "ID" %></th>
-      <th width="200">投稿日時<%#= sortable "create_at", "開始日時" %></th>
-      <th width="400">到着予定日<%#= sortable "date_of_arrive", "到着予定日" %></th>
-      <th width="400">購入台数<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      <th width="400">合計価格<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      <th width="400">検品納期<%#= sortable "limit_of_inspection", "検品納期" %></th>
-    </tr>
-  </thead>
-  <tbody>
-   
-      <tr scope="row">
-        <td><%= @safe.id %></td>
-        
-        <td>
-        <%= @safe.created_at.strftime("%m/%d") %></td>
-        
-        <td><%= f.text_field :date_of_arrive , :placeholder => @safe.date_of_arrive %>
-        <%#= @safe.date_of_arrive %></td>
-        
-        <td><%= f.text_field :confirm_number , :placeholder => @safe.confirm_number %>
-        <%#= @safe.confirm_number %></td>
-        
-        <td><%= f.text_field :confirm_price , :placeholder => @place %>
-        <%#= @safe.confirm_price %></td>
-        
-        <%#= @commission %>
-        <%#= @safe.confirm_price %>
-        
-        <td><%= f.text_field :limit_of_inspection , :placeholder => @safe.limit_of_inspection %>
-        <%#= @safe.limit_of_inspection %></td>
-      </tr>
-      
- </tbody>
-</table>
+
+
 
 
 
 
 <br>
-<%= f.submit "許可する" , class: "btn btn-primary", data: { disable_with: "送信中..." } %>
+<%= f.submit "許可する" , class: "btn btn-primary big_botton", data: { disable_with: "送信中...", confirm: '本当に許可しますか？' } %>
 
+<%= link_to "却下する" , rejection_safes_path(@safe_id) , :class => "btn btn-primary big_botton btnred", method: :put, data: { disable_with: "送信中...", confirm: '本当に却下しますか？' }  %>
+<center>
 <p style="color:red; font-size:14px;" >※このアクションは実行後に取り消すことができません。</p>
+<p style="color:red; font-size:14px;" >※サイト内バンクの使用可能残高を消費することで、商品が購入されます。</p>
+</center>
 
-<h5>購入希望会社情報</h5>
+
+<h5>購入希望の会社情報</h5>
+
 
 <!--セル情報の一覧のフォーム(並び替え可能)-->
 
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table font-small sampleTable">
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">メインの受付用電話番号</th>
-  <td width="1500"><%= @buyer.company_call_number_contact %></td>
+  <th width="50" class="thead-inverse">メインの受付用電話番号</th>
+  <td width="150"><%= @buyer.company_call_number_contact %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付時間</th>
-  <td width="1500"><%= @buyer.company_call_time_from_1 %>時
+  <th width="50" class="thead-inverse">受付時間</th>
+  <td width="150"><%= @buyer.company_call_time_from_1 %>時
         <%= @buyer.company_call_time_from_2 %>分　〜　
         <%= @buyer.company_call_time_to_1 %>時
         <%= @buyer.company_call_time_to_2 %>分</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">メインの受付担当者</th>
-  <td width="1500"><%= @buyer.company_reception %>（<%= @buyer.company_reception_sound %>）</td>
+  <th width="50" class="thead-inverse">メインの受付担当者</th>
+  <td width="150"><%= @buyer.company_reception %>（<%= @buyer.company_reception_sound %>）</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">担当者の役職</th>
-  <td width="1500"><%= @buyer.company_position %></td>
+  <th width="50" class="thead-inverse">担当者の役職</th>
+  <td width="150"><%= @buyer.company_position %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付用FAX番号</th>
-  <td width="1500"><%= @buyer.company_fax_number_contact %></td>
+  <th width="50" class="thead-inverse">受付用FAX番号</th>
+  <td width="150"><%= @buyer.company_fax_number_contact %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付用メールアドレス</th>
-  <td width="1500"><%= @buyer.company_mail_address %></td>
+  <th width="50" class="thead-inverse">受付用メールアドレス</th>
+  <td width="150"><%= @buyer.company_mail_address %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付先住所</th>
-  <td width="1500"><%= @buyer.company_post_number_contact %>
+  <th width="50" class="thead-inverse">受付先住所</th>
+  <td width="150"><%= @buyer.company_post_number_contact %>
       <%= @buyer.company_place_contact %>
       <%= @buyer.company_place_detail_contact %></td>
 <tr>
@@ -151,79 +175,79 @@
 </table>
 </div>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table font-small sampleTable">
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先①</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_1 %><br>
+  <th width="50" class="thead-inverse">その他連絡先①</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_1 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_1 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先②</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_2 %><br>
+  <th width="50" class="thead-inverse">その他連絡先②</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_2 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_2 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先③</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_3 %><br>
+  <th width="50" class="thead-inverse">その他連絡先③</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_3 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_3 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先④</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_4 %><br>
+  <th width="50" class="thead-inverse">その他連絡先④</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_4 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_4 %></td>
 <tr>
   
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先⑤</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_5 %><br>
+  <th width="50" class="thead-inverse">その他連絡先⑤</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_5 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_5 %></td>
 <tr>
   
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先⑥</th>
-  <td width="1500">電話番号：<%= @buyer.company_call_number_contact_name_6 %><br>
+  <th width="50" class="thead-inverse">その他連絡先⑥</th>
+  <td width="150">電話番号：<%= @buyer.company_call_number_contact_name_6 %><br>
       担当：<%= @buyer.company_call_number_contact_tel_6 %></td>
 <tr>
   
 </table>
 </div>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table font-small sampleTable">
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">販売社名</th>
-  <td width="1500"><%= @buyer.company_name %>(<%= @buyer.company_name_sounds %>)</td>
+  <th width="50" class="thead-inverse">販売社名</th>
+  <td width="150"><%= @buyer.company_name %>(<%= @buyer.company_name_sounds %>)</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">業態</th>
-  <td width="1500"><%= @buyer.company_type %></td>
+  <th width="50" class="thead-inverse">業態</th>
+  <td width="150"><%= @buyer.company_type %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">所属組合</th>
-  <td width="1500"><%= @buyer.company_union %></td>
+  <th width="50" class="thead-inverse">所属組合</th>
+  <td width="150"><%= @buyer.company_union %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">支店</th>
-  <td width="1500"><%= @buyer.company_branch %></td>
+  <th width="50" class="thead-inverse">支店</th>
+  <td width="150"><%= @buyer.company_branch %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">代表者名</th>
-  <td width="1500"><%= @buyer.company_president %>(<%= @buyer.company_president_sound %>)</td>
+  <th width="50" class="thead-inverse">代表者名</th>
+  <td width="150"><%= @buyer.company_president %>(<%= @buyer.company_president_sound %>)</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">住所</th>
-  <td width="1500">
+  <th width="50" class="thead-inverse">住所</th>
+  <td width="150">
   （<%= @buyer.company_post_number %>）
   <%= @buyer.company_place %>　
   <%= @buyer.company_place_detail %>
@@ -231,38 +255,38 @@
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">電話番号</th>
-  <td width="1500"><%= @buyer.company_call_number %></td>
+  <th width="50" class="thead-inverse">電話番号</th>
+  <td width="150"><%= @buyer.company_call_number %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">FAX番号</th>
-  <td width="1500"><%= @buyer.company_fax_number %></td>
+  <th width="50" class="thead-inverse">FAX番号</th>
+  <td width="150"><%= @buyer.company_fax_number %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">緊急連絡先</th>
-  <td width="1500"><%= @buyer.company_call_number_emergency %></td>
+  <th width="50" class="thead-inverse">緊急連絡先</th>
+  <td width="150"><%= @buyer.company_call_number_emergency %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">登録日</th>
-  <td width="1500"><%= @buyer.created_at.strftime("%y/%m/%d") %></td>
+  <th width="50" class="thead-inverse">登録日</th>
+  <td width="150"><%= @buyer.created_at.strftime("%y/%m/%d") %></td>
 <tr>
   
 </table> 
 </div>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table font-small sampleTable">
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">公式WEBページ</th>
-  <td width="1500"><%= @buyer.company_url %></td>
+  <th width="50" class="thead-inverse">公式WEBページ</th>
+  <td width="150"><%= @buyer.company_url %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">会社PR</th>
-  <td width="1500"><%= @buyer.company_pr %></td>
+  <th width="50" class="thead-inverse">会社PR</th>
+  <td width="150"><%= @buyer.company_pr %></td>
 <tr>    
 
         
@@ -271,10 +295,18 @@
 </table>
 </div>
 
+<%= f.submit "許可する" , class: "btn btn-primary big_botton", data: { disable_with: "送信中...", confirm: '本当に許可しますか？' } %>
 
 
-<%= f.submit "許可する" , class: "btn btn-primary big_botton", data: { disable_with: "送信中..." } %>
+
 <% end %>
+
+
+
+<%= link_to "却下する" , rejection_safes_path(@safe_id) , :class => "btn btn-primary big_botton btnred", method: :put, data: { disable_with: "送信中...", confirm: '本当に却下しますか？' }  %>
+
+
+
 
 </div>
 </div>
@@ -283,4 +315,7 @@
 <br>
 <center>
 <p style="color:red; font-size:14px;" >※このアクションは実行後に取り消すことができません。</p>
+<p style="color:red; font-size:14px;" >※サイト内バンクの使用可能残高を消費することで、商品が購入されます。</p>
 </center>
+
+<%= link_to '戻る', buyer_user_path(current_user) , :class => "btn btn-primary big_botton btnwhite" %>

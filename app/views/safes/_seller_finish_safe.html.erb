@@ -1,0 +1,71 @@
+
+<!--セル情報の一覧のフォーム(並び替え可能)-->
+<div class="width_table">
+<table class="table font-small2 sampleTable ">
+  <thead class="thead-inverse">
+    <tr scope="row">
+
+
+      <th class="width5vw smart2">ID<%#= sortable "id", "ID" %></th>
+      <th class="width5vw smart2">開始日時<%#= sortable "create_at", "開始日時" %></th>
+      <th class="width20vw">商品名<%#= sortable "seller_id", "売り手" %></th>
+      <th class="width10vw smart">販売者様<%#= sortable "seller_id", "売り手" %></th>
+      <th class="width5vw smart">到着予定日<%#= sortable "date_of_arrive", "到着予定日" %></th>
+      <th class="width5vw">確定個数<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th class="width10vw">確定価格<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th class="width5vw smart">検品納期<%#= sortable "limit_of_inspection", "検品納期" %></th>
+
+
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% @seller_finish_safes.each do |safe| %>
+   
+   <% if safe.seller_id == @user.id %>
+   <% @buy_staff = Sell.find(safe.sell_id)  %>
+   <% @user_staff = User.find(safe.buyer_id)  %>
+   
+      <tr scope="row">
+       
+        <td class="width5vw smart2"><%= safe.id %></td>
+        <td class="width5vw smart2"><%= safe.created_at.strftime("%m/%d") %></td>
+        
+        <!-- <td class="width20vw">-->
+        <!-- <%# unless Sell.find(safe.sell_id).name.blank? %>-->
+        <!-- <%#= Sell.find(safe.sell_id).name %>-->
+        <!-- <%# end %>-->
+        <!-- </td>-->
+         
+        <!--<td class="width10vw smart">-->
+        <!--  <%# unless User.find(safe.seller_id).blank? %>-->
+        <!--  <%#= User.find(safe.seller_id).company_name %>-->
+        <!--  <%# end %>-->
+        <!--</td>-->
+        
+          <td class="width20vw">
+         <%= @buy_staff.name %>
+         </td>
+        <td class="width10vw smart"><%= @user_staff.company_name %></td>
+        
+        <td class="width5vw smart"><%= safe.date_of_arrive %></td>
+        <td class="width5vw"><%= safe.confirm_number %></td>
+        <td class="width10vw">
+<% if safe.confirm_price? %>
+          <%= safe.confirm_price.to_s(:delimited) %>円
+<% end %>
+        </td>
+        <td class="width5vw smart"><%= safe.limit_of_inspection %></td>
+
+
+
+ 
+        
+
+      </tr>
+      
+    <% end %>
+    <% end %>
+ </tbody>
+</table>
+</div>

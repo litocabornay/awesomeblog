@@ -118,7 +118,7 @@
 ["ラスター", "ラスター"],
 ["リックコーポレーション", "リックコーポレーション"],
 ["ロデオ", "ロデオ"],
-["その他", "その他"]] %>
+["その他", "その他"]], include_blank: true %>
 <%= submit_tag "検索"  %>
 <% end %>
 </div>
@@ -135,11 +135,11 @@
 </div>
 </div>
 
-<div class="parent"> 
-<div class="box">
-<%= paginate @sells %>
-</div>
-</div>
+<!--<div class="parent"> -->
+<!--<div class="box"> -->
+<!--<%#= paginate @sells %>-->
+<!--</div>-->
+<!--</div>-->
 
 </div>
 
@@ -154,28 +154,8 @@
  </div>
  
  
- <div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
- 
-  <div class="parent_air"> 
-<div class="box"> 
-</div>
-</div>
- 
- <div class="parent"> 
-<div class="box"> 
-<div class="center padding2" style="width:100%;">
+
 <%= paginate @sells %>
-</div>
-</div>
-</div>
-
-
-  <div class="parent_air"> 
-<div class="box"> 
-</div>
-</div>
-
-</div>
 
 <!--crrent user自身のデータの表示-->
 <!--  --  -->

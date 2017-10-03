@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919064331) do
+ActiveRecord::Schema.define(version: 20171003014526) do
 
   create_table "adds", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -81,16 +81,19 @@ ActiveRecord::Schema.define(version: 20170919064331) do
 
   create_table "flows", force: :cascade do |t|
     t.string   "company"
-    t.integer  "before_price"
+    t.integer  "before_price",    default: 0
     t.integer  "year_date"
     t.integer  "month_date"
     t.integer  "day_date"
-    t.integer  "price"
-    t.integer  "after_price"
+    t.integer  "price",           default: 0
+    t.integer  "after_price",     default: 0
     t.string   "staff"
     t.string   "memo"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "content"
+    t.string   "pass_company"
+    t.string   "recieve_company"
   end
 
   create_table "inquiries", force: :cascade do |t|
@@ -136,18 +139,15 @@ ActiveRecord::Schema.define(version: 20170919064331) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
   create_table "saves", force: :cascade do |t|
-    t.boolean  "archive",             default: false
-    t.boolean  "archive_seller",      default: false
-    t.string   "status"
-    t.integer  "seller_id"
-    t.integer  "sell_id"
-    t.integer  "buyer_id"
-    t.string   "date_of_arrive"
-    t.integer  "confirm_price"
-    t.integer  "confirm_number"
-    t.string   "limit_of_inspection"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "status",       default: "one"
+    t.string   "name"
+    t.string   "staff"
+    t.string   "type_machine"
+    t.string   "from"
+    t.string   "to"
+    t.string   "number"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "sells", force: :cascade do |t|
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20170919064331) do
     t.string   "place"
     t.integer  "price"
     t.string   "removal_date"
-    t.string   "remnant"
+    t.string   "remnant",      default: "撤去済"
     t.string   "stage"
     t.string   "condition"
     t.string   "remarks"
@@ -171,6 +171,15 @@ ActiveRecord::Schema.define(version: 20170919064331) do
   end
 
   add_index "sells", ["user_id"], name: "index_sells_on_user_id"
+
+  create_table "stocks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.string   "staff"
+    t.string   "type"
+    t.string   "status"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -229,6 +238,20 @@ ActiveRecord::Schema.define(version: 20170919064331) do
     t.string   "company_place_detail_contact"
     t.text     "company_pr"
     t.integer  "reccent_deposit"
+    t.string   "bank_name"
+    t.string   "bank_branch"
+    t.string   "bank_username"
+    t.string   "bank_type"
+    t.integer  "bank_number"
+  end
+
+  create_table "withdrows", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "message"
+    t.string   "status"
   end
 
 end

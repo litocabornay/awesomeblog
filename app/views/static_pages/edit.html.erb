@@ -8,23 +8,23 @@
       <div class="row">
         <div class="col-md-12 col-md-offset-3">
 
-<%= form_for(@user) do |f| %>
-<%= render 'shared/error_message', object: f.object %>
-
-<%= render "flows/new" %>
-
-<!--<p>変更後の額　-->
-<%#= f.text_field :money %>
-　<!--円</p>-->
-<br>
-
-<!--フォームで何も送信されないとそれもバグになる-->
-<%= f.submit "変更する", class: "btn btn-primary", data: { disable_with: "変更中..." } %>
-<% end %>     
-
-<br>
-<br>
-<%= link_to '戻る', "/bss/" %>
+          <%= form_for(@user) do |f| %>
+          <%= render 'shared/error_message', object: f.object %>
+          
+          <%= render "flows/new" %>
+          
+          <!--<p>変更後の額　-->
+          <%#= f.text_field :money %>
+          　<!--円</p>-->
+          <br>
+          
+          <!--フォームで何も送信されないとそれもバグになる-->
+          <%= f.submit "変更する", class: "btn btn-primary", data: { disable_with: "変更中..." } %>
+          <% end %>     
+          
+          <br>
+          <br>
+          <%= link_to '戻る', "/bss/" %>
 
           </div>
         </div>

@@ -1,35 +1,35 @@
 <p>会社情報</p>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table sampleTable">
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">販売社名</th>
-  <td width="1500"><%= @user.company_name %>(<%= @user.company_name_sounds %>)</td>
+  <th width="100" class="thead-inverse">販売社名</th>
+  <td width="300"><%= @user.company_name %>(<%= @user.company_name_sounds %>)</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">業態</th>
-  <td width="1500"><%= @user.company_type %></td>
+  <th width="100" class="thead-inverse">業態</th>
+  <td width="300"><%= @user.company_type %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">所属組合</th>
-  <td width="1500"><%= @user.company_union %></td>
+  <th width="100" class="thead-inverse">所属組合</th>
+  <td width="300"><%= @user.company_union %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">支店</th>
-  <td width="1500"><%= @user.company_branch %></td>
+  <th width="100" class="thead-inverse">支店</th>
+  <td width="300"><%= @user.company_branch %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">代表者名</th>
-  <td width="1500"><%= @user.company_president %>(<%= @user.company_president_sound %>)</td>
+  <th width="100" class="thead-inverse">代表者名</th>
+  <td width="300"><%= @user.company_president %>(<%= @user.company_president_sound %>)</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">住所</th>
-  <td width="1500">
+  <th width="100" class="thead-inverse">住所</th>
+  <td width="300">
   （<%= @user.company_post_number %>）
   <%= @user.company_place %>　
   <%= @user.company_place_detail %>
@@ -37,23 +37,23 @@
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">電話番号</th>
-  <td width="1500"><%= @user.company_call_number %></td>
+  <th width="100" class="thead-inverse">電話番号</th>
+  <td width="300"><%= @user.company_call_number %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">FAX番号</th>
-  <td width="1500"><%= @user.company_fax_number %></td>
+  <th width="100" class="thead-inverse">FAX番号</th>
+  <td width="300"><%= @user.company_fax_number %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">緊急連絡先</th>
-  <td width="1500"><%= @user.company_call_number_emergency %></td>
+  <th width="100" class="thead-inverse">緊急連絡先</th>
+  <td width="300"><%= @user.company_call_number_emergency %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">登録日</th>
-  <td width="1500"><%= @user.created_at.strftime("%y/%m/%d") %></td>
+  <th width="100" class="thead-inverse">登録日</th>
+  <td width="300"><%= @user.created_at.strftime("%y/%m/%d") %></td>
 <tr>
   
 </table> 
@@ -61,44 +61,44 @@
 
 <p>受付連絡先情報</p>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table sampleTable">
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">メインの受付用電話番号</th>
-  <td width="1500"><%= @user.company_call_number_contact %></td>
+  <th width="100" class="thead-inverse">メインの受付用電話番号</th>
+  <td width="300"><%= @user.company_call_number_contact %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付時間</th>
-  <td width="1500"><%= @user.company_call_time_from_1 %>時
+  <th width="100" class="thead-inverse">受付時間</th>
+  <td width="300"><%= @user.company_call_time_from_1 %>時
         <%= @user.company_call_time_from_2 %>分　〜　
         <%= @user.company_call_time_to_1 %>時
         <%= @user.company_call_time_to_2 %>分</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">メインの受付担当者</th>
-  <td width="1500"><%= @user.company_reception %>（<%= @user.company_reception_sound %>）</td>
+  <th width="100" class="thead-inverse">メインの受付担当者</th>
+  <td width="300"><%= @user.company_reception %>（<%= @user.company_reception_sound %>）</td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">担当者の役職</th>
-  <td width="1500"><%= @user.company_position %></td>
+  <th width="100" class="thead-inverse">担当者の役職</th>
+  <td width="300"><%= @user.company_position %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付用FAX番号</th>
-  <td width="1500"><%= @user.company_fax_number_contact %></td>
+  <th width="100" class="thead-inverse">受付用FAX番号</th>
+  <td width="300"><%= @user.company_fax_number_contact %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付用メールアドレス</th>
-  <td width="1500"><%= @user.company_mail_address %></td>
+  <th width="100" class="thead-inverse">受付用メールアドレス</th>
+  <td width="300"><%= @user.company_mail_address %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">受付先住所</th>
-  <td width="1500"><%= @user.company_post_number_contact %>
+  <th width="100" class="thead-inverse">受付先住所</th>
+  <td width="300"><%= @user.company_post_number_contact %>
       <%= @user.company_place_contact %>
       <%= @user.company_place_detail_contact %></td>
 <tr>
@@ -106,43 +106,43 @@
 </table>
 </div>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table sampleTable">
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先①</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_1 %><br>
+  <th width="100" class="thead-inverse">その他連絡先①</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_1 %><br>
       担当：<%= @user.company_call_number_contact_tel_1 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先②</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_2 %><br>
+  <th width="100" class="thead-inverse">その他連絡先②</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_2 %><br>
       担当：<%= @user.company_call_number_contact_tel_2 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先③</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_3 %><br>
+  <th width="100" class="thead-inverse">その他連絡先③</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_3 %><br>
       担当：<%= @user.company_call_number_contact_tel_3 %></td>
 <tr>
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先④</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_4 %><br>
+  <th width="100" class="thead-inverse">その他連絡先④</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_4 %><br>
       担当：<%= @user.company_call_number_contact_tel_4 %></td>
 <tr>
   
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先⑤</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_5 %><br>
+  <th width="100" class="thead-inverse">その他連絡先⑤</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_5 %><br>
       担当：<%= @user.company_call_number_contact_tel_5 %></td>
 <tr>
   
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">その他連絡先⑥</th>
-  <td width="1500">電話番号：<%= @user.company_call_number_contact_name_6 %><br>
+  <th width="100" class="thead-inverse">その他連絡先⑥</th>
+  <td width="300">電話番号：<%= @user.company_call_number_contact_name_6 %><br>
       担当：<%= @user.company_call_number_contact_tel_6 %></td>
 <tr>
   
@@ -151,16 +151,16 @@
 
 <p>そのほか会社情報</p>
 <div class="width_table">
-<table class="table font-small sampleTable small-zoom">
+<table class="table sampleTable">
   
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">公式WEBページ</th>
-  <td width="1500"><%= @user.company_url %></td>
+  <th width="100" class="thead-inverse">公式WEBページ</th>
+  <td width="300"><%= @user.company_url %></td>
 <tr>
 
 <tr scope="row"> 
-  <th width="400" class="thead-inverse">会社PR</th>
-  <td width="1500"><%= @user.company_pr %></td>
+  <th width="100" class="thead-inverse">会社PR</th>
+  <td width="300"><%= @user.company_pr %></td>
 <tr>    
 
         

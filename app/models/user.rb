@@ -27,6 +27,21 @@ class User < ActiveRecord::Base
   # end
   
   
+  def self.sumprice  
+    sum(:money)
+    #User.sumでもかまいません
+    #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
+  end
+  
+
+  def self.sumyetprice  
+    sum(:money_yet)
+    #User.sumでもかまいません
+    #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
+  end
+  
+  
+  
   
 #—————
 #以下はパスワード再設定のためです。—————
@@ -167,39 +182,46 @@ class User < ActiveRecord::Base
   has_secure_password
   #gem 'bcrypt','3.1.11'とbundle installが必須
 
-  validates :password, presence: true, length: { minimum: 6 } ,allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 } ,allow_nil: true, format: { with: /\A[a-z0-9]+\z/i }
   # presence: true　があるため、新規ユーザーはemptyではNG
   # ただし、既存ユーザーはすでにデータが存在するため、
   # allow_nil: true　でemptyでもOK。
+
   
-#   validates :company_name, presence: true
-#   validates :company_name_sounds, presence: true
-#   validates :company_reception, presence: true
-#   validates :company_president, presence: true
-#   validates :company_president_sound, presence: true
-#   validates :company_post_number, presence: true
-#   validates :company_place, presence: true
-#   validates :company_place_detail, presence: true
-#   validates :company_call_number, presence: true
+#   validates :company_name, presence: true, length:{ maximum: 20 },uniqueness: true
+#   validates :company_name_sounds, presence: true, length:{ maximum: 20 }
+#   validates :company_reception, presence: true, length:{ maximum: 20 }
+#   validates :company_president, presence: true, length:{ maximum: 20 }
+#   validates :company_president_sound, presence: true, length:{ maximum: 20 }
+#   validates :company_post_number, presence: true, length:{ maximum: 20 }
+#   validates :company_place, presence: true, length:{ maximum: 200 }
+#   validates :company_place_detail, presence: true, length:{ maximum: 200 }
+#   validates :company_call_number, presence: true, length:{ maximum: 20 }
 # # validates :company_fax_number, presence: true
 # # validates :company_branch, presence: true
-#   validates :company_type, presence: true
-#   validates :company_union, presence: true
-#   validates :company_reception_sound, presence: true
-#   validates :company_position, presence: true
-#   validates :company_post_number_contact, presence: true
-#   validates :company_call_time_from_1, presence: true
-#   validates :company_call_time_from_2, presence: true
-#   validates :company_call_time_to_1, presence: true
-#   validates :company_call_time_to_2, presence: true
+#   validates :company_type, presence: true, length:{ maximum: 20 }
+#   validates :company_union, presence: true, length:{ maximum: 20 }
+#   validates :company_reception_sound, presence: true, length:{ maximum: 20 }
+#   validates :company_position, presence: true, length:{ maximum: 20 }
+#   validates :company_post_number_contact, presence: true, length:{ maximum: 20 }
+#   validates :company_call_time_from_1, presence: true, length:{ maximum: 5 }
+#   validates :company_call_time_from_2, presence: true, length:{ maximum: 5 }
+#   validates :company_call_time_to_1, presence: true, length:{ maximum: 5 }
+#   validates :company_call_time_to_2, presence: true, length:{ maximum: 5 }
 # # validates :company_fax_number_contact, presence: true
-#   validates :company_call_number_emergency, presence: true
+#   validates :company_call_number_emergency, presence: true, length:{ maximum: 20 }
 # # validates :company_url, presence: true
-#   validates :company_mail_address, presence: true
-#   validates :company_place_detail_contact, presence: true
+#   validates :company_mail_address, presence: true, length:{ maximum: 20 }
+#   validates :company_place_detail_contact, presence: true, length:{ maximum: 200 }
 # # validates :company_pr, presence: true
 
-  # after
+#   validates :bank_name, presence: true, length:{ maximum: 20 }
+#   validates :bank_branch, presence: true, length:{ maximum: 20 }
+#   validates :bank_username, presence: true, length:{ maximum: 20 }
+#   validates :bank_type, presence: true, length:{ maximum: 20 }
+#   validates :bank_number, presence: true, length:{ maximum: 20 },uniqueness: true, format: { with: /\A[a-z0-9]+\z/i }
+  validates :money, length:{ maximum: 20 }, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+#   # after
 
 
   

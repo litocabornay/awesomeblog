@@ -8,10 +8,10 @@
 <div class="right_menu menu_box"></div> 
 <!--safe-->
 
-<div class="right_menu menu_box"><%= link_to "買う予定物件", buyer_user_path(current_user) , :class => 'orange' %></div> 
+<div class="right_menu menu_box"><%= link_to "買物件", buyer_user_path(current_user) , :class => 'orange' %></div> 
 <!--safe-->
 
-<div class="right_menu menu_box"><%= link_to "売る予定物件", seller_user_path(current_user), :class => 'orange' %></div> 
+<div class="right_menu menu_box"><%= link_to "売物件", seller_user_path(current_user), :class => 'orange' %></div> 
 <!--sell-->
 
 <div class="right_menu menu_box"></div> 
@@ -20,8 +20,6 @@
 </div>
 
 
-
-</div>
 </div>
 
 <%= render @embedded1 %>

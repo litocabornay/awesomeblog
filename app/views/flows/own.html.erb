@@ -1,0 +1,86 @@
+<h3>入出金履歴</h3>
+
+   <div class="width_container">
+    <div >
+      
+<div class="width_table">
+<table class="table font-small sampleTable small-zoom">
+  <thead class="thead-inverse">
+    <tr scope="row">
+      
+      <th width="100"><%= "取引内容" %></th>
+
+      <th width="100"><%= "代金を渡した会社" %></th>
+      <th width="100"><%= "代金を受け取った会社" %></th>
+      
+      <th width="100"><%= "入金した日時" %></th>
+      <th width="100"><%=  "製作された日時" %> </th>
+      
+      <th width="100"><%= "取引前金額" %></th>
+      <th width="100"><%= "取引額" %></th>
+      <th width="100"><%= "取引後金額" %></th>
+      
+
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% @flows.each do |flow| %>
+
+  <% if ( flow.company == current_user.company_name ) or ( flow.company == current_user.company_name ) %>  
+      <tr scope="row">
+
+        <td><%= flow.content %></td>
+
+        <td><%= flow.pass_company %></td>
+        <td><%= flow.recieve_company %></td>
+        
+        <td>
+        <% if flow.year_date.nil? %>
+        なし
+        <% else %>
+        <%= flow.year_date %>-
+        <%= flow.month_date %>-
+        <%= flow.day_date %>
+        <% end %>
+        </td>
+        
+        
+        <td>
+        <% unless flow.created_at.blank? %>
+        <%= flow.created_at.strftime("%y-%m-%d") %>
+        <% end %>
+        </td>
+        
+        <td>
+        <% unless flow.before_price.blank? %>
+        <%= flow.before_price.to_s(:delimited) %>円
+        <% end %>
+        </td>
+        
+        <td>
+        <% unless flow.price.blank? %>
+          <%= flow.price.to_s(:delimited) %>円
+        <% end %>
+        </td>
+        
+        <td>
+        <% unless flow.after_price.blank? %>
+        <%= flow.after_price.to_s(:delimited) %>円</td>
+        <% end %>
+        </td>
+
+
+      </tr>
+    <% end %>
+      
+    <% end %>
+  
+  <%= paginate @flows %>
+  
+ </tbody>
+</table>
+</div>
+
+</div>
+</div>

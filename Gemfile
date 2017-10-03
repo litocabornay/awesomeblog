@@ -31,6 +31,8 @@ gem 'fog', '1.40.0'
 gem 'kaminari'
 
 
+# gem 'zbar', '~> 0.2.2'
+
 
 gem 'jp_prefecture'
 

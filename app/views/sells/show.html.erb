@@ -4,10 +4,19 @@
 
 <%#= @sell.content_type %>
 <%= render @embeded_place %>
+<%= link_to '→ 購入希望を送る', "/safes/new", :class => "btn btn-primary big_botton" %>
+<br>
+<br>
 <%= render 'sells/company' %>
 
-<%= link_to '戻る', "/" %>
-<%= link_to '戻る', sell_make_safe_path(current_user) %>
+
+<%= link_to '→ 購入希望を送る', "/safes/new", :class => "btn btn-primary big_botton" %>
+
+<%= link_to '戻る', "/back", :class => "btn btn-primary big_botton btnred" %>
+
+
+
+<%#= link_to '戻る', sell_make_safe_path(current_user) %>
 
 <!--<p>-->
 <!--  <strong>会社名:</strong>-->

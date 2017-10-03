@@ -1,0 +1,19 @@
+<h3>①　現在のサイトBANKシステム内の総マネー</h3>
+<h1><%= User.sumprice.to_s(:delimited) %> 円</h1>
+<br><br>
+
+<h3>②　安心決済、現在経過途中の総金額</h3>
+<h1><%= User.sumyetprice.to_s(:delimited) %> 円</h1>
+<br><br>
+
+<h3>③　ユーザーに借りてる総額(①+②)</h3>
+<h1><%= (User.sumprice + User.sumyetprice).to_s(:delimited) %> 円</h1>
+<br><br>
+
+<h3>④　過去全ての安心決済の総額</h3>
+<h1><%= (Safe.where("status = 'end'").sumprice * 1.02).floor.to_s(:delimited) %> 円</h1>
+<br><br>
+
+<h3>⑤　過去全ての安心決済の手数料総額</h3>
+<h1><%= (Safe.where("status = 'end'").sumprice * 0.02).floor.to_s(:delimited) %> 円</h1>
+<br><br>

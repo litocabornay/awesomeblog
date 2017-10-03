@@ -7,36 +7,37 @@
       
         <div id="app" class="container-fullwidth">
             <nav class="navbar navbar-expand-lg navbar-light bg-faded navbar_color1">
-                <a class="navbar-brand" href="/">中古パチスロ機器売買掲示板</a>
+                <a class="navbar-brand" href="/">在庫管理</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div id="navbarNavDropdown" class="navbar-collapse collapse">
-                    <ul class="navbar-nav mr-auto">
+                <!--<div id="navbarNavDropdown" class="navbar-collapse collapse">-->
+                <!--    <ul class="navbar-nav mr-auto">-->
                       
-                      <% if logged_in? %>
-                      <li class="nav-item money_box">
-                        使用可能残高：  <%= current_user.money %> 円
+                <!--      <%# if logged_in? %>-->
+                <!--      <li class="nav-item money_box">-->
+                <!--        使用可能残高：  <%#= current_user.money %> 円-->
                         <%#= link_to "Help", help_path %>
-                      </li>
-                      <li class="nav-item money_box">
-                        入金予定残高：  <%= current_user.money_yet %> 円
+                <!--      </li>-->
+                <!--      <li class="nav-item money_box">-->
+
+                <!--        入金予定残高： <%#= Safe.where("status == 'three'").where(seller_id: current_user.id).sumprice %> 円-->
                         <%#= link_to "Help", help_path %>
-                      </li>
-                      <% end %>
+                <!--      </li>-->
+                <!--      <%# end %>-->
                       
-                    </ul>
-                    <ul class="navbar-nav">
+                <!--    </ul>-->
+                <!--    <ul class="navbar-nav">-->
                       
-                      <% if logged_in? %>
+                <!--      <%# if logged_in? %>-->
                       
                       <!--<%# if current_user.admin? %>-->
                       <!--  <li class="right_menu menu_box"><%#= link_to "管理画面", "/admin" %></li> -->
                       <!--<%# end %>-->
                        
-                        <li class="right_menu menu_box"><%= link_to "探す", "/" %></li> 
+                <!--        <li class="right_menu menu_box"><%#= link_to "探す", "/" %></li> -->
                         
-                        <li class="right_menu menu_box"><%= link_to "投稿", new_sell_path %></li> 
+                <!--        <li class="right_menu menu_box"><%#= link_to "投稿", "/sells/new" %></li> -->
                        
                         <!--<li class="dropdown">-->
                         <!--  <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
@@ -45,19 +46,19 @@
                         <!--  <ul class="dropdown-menu">-->
                       
                       
-                      <li class="right_menu padding nav-item menu_box"><%= link_to "設定", edit_user_path(current_user) %></li>
+                <!--      <li class="right_menu padding nav-item menu_box"><%#= link_to "設定", edit_user_path(current_user) %></li>-->
                             
-                       <li class="right_menu menu_box"><%= link_to "ログアウト", logout_path , method: :delete %></li>
+                <!--       <li class="right_menu menu_box"><%#= link_to "ログアウト", logout_path , method: :delete %></li>-->
                         <!--  </ul>-->
                         <!--</li>-->
         
-                      <% else %>    
+                <!--      <%# else %>    -->
         
-                        <li><%= link_to "Log in", login_path %></li>
+                <!--        <li><%#= link_to "Log in", login_path %></li>-->
                       
-                      <% end %>
-                    </ul>
-                </div>
+                <!--      <%# end %>-->
+                <!--    </ul>-->
+                <!--</div>-->
             </nav>
         </div>
         
@@ -72,101 +73,97 @@
 
 
 
-<% if logged_in? %>
-<% if current_user.admin? %>
-管理者管理メニュー
+<!--<%# if logged_in? %>-->
+<!--<%# if current_user.admin? %>-->
+<!--管理者管理メニュー-->
 <!--<header class="navbar navbar-fixed-top navbar-inverse">-->
 <!--  <div class="container">-->
 
       
-        <div class="container-fullwidth fixed-top-2 navbar_color2 margin2">
-            <nav class="navbar nav_wide navbar_center">
+<!--        <div class="container-fullwidth fixed-top-2 navbar_color2 margin2">-->
+<!--            <nav class="navbar nav_wide navbar_center">-->
                
    
                       
-                      <% if logged_in? %>
+<!--                      <%# if logged_in? %>-->
 
                       <!--<div class="right_menu menu_box"><%#= link_to "ＵＳＥＲ承認", "/admin/", :class => 'orange' %></div> -->
                             
-                      <div class="right_menu menu_box"><%= link_to "ＢＡＮＫ反映", "/bss/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "ＢＡＮＫ反映", "/bss/", :class => 'orange' %></div> -->
                       
-                      <div class="right_menu menu_box"><%= link_to "出金依頼対応", "/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "出金依頼対応", "/withdrows/", :class => 'orange' %></div> -->
                       
-                      <div class="right_menu menu_box"><%= link_to "ＵＳＥＲ一覧", "/users/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "ＵＳＥＲ一覧", "/users/", :class => 'orange' %></div> -->
                       
-                      <div class="right_menu menu_box"><%= link_to "機器掲載一覧", "/sells/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "機器掲載一覧", "/sells/", :class => 'orange' %></div> -->
                       
-                      <div class="right_menu menu_box"><%= link_to "決済経過一覧", "/safes/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "決済経過一覧", "/safes/", :class => 'orange' %></div> -->
 
-                      <div class="right_menu menu_box"><%= link_to "金銭流動履歴", "/flows/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "金銭流動履歴", "/flows/", :class => 'orange' %></div> -->
 
-                      <div class="right_menu menu_box"><%= link_to "アナライズ", "/", :class => 'orange' %></div> 
+<!--                      <div class="right_menu menu_box"><%#= link_to "アナライズ", "/analyze", :class => 'orange' %></div> -->
                       
-                      <% else %>    
+<!--                      <%# else %>    -->
         
-                        <li><%= link_to "Log in", login_path %></li>
+<!--                        <li><%#= link_to "Log in", login_path %></li>-->
                       
-                      <% end %>
+<!--                      <%# end %>-->
                        
          
-            </nav>
-        </div>
+<!--            </nav>-->
+<!--        </div>-->
         
         
         
         
 <!--  </div>-->
 <!--</header>-->
-<% end %>
+<!--<%#end %>-->
 
 
 
 <!--<header class="navbar navbar-fixed-top navbar-inverse">-->
 <!--  <div class="container">-->
-会員様管理メニュー
+<!--会員様管理メニュー-->
       
-        <div class="container-fullwidth fixed-top-2 navbar_color2 margin2">
-            <nav class="navbar nav_wide navbar_center">
+<!--        <div class="container-fullwidth fixed-top-2 navbar_color2 margin2">-->
+<!--            <nav class="navbar nav_wide navbar_center">-->
                
    
                       
-                      <% if logged_in? %>
-<div class="right_menu menu_box"></div> 
-
-                      <div class="right_menu menu_box"><%= link_to "投稿する", "/sells/new" , :class => 'orange' %></div>
-
-                      <div class="right_menu menu_box"><%= link_to "進行中の売買", buyer_user_path(current_user) , :class => 'orange' %></div> 
+<!--                      <%# if logged_in? %>-->
+<!--                      <div class="smart">-->
+<!--<div class="right_menu menu_box"></div> -->
+<!--</div>-->
+                     
+<!--                      <div class="right_menu menu_box"><%#= link_to "売買の履歴", buyer_finish_user_path(current_user) , :class => 'orange' %></div> -->
                       <!--safe-->
                       
-                      <div class="right_menu menu_box"><%= link_to "掲載中の投稿", "/", :class => 'orange' %></div> 
-                      <!--sell-->
-                      
-                      <div class="right_menu menu_box"><%= link_to "売買の履歴", finish_user_path(current_user) , :class => 'orange' %></div> 
-                      <!--safe-->
-                      
-                      <div class="right_menu menu_box"><%= link_to "入出金", "/", :class => 'orange' %></div>
+<!--                      <div class="right_menu menu_box"><%#= link_to "入出金", "/withdrows/new", :class => 'orange' %></div>-->
                       <!--withdorow-->
                       
-                      <div class="right_menu menu_box"><%= link_to "入出金履歴", "/", :class => 'orange' %></div>
+<!--                      <div class="right_menu menu_box"><%#= link_to "入出金履歴", "/flows/own", :class => 'orange' %></div>-->
                       <!--flow-->
 
-<div class="right_menu menu_box"></div> 
+<!--                      <div class="smart">-->
+<!--<div class="right_menu menu_box"></div> -->
+<!--</div>-->
                       
-                      <% else %>    
+<!--                      <%# else %>    -->
         
                  
                       
-                      <% end %>
+<!--                      <%# end %>-->
                        
          
-            </nav>
-        </div>
+<!--            </nav>-->
+<!--        </div>-->
         
         
         
         
 <!--  </div>-->
 <!--</header>-->
-<% end %>
+<!--<%# end %>-->
 
 </div>

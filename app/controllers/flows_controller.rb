@@ -4,22 +4,25 @@ class FlowsController < ApplicationController
   before_action :admin_user, only: [:destroy, :help, :edit, :index, :new, :create]
 
 def index
-    @flows = Flow.all
+    @flows = Flow.paginate(page: params[:page]) 
 end
+def own
+    @flows = Flow.paginate(page: params[:page]) 
+
+end
+
 
 def new
     @flow = Flow.new
 end
 
 def create
-     @user = User.find(params[:id])
+    @user = User.find(params[:id])
   
     @flow = Flow.build(flow_params)
-    @flow.save
-     
+
      if @flow.save
-       # money_update
-       flash[:success] = "flash サクセス!"
+       flash[:success] = "フロー"
        redirect_to root_url
      else
        @flow = []
@@ -43,9 +46,9 @@ end
    # end
  
 
-  def flow_params
-    params.require(:flow).permit(:company, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo)
-  end
+   def flow_params
+      params.require(:flow).permit(:content, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo, :pass_company, :recieve_company, :company)
+   end
   
   # def money_update
     

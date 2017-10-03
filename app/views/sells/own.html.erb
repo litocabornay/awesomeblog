@@ -1,0 +1,69 @@
+<% provide(:title,"投稿中の機器一覧") %>
+
+  <div class="row">
+
+<div style="width:90%; margin:0 5% 0 5%; ">
+<h3>投稿中の機器一覧</h3>
+<br>
+<div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+
+
+<div class="parent"> 
+<div class="box"> 
+<%= form_tag("/sells/own", method: "get") do %>
+<%= label_tag :name, "機器名から検索　" %>
+<%= text_field_tag :name , params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+</div>
+
+</div>
+
+
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%= render 'sells/sell' %>
+    </div>
+    </div>
+    
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%#= render 'sells/sell2' %>
+    </div>
+    </div>
+    
+   <div class="width_container">
+    <div class="col-md-8 ">
+      <%#= render 'sells/sell3' %>
+    </div>
+    </div>
+    
+    
+ </div>
+ 
+ <div class="container-fullwidth fixed-top-2 navbar_color2 margin2 boxContainer"> 
+ 
+ 
+ 
+
+<div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+<div class="parent"> 
+<div class="box"> 
+<div class="center padding2" style="width:100%;">
+<%= paginate @sells %>
+</div>
+</div>
+</div>
+<div class="parent_air"> 
+<div class="box"> 
+</div>
+</div>
+
+
+
+</div>
+ </div>

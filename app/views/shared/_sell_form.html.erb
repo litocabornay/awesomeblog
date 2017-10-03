@@ -1,19 +1,36 @@
 <div class="row">
 <div class="col-md-6 col-md-offset-3">
-<!-- -- -->
-<%= form_for (@sell) do |f| %>
-<!--urlいらない　→　ただのリフレッシュだから-->
-<!-- -- -->
-<%= render 'shared/error_message', object: f.object  %>
-<!-- -- -->
-
-
-        
 
 
 
 
-  <br>
+<%= form_for @sell, url: sells_path do |f| %>
+<!--#sells_pathに飛ぶから更新できる。-->
+
+
+<% if @new_one.nil? %>
+  <div class="box2">
+  <div class="row">
+    <div class="large-12 columns">
+     <%= f.label :状態 %>
+     <br>
+        <%= f.radio_button :status, "受付中", {:checked => true}  %> 受付中 </label>
+        <%= f.radio_button :status, "終了" %> 終了 </label>
+    </div>
+  </div>
+<p>案件の状態を"終了"に変えると、他のユーザーは案件が見えなくなります。</p>
+</div>
+<% end %>
+
+
+
+
+
+<%= render 'shared/error_message', object: f.object %>
+
+<%= f.hidden_field :content_type, :value => "パチンコ" %>
+
+
   <div class="row">
     <div class="large-12 columns width100">
      <%= f.label :メーカー %>
@@ -66,11 +83,13 @@
        ], :required => true %>
     </div>
   </div>
+  
+  
   <br>
   <div class="row">
     <div class="large-12 columns form-width width100">
      <%= f.label :機種名〔正式名称をご記入ください。〕 %>
-        <%= f.text_field :name, class: 'form-control', :required => true %>
+        <%= f.text_field :name, class: 'form-control', :required => true, :placeholder => '例：ＣＲ交渉人　真下正義Ｍ２ＢＺ１２ ' %>
     </div>
   </div>
   <br>
@@ -86,14 +105,14 @@
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :数量〔半角英数字〕 %>
-        <%= f.text_field :number, class: 'form-control', :required => true %>
+        <%= f.text_field :number, class: 'form-control', :required => true, :placeholder => '例：2' %>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :売却価格〔半角英数字〕 %>
-        <%= f.text_field :price, class: 'form-control', :required => true  %>
+        <%= f.text_field :price, class: 'form-control', :required => true, :placeholder => '例：231000'  %>
       <small class="red1">※１台あたりの価格ではございません。
       <br>上記でご入力いただいた数量の
       トータルの価格をご記入ください。</small>
@@ -120,7 +139,7 @@
   <div class="row">
     <div class="large-12 columns">
      <%= f.label :撤去日（すでに撤去済みの場合は”撤去済み”と入力ください） %>
-        <%= f.text_field :removal_date, class: 'form-control', :required => true  %>
+        <%= f.text_field :removal_date, class: 'form-control', :required => true, :placeholder => '例：撤去済　or　17/10/15'  %>
     </div>
   </div>
   <br>
@@ -155,7 +174,7 @@
   <div class="row">
     <div class="large-12 columns width100">
      <%= f.label :備考 %>
-        <%= f.text_area :remarks, class: 'form-control' %>
+        <%= f.text_area :remarks, class: 'form-control', :placeholder => '例：価格、要相談' %>
     </div>
   </div>
   <br>
@@ -164,7 +183,8 @@
   
   
 <!-- -- -->
-    <%= f.submit "登録する", class: "btn btn-primary" %>
+    <%= f.submit "登録する", class: "btn btn-primary", data: { disable_with: "登録中..." } %>
+
 <!-- -- -->
 <% end %>
 <!-- -- -->

@@ -1,74 +1,87 @@
-
-<h4>パチンコ機器の詳細</h4>
-
-<!--セル情報の一覧のフォーム(並び替え可能)-->
-<div class="width_table">
-<table class="table font-small sampleTable">
-  <thead class="thead-inverse">
-    <tr scope="row">
-      <!--<th width="60">投稿者</th>-->
-      <!--<th>ユーザーの会社名前</th>-->
-      <th width="120"><%= sortable "created_at", "更新日" %></th>
-      <th width="80"><%= sortable "status", "状況" %></th>
-      <th width="100"><%= sortable "place", "前設置" %></th>
-      <th width="170"><%= sortable "maker", "メーカー" %></th>
-      <th width="400"><%= sortable "name", "機種名" %></th>
-
-    </tr>
-  </thead>
-  <tbody>
-      <tr scope="row">
-        <%#= sell.user.name %>
-        <%#= sell.user.detail.company_name %>
-        <%#= sell.created_at %>
-        <%#= I18n.l(sell.created_at, format: :long) %>
-        <td><%= @sell.created_at.strftime("%y/%m/%d") %></td>
-        <td><%= @sell.status %></td>
-        <td><%= @sell.place %></td>
-        <td><%= @sell.maker %></td>
-        <td><%= @sell.name %></td>
-
-      </tr>
- </tbody>
-</table>
-</div>
-
-
+<h3>パチンコ機器の詳細</h3>
 
 <div class="width_table">
 <table class="table font-small sampleTable">
-  <thead class="thead-inverse">
-    <tr scope="row">
-      <!--<th width="60">投稿者</th>-->
-      <!--<th>ユーザーの会社名前</th>-->
 
-      <th width="80"><%= sortable "number", "数量" %></th>
-      <th width="80"><%= sortable "type_machine", "種別" %></th>
-      <th width="120"><%= sortable "price", "価格" %></th>
-      <th width="150"><%= sortable "removal_date", "撤去日" %></th>
-      <th width="80"><%= sortable "remnant", "残債" %></th>
-      <th width="80"><%= sortable "stage", "使用次" %></th>
-      <th width="80"><%= sortable "condition", "状態" %></th>
-      <th width="200"><%= sortable "remarks", "備考" %></th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr scope="row">
-        <%#= sell.user.name %>
-        <%#= sell.user.detail.company_name %>
-        <%#= sell.created_at %>
-        <%#= I18n.l(sell.created_at, format: :long) %>
 
-        <td><%= @sell.number %></td>
-        <td><%= @sell.type_machine %></td>
-        <td><%= @sell.price %></td>
-        <td><%= @sell.removal_date %></td>
-        <td><%= @sell.remnant %></td>
-        <td><%= @sell.stage %></td>
-        <td><%= @sell.condition %></td>
-        <td><%= @sell.remarks %></td>
-      </tr>
- </tbody>
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">物件名</th>
+  <td width="150" ><%= @sell.name %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">メーカー</th>
+  <td width="150" ><%= @sell.maker %></td>
+<tr>
+  
+ <tr scope="row"> 
+  <th width="50"  class="thead-inverse">状況</th>
+  <td width="150" ><%= @sell.status %></td>
+<tr>   
+  
+ <tr scope="row"> 
+  <th width="50"  class="thead-inverse">前設置</th>
+  <td width="150" ><%= @sell.place %></td>
+<tr>
+  
+  
+  
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">数量</th>
+  <td width="150" ><%= @sell.number %></td>
+<tr>
+  
+  
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">種別</th>
+  <td width="150" ><%= @sell.type_machine %></td>
+<tr>
+
+  
+ <tr scope="row"> 
+  <th width="50"  class="thead-inverse">価格</th>
+  <td width="150" ><%= @sell.price.to_s(:delimited) %>円</td>
+<tr>  
+  
+  
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">撤去日</th>
+  <td width="150" ><%= @sell.removal_date %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">残債</th>
+  <td width="150" ><%= @sell.remnant %></td>
+<tr>
+
+
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">使用次</th>
+  <td width="150" ><%= @sell.remnant %></td>
+<tr>
+    
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">状態</th>
+  <td width="150" ><%= @sell.condition %></td>
+<tr>
+    
+    
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">備考</th>
+  <td width="150" ><%= @sell.remarks %></td>
+<tr> 
+
+  
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">更新日</th>
+  <td width="150" ><%= @sell.created_at.strftime("%m/%d") %></td>
+<tr>
+  
+
+
+
 </table>
 </div>
-

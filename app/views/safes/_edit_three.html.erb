@@ -1,0 +1,311 @@
+
+<div class="row">
+
+ 
+ 
+<%= form_for(@safe) do |f| %>
+<%= render 'shared/error_message', object: f.object %>
+<h3>検品OK →売買成立　or　検品OK →返品処理</h3>
+<h4>売買情報</h4>
+<p>商品が手元に届き、商品の検品が完了した際に、以下の”売買終了”ボタンを押してください。</p>
+<p>検品の際、商品に不具合があった場合は、返品処理も可能です。</p>
+<p> 　</p>
+<h5>台情報</h5>
+
+<table class="table font-small sampleTable">
+
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">ID</th>
+  <td width="150" ><%= @safe.id %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">投稿日時</th>
+  <td width="150" ><%= @safe.created_at.strftime("%y年 %m月 %d日") %></td>
+<tr>
+ 
+ 
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">前設置</th>
+  <td width="150" ><%= @sell.place %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">メーカー</th>
+  <td width="150" ><%= @sell.maker %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">物件名</th>
+  <td width="150" ><%= @sell.name %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">種別</th>
+  <td width="150" ><%= @sell.type_machine %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">撤去日</th>
+  <td width="150" ><%= @sell.removal_date %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">残債</th>
+  <td width="150" ><%= @sell.remnant %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">使用次</th>
+  <td width="150" ><%= @sell.stage %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">状態</th>
+  <td width="150" ><%= @sell.condition %></td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">備考</th>
+  <td width="150" ><%= @sell.remarks %></td>
+<tr> 
+
+</table> 
+
+
+       
+
+
+<h5>確定条件</h5>
+
+<%#= f.hidden_field_tag 'status', @status %>
+<table class="table font-small sampleTable">
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">到着予定日</th>
+  <td width="150" ><%= @safe.date_of_arrive %></td>
+<tr>
+ 
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">購入台数</th>
+  <td width="150" ><%= @safe.confirm_number %>台</td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">合計価格</th>
+  <td width="150" ><%= @commission.to_s(:delimited) %>円 (手数料２％込)</td>
+<tr> 
+
+<tr scope="row"> 
+  <th width="50"  class="thead-inverse">検品納期</th>
+  <td width="150" ><%= @safe.limit_of_inspection %></td>
+<tr> 
+
+</table> 
+
+
+
+
+<br>
+<%= f.submit "売買終了" , class: "btn btn-primary big_botton", data: { disable_with: "処理中...", confirm: "本当に検品は終わりましたか？" } %>
+
+<%= link_to "返品する" , returnback_safes_path(@safe_id) , :class => "btn btn-primary big_botton btnred", method: :put, data: { disable_with: "送信中...", confirm:  "本当に返品処理しますか？" } %>
+<center>
+<p style="color:red; font-size:14px;" >※このアクションは実行後に取り消すことができません。</p>
+<p style="color:red; font-size:14px;" >※"売買終了"ボタンを押すまでは、仮払いの状態で販売者様に商品代金は入金されていない状態になっております。</p>
+</center>
+
+<h5>販売会社情報</h5>
+
+
+<!--セル情報の一覧のフォーム(並び替え可能)-->
+
+<div class="width_table">
+<table class="table font-small sampleTable">
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">メインの受付用電話番号</th>
+  <td width="150"><%= @seller.company_call_number_contact %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">受付時間</th>
+  <td width="150"><%= @seller.company_call_time_from_1 %>時
+        <%= @seller.company_call_time_from_2 %>分　〜　
+        <%= @seller.company_call_time_to_1 %>時
+        <%= @seller.company_call_time_to_2 %>分</td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">メインの受付担当者</th>
+  <td width="150"><%= @seller.company_reception %>（<%= @seller.company_reception_sound %>）</td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">担当者の役職</th>
+  <td width="150"><%= @seller.company_position %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">受付用FAX番号</th>
+  <td width="150"><%= @seller.company_fax_number_contact %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">受付用メールアドレス</th>
+  <td width="150"><%= @seller.company_mail_address %></td>
+<tr>
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">受付先住所</th>
+  <td width="150"><%= @seller.company_post_number_contact %>
+      <%= @seller.company_place_contact %>
+      <%= @seller.company_place_detail_contact %></td>
+<tr>
+  
+</table>
+</div>
+<div class="width_table">
+<table class="table font-small sampleTable">
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先①</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_1 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_1 %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先②</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_2 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_2 %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先③</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_3 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_3 %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先④</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_4 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_4 %></td>
+<tr>
+  
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先⑤</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_5 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_5 %></td>
+<tr>
+  
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">その他連絡先⑥</th>
+  <td width="150">電話番号：<%= @seller.company_call_number_contact_name_6 %><br>
+      担当：<%= @seller.company_call_number_contact_tel_6 %></td>
+<tr>
+  
+</table>
+</div>
+<div class="width_table">
+<table class="table font-small sampleTable">
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">販売社名</th>
+  <td width="150"><%= @seller.company_name %>(<%= @seller.company_name_sounds %>)</td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">業態</th>
+  <td width="150"><%= @seller.company_type %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">所属組合</th>
+  <td width="150"><%= @seller.company_union %></td>
+<tr>
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">支店</th>
+  <td width="150"><%= @seller.company_branch %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">代表者名</th>
+  <td width="150"><%= @seller.company_president %>(<%= @seller.company_president_sound %>)</td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">住所</th>
+  <td width="150">
+  （<%= @seller.company_post_number %>）
+  <%= @seller.company_place %>　
+  <%= @seller.company_place_detail %>
+  </td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">電話番号</th>
+  <td width="150"><%= @seller.company_call_number %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">FAX番号</th>
+  <td width="150"><%= @seller.company_fax_number %></td>
+<tr>
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">緊急連絡先</th>
+  <td width="150"><%= @seller.company_call_number_emergency %></td>
+<tr>
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">登録日</th>
+  <td width="150"><%= @seller.created_at.strftime("%y/%m/%d") %></td>
+<tr>
+  
+</table> 
+</div>
+<div class="width_table">
+<table class="table font-small sampleTable">
+  
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">公式WEBページ</th>
+  <td width="150"><%= @seller.company_url %></td>
+<tr>
+
+<tr scope="row"> 
+  <th width="50" class="thead-inverse">会社PR</th>
+  <td width="150"><%= @seller.company_pr %></td>
+<tr>    
+
+        
+        
+
+</table>
+</div>
+
+
+<br>
+<%= f.submit "売買終了" , class: "btn btn-primary big_botton", data: { disable_with: "処理中...", confirm: "本当に検品は終わりましたか？" } %>
+
+<% end %>
+
+<%= link_to "返品する" , returnback_safes_path(@safe_id) , :class => "btn btn-primary big_botton btnred", method: :put, data: { disable_with: "送信中...", confirm:  "本当に返品処理しますか？" } %>
+
+
+</div>
+
+
+<br>
+
+<center>
+<p style="color:red; font-size:14px;" >※このアクションは実行後に取り消すことができません。</p>
+<p style="color:red; font-size:14px;" >※"売買終了"ボタンを押すまでは、仮払いの状態で販売者様に商品代金は入金されていない状態になっております。</p>
+</center>
+
+
+<%= link_to '戻る', buyer_user_path(current_user) , :class => "btn btn-primary big_botton btnwhite" %>
