@@ -2,7 +2,12 @@
 @import "layouts/_paginate.scss";
 
 
-body { -webkit-text-size-adjust : 100%!important ; }
+body {
+  -webkit-text-size-adjust : 100%!important ;
+
+  
+  
+}
 
 .container { overflow : hidden ; }
 
@@ -637,7 +642,7 @@ padding: 8px;
 
 
 
-@media screen and (max-width: 640px) {
+// @media screen and (max-width: 640px) {
 
 img { float : none ; }
 
@@ -656,7 +661,7 @@ line-height : 1.7 ; }
   display:none;
 }
 
-}
+// }
 
 
 @media screen and (max-width: 960px) {

@@ -1,7 +1,7 @@
+<center>
 <h3>新規在庫入力</h3>
 <br>
-<center>
-<div class="width_table">
+
 
 <div class="box2">
 
@@ -16,7 +16,7 @@
 <%#= f.hidden_field :status, :value => @one %>
 
 <p>機器番号<br>
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622'%>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
 <label class=qrcode-text-btn>
 <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);'%>
 <!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
@@ -25,15 +25,15 @@
 <br><br> 
 
 <p>在庫名<br>
-<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name] %></p>
+<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name], class: 'form-control' %></p>
 <br><br>
 
 <p>担当者<br>
-<%= f.text_field :staff , :placeholder => '例：山田太郎', :value => session[:staff] %></p>
+<%= f.text_field :staff , :placeholder => '例：山田太郎', :value => session[:staff], class: 'form-control' %></p>
 <br><br>
 
 <p>種別<br>
-<%= f.text_field :type_machine , :placeholder => '例：本体', :value => session[:type_machine]%>
+<%= f.text_field :type_machine , :placeholder => '例：本体', :value => session[:type_machine], class: 'form-control'%>
 <br><br>
 
 
@@ -61,5 +61,4 @@
 
 
 
-</div>
 </center>
