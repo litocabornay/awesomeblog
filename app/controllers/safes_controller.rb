@@ -115,44 +115,44 @@ end
 
    
    @safe = Safe.find(params[:id])
-   @safe_id = @safe.id
+  # @safe_id = @safe.id
    
-   @buyer_id = @safe.buyer_id
-   @seller_id = @safe.seller_id
-   @sell_id = @safe.sell_id
+  # @buyer_id = @safe.buyer_id
+  # @seller_id = @safe.seller_id
+  # @sell_id = @safe.sell_id
    
-   @buyer = User.find(@buyer_id)
-   @seller = User.find(@seller_id)
-   @sell = Sell.find(@sell_id)
+  # @buyer = User.find(@buyer_id)
+  # @seller = User.find(@seller_id)
+  # @sell = Sell.find(@sell_id)
    
-   @commission_of_price = 1.02
-   @place = @safe.confirm_price
-   @commission = (@place * @commission_of_price).floor
+  # @commission_of_price = 1.02
+  # @place = @safe.confirm_price
+  # @commission = (@place * @commission_of_price).floor
    
-   @flow = Flow.new
+  # @flow = Flow.new
     
     if @safe.status == "one"
 
-   @edit = "edit_one"
+  # @edit = "edit_one"
     
-    elsif @safe.status == "two"
+  #   elsif @safe.status == "two"
     
-   @edit = "edit_two"
-  # @content_for_flow = "商品の購入に伴う、当サイトへの代金先払い"
+  # @edit = "edit_two"
+  # # @content_for_flow = "商品の購入に伴う、当サイトへの代金先払い"
    
-    elsif @safe.status == "three"
+  #   elsif @safe.status == "three"
     
-   @edit = "edit_three"
-  # @content_for_flow = "商品検品完了につき、当サイトからの代金の受け取り"
+  # @edit = "edit_three"
+  # # @content_for_flow = "商品検品完了につき、当サイトからの代金の受け取り"
     
-    elsif @safe.status == "rejection"
+  #   elsif @safe.status == "rejection"
     
-    @edit = "edit_one"
+  #   @edit = "edit_one"
   
-    elsif @safe.status == "return"
+  #   elsif @safe.status == "return"
     
-    @edit = "edit_return"
-    # @content_for_flow = "商品返品完了につき、当サイトからの代金の差し戻し"
+  #   @edit = "edit_return"
+  #   # @content_for_flow = "商品返品完了につき、当サイトからの代金の差し戻し"
   
     
     

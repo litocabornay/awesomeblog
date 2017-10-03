@@ -6,7 +6,9 @@
  // }
  
  
- function openQRCamera(node) {
+
+ 
+function openQRCamera(node) {
   var reader = new FileReader();
   reader.onload = function() {
     node.value = "";

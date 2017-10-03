@@ -4,7 +4,8 @@
   <title><%= full_title(yield(:title))%></title>
   <!--ヘルパーに設定必要-->
   <meta name="viewport" content="width=300" >
-  
+  <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js">
+</script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
