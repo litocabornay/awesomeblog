@@ -98,8 +98,8 @@ get 'safe_before' => 'safes#safe'
 get 'safe_after' => 'safes#after'  
 get 'zaiko' => 'safes#index2'  
 
-patch '/safes/:id/editbot', to:'safes#editbot'
-put '/safes/:id/editbot', to:'safes#editbot'
+patch '/safes/:id', to:'safes#editbot'
+put '/safes/:id', to:'safes#editbot'
 
 # # patch '/safes/:id', to:'safes#update'
 # # put '/safes/:id', to:'safes#update'
