@@ -132,6 +132,28 @@ def create
 end
 
 
+def editbot
+  @safe = Safe.find(params[:id])
+   
+  if @safe.status == "在庫中"
+
+    @status = "出庫済"
+    @safe.update(:status => @status)
+    
+    @staff= current_user.name
+    @safe.update(:staff2 => @staff)
+    
+    flash[:success] = "出庫完了"
+    redirect_to root_url
+    
+  else
+    
+    flash[:danger] = "権限がないか、既に完了したアクションです。"
+    redirect_to root_url
+    
+  end
+  
+end
 
 
 
