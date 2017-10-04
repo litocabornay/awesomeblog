@@ -3,6 +3,8 @@
 <br>
 
 
+
+
 <div class="box2">
 
 <%= form_for(@safe, url: "/safes") do |f| %>
@@ -15,26 +17,31 @@
 <%#= f.hidden_field :seller_id, :value => @seller %>
 <%#= f.hidden_field :status, :value => @one %>
 
-<p>機器番号<br>
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
-<label class=qrcode-text-btn>
-<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);'%>
+<p>機器番号
+<br>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' ,:required => true %>
+<label class="qrcode-text-btn zoom2">
+<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
 <!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
 </label>
-<%#= f.text_field :number , :placeholder => '例：P1SS160135622' %></p>
-<br><br> 
+</p>
 
-<p>在庫名<br>
-<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name], class: 'form-control' %></p>
-<br><br>
+<p>在庫名
+<br>
+<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name], class: 'form-control', :checked => true ,:required => true %>
+</p>
 
-<p>担当者<br>
-<%= f.text_field :staff , :placeholder => '例：山田太郎', :value => session[:staff], class: 'form-control' %></p>
-<br><br>
 
-<p>種別<br>
-<%= f.text_field :type_machine , :placeholder => '例：本体', :value => session[:type_machine], class: 'form-control'%>
-<br><br>
+<!--<p>担当者<br>-->
+<!--<%#= f.text_field :staff , :placeholder => '例：山田太郎', :value => session[:staff], class: 'form-control', :checked => true %></p>-->
+<!--<br><br>-->
+<%= f.hidden_field :status , :value => "在庫中" %>
+<%= f.hidden_field :staff , :value => current_user.name %>
+
+<p>種別
+<br>
+<%= f.text_field :type_machine , :placeholder => '例：本体', :value => session[:type_machine], class: 'form-control', :checked => true ,:required => true %>
+</p>
 
 
 

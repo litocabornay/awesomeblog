@@ -321,13 +321,13 @@
  # bank_number = Faker::Number.number(7)
  
  
-User.create!(name: "jizokm",
+User.create!(name: "小畑克志",
              email: "jizokm@gmail.com",
-             password: "caster39",
-             password_confirmation: "caster39",
+             password: "caster77",
+             password_confirmation: "caster77",
              admin:     true,
              activated: true,
-             activated_at: Time.zone.now,
+             activated_at: Time.zone.now
              
               # company_name: company_name,
               # company_name_sounds: company_name_sounds,
@@ -375,4 +375,16 @@ User.create!(name: "jizokm",
               # bank_type: bank_type,
               # bank_number: bank_number
              )
+             
+             
+             
+User.create!(name: "社員さん１",
+             email: "syain@gmail.com",
+             password: "caster39",
+             password_confirmation: "caster39",
+             admin:     false,
+             activated: true,
+             activated_at: Time.zone.now
+             )
+             
 end    

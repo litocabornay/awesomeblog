@@ -1,11 +1,31 @@
 <% provide(:title,"トップページ") %>
 
 <% if logged_in? %>
+<center>
 
-  <h1>在庫管理システム</h1>
-  <%= link_to "新規登録", new_safe_path, class:"btn btn-lg btn-primary" %>
+<% if current_user.admin? %>
+  <h1>管理者用</h1>
+<% else %>
+  <h1>登録者用</h1>
+<% end %>
+
+
+  <%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
+  <br>  <br>
+
+<% if current_user.admin? %>
+  <%= link_to "一覧", safes_path, class:"btn btn-lg btn-primary" %>
+  <br>  <br>
+<% end %>
+
+  <%= link_to "出庫", "/safe_before", class:"btn btn-lg btn-primary" %>
+  
+  
   
   <br>
+  </center>
+  
+  
 <% else %>
 <div class="center jumbotron">
 <center>

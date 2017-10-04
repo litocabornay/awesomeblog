@@ -90,7 +90,13 @@ resources :password_resets,     only: [:new, :create, :edit, :update]
 
 # resources :withdrows , only: [:index, :new, :create, :edit, :update]
 
-resources :safes, only: [:index, :new, :create, :edit, :update]
+resources :safes
+# get '/safes/safe', to: 'safes#safe', as:'safe'
+
+get 'safe_before' => 'safes#safe'  
+get 'safe_after' => 'safes#after'  
+get 'zaiko' => 'safes#index2'  
+
 # # patch '/safes/:id', to:'safes#update'
 # # put '/safes/:id', to:'safes#update'
 # # form_for(@safe) & @safe = Safe.find(params[:id]) = showページ = /safes/:id

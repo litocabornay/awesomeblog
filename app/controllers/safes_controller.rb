@@ -10,7 +10,11 @@ class SafesController < ApplicationController
 
 
   # helper_method :sort_column, :sort_direction
-
+def index2
+  @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+end
+  
+  
 def index
   @safes = Safe.paginate(page: params[:page])
 
@@ -62,7 +66,29 @@ def index
   # @one_safes = one_safes.all
 end
 
-
+  
+ def safe
+   
+    if params[:number]
+     @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page])
+    else
+     @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+    end
+    
+ end
+ 
+ 
+ def after
+   
+    if params[:number]
+     @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page])
+    else
+     @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+    end
+    
+ end
+ 
+ 
 
 def show
    @safe = Safe.find(params[:id])
@@ -95,7 +121,7 @@ def create
     
     flash[:success] = "登録完了"
 
-    redirect_to "/safes"
+    redirect_to "/"
     else
       render 'new'
     end
@@ -115,6 +141,8 @@ end
 
    
    @safe = Safe.find(params[:id])
+   
+   
   # @safe_id = @safe.id
    
   # @buyer_id = @safe.buyer_id
@@ -131,8 +159,26 @@ end
    
   # @flow = Flow.new
     
-    if @safe.status == "one"
+  if @safe.status == "在庫中"
 
+
+  if @safe.status && (@safe.status == "在庫中")
+    # if  @who_now == @who_seller
+    @status = "出庫済"
+    @safe.update(:status => @status)
+    
+    @staff= current_user.name
+    @safe.update(:staff2 => @staff)
+    
+    # @safe.update(safe_params)
+    flash[:success] = "出庫完了"
+    redirect_to root_url
+  else
+    flash[:danger] = "権限がないか、既に完了したアクションです。"
+    redirect_to root_url
+  end
+  
+  
   # @edit = "edit_one"
     
   #   elsif @safe.status == "two"
@@ -156,9 +202,8 @@ end
   
     
     
-    end
-    
-    
+  end
+
     
  end
 
@@ -174,227 +219,230 @@ def update
 # end
 
 @safe = Safe.find(params[:id])
-@safe_id = @safe.id
+# @safe_id = @safe.id
 
-@buyer_id = @safe.buyer_id
-@seller_id = @safe.seller_id
-@sell_id = @safe.sell_id
+# @buyer_id = @safe.buyer_id
+# @seller_id = @safe.seller_id
+# @sell_id = @safe.sell_id
 
-@buyer = User.find(@buyer_id)
-@seller = User.find(@seller_id)
-@sell = Sell.find(@sell_id)
+# @buyer = User.find(@buyer_id)
+# @seller = User.find(@seller_id)
+# @sell = Sell.find(@sell_id)
 
-@commission_of_price = 1.02
-@pricee = @safe.confirm_price
-@commission = (@pricee * @commission_of_price).floor
+# @commission_of_price = 1.02
+# @pricee = @safe.confirm_price
+# @commission = (@pricee * @commission_of_price).floor
 
 
-@who_now = current_user.id
-@who_buyer = @safe.buyer_id
-@who_seller = @safe.seller_id
-#必要な情報を準備して
+# @who_now = current_user.id
+# @who_buyer = @safe.buyer_id
+# @who_seller = @safe.seller_id
+# #必要な情報を準備して
 
 # @flow = Flow.new(flow_params)
 
 
 
-if @safe.status == "one"
+# if @safe.status == "one"
   
-  if @safe.status == "one"
-    if  @who_now == @who_seller
-    @status = "two"
+  if @safe.status && (@safe.status == "在庫中")
+    # if  @who_now == @who_seller
+    @status = "出庫済"
     @safe.update(:status => @status)
     @safe.update(safe_params)
-    #DBに入れる！
-    flash[:success] = "販売許可しました。"
-    redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-    else
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
-    end
+    
+    flash[:success] = "出庫完了"
+    redirect_to root_url
   else
-  flash[:danger] = "権限がないか、既に完了したアクションです。"
-  redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+    flash[:danger] = "権限がないか、既に完了したアクションです。"
+    redirect_to root_url
   end
   
   
-elsif @safe.status == "two"
-
-  if @safe.status == "two"
-    if  @who_now == @who_buyer
-    @status = "three"
-    @safe.update(:status => @status)
-    #DBに入れる！
-    
-    @user = User.find(current_user)
-    
-    @company = User.find(@who_buyer).company_name
-    @pass_company =User.find(@who_buyer).company_name
-    @recieve_company = User.find(@who_seller).company_name
-    @before_price = User.find(@who_buyer).money
-    # @year_date = "-"
-    # @month_date = "-"
-    # @day_date = "-"
-    @price =  @commission * -1
-    @after_price =  User.find(@who_buyer).money - @commission
-    # @staff = "なし"
-    # @memo = "なし"
-    @content = "buyer購入お金支払い"
-     @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
-    @flow.save
-    
-    @user.update(:money => @after_price)
-    
-    
-
-    flash[:success] = "購入が完了しました。"
-    redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
-    else
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-    end
-  else
-  flash[:danger] = "権限がないか、既に完了したアクションです。"
-  redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-  end 
+  
+  # else
+  # flash[:danger] = "権限がないか、既に完了したアクションです。"
+  # redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+  # end
   
   
-elsif @safe.status == "three"
+# elsif @safe.status == "two"
 
-  if @safe.status == "three"
-    if  @who_now == @who_buyer
-    @status = "end"
-    @safe.update(:status => @status)
-    #DBに入れる！
+#   if @safe.status == "two"
+#     if  @who_now == @who_buyer
+#     @status = "three"
+#     @safe.update(:status => @status)
+#     #DBに入れる！
+    
+#     @user = User.find(current_user)
+    
+#     @company = User.find(@who_buyer).company_name
+#     @pass_company =User.find(@who_buyer).company_name
+#     @recieve_company = User.find(@who_seller).company_name
+#     @before_price = User.find(@who_buyer).money
+#     # @year_date = "-"
+#     # @month_date = "-"
+#     # @day_date = "-"
+#     @price =  @commission * -1
+#     @after_price =  User.find(@who_buyer).money - @commission
+#     # @staff = "なし"
+#     # @memo = "なし"
+#     @content = "buyer購入お金支払い"
+#     @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
+#     @flow.save
+    
+#     @user.update(:money => @after_price)
+    
+    
+
+#     flash[:success] = "購入が完了しました。"
+#     redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+#     else
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#     end
+#   else
+#   flash[:danger] = "権限がないか、既に完了したアクションです。"
+#   redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#   end 
   
-    @user = @seller
+  
+# elsif @safe.status == "three"
+
+#   if @safe.status == "three"
+#     if  @who_now == @who_buyer
+#     @status = "end"
+#     @safe.update(:status => @status)
+#     #DBに入れる！
+  
+#     @user = @seller
     
-    @company = User.find(@who_seller).company_name
-    @pass_company = User.find(@who_buyer).company_name
-    @recieve_company = User.find(@who_seller).company_name
-    @before_price = User.find(@who_seller).money
-    # @year_date = "-"
-    # @month_date = "-"
-    # @day_date = "-"
-    @after_price =  User.find(@who_seller).money + @pricee
-    @price =  @pricee
-    # @staff = "なし"
-    # @memo = "なし"
-    @content = "seller代金受け取り"
-    @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
-    @flow.save
+#     @company = User.find(@who_seller).company_name
+#     @pass_company = User.find(@who_buyer).company_name
+#     @recieve_company = User.find(@who_seller).company_name
+#     @before_price = User.find(@who_seller).money
+#     # @year_date = "-"
+#     # @month_date = "-"
+#     # @day_date = "-"
+#     @after_price =  User.find(@who_seller).money + @pricee
+#     @price =  @pricee
+#     # @staff = "なし"
+#     # @memo = "なし"
+#     @content = "seller代金受け取り"
+#     @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
+#     @flow.save
     
-    @user.update(:money => @after_price)
+#     @user.update(:money => @after_price)
     
-    flash[:success] = "検品合格処理が完了し、取引が無事に終了しました。"
-    redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+#     flash[:success] = "検品合格処理が完了し、取引が無事に終了しました。"
+#     redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
     
-    else
+#     else
       
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-    end
-  else
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#     end
+#   else
     
-  flash[:danger] = "権限がないか、既に完了したアクションです。"
-  redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-  end
+#   flash[:danger] = "権限がないか、既に完了したアクションです。"
+#   redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#   end
     
     
     
-elsif @safe.status == "return"
+# elsif @safe.status == "return"
 
-  if @safe.status == "return"
-    if  @who_now == @who_seller
-    @status = "return_end"
-    @safe.update(:status => @status)
-    #DBに入れる！
+#   if @safe.status == "return"
+#     if  @who_now == @who_seller
+#     @status = "return_end"
+#     @safe.update(:status => @status)
+#     #DBに入れる！
   
-    @user = @buyer
+#     @user = @buyer
     
-    @company = User.find(@who_buyer).company_name
-    @recieve_company = User.find(@who_buyer).company_name
-    @pass_company = User.find(@who_seller).company_name
+#     @company = User.find(@who_buyer).company_name
+#     @recieve_company = User.find(@who_buyer).company_name
+#     @pass_company = User.find(@who_seller).company_name
     
-    @before_price = User.find(@who_buyer).money
-    # @year_date = "-"
-    # @month_date = "-"
-    # @day_date = "-"
-    @after_price =  User.find(@who_buyer).money + @commission
-    @price =  @commission
-    # @staff = "なし"
-    # @memo = "なし"
-    @content = "seller返金受け取り"
-    @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
-    @flow.save
+#     @before_price = User.find(@who_buyer).money
+#     # @year_date = "-"
+#     # @month_date = "-"
+#     # @day_date = "-"
+#     @after_price =  User.find(@who_buyer).money + @commission
+#     @price =  @commission
+#     # @staff = "なし"
+#     # @memo = "なし"
+#     @content = "seller返金受け取り"
+#     @flow = Flow.new(:company => @company, :pass_company => @pass_company, :recieve_company => @recieve_company, :before_price => @before_price, :year_date => @year_date, :month_date => @month_date, :day_date => @day_date, :price => @price, :after_price => @after_price, :staff => @staff, :memo => @memo, :content => @content)
+#     @flow.save
     
-    @user.update(:money => @after_price)
+#     @user.update(:money => @after_price)
     
-    flash[:success] = "返品処理が完了し、取引が無事に終了しました。"
-    redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+#     flash[:success] = "返品処理が完了し、取引が無事に終了しました。"
+#     redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
     
-    else
+#     else
       
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-    end
-  else
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#     end
+#   else
     
-  flash[:danger] = "権限がないか、既に完了したアクションです。"
-  redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
-  end
+#   flash[:danger] = "権限がないか、既に完了したアクションです。"
+#   redirect_to seller_user_path(current_user) #通常、redirect_to ★url_path
+#   end
   
   
-end
-end
+# end
+# end
   
   
-def returnback
+# def returnback
   
-@safe = Safe.find(params[:id])
-@safe_id = @safe.id
+# @safe = Safe.find(params[:id])
+# @safe_id = @safe.id
 
-@buyer_id = @safe.buyer_id
-@seller_id = @safe.seller_id
-@sell_id = @safe.sell_id
+# @buyer_id = @safe.buyer_id
+# @seller_id = @safe.seller_id
+# @sell_id = @safe.sell_id
 
-@buyer = User.find(@buyer_id)
-@seller = User.find(@seller_id)
-@sell = Sell.find(@sell_id)
+# @buyer = User.find(@buyer_id)
+# @seller = User.find(@seller_id)
+# @sell = Sell.find(@sell_id)
 
-@commission_of_price = 1.02
-@pricee = @safe.confirm_price
-@commission = (@pricee * @commission_of_price).floor
+# @commission_of_price = 1.02
+# @pricee = @safe.confirm_price
+# @commission = (@pricee * @commission_of_price).floor
 
 
-@who_now = current_user.id
-@who_buyer = @safe.buyer_id
-@who_seller = @safe.seller_id
-#必要な情報を準備して
+# @who_now = current_user.id
+# @who_buyer = @safe.buyer_id
+# @who_seller = @safe.seller_id
+# #必要な情報を準備して
 
-#必要な情報を準備して
-  if @safe.status == "three"
-    if  @who_now == @who_buyer
-      @status = "return"
+# #必要な情報を準備して
+#   if @safe.status == "three"
+#     if  @who_now == @who_buyer
+#       @status = "return"
   
-      @safe.update(:status => @status)
-      #DBに入れる！
-      flash[:success] = "返品処理しました。商品返品前の、販売会社様への連絡をお勧めします。"
-      redirect_to buyer_user_path(current_user) 
-    else
-      @status = "archive"
-      @safe.update(:archive => @status)
-      #DBに入れる！
-      flash[:danger] = "権限がないか、既に完了したアクションです。"
-      redirect_to seller_user_path(current_user)
-    end
-  else
-    @status = "archive"
-    @safe.update(:archive => @status)
-    #DBに入れる！
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to seller_user_path(current_user)
-  end 
+#       @safe.update(:status => @status)
+#       #DBに入れる！
+#       flash[:success] = "返品処理しました。商品返品前の、販売会社様への連絡をお勧めします。"
+#       redirect_to buyer_user_path(current_user) 
+#     else
+#       @status = "archive"
+#       @safe.update(:archive => @status)
+#       #DBに入れる！
+#       flash[:danger] = "権限がないか、既に完了したアクションです。"
+#       redirect_to seller_user_path(current_user)
+#     end
+#   else
+#     @status = "archive"
+#     @safe.update(:archive => @status)
+#     #DBに入れる！
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to seller_user_path(current_user)
+#   end 
     
     
   
@@ -468,17 +516,17 @@ end
   
   
   
+
+ 
   
   
   
   
   
-  
-  
- def one
-    @safe = Safe.find(params[:id])
-    @status = "two"
- end
+# def one
+#     @safe = Safe.find(params[:id])
+#     @status = "two"
+# end
 
   #Sample Route: /users/32/one/edit
   
@@ -514,7 +562,7 @@ end
    
    
   def safe_params
-    params.require(:safe).permit(:name, :staff, :type_machine)
+    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status)
   end
   
   # def safe_params2

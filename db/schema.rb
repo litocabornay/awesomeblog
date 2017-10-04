@@ -139,9 +139,10 @@ ActiveRecord::Schema.define(version: 20171003014526) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
   create_table "saves", force: :cascade do |t|
-    t.string   "status",       default: "one"
+    t.string   "status",       default: "在庫中"
     t.string   "name"
     t.string   "staff"
+    t.string   "staff2"
     t.string   "type_machine"
     t.string   "from"
     t.string   "to"

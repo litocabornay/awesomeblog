@@ -12,24 +12,37 @@
 </head>
 <body>
   
-  <!--<div class="header_margin">-->
+  
+<% if current_user && current_user.admin? %>
   <%= render "layouts/header" %>
-  <!--</div>-->
-  
-  <%# if current_user.admin? %>
-  <%#= render "layouts/header_two" %>
-  <%# end %>
-  
   <div class="container top_padding">
     <div>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
     </div>
-    
     <%= yield %>
-    
   </div>
   <%= render "layouts/footer" %>
+</div>
+
+<% else %>
+
+
+
+  <div class="sumaho600">
+  <%= render "layouts/header" %>
+  <div class="container top_padding">
+    <div>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    </div>
+    <%= yield %>
+  </div>
+  <%= render "layouts/footer" %>
+</div>
+<% end %>
+  
 </body>
 </html>
