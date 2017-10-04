@@ -76,7 +76,8 @@
       <% else %>
        <td class="100">
         <b><%= safe.status %></b>
-
+        <br>
+<%= link_to "出庫する", safe_path(safe, params: { safe: { status: "出庫済"} }), :method => :put, :class => "btn btn-primary big_botton" %>
         <%#= link_to '出庫', safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
        </td>
       <% end %> 
