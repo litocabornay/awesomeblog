@@ -1,10 +1,11 @@
 <div class="padding1-20"> 
 <%= form_tag("safe_after", method: "get") do %>
 
-<%= text_field params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
+
+<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
 
 <label class="qrcode-text-btn zoom2 helf2">
-<%= file_field params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);' %>
+<%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);' %>
 </label>
 
 <br><br>
