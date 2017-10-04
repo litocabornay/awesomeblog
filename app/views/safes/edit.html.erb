@@ -1,50 +1,36 @@
-<center>
-<h3>新規在庫入力</h3>
-<br>
-
-
-<div class="box2">
-
-<%= form_for(@safe, url: safe_path ) do |f| %>
-<%= render 'shared/error_message', object: f.object %>
-
-
-<%#= f.hidden_field :staff, :value => @current_user %>
-<%#= f.hidden_field :buyer_id, :value => @current %>
-
-<%#= f.hidden_field :seller_id, :value => @seller %>
-<%#= f.hidden_field :status, :value => @one %>
-
-<p>機器番号
-<%= f.text_field :number , class: 'form-control', :disabled => true %>
-<br></p>
-
-<p>在庫名
-<%= f.text_field :name , class: 'form-control', :disabled => true %>
-<br></p>
-
-<p>種別
-<%= f.text_field :type_machine, class: 'form-control', :disabled => true %>
-<br></p>
-
-<br>
-<%= f.hidden_field :staff2 , :value => current_user.name %>
-
-<!--<p>FROM<br>-->
-<!--<%#= f.text_field :from , :placeholder => '例：藤商事', class: "width20vw"%></p>-->
+<!--<center>-->
+<!--<h3>新規在庫入力</h3>-->
 <!--<br>-->
 
-<!--<p>TO<br>-->
-<!--<%#= f.text_field :to , :placeholder => '例：タイヨー', class: "width20vw"%></p>-->
+
+<!--<div class="box2">-->
+
+<%#= form_for(@safe, url: safe_path ) do |f| %>
+<%#= render 'shared/error_message', object: f.object %>
+
+<!--<p>機器番号-->
+<!--<%#= f.text_field :number , class: 'form-control', :disabled => true %>-->
+<!--<br></p>-->
+
+<!--<p>在庫名-->
+<!--<%#= f.text_field :name , class: 'form-control', :disabled => true %>-->
+<!--<br></p>-->
+
+<!--<p>種別-->
+<!--<%#= f.text_field :type_machine, class: 'form-control', :disabled => true %>-->
+<!--<br></p>-->
+
 <!--<br>-->
+<!--<%#= f.hidden_field :staff2 , :value => current_user.name %>-->
 
-<%= f.submit "出庫する", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に出庫しますか？' } %>
-<% end %>     
 
-</div>
+<!--<%#= f.submit "出庫する", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に出庫しますか？' } %>-->
+<!--<%# end %>     -->
+
+<!--</div>-->
 
 <%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>
 
 
 
-</center>
+<!--</center>-->

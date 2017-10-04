@@ -1,7 +1,7 @@
 <div class="row">
 <div style="width:100%;">
+  
 <h3>在庫（過去含む）</h3>
-
 <br> 
 <%= link_to "在庫中のみ", "/zaiko/", class:"btn btn-lg btn-primary" %>
 <%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
@@ -43,15 +43,15 @@
 
         <!--<td class="width10vw"><%#= safe.updated_at.strftime("%m/%d") %></td>-->
 
-        <td class="width5vw"><%= safe.name.truncate(20) %></td>
+        <td class="width5vw"><%= safe.name %></td>
         <!--<td class="width5vw"><%#= safe.type_machine %></td>-->
       
 
         
-      <td class="width5vw"><%= safe.staff.truncate(10) %></td>
+      <td class="width5vw"><%= safe.staff %></td>
         
       <% if safe.staff2 %>
-        <td class="width5vw"><%= safe.staff2.truncate(10) %></td>
+        <td class="width5vw"><%= safe.staff2 %></td>
       <% else %>
         <td class="width5vw">まだ</td>
       <% end %>
