@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20171003014526) do
     t.string   "status",       default: "在庫中"
     t.string   "name"
     t.string   "staff",        default: "まだ"
-    t.string   "staff2",       default: "まだ"
+    t.string   "staff_two",    default: "まだ"
     t.string   "type_machine"
     t.string   "from"
     t.string   "to"
