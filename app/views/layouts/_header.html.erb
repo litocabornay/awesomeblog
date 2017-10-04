@@ -8,11 +8,13 @@
         <div id="app" class="container-fullwidth">
             <nav class="navbar navbar-expand-lg navbar-light bg-faded navbar_color1">
                 <a class="navbar-brand" href="/">在庫管理</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!--<div id="navbarNavDropdown" class="navbar-collapse collapse">-->
-                <!--    <ul class="navbar-nav mr-auto">-->
+                
+                
+                <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+                <!--    <span class="navbar-toggler-icon"></span>-->
+                <!--</button>-->
+                <div id="navbarNavDropdown" class="navbar-collapse collapse">
+                    <ul class="navbar-nav mr-auto">
                       
                 <!--      <%# if logged_in? %>-->
                 <!--      <li class="nav-item money_box">-->
@@ -29,10 +31,10 @@
                 <!--    </ul>-->
                 <!--    <ul class="navbar-nav">-->
                       
-                <!--      <%# if logged_in? %>-->
+                      <% if logged_in? %>
                       
                       <!--<%# if current_user.admin? %>-->
-                      <!--  <li class="right_menu menu_box"><%#= link_to "管理画面", "/admin" %></li> -->
+                        <!--<li class="right_menu menu_box"><%#= link_to "管理画面", "/admin" %></li> -->
                       <!--<%# end %>-->
                        
                 <!--        <li class="right_menu menu_box"><%#= link_to "探す", "/" %></li> -->
@@ -48,17 +50,17 @@
                       
                 <!--      <li class="right_menu padding nav-item menu_box"><%#= link_to "設定", edit_user_path(current_user) %></li>-->
                             
-                <!--       <li class="right_menu menu_box"><%#= link_to "ログアウト", logout_path , method: :delete %></li>-->
+                       <li class="right_menu menu_box"><%= link_to "ログアウト", logout_path , method: :delete %></li>
                         <!--  </ul>-->
                         <!--</li>-->
         
-                <!--      <%# else %>    -->
+                      <% else %>    
         
-                <!--        <li><%#= link_to "Log in", login_path %></li>-->
+                        <li><%= link_to "Log in", login_path %></li>
                       
-                <!--      <%# end %>-->
-                <!--    </ul>-->
-                <!--</div>-->
+                      <% end %>
+                    </ul>
+                </div>
             </nav>
         </div>
         
@@ -126,8 +128,8 @@
 <!--  <div class="container">-->
 <!--会員様管理メニュー-->
       
-<!--        <div class="container-fullwidth fixed-top-2 navbar_color2 margin2">-->
-<!--            <nav class="navbar nav_wide navbar_center">-->
+        <!--<div class="container-fullwidth fixed-top-2 navbar_color2 margin2">-->
+        <!--    <nav class="navbar nav_wide navbar_center">-->
                
    
                       
@@ -139,7 +141,7 @@
 <!--                      <div class="right_menu menu_box"><%#= link_to "売買の履歴", buyer_finish_user_path(current_user) , :class => 'orange' %></div> -->
                       <!--safe-->
                       
-<!--                      <div class="right_menu menu_box"><%#= link_to "入出金", "/withdrows/new", :class => 'orange' %></div>-->
+                      <!--<div class="right_menu menu_box"><%#= link_to "入出金", "/withdrows/new", :class => 'orange' %></div>-->
                       <!--withdorow-->
                       
 <!--                      <div class="right_menu menu_box"><%#= link_to "入出金履歴", "/flows/own", :class => 'orange' %></div>-->
