@@ -6,7 +6,9 @@
 <h5>種別：　<%= safe.type_machine %></h5>
 </center>
  
-<%= link_to "出庫する", safe_path(safe), :class => "btn btn-primary big_botton" %>
+<%#= link_to "出庫する", safe_path(safe), :class => "btn btn-primary big_botton" %>
+<%= link_to '出庫する', safe_path(safe), method: :put, :class => "btn btn-primary big_botton" %>
+
 
 <% end %>
 
