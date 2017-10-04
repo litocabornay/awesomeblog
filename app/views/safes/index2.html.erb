@@ -62,7 +62,7 @@
         
       <td class="width5vw"><%= safe.staff.truncate(10) %></td>
         
-      <% if safe.staff2? %>
+      <% unless safe.staff2.blank? %>
         <td class="width5vw"><%= safe.staff2.truncate(10) %></td>
       <% else %>
         <td class="width5vw">まだ</td>
@@ -70,7 +70,7 @@
       
         <!--<td class="width5vw"><%#= safe.status %></td>-->
         
-      <% if safe.status && safe.status == "出庫済" %>
+      <% if safe.status == "出庫済" %>
        <td class="100">
         <b>出庫済</b>
        </td>
