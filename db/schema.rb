@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(version: 20171003014526) do
   create_table "saves", force: :cascade do |t|
     t.string   "status",       default: "在庫中"
     t.string   "name"
-    t.string   "staff"
-    t.string   "staff2"
+    t.string   "staff",        default: "まだ"
+    t.string   "staff2",       default: "まだ"
     t.string   "type_machine"
     t.string   "from"
     t.string   "to"

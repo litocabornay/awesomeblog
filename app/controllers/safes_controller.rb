@@ -140,8 +140,8 @@ def editbot
     @status = "出庫済"
     @safe.update(:status => @status)
     
-    @staff= current_user.name
-    @safe.update(:staff2 => @staff)
+    @staff_two= current_user.name
+    @safe.update(:staff_two => @staff_two)
     
     flash[:success] = "出庫完了"
     redirect_to root_url
