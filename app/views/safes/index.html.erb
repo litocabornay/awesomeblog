@@ -1,18 +1,13 @@
-<% provide(:title,"決済経過一覧") %>
-
-  <div class="row">
-
+<div class="row">
 <div style="width:100%;">
 <h3>在庫（過去含む）</h3>
 
-
 <br> 
 <%= link_to "在庫中のみ", "/zaiko/", class:"btn btn-lg btn-primary" %>
-
 <%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
-  
 <%= link_to "出庫", "/safe_before/", class:"btn btn-lg btn-primary" %>
 <br> <br> 
+
 
 <div class="width_table">
 
@@ -38,9 +33,8 @@
       <th colspan="1" class="width5vw">状況</th>
 
   </thead>
-  <tbody>
-    
-   <% @safes.each do |safe| %>
+<tbody>
+<% @safes.each do |safe| %>
 
    <%# @sell_staff = Sell.find(safe.sell_id)  %>
    <%# @user_staff = User.find(safe.buyer_id)  %>
@@ -70,11 +64,10 @@
       
         <!--<td class="width5vw"><%#= safe.status %></td>-->
         
-      <% if safe.status && safe.status == "出庫済" %>
+      <% if safe.status == "出庫済" %>
        <td class="100">
         <b>出庫済</b>
        </td>
-       
       <% else %>
        <td class="100">
         <b><%= safe.status %></b>
@@ -87,25 +80,14 @@
       </tr>
 
 
-        <% end %>
- </tbody>
+<% end %>
+</tbody>
 </table>
-
-
-
 
 <%= paginate @safes %>
 
 </div>
 
 
-
-
-
-
-
-
-
 </div>
-
 </div>

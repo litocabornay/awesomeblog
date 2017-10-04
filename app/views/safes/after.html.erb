@@ -1,6 +1,6 @@
 <% @safes.each do |safe| %>
  
- <% if Safe.find(safe) %>
+
 
 <center>
 <h5>機器番号：　
@@ -15,11 +15,8 @@
  
  <%= link_to "出庫する", edit_safe_path(safe), :class => "btn btn-primary big_botton" %>
 
- <% else %>
- 
- <h3>存在しません</h3>
  <%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>
  
- <% end %>
+
  
 <% end %>
