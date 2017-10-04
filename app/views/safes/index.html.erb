@@ -17,23 +17,17 @@
 
       <th class="width5vw">ID</th>
       <th class="width5vw">機器番号</th>
-      <!--<th class="width5vw smart2">機器番号</th>-->
-      
       <th class="width5vw">登録日時</th>
-      <!--<th class="width20vw">最終更新</th>-->
-      
-      <th class="width10vw">機種名<%#= sortable "seller_id", "売り手" %></th>
-      <!--<th class="width5vw smart">タイプ</th>-->
-      
-      <th class="width5vw">入庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th class="width10vw">機種名</th>
+      <th class="width5vw">入庫登録者</th>
       
       <th class="width5vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      
-      
       <th colspan="1" class="width5vw">状況</th>
 
+    </tr>
   </thead>
 <tbody>
+
 <% @safes.each do |safe| %>
 
    <%# @sell_staff = Sell.find(safe.sell_id)  %>

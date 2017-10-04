@@ -1,23 +1,13 @@
 <% @safes.each do |safe| %>
  
-
-
 <center>
-<h5>機器番号：　
-<%= safe.number %></h5>
-
-<h5>在庫名：　
-<%= safe.name %></h5>
-
-<h5>種別：　
-<%= safe.type_machine %></h5>
+<h5>機器番号：　<%= safe.number %></h5>
+<h5>在庫名：　<%= safe.name %></h5>
+<h5>種別：　<%= safe.type_machine %></h5>
 </center>
  
- <%= link_to "出庫する", edit_safe_path(safe), :class => "btn btn-primary big_botton" %>
+<%= link_to "出庫する", edit_safe_path(safe), :class => "btn btn-primary big_botton" %>
 
-
-
- 
 <% end %>
 
  <%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>

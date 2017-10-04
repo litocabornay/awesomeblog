@@ -90,12 +90,15 @@ resources :password_resets,     only: [:new, :create, :edit, :update]
 
 # resources :withdrows , only: [:index, :new, :create, :edit, :update]
 
-resources :safes
+resources :safes , only: [:index, :new, :create, :edit]
 # get '/safes/safe', to: 'safes#safe', as:'safe'
 
 get 'safe_before' => 'safes#safe'  
 get 'safe_after' => 'safes#after'  
 get 'zaiko' => 'safes#index2'  
+
+# get '/safes/:id/edit', to:'safes#edit'
+# # put '/safes/:id/edit', to:'safes#edit'
 
 # # patch '/safes/:id', to:'safes#update'
 # # put '/safes/:id', to:'safes#update'
@@ -112,6 +115,12 @@ get 'zaiko' => 'safes#index2'
 # resources :flows, only: [:index, :new, :create]
 # get '/flows/own', to: 'flows#own', as:'own_flows'
 
+
+
+
+# get '/★/:id/edit', to:'★#edit', as:'edit_★(s)'
+# patch '/★/:id', to:'★#update'
+# put '/★/:id', to:'★#update'
 
 
 end
