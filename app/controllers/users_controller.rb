@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:new, :destroy, :show]
+before_action :admin_user
   
 #ログインしなくてもできる　new create
 #ログインしてるだけでできる　show
@@ -75,29 +73,18 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page]) 
   end
   
-  def show
-    @user = User.find(params[:id])
-    @embedded = "show_user"
-  end
+
   
   def new
     @user = User.new
   end
   
 
-  
-  # def moneyedit
-  #   @user = User.find(params[:id])
-  # end  
 
-  
-  #ユーザーが登録される時
   def create
     @user = User.new(user_params)
    if @user.save
-    UserMailer.account_activation(@user).deliver_now
-    @user.send_activation_email  #SENDGRID
-    flash[:info] = "認証用メールを送りました。登録メールアドレスをチェックください。"
+      flash[:success] = "成功！"
     redirect_to root_url
    else
       flash[:danger] = "未入力項目があります。"
@@ -108,67 +95,23 @@ class UsersController < ApplicationController
   
   
   
-  def edit_noflow
+  def edit
     @user = User.find(params[:id])
-
-    # details = User.test(user_id)
-    # @user = details[:user]
-    # @flow = details[:flow]
   end
   
-  def update_noflow
+  def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "設定されました。"
-      redirect_to edit_user_path(current_user)
+      redirect_to "/users/"
     else
       flash[:danger] = "未入力項目があります。"
-      redirect_to edit_user_path(current_user)
+      redirect_to "/users/"
     end
     
   end  
     
     
-    
-  
-
-  def edit
-    @user = User.find(params[:id])
-    @flow = Flow.new
-
-    # details = User.test(user_id)
-    # @user = details[:user]
-    # @flow = details[:flow]
-  end
-
-
-  def update
-    @user = User.find(params[:id])
-
-    
-    @flow = Flow.new(flow_params)
-    
-    #必要な情報を準備して
-    if @flow.save
-      # @money = @flow.after_price
-      @money1 = @flow.price
-      @price = @user.money
-      @money2 = @money1 + @price
-      #DBに入れたい特定の情報(パッケージ)を作って
-    
-      @flow.update(:before_price => @price)
-      @flow.update(:after_price => @money2)
-      @user.update(:money => @money2)
-      #DBに入れる！
-      
-      flash[:success] = "設定されました。"
-      redirect_back_or(edit_user_path(params[:id]))
-    else
-      flash[:danger] = "未入力項目があります。"
-      redirect_back_or(edit_user_path(params[:id]))
-    end
-  end  
-
     
     
 
@@ -258,122 +201,122 @@ class UsersController < ApplicationController
 
 
 
-  def buyer
+  # def buyer
     
-  @title = "買い｜進行中の案件"
-  @embedded = "buy_and_sell"
-  @embedded1 = "buy_table1"
-  @embedded2 = "buy_table2"
-  @embedded3 = "buy_table3"
-  @embedded4 = "buy_tablereturn"
+  # @title = "買い｜進行中の案件"
+  # @embedded = "buy_and_sell"
+  # @embedded1 = "buy_table1"
+  # @embedded2 = "buy_table2"
+  # @embedded3 = "buy_table3"
+  # @embedded4 = "buy_tablereturn"
   
-  @user = User.find(params[:id])
+  # @user = User.find(params[:id])
   
 
    
-  @seller_one_safes = Safe.one
-  @buyer_one_safes = Safe.one
-  @seller_two_safes = Safe.two
-  @buyer_two_safes = Safe.two
-  @seller_three_safes = Safe.three
-  @buyer_three_safes = Safe.three
-  @seller_returner_safes = Safe.returner
-  @buyer_returner_safes = Safe.returner
-    render 'show'
-  end
+  # @seller_one_safes = Safe.one
+  # @buyer_one_safes = Safe.one
+  # @seller_two_safes = Safe.two
+  # @buyer_two_safes = Safe.two
+  # @seller_three_safes = Safe.three
+  # @buyer_three_safes = Safe.three
+  # @seller_returner_safes = Safe.returner
+  # @buyer_returner_safes = Safe.returner
+  #   render 'show'
+  # end
 
-  #Sample Route: /users/32/buyer
+  # #Sample Route: /users/32/buyer
   
-  def seller
+  # def seller
   
-  @title = "売り｜進行中の案件"
+  # @title = "売り｜進行中の案件"
     
-  @embedded = "buy_and_sell"
-  @embedded1 = "sell_table1"
-  @embedded2 = "sell_table2"
-  @embedded3 = "sell_table3"
-  @embedded4 = "sell_tablereturn"
+  # @embedded = "buy_and_sell"
+  # @embedded1 = "sell_table1"
+  # @embedded2 = "sell_table2"
+  # @embedded3 = "sell_table3"
+  # @embedded4 = "sell_tablereturn"
   
-  @user = User.find(params[:id])
-  @seller_one_safes = Safe.one
-  @buyer_one_safes = Safe.one
-  @seller_two_safes = Safe.two
-  @buyer_two_safes = Safe.two
-  @seller_three_safes = Safe.three
-  @buyer_three_safes = Safe.three
-  @seller_returner_safes = Safe.returner
-  @buyer_returner_safes = Safe.returner
-    render 'show'
-  end
+  # @user = User.find(params[:id])
+  # @seller_one_safes = Safe.one
+  # @buyer_one_safes = Safe.one
+  # @seller_two_safes = Safe.two
+  # @buyer_two_safes = Safe.two
+  # @seller_three_safes = Safe.three
+  # @buyer_three_safes = Safe.three
+  # @seller_returner_safes = Safe.returner
+  # @buyer_returner_safes = Safe.returner
+  #   render 'show'
+  # end
   
   
   
-  def buyer_finish
+  # def buyer_finish
     
-  @title = "履歴｜終了済みの案件"
-  @embedded = "finish"
-  @embedded1 = "buy_finish_table"
-  @embedded2 = "buy_finish_tablereturn"
+  # @title = "履歴｜終了済みの案件"
+  # @embedded = "finish"
+  # @embedded1 = "buy_finish_table"
+  # @embedded2 = "buy_finish_tablereturn"
   
-  @user = User.find(params[:id])
+  # @user = User.find(params[:id])
 
-  @buyer_finish_safes = Safe.finish
-  @buyer_finish_returner_safes = Safe.finish_returner
+  # @buyer_finish_safes = Safe.finish
+  # @buyer_finish_returner_safes = Safe.finish_returner
 
-    render 'show'
-  end
+  #   render 'show'
+  # end
   
 
-  def seller_finish
+  # def seller_finish
     
-  @title = "履歴｜終了済みの案件"
-  @embedded = "finish"
-  @embedded1 = "sell_finish_table"
-  @embedded2 = "sell_finish_tablereturn"
+  # @title = "履歴｜終了済みの案件"
+  # @embedded = "finish"
+  # @embedded1 = "sell_finish_table"
+  # @embedded2 = "sell_finish_tablereturn"
   
-  @user = User.find(params[:id])
+  # @user = User.find(params[:id])
 
-  @seller_finish_safes = Safe.finish
-  @seller_finish_returner_safes = Safe.finish_returner
+  # @seller_finish_safes = Safe.finish
+  # @seller_finish_returner_safes = Safe.finish_returner
 
-    render 'show'
-  end 
+  #   render 'show'
+  # end 
   
   
   
   
   
   
-#----
-#以下、フォロー機能のカスタムフィールドのためです。----
-#----
- #Sample Route: /users/32/followers
+# #----
+# #以下、フォロー機能のカスタムフィールドのためです。----
+# #----
+# #Sample Route: /users/32/followers
   
-  def following
-    @title = "Following"
-    @user  = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
-    render 'show_follow'
-  end
+#   def following
+#     @title = "Following"
+#     @user  = User.find(params[:id])
+#     @users = @user.following.paginate(page: params[:page])
+#     render 'show_follow'
+#   end
 
-  #Sample Route: /users/32/following
+#   #Sample Route: /users/32/following
   
-  def followers
-    @title = "Followers"
-    @user  = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
-  end
+#   def followers
+#     @title = "Followers"
+#     @user  = User.find(params[:id])
+#     @users = @user.followers.paginate(page: params[:page])
+#     render 'show_follow'
+#   end
   
-  #簡易的な RESTのようなもの
+#   #簡易的な RESTのようなもの
   
-  #show_follow.htmlのため
+#   #show_follow.htmlのため
 
-#ルート
-# memberの能力
-# URLは２つ、ファイルは１つ
-# ①コントローラーで飛ぶURLと同じ名前、memberのgetと同じ名前、のmethodを書く、
-# ②情報を挙列させると、カスタムポストテンプレートのように、部分的に別の表示をさせることができる
+# #ルート
+# # memberの能力
+# # URLは２つ、ファイルは１つ
+# # ①コントローラーで飛ぶURLと同じ名前、memberのgetと同じ名前、のmethodを書く、
+# # ②情報を挙列させると、カスタムポストテンプレートのように、部分的に別の表示をさせることができる
   
   
   
@@ -384,23 +327,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    if logged_in?
-      if current_user.admin?
-      params.require(:user).permit(:money, :money_yet, :reccent_deposit, :name, :email, :password, :password_confirmation, :company_name, :company_name_sounds, :company_president, :company_president_sound, :company_post_number, :company_place, :company_place_detail, :company_call_number, :company_fax_number, :company_branch, :company_type, :company_union, :company_reception, :company_reception_sound, :company_position, :company_post_number_contact, :company_place_contact, :company_call_number_contact, :company_call_number_contact_name_1, :company_call_number_contact_tel_1, :company_call_number_contact_name_2, :company_call_number_contact_tel_2, :company_call_number_contact_name_3, :company_call_number_contact_tel_3, :company_call_number_contact_name_4, :company_call_number_contact_tel_4, :company_call_number_contact_name_5, :company_call_number_contact_tel_5, :company_call_number_contact_name_6, :company_call_number_contact_tel_6, :company_call_time_from_1, :company_call_time_from_2, :company_call_time_to_1, :company_call_time_to_2, :company_fax_number_contact, :company_call_number_emergency, :company_url, :company_mail_address, :company_place_detail_contact, :company_pr, :bank_name, :bank_branch, :bank_username, :bank_number, :bank_type)
-      else
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :company_name, :company_name_sounds, :company_president, :company_president_sound, :company_post_number, :company_place, :company_place_detail, :company_call_number, :company_fax_number, :company_branch, :company_type, :company_union, :company_reception, :company_reception_sound, :company_position, :company_post_number_contact, :company_place_contact, :company_call_number_contact, :company_call_number_contact_name_1, :company_call_number_contact_tel_1, :company_call_number_contact_name_2, :company_call_number_contact_tel_2, :company_call_number_contact_name_3, :company_call_number_contact_tel_3, :company_call_number_contact_name_4, :company_call_number_contact_tel_4, :company_call_number_contact_name_5, :company_call_number_contact_tel_5, :company_call_number_contact_name_6, :company_call_number_contact_tel_6, :company_call_time_from_1, :company_call_time_from_2, :company_call_time_to_1, :company_call_time_to_2, :company_fax_number_contact, :company_call_number_emergency, :company_url, :company_mail_address, :company_place_detail_contact, :company_pr, :bank_name, :bank_branch, :bank_username, :bank_number, :bank_type)
-      end
-    else
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :company_name, :company_name_sounds, :company_president, :company_president_sound, :company_post_number, :company_place, :company_place_detail, :company_call_number, :company_fax_number, :company_branch, :company_type, :company_union, :company_reception, :company_reception_sound, :company_position, :company_post_number_contact, :company_place_contact, :company_call_number_contact, :company_call_number_contact_name_1, :company_call_number_contact_tel_1, :company_call_number_contact_name_2, :company_call_number_contact_tel_2, :company_call_number_contact_name_3, :company_call_number_contact_tel_3, :company_call_number_contact_name_4, :company_call_number_contact_tel_4, :company_call_number_contact_name_5, :company_call_number_contact_tel_5, :company_call_number_contact_name_6, :company_call_number_contact_tel_6, :company_call_time_from_1, :company_call_time_from_2, :company_call_time_to_1, :company_call_time_to_2, :company_fax_number_contact, :company_call_number_emergency, :company_url, :company_mail_address, :company_place_detail_contact, :company_pr, :bank_name, :bank_branch, :bank_username, :bank_number, :bank_type)
-    end
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+     
   end
   
-
-   def flow_params
-      params.require(:flow).permit(:content, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo, :pass_company, :recieve_company, :company)
-
-   end
-
   
 
 

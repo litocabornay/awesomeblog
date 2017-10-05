@@ -1,15 +1,36 @@
 <% @safes.each do |safe| %>
- 
+<%#= form_for(@safe, safe_path) do |f| %>
+<%#= form_for(@safe, url: safe_path ) do |f| %>
+
+
 <center>
 <h5>機器番号：　<%= safe.number %></h5>
 <h5>在庫名：　<%= safe.name %></h5>
-<h5>種別：　<%= safe.type_machine %></h5>
+
+<h5>出庫先：　<%= params[:staff] %></h5>
+<!--<h5>機種：　<%#= safe.machine %></h5>-->
+<!--<h5>種別：　<%#= safe.type_machine %></h5>-->
+<!--<h5>価格：　<%#= safe.price_from %></h5>-->
+<!--<h5>備考：　<%#= safe.remarks %></h5>-->
+<h5>画像：　<img src="<%= safe.photo %>" width="100"></imag></h5>
 </center>
- 
+
+<%= link_to "出庫する", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary big_botton" %>
+
+<%#= link_to '出庫する', edit_safe_path(safe), class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
+
+<%#= f.text_field :to , :placeholder => '例：タイヨー', :value => session[:to], class: 'form-control', :checked => true ,:required => true %>
+
+
+<%#= f.submit "登録", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
+<%# end %>
+
+
+
 <%#= link_to "出庫する", safe_path(safe), :class => "btn btn-primary big_botton" %>
 <%#= link_to '出庫する', safe_path(safe), method: :put, :class => "btn btn-primary big_botton" %>
-<%= link_to "出庫する", safe_path(safe, params: { safe: { status: "出庫済"} }), :method => :put, :class => "btn btn-primary big_botton" %>
+<%#= link_to "出庫する", safe_path(safe, params: { safe: { status: "出庫済", to: params[:staff] , staff_two: @staff } } ), :method => :put, :class => "btn btn-primary big_botton" %>
 
 <% end %>
 
- <%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>
+<%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>

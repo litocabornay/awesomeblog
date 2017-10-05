@@ -1,18 +1,15 @@
 <% provide(:title,"在庫") %>
 
-  <div class="row">
-
+<div class="row">
 <div style="width:100%;">
-<h3>現在在庫中の物件</h3>
-
-
-<br> 
-<%= link_to "過去含む", "/safes/", class:"btn btn-lg btn-primary" %>
-
-<%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
   
+<h3>在庫中のみ</h3>
+<br> 
+<%= link_to "在庫履歴", "/safes/", class:"btn btn-lg btn-primary" %>
+<%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
 <%= link_to "出庫", "/safe_before/", class:"btn btn-lg btn-primary" %>
 <br> <br> 
+
 
 <div class="width_table">
 
@@ -20,65 +17,78 @@
   <thead class="thead-inverse">
     <tr scope="row">
 
-      <th class="width5vw">ID</th>
+      <th class="width3vw">ID</th>
+      <th class="width5vw">機種</th>
+      <th class="width5vw">種別</th>
       <th class="width5vw">機器番号</th>
-      <!--<th class="width5vw smart2">機器番号</th>-->
+      <th class="width3vw">入庫日時</th>
+      <th class="width3vw">出庫日時</th>
+      <th class="width10vw">機種名</th>
       
-      <th class="width5vw">登録日時</th>
-      <!--<th class="width20vw">最終更新</th>-->
+      <th class="width3vw">入庫登録者</th>
+      <th class="width3vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
       
-      <th class="width10vw">機種名<%#= sortable "seller_id", "売り手" %></th>
-      <!--<th class="width5vw smart">タイプ</th>-->
-      
-      <th class="width5vw">入庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      
-      <th class="width5vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <th class="width5vw">入庫先</th>
+      <th class="width5vw">出庫先</th>
       
       
-      <th colspan="1" class="width5vw">状況</th>
+      <th class="width5vw">価格</th>
+      <th class="width5vw">備考</th>
+      <th class="width5vw">画像</th>
+      
+      
+      <th class="width5vw">状況</th>
 
+    </tr>
   </thead>
-  <tbody>
-    
-   <% @safes.each do |safe| %>
+<tbody>
+
+<% @safes.each do |safe| %>
 
    <%# @sell_staff = Sell.find(safe.sell_id)  %>
    <%# @user_staff = User.find(safe.buyer_id)  %>
    
       <tr scope="row">
        
-        <td class="width5vw"><%= safe.id %></td>
+        <td class="width3vw"><%= safe.id %></td>
+        
+        <td class="width5vw"><%= safe.machine %></td>
+        <td class="width5vw"><%= safe.type_machine %></td>
         
         <td class="width5vw"><%= safe.number %></td>
         
-        <td class="width5vw"><%= safe.created_at.strftime("%m/%d") %></td>
+        <td class="width3vw"><%= safe.created_at.strftime("%m/%d") %></td>
 
-        <!--<td class="width10vw"><%#= safe.updated_at.strftime("%m/%d") %></td>-->
+        <td class="width3vw"><%= safe.updated_at.strftime("%m/%d") %></td>
 
-        <td class="width5vw"><%= safe.name.truncate(20) %></td>
-        <!--<td class="width5vw"><%#= safe.type_machine %></td>-->
+        <td class="width5vw"><%= safe.name %></td>
+
+        <td class="width3vw"><%= safe.staff %></td>
+        <td class="width3vw"><%= safe.staff_two %></td>
       
-
-        
-      <td class="width5vw"><%= safe.staff %></td>
-        
-
-        <td class="width5vw"><%= safe.staff_two %></td>
-
+        <td class="width5vw"><%= safe.from %></td>
+        <td class="width5vw"><%= safe.to %></td>
       
-        <!--<td class="width5vw"><%#= safe.status %></td>-->
+      <% unless safe.price_from.blank? %>
+        <td class="width5vw"><%= safe.price_from.to_s(:delimited) %></td>
+        <% else %>
+        <td class="width5vw"><%= safe.price_from %></td>
+        <% end %>
+        
+        <td class="width5vw"><%= safe.remarks %></td>
+        
+        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
         
       <% if safe.status == "出庫済" %>
-       <td class="100">
+       <td class="width5vw">
         <b>出庫済</b>
        </td>
-       
       <% else %>
-       <td class="100">
+       <td class="width5vw">
         <b><%= safe.status %></b>
-        <br>
-<%= link_to "出庫する", safe_path(safe, params: { safe: { status: "出庫済"} }), :method => :put, :class => "btn btn-primary big_botton" %>
-        <%#= link_to '出庫', safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
+        <%#= link_to '出庫', editbot_safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
+
+      <%= link_to "出庫", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" %>
        </td>
       <% end %> 
  
@@ -86,25 +96,14 @@
       </tr>
 
 
-        <% end %>
- </tbody>
+<% end %>
+</tbody>
 </table>
-
-
-
 
 <%= paginate @safes %>
 
 </div>
 
 
-
-
-
-
-
-
-
 </div>
-
 </div>

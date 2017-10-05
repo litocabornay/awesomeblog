@@ -1,7 +1,10 @@
 <% provide(:title,"ユーザー一覧") %>
-<h1>ユーザー一覧</h1>
+<h3>ユーザー一覧</h3>
+<br>
 
-   <div class="width_container">
+<%= link_to "追加", new_user_path, class: "btn btn-primary" %>
+<br><br>
+<div class="width_container">
 <div class="width_table">
 <table class="table font-small sampleTable">
 
@@ -10,17 +13,14 @@
 <tr scope="row"> 
 
 
-  <th width="200">社名</th>
+  <th width="200">名前</th>
   
-  <td width="200">代表</td></td>
+  <td width="200">ID(メールアドレス)</td>
   
-  <td width="200">TEL</td>
+  <td width="200">権限</td>
   
-  <td width="200">登録日</td>
-  
-  <td width="50">
-詳細
-  </td>
+  <td width="50">編集</td>
+  <td width="50">削除</td>
   
 <%# if current_user.admin? %>
 <!--  <td width="100">-->
@@ -35,12 +35,26 @@
 <%#= will_paginate %>
 <tbody>
 <% @users.each do |user| %>
-</tbody>
-<%= render user %>
+
+<tr scope="row"> 
+  <th width="300"><%= link_to user.name, user %></th>
+  <td width="300"><%= user.email %></td>
+  
+ <% if user.admin? %>
+  <td width="100">管理者</td>
+ <% else %>
+  <td width="100">編集者</td>
+<% end %>
+ 
+  <td width="100"><%= link_to '編集', edit_user_path(user) %></td>
+
+  <td width="100"><%= link_to "削除" , user ,method: :delete, data: { confirm: "本当にこのユーザーを削除しますか？" } %></td>
+
+<tr>
 
 <% end %>
-  
-<%#= will_paginate %>
+</tbody>
+
   
 </table>
 </div>

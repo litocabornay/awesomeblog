@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-get '/signup', to: 'users#new'
-post '/signup', to: 'users#create'
-#signup
+# get '/signup', to: 'users#new'
+# post '/signup', to: 'users#create'
+# #signup
 
 get '/login', to:'sessions#new'
 post '/login', to:'sessions#create'
@@ -71,7 +71,8 @@ resources :account_activations, only: [:edit]
 resources :password_resets,     only: [:new, :create, :edit, :update]
 #パスワード再設定
  
-# resources :users do
+resources :users , only: [:index, :new, :create, :edit, :update, :delete]
+# do
 #     member do
 #       get :following, :followers
 #     end

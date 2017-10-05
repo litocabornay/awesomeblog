@@ -16,7 +16,12 @@ html{
   word-break: break-all;
 }
 
-
+#firstBox{
+  display:none;
+}
+#secondBox{
+  display:none;
+}
 
 input, label {vertical-align:middle}
 .qrcode-text {padding-right:1.7em; margin-right:0}
@@ -114,8 +119,12 @@ text-align:center;
   width:6vw;
 }
 
+.width3vw{
+  width:4vw;
+}
+
 .width10vw{
-  width:10vw;
+  width:8vw;
 }
 
 .width20vw{

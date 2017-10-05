@@ -79,12 +79,15 @@ end
  
  
  def after
-   
+
+  # @safe = Safe.where(:number => params[:number])
+  
     if params[:number]
-     @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page])
+    @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page])
     else
-     @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+    @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
     end
+
     
  end
  
@@ -117,7 +120,20 @@ def create
     session[:name] = @safe.name
     session[:staff] = @safe.staff
     session[:type_machine] = @safe.type_machine
+    session[:from] = @safe.from
+    session[:price_from] = @safe.price_from
+    session[:remarks] = @safe.remarks
+    
+    
+    if @safe.type_machine == "本体" or @safe.type_machine == "セル"
+        @machine = "パチンコ"
+    elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
+        @machine = "スロット"
+    else
+        @machine = ""
+    end
 
+    @safe.update(:machine => @machine)
     
     flash[:success] = "登録完了"
 
@@ -142,7 +158,7 @@ def editbot
     
     @staff_two= current_user.name
     @safe.update(:staff_two => @staff_two)
-    
+  
     flash[:success] = "出庫完了"
     redirect_to root_url
     
@@ -158,17 +174,25 @@ end
 
 
 
- def edit
-  
-  @safe = Safe.find(params[:id])
-   
-  if @safe.status == "在庫中"
+def edit
+    @safe = Safe.find(params[:id])
+end
 
-    @status = "出庫済"
-    @safe.update(:status => @status)
+
+
+
+def update
+
+@safe = Safe.find(params[:id])
+
+
+  if @safe.status && (@safe.status == "在庫中")
+    # if  @who_now == @who_seller
     
-    @staff= current_user.name
-    @safe.update(:staff2 => @staff)
+    @staff = current_user.name
+    @safe.update(:staff_two => @staff )
+    
+    @safe.update(safe_params)
     
     flash[:success] = "出庫完了"
     redirect_to root_url
@@ -177,21 +201,9 @@ end
     redirect_to root_url
   end
   
-    
- end
-
-
-
-
-def update
-# @safe = Safe.find(params[:id])
-# if @safe.update(safe_params)
-#   redirect_to edit_user_path
-# else
-#   render 'edit'
-# end
-
-@safe = Safe.find(params[:id])
+  
+  
+  
 # @safe_id = @safe.id
 
 # @buyer_id = @safe.buyer_id
@@ -218,18 +230,7 @@ def update
 
 # if @safe.status == "one"
   
-  if @safe.status && (@safe.status == "在庫中")
-    # if  @who_now == @who_seller
-    @status = "出庫済"
-    @safe.update(:status => @status)
-    @safe.update(safe_params)
-    
-    flash[:success] = "出庫完了"
-    redirect_to root_url
-  else
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to root_url
-  end
+
   
   
   
@@ -535,7 +536,7 @@ end
    
    
   def safe_params
-    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status)
+    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status, :from, :to, :machine, :price_from, :remarks, :photo)
   end
   
   # def safe_params2

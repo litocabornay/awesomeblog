@@ -9,14 +9,17 @@
   <h1>登録者用</h1>
 <% end %>
 
+<% if current_user.admin? %>
+  <%= link_to "一覧", "/zaiko/", class:"btn btn-lg btn-primary" %>
+  <br>  <br>
+    <%= link_to "ユーザー", "/users/", class:"btn btn-lg btn-primary" %>
+  <br>  <br>
+<% end %>
+
 
   <%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
   <br>  <br>
 
-<% if current_user.admin? %>
-  <%= link_to "一覧", safes_path, class:"btn btn-lg btn-primary" %>
-  <br>  <br>
-<% end %>
 
   <%= link_to "出庫", "/safe_before", class:"btn btn-lg btn-primary" %>
   

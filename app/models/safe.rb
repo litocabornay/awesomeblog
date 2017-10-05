@@ -3,9 +3,37 @@ include ActionView::Helpers
 
 
 
-  
-  
 
+  mount_uploader :photo, PictureUploader
+  # 画像アップのための準備
+
+  
+  validate  :photo
+  #画像のサイズについての制限
+  #以下、private内のmethodを実行してる
+
+  private
+   # Validates the size of an uploaded picture.
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:photo, "5MB以下の画像にしてください。")
+        #エラーに１つ加える
+      end
+    end
+  # 画像が重いとエラーだす。
+  
+  
+  # validates :machine, presence: true, length:{ maximum: 10 }
+  
+  
+  validates :type_machine, presence: true, length:{ maximum: 10 }
+  
+  # validates :number, presence: true, length:{ maximum: 50 }
+  # validates :name, presence: true, length:{ maximum: 100 }
+  # validates :from, presence: true, length:{ maximum: 50 }
+  # validates :price_from, presence: true, length:{ maximum: 10 } 
+  
+  
   # validates :status, presence: true, length:{ maximum: 10 }
   # validates :seller_id, presence: true, length:{ maximum: 10 }, format: { with: /\A[a-z0-9]+\z/i }
 
@@ -14,10 +42,7 @@ include ActionView::Helpers
   # validates :confirm_number, presence: true, length:{ maximum: 10 }, format: { with: /\A[a-z0-9]+\z/i }, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   # validates :limit_of_inspection, presence: true, length:{ maximum: 20 }
   
-  # validates :date_of_arrive, :presence => {:message => '到着日時を入力してください'}
-  # validates :confirm_price, :presence => {:message => '価格を入力してください'}
-  # validates :confirm_number, :presence => {:message => '数量を入力してください'}
-  # validates :limit_of_inspection, :presence => {:message => '納期を入力してください'}
+
 
 
 

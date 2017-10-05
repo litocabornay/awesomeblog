@@ -1,12 +1,15 @@
 <div class="padding1-20"> 
-<%= form_tag("safe_after", method: "get") do %>
+<%= form_tag("/safe_after", method: "get") do %>
 
-
+<p>QR
 <%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
 
 <label class="qrcode-text-btn zoom2 helf2">
 <%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);' %>
 </label>
+</p>
+
+
 
 <br><br>
 <%= submit_tag "検索", :class => 'btn btn-primary' %>

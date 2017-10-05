@@ -27,18 +27,18 @@ class User < ActiveRecord::Base
   # end
   
   
-  def self.sumprice  
-    sum(:money)
-    #User.sumでもかまいません
-    #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
-  end
+  # def self.sumprice  
+  #   sum(:money)
+  #   #User.sumでもかまいません
+  #   #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
+  # end
   
 
-  def self.sumyetprice  
-    sum(:money_yet)
-    #User.sumでもかまいません
-    #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
-  end
+  # def self.sumyetprice  
+  #   sum(:money_yet)
+  #   #User.sumでもかまいません
+  #   #カラム名(フィールド名)は大文字使ってもいいですが、普通小文字の方がよいです
+  # end
   
   
   
@@ -55,118 +55,118 @@ class User < ActiveRecord::Base
   before_create :create_activation_digest
   #一時的なランダム文字列（トークン）を発行
 
-#—————
-#以下はマイクロポストのためです。—————
-#—————
-  has_many :microposts, dependent: :destroy
-  #これによって、初めて2つのDBがコネクト
-  #親が死んだら、子も死ぬ設定。
-#—————
-#—————
-# #以下はflowのためです。—————
 # #—————
-  has_many :flows
+# #以下はマイクロポストのためです。—————
+# #—————
+#   has_many :microposts, dependent: :destroy
 #   #これによって、初めて2つのDBがコネクト
 #   #親が死んだら、子も死ぬ設定。
-#—————
-#—————
-# #以下はsafeのためです。—————
 # #—————
-  has_many :safes
+# #—————
+# # #以下はflowのためです。—————
+# # #—————
+#   has_many :flows
+# #   #これによって、初めて2つのDBがコネクト
+# #   #親が死んだら、子も死ぬ設定。
+# #—————
+# #—————
+# # #以下はsafeのためです。—————
+# # #—————
+#   has_many :safes
 
-  # has_many :buyer, class_name:  "Safe",
-  #                 foreign_key: "buyer_id"
-  # has_many :buying, through: :buyer, source: :buyed
+#   # has_many :buyer, class_name:  "Safe",
+#   #                 foreign_key: "buyer_id"
+#   # has_many :buying, through: :buyer, source: :buyed
   
-  # has_many :seller, class_name:  "Safe",
-  #                 foreign_key: "seller_id"
-  # has_many :selling, through: :seller, source: :selled
-#—————
+#   # has_many :seller, class_name:  "Safe",
+#   #                 foreign_key: "seller_id"
+#   # has_many :selling, through: :seller, source: :selled
+# #—————
 
-#以下はsellのためです。—————
-#—————
-  has_many :sells, dependent: :destroy
-  #これによって、初めて2つのDBがコネクト
-  #親が死んだら、子も死ぬ設定。
+# #以下はsellのためです。—————
 # #—————
-# #以下はdetailのためです。—————
-# #—————
-#   has_many :details, dependent: :destroy
+#   has_many :sells, dependent: :destroy
 #   #これによって、初めて2つのDBがコネクト
 #   #親が死んだら、子も死ぬ設定。
+# # #—————
+# # #以下はdetailのためです。—————
+# # #—————
+# #   has_many :details, dependent: :destroy
+# #   #これによって、初めて2つのDBがコネクト
+# #   #親が死んだら、子も死ぬ設定。
+  
+# # #—————
+# #以下はフォロー/アンフォローのためです。１—————
+# #—————
+
+#   #フォローする設定ーーーーーーー
+#   #ーーーーーーーーーーーーーーー
+#   has_many :active_relationships,   
+#   #ここに本来ならモデルの名前が入る
+#   #しかし、このケースでは、モデルではなくactive_relationships。
+#   #classの設定で代わりにモデルと繋げている
+
+#   # Userは、active_relationships(イマジナリーテーブル)を持つことができる。という意味。
+#   # active_relationshipsは今作った。
+#   # has_manyは持つことができる。
+#   # このファイルがUserの設定というとこがミソ。
+  
+#                                   class_name:  "Relationship",
+#                                   #テーブルRelationshipと繋げてる。それだけ
+#                                   foreign_key: "follower_id",
+#                                   #繋がってるテーブルRelationshipの、棚"follower_id"と繋げてる。それだけ
+#                                   #結論　→　follower_id(フォローしてる人一覧)と結びつける
+                                  
+#                                   dependent:   :destroy
+#                                   #親が死んだら、子も死ぬ設定。
+                                  
+#   # 結論、active_relationshipsは、「だれフォローしてる(全員)(IDのみ)」っていうだけ
+                                  
+#   has_many :following, through: :active_relationships, source: :followed
+#   # following(フォローしてる)もイマジナリーテーブル
+  
+#   # Uesrは、followingを持てる。
+#   # followingは情報が１つだけ。(active_relationshipsはたくさん情報が入ってる)
+
+#   #through　-　あるテーブルから情報を引っ張ってくる
+#   #source: :followed　- active_relationshipsのfollowed(フォローされてる人一覧)の情報とむすびつく
+#   #ターゲットはどこにする？
+#   #(このケースでは、sourceは、railsが自動で探し出してくれるから省略化。)
+  
+#   #class_nameの中のforeign_key　っていう概念と、
+#   #throughの中のsource　っていう概念と、
+#   #はほぼ同じ感じ。
+  
+#   # 結論、followingは、「だれフォローしてる(特定の１人)(名前やE-mailなどの情報)」っていうだけ
+  
+  
+  
+  
+
+  
+  
+#   #フォローされる設定ーーーーーーー
+#   #ーーーーーーーーーーーーーーー
+#   has_many :passive_relationships, class_name:  "Relationship",
+#                                   foreign_key: "followed_id",
+#                                   dependent:   :destroy
+#   has_many :followers, through: :passive_relationships, source: :follower
+
+#   # 結論、passive_relationships、「だれにフォローされてる(全員)(IDのみ)」っていうだけ  
+#   # 結論、followersは、「だれフォローされてる(特定の１人)(名前やE-mailなどの情報)」っていうだけ
+  
+#   #following(してる)とfollowers(されてる)は逆の意味(ややこしいが)
+  
+# #状態を聞くアクションメソッドは、親側(直接MODELに命令を下さない側)で行う
+# #まあ、単純にユーザー通しの関係性(リレーション)だから、主語はユーザー。
+# #リレーション側じゃなくてユーザー側でやってよ。
+# #リレーションはあくまでもhelpだよって事  
+  
+  
   
 # #—————
-#以下はフォロー/アンフォローのためです。１—————
-#—————
-
-  #フォローする設定ーーーーーーー
-  #ーーーーーーーーーーーーーーー
-  has_many :active_relationships,   
-  #ここに本来ならモデルの名前が入る
-  #しかし、このケースでは、モデルではなくactive_relationships。
-  #classの設定で代わりにモデルと繋げている
-
-  # Userは、active_relationships(イマジナリーテーブル)を持つことができる。という意味。
-  # active_relationshipsは今作った。
-  # has_manyは持つことができる。
-  # このファイルがUserの設定というとこがミソ。
-  
-                                  class_name:  "Relationship",
-                                  #テーブルRelationshipと繋げてる。それだけ
-                                  foreign_key: "follower_id",
-                                  #繋がってるテーブルRelationshipの、棚"follower_id"と繋げてる。それだけ
-                                  #結論　→　follower_id(フォローしてる人一覧)と結びつける
-                                  
-                                  dependent:   :destroy
-                                  #親が死んだら、子も死ぬ設定。
-                                  
-  # 結論、active_relationshipsは、「だれフォローしてる(全員)(IDのみ)」っていうだけ
-                                  
-  has_many :following, through: :active_relationships, source: :followed
-  # following(フォローしてる)もイマジナリーテーブル
-  
-  # Uesrは、followingを持てる。
-  # followingは情報が１つだけ。(active_relationshipsはたくさん情報が入ってる)
-
-  #through　-　あるテーブルから情報を引っ張ってくる
-  #source: :followed　- active_relationshipsのfollowed(フォローされてる人一覧)の情報とむすびつく
-  #ターゲットはどこにする？
-  #(このケースでは、sourceは、railsが自動で探し出してくれるから省略化。)
-  
-  #class_nameの中のforeign_key　っていう概念と、
-  #throughの中のsource　っていう概念と、
-  #はほぼ同じ感じ。
-  
-  # 結論、followingは、「だれフォローしてる(特定の１人)(名前やE-mailなどの情報)」っていうだけ
-  
-  
-  
-  
-
-  
-  
-  #フォローされる設定ーーーーーーー
-  #ーーーーーーーーーーーーーーー
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
-  has_many :followers, through: :passive_relationships, source: :follower
-
-  # 結論、passive_relationships、「だれにフォローされてる(全員)(IDのみ)」っていうだけ  
-  # 結論、followersは、「だれフォローされてる(特定の１人)(名前やE-mailなどの情報)」っていうだけ
-  
-  #following(してる)とfollowers(されてる)は逆の意味(ややこしいが)
-  
-#状態を聞くアクションメソッドは、親側(直接MODELに命令を下さない側)で行う
-#まあ、単純にユーザー通しの関係性(リレーション)だから、主語はユーザー。
-#リレーション側じゃなくてユーザー側でやってよ。
-#リレーションはあくまでもhelpだよって事  
-  
-  
-  
-#—————
-#以下はサインアップのためです。—————
-#—————
+# #以下はサインアップのためです。—————
+# #—————
   
   # サインアップのためのvalidation
   
@@ -220,8 +220,8 @@ class User < ActiveRecord::Base
 #   validates :bank_username, presence: true, length:{ maximum: 20 }
 #   validates :bank_type, presence: true, length:{ maximum: 20 }
 #   validates :bank_number, presence: true, length:{ maximum: 20 },uniqueness: true, format: { with: /\A[a-z0-9]+\z/i }
-  validates :money, length:{ maximum: 20 }, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-#   # after
+#   validates :money, length:{ maximum: 20 }, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+# #   # after
 
 
   
@@ -310,119 +310,119 @@ class User < ActiveRecord::Base
 
   
   
-#—————
-#以下はニュースフィードのためです。—————
-#—————  
+# #—————
+# #以下はニュースフィードのためです。—————
+# #—————  
   
-  def feed
+#   def feed
     
-     following_ids = "SELECT followed_id FROM relationships
-                     WHERE follower_id = :user_id"
+#     following_ids = "SELECT followed_id FROM relationships
+#                     WHERE follower_id = :user_id"
     
-     Micropost.where("user_id IN (#{following_ids})
-     OR user_id = :user_id", user_id: id)
-    #OR - フォローしてるユーザーのみ出力するニュースフィードにしてる
-    
-    
-    # before
-    # Micropost.where("user_id = :user_id", user_id: id)
-    # user_id = :user_id, user_id: id
-    # ユーザーテーブルのID　＝：ただコネクトのため, ただコネクトのため:　マイクロポストテーブルのID
+#     Micropost.where("user_id IN (#{following_ids})
+#     OR user_id = :user_id", user_id: id)
+#     #OR - フォローしてるユーザーのみ出力するニュースフィードにしてる
     
     
-  end
+#     # before
+#     # Micropost.where("user_id = :user_id", user_id: id)
+#     # user_id = :user_id, user_id: id
+#     # ユーザーテーブルのID　＝：ただコネクトのため, ただコネクトのため:　マイクロポストテーブルのID
+    
+    
+#   end
   
-  #ニュースフィードに表示する情報を引っ張る。
-  #見つけるだけ　←フィードをアウトプットするための
-  #特定のユーザーのマイクロポストを全部見るける
+#   #ニュースフィードに表示する情報を引っ張る。
+#   #見つけるだけ　←フィードをアウトプットするための
+#   #特定のユーザーのマイクロポストを全部見るける
   
   
   
-  def flowfeed
+#   def flowfeed
     
-    # following_ids = "SELECT user_id FROM flows
-    #                 WHERE @user = :user_id"
+#     # following_ids = "SELECT user_id FROM flows
+#     #                 WHERE @user = :user_id"
     
-    # Flow.where("user_id IN (#{following_ids})
-    # OR user_id = :user_id", user_id: id)
+#     # Flow.where("user_id IN (#{following_ids})
+#     # OR user_id = :user_id", user_id: id)
      
      
-     Flow.where("@user = :user_id", user_id: id)
+#     Flow.where("@user = :user_id", user_id: id)
      
      
-    #OR - フォローしてるユーザーのみ出力するニュースフィードにしてる
+#     #OR - フォローしてるユーザーのみ出力するニュースフィードにしてる
   
-    # before
-    # Micropost.where("user_id = :user_id", user_id: id)
-    # user_id = :user_id, user_id: id
-    # ユーザーテーブルのID　＝：ただコネクトのため, ただコネクトのため:　マイクロポストテーブルのID
+#     # before
+#     # Micropost.where("user_id = :user_id", user_id: id)
+#     # user_id = :user_id, user_id: id
+#     # ユーザーテーブルのID　＝：ただコネクトのため, ただコネクトのため:　マイクロポストテーブルのID
     
     
-  end
+#   end
   
   
   
   
-#—————
-#以下はフォロー/アンフォローのためです。２—————
-#—————
+# #—————
+# #以下はフォロー/アンフォローのためです。２—————
+# #—————
   
-  # # Follows a user.
-  # def follow(other_user)
-  #   following << other_user
-  #   # pseudocode　-本番ではないコード
+#   # # Follows a user.
+#   # def follow(other_user)
+#   #   following << other_user
+#   #   # pseudocode　-本番ではないコード
     
-  #   # following　はイマジナリーテーブル
-  # end
+#   #   # following　はイマジナリーテーブル
+#   # end
 
-  # # Unfollows a user.
-  # def unfollow(other_user)
-  #   following.delete(other_user)
-  # end
+#   # # Unfollows a user.
+#   # def unfollow(other_user)
+#   #   following.delete(other_user)
+#   # end
 
-  # # Returns true if the current user is following the other user.
-  # def following?(other_user)
-  #   following.include?(other_user)
-  # end
+#   # # Returns true if the current user is following the other user.
+#   # def following?(other_user)
+#   #   following.include?(other_user)
+#   # end
 
 
 
-  #TRY 2
+#   #TRY 2
   
   
   
   
   
   
-  #ここはuserのコントローラーなので、ユーザーの情報に関するアクションを作ってる
-  # Follows a user.
-  def follow(other_user)
-    active_relationships.create(followed_id: other_user.id)
-    #createはsave(newとcreate両方のイメージ)
-    #followed_id: と、other_user.id は、変更すべき２つの棚
-    #フォローした人、された人
-    #この２つを作るのがfollow()
-  end
+#   #ここはuserのコントローラーなので、ユーザーの情報に関するアクションを作ってる
+#   # Follows a user.
+#   def follow(other_user)
+#     active_relationships.create(followed_id: other_user.id)
+#     #createはsave(newとcreate両方のイメージ)
+#     #followed_id: と、other_user.id は、変更すべき２つの棚
+#     #フォローした人、された人
+#     #この２つを作るのがfollow()
+#   end
 
-  # Unfollows a user.
-  def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
-    #探して、deleteする　→unfollow()
-  end
+#   # Unfollows a user.
+#   def unfollow(other_user)
+#     active_relationships.find_by(followed_id: other_user.id).destroy
+#     #探して、deleteする　→unfollow()
+#   end
 
-  # Returns true if the current user is following the other user.
-  def following?(other_user)
-    following.include?(other_user)
-    #画面の表示を変えるための条件分岐
-    #following.include?　→followingに情報入ってる？？
-  end
-
-
+#   # Returns true if the current user is following the other user.
+#   def following?(other_user)
+#     following.include?(other_user)
+#     #画面の表示を変えるための条件分岐
+#     #following.include?　→followingに情報入ってる？？
+#   end
 
 
-  # def buying(other_user)
-  #   buyer.create(buyer_id: other_user.id)
-  # end
+
+
+#   # def buying(other_user)
+#   #   buyer.create(buyer_id: other_user.id)
+#   # end
 
 
 
