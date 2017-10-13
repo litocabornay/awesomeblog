@@ -12,6 +12,20 @@ class SafesController < ApplicationController
   # helper_method :sort_column, :sort_direction
 def index2
   @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+  
+# @sjis = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
+# # @sjis = @str.encode "SJIS"
+# @utf8 = @sjis.encode("cp932", :invalid => :replace, :undef => :replace)
+# require 'kconv'
+# @sjis_str.kconv(Kconv::UTF8)
+
+
+
+
+
+  # @str = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
+  # @params = URI.decode_www_form(@str, Encoding::Shift_JIS)
+  
 end
   
   
@@ -113,7 +127,14 @@ def create
 
  
     @safe = Safe.new(safe_params)
-    
+
+    if session[:place] == "本社"
+      @place = true
+    elsif session[:place] == "菊水"
+      @place2 = true
+    end
+  
+      
     
     if @safe.save
       
@@ -123,7 +144,7 @@ def create
     session[:from] = @safe.from
     session[:price_from] = @safe.price_from
     session[:remarks] = @safe.remarks
-    
+    session[:place] = @safe.place
     
     if @safe.type_machine == "本体" or @safe.type_machine == "セル"
         @machine = "パチンコ"
@@ -535,8 +556,20 @@ end
   # end 
    
    
+   
+  def read_shift_jis_encoded_params
+    params_shift_jis = URI.decode_www_form(request.body.read, Encoding::Shift_JIS)
+    params_shift_jis.each_with_object({}) do |(key, value), result|
+      result[key.to_sym] = value.encode(Encoding::UTF_8, invalid: :replace, undef: :replace)
+    end
+  ensure
+    request.body.rewind
+  end
+   
+   
+   
   def safe_params
-    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status, :from, :to, :machine, :price_from, :remarks, :photo)
+    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture)
   end
   
   # def safe_params2

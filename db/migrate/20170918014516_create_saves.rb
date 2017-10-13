@@ -7,10 +7,10 @@ class CreateSaves < ActiveRecord::Migration
       t.string :staff_two, default:"まだ"
       t.string :type_machine
       t.string :from
-      t.string :to
+      t.string :to, default:"まだ"
       t.string :number
     
-
+      
     
     
       t.timestamps null: false

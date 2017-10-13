@@ -321,7 +321,7 @@
  # bank_number = Faker::Number.number(7)
  
  
-User.create!(name: "小畑克志",
+User.create!(name: "社長１",
              email: "jizokm@gmail.com",
              password: "caster77",
              password_confirmation: "caster77",

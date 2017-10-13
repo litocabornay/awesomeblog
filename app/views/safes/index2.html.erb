@@ -3,6 +3,8 @@
 <div class="row">
 <div style="width:100%;">
   
+
+  
 <h3>在庫中のみ</h3>
 <br> 
 <%= link_to "在庫履歴", "/safes/", class:"btn btn-lg btn-primary" %>
@@ -16,7 +18,7 @@
 <table class="table font-small2 sampleTable">
   <thead class="thead-inverse">
     <tr scope="row">
-
+     
       <th class="width3vw">ID</th>
       <th class="width5vw">機種</th>
       <th class="width5vw">種別</th>
@@ -24,6 +26,8 @@
       <th class="width3vw">入庫日時</th>
       <th class="width3vw">出庫日時</th>
       <th class="width10vw">機種名</th>
+      
+      <th class="width3vw">倉庫</th>
       
       <th class="width3vw">入庫登録者</th>
       <th class="width3vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
@@ -39,6 +43,8 @@
       
       <th class="width5vw">状況</th>
 
+      <th class="width10vw">p-sensor</th>
+      
     </tr>
   </thead>
 <tbody>
@@ -49,6 +55,10 @@
    <%# @user_staff = User.find(safe.buyer_id)  %>
    
       <tr scope="row">
+       
+       
+
+       
        
         <td class="width3vw"><%= safe.id %></td>
         
@@ -63,6 +73,8 @@
 
         <td class="width5vw"><%= safe.name %></td>
 
+        <td class="width3vw"><%= safe.place %></td>
+        
         <td class="width3vw"><%= safe.staff %></td>
         <td class="width3vw"><%= safe.staff_two %></td>
       
@@ -89,6 +101,17 @@
         <%#= link_to '出庫', editbot_safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
 
       <%= link_to "出庫", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" %>
+       
+       
+       <td class="width3vw">
+<br>
+        <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
+        <% @utf8 = ERB::Util.url_encode(@utf81) %>
+        <% @url = "https://www.p-sensor.co.jp/php/search_sale.php?&item=" + @utf8 %>
+        <%= link_to "リンク", @url, :class => "btn btn-primary" %>
+       </td>
+       
+       
        </td>
       <% end %> 
  

@@ -25,6 +25,8 @@
       <th class="width3vw">出庫日時</th>
       <th class="width10vw">機種名</th>
       
+      <th class="width3vw">倉庫</th>
+      
       <th class="width3vw">入庫登録者</th>
       <th class="width3vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
       
@@ -63,6 +65,9 @@
 
         <td class="width5vw"><%= safe.name %></td>
 
+        <td class="width3vw"><%= safe.place %></td>
+        
+        
         <td class="width3vw"><%= safe.staff %></td>
         <td class="width3vw"><%= safe.staff_two %></td>
       

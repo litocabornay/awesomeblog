@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005024228) do
+ActiveRecord::Schema.define(version: 20171011130712) do
 
   create_table "adds", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -139,21 +139,25 @@ ActiveRecord::Schema.define(version: 20171005024228) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
   create_table "saves", force: :cascade do |t|
-    t.string   "status",       default: "在庫中"
+    t.string   "status",               default: "在庫中"
     t.string   "name"
-    t.string   "staff",        default: "まだ"
-    t.string   "staff_two",    default: "まだ"
+    t.string   "staff",                default: "まだ"
+    t.string   "staff_two",            default: "まだ"
     t.string   "type_machine"
     t.string   "from"
     t.string   "to"
     t.string   "number"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "machine"
     t.integer  "price_from"
     t.integer  "price_after"
     t.string   "remarks"
     t.string   "photo"
+    t.string   "place"
+    t.string   "maker"
+    t.string   "year_of_manufacture"
+    t.string   "month_of_manufacture"
   end
 
   create_table "sells", force: :cascade do |t|
