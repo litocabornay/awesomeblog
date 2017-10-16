@@ -145,15 +145,15 @@ ActiveRecord::Schema.define(version: 20171011130712) do
     t.string   "staff_two",            default: "まだ"
     t.string   "type_machine"
     t.string   "from"
-    t.string   "to"
+    t.string   "to",                   default: "まだ"
     t.string   "number"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "machine"
     t.integer  "price_from"
     t.integer  "price_after"
     t.string   "remarks"
-    t.string   "photo"
+    t.string   "photo",                default: "No-image-found.jpg"
     t.string   "place"
     t.string   "maker"
     t.string   "year_of_manufacture"
