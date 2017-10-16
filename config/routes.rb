@@ -71,7 +71,7 @@ resources :account_activations, only: [:edit]
 resources :password_resets,     only: [:new, :create, :edit, :update]
 #パスワード再設定
  
-resources :users , only: [:index, :new, :create, :edit, :update, :delete]
+resources :users
 # do
 #     member do
 #       get :following, :followers
@@ -91,7 +91,16 @@ resources :users , only: [:index, :new, :create, :edit, :update, :delete]
 
 # resources :withdrows , only: [:index, :new, :create, :edit, :update]
 
-resources :safes , only: [:index, :new, :create, :edit, :update]
+
+# resources :safes , only: [:index, :new, :create, :edit, :update]
+resources :safes  do
+    collection do
+      get 'csv_output'
+      get 'csv_output_two'
+    end
+  end
+  
+  
 
 # get '/safes/safe', to: 'safes#safe', as:'safe'
 

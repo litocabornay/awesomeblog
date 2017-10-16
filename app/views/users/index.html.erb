@@ -37,7 +37,7 @@
 <% @users.each do |user| %>
 
 <tr scope="row"> 
-  <th width="300"><%= link_to user.name, user %></th>
+  <th width="300"><%= link_to user.name, edit_user_path(user) %></th>
   <td width="300"><%= user.email %></td>
   
  <% if user.admin? %>

@@ -173,11 +173,11 @@ before_action :admin_user
   #   end
   # end
   
-  # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #     redirect_to users_path
-  # end
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+      redirect_to users_path
+  end
   
 
 # ★m = model name(ex.users) =directory name

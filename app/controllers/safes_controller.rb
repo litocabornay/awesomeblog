@@ -9,19 +9,28 @@ class SafesController < ApplicationController
 # end
 
 
+  def csv_output
+    @safes = Safe.all
+    send_data render_to_string, filename: "safes.csv", type: :csv
+  end
+    
+  def csv_output_two
+    @safes = Safe.where("status = '在庫中'")
+    send_data render_to_string, filename: "safes.csv", type: :csv
+  end
+    
+
   # helper_method :sort_column, :sort_direction
 def index2
   @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
+  
+  
   
 # @sjis = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
 # # @sjis = @str.encode "SJIS"
 # @utf8 = @sjis.encode("cp932", :invalid => :replace, :undef => :replace)
 # require 'kconv'
 # @sjis_str.kconv(Kconv::UTF8)
-
-
-
-
 
   # @str = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
   # @params = URI.decode_www_form(@str, Encoding::Shift_JIS)
@@ -31,6 +40,15 @@ end
   
 def index
   @safes = Safe.paginate(page: params[:page])
+  
+  
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @products.to_csv }
+    # end
+    # #CSV
+    
+    
 
   # @seller = User.find(@safe.seller_id)
   # @buyer = User.find(@safe.buyer_id)
@@ -133,27 +151,40 @@ def create
     elsif session[:place] == "菊水"
       @place2 = true
     end
-  
-      
+    
     
     if @safe.save
       
     session[:name] = @safe.name
-    session[:staff] = @safe.staff
-    session[:type_machine] = @safe.type_machine
+    # session[:staff] = @safe.staff
+    # session[:type_machine] = @safe.type_machine
     session[:from] = @safe.from
     session[:price_from] = @safe.price_from
     session[:remarks] = @safe.remarks
     session[:place] = @safe.place
     
-    if @safe.type_machine == "本体" or @safe.type_machine == "セル"
+    if @safe.number.start_with?("P0") == true
         @machine = "パチンコ"
-    elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
-        @machine = "スロット"
+        @type_machine = "枠"
+    elsif @safe.number.start_with?("P1") == true
+        @machine = "パチンコ"
+        @type_machine = "セル"
+    elsif @safe.number.start_with?("P2") == true
+        @machine = "パチンコ"
+        @type_machine = "基盤"
     else
-        @machine = ""
+        @machine = "スロット"
     end
-
+    
+    # if @safe.type_machine == "本体" or @safe.type_machine == "セル"
+    #     @machine = "パチンコ"
+    # elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
+    #     @machine = "スロット"
+    # else
+    #     @machine = ""
+    # end
+    
+    @safe.update(:type_machine => @type_machine)
     @safe.update(:machine => @machine)
     
     flash[:success] = "登録完了"
@@ -555,7 +586,7 @@ end
   #     params.require(:flow).permit(:content, :before_price, :year_date, :month_date, :day_date, :price, :after_price, :staff, :memo, :pass_company, :recieve_company, :company)
   # end 
    
-   
+    # send_data render_to_string, filename: "zaiko.csv", type: :csv
    
   def read_shift_jis_encoded_params
     params_shift_jis = URI.decode_www_form(request.body.read, Encoding::Shift_JIS)

@@ -2,7 +2,30 @@ class Safe < ActiveRecord::Base
 include ActionView::Helpers
 
 
+  def self.to_csv
+    CSV.generate do |csv|
+      # column_namesはカラム名を配列で返す
+      # 例: ["id", "name", "price", "released_on", ...]
+      csv << column_names
+      all.each do |safe|
+        # attributes はカラム名と値のハッシュを返す
+        # 例: {"id"=>1, "name"=>"レコーダー", "price"=>3000, ... }
+        # valudes_at はハッシュから引数で指定したキーに対応する値を取り出し、配列にして返す
+        # 下の行は最終的に column_namesで指定したvalue値の配列を返す
+        csv << safe.attributes.values_at(*column_names)
+      end
+    end
+  end
+  
+  def self.csv_column_names
+    ["ID", "機種", "種別", "機器番号", "入庫日時", "出庫日時", "機種名", "倉庫", "入庫登録者", "出庫登録者", "入庫先", "出庫先", "価格", "備考", "
+  画像", "状況", "P-sensor"]
+  end
 
+  def csv_column_values
+    [id, machine, type_machine, created_at, updated_at, name, place, staff, staff_two, from, to, price_from, remarks, photo, status, sensor]
+  end
+  
 
   mount_uploader :photo, PictureUploader
   # 画像アップのための準備
@@ -26,7 +49,7 @@ include ActionView::Helpers
   # validates :machine, presence: true, length:{ maximum: 10 }
   
   
-  validates :type_machine, presence: true, length:{ maximum: 10 }
+  # validates :type_machine, presence: true, length:{ maximum: 10 }
   
   # validates :number, presence: true, length:{ maximum: 50 }
   # validates :name, presence: true, length:{ maximum: 100 }

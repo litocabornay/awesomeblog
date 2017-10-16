@@ -21,8 +21,11 @@ class ApplicationController < ActionController::Base
 #   yield 
 # end 
   
-  
- 
+
+# require File.expand_path('../boot', __FILE__)
+# require 'rails/all'
+# require 'csv'
+# #CSVにため
   
   
   protect_from_forgery with: :exception

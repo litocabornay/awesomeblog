@@ -436,44 +436,44 @@ class User < ActiveRecord::Base
     # Activates an account.
     #アカウントが有効かのメール確認済んでる？
     
-  def activate
-    update_attribute(:activated,    true)
-    update_attribute(:activated_at, Time.zone.now)
-  end
+  # def activate
+  #   update_attribute(:activated,    true)
+  #   update_attribute(:activated_at, Time.zone.now)
+  # end
 
-  # Sends activation email.
-  def send_activation_email
-    UserMailer.account_activation(self).deliver_now
-  end
+  # # Sends activation email.
+  # def send_activation_email
+  #   UserMailer.account_activation(self).deliver_now
+  # end
 
-  # Sets the password reset attributes.
-  def create_reset_digest
-    self.reset_token = User.new_token
-    update_attribute(:reset_digest,  User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
-  end
+  # # Sets the password reset attributes.
+  # def create_reset_digest
+  #   self.reset_token = User.new_token
+  #   update_attribute(:reset_digest,  User.digest(reset_token))
+  #   update_attribute(:reset_sent_at, Time.zone.now)
+  # end
   
-  # Sends password reset email.
-  def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
-  end
-  
-  
-  
-    # Returns true if a password reset has expired.
-  def password_reset_expired?
-    reset_sent_at < 2.hours.ago
-    #要求された時刻が、今の２時間前より大きいか？？
-  end
-  #パスワードリセットの期限
+  # # Sends password reset email.
+  # def send_password_reset_email
+  #   UserMailer.password_reset(self).deliver_now
+  # end
   
   
   
-  def self.user(user_id)
-    { user: User.find_by_id(user_id),
-      flow: Flow.find_by_id(user_id)
-    }
-  end
+  #   # Returns true if a password reset has expired.
+  # def password_reset_expired?
+  #   reset_sent_at < 2.hours.ago
+  #   #要求された時刻が、今の２時間前より大きいか？？
+  # end
+  # #パスワードリセットの期限
+  
+  
+  
+  # def self.user(user_id)
+  #   { user: User.find_by_id(user_id),
+  #     flow: Flow.find_by_id(user_id)
+  #   }
+  # end
 
 
 
