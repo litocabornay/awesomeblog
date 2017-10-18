@@ -35,3 +35,25 @@
 	}
 	//オンロードさせ、リロード時に選択を保持
 	window.onload = entryChange1;
+
+
+
+
+// :javascript
+//   $(function() {
+//     $('#micropost_content').autocomplete({
+//       source: "/users/auto_complete.json",
+//       delay: 500,
+//       minLength: 2,
+//       focus: function(event, ui) {
+//         $("#micropost_content").val(ui.item.nickname);
+//         return false;
+//       },
+//       select: function(event, ui) {
+//         $('#micropost_content').val(ui.item.nickname);
+//         return false;
+//       }
+//     }).data("ui-autocomplete")._renderItem = function(ul, item) {
+//       return $("<li>").attr("data-value", item.nickname).data("ui-autocomplete-item", item).append("<a>" + item.nickname + "</a>").appendTo(ul);
+//     };
+//   });

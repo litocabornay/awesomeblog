@@ -29,7 +29,7 @@ module ApplicationHelper
 
    def full_title(page_title = '')
     #full_title - method
-    base_title = "中古パチスロ機器売買掲示板"
+    base_title = "在庫管理"
      if page_title.empty?
       base_title
      else

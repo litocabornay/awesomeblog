@@ -1,4 +1,4 @@
-<% if current_user.admin? && !current_user?(user) %>
+<% if current_user.admin? %>
 <li>
 <%= link_to maker.name, maker %>
 | <%= link_to "delete" , maker ,method: :delete, data: { confirm: "you sure?" } %>

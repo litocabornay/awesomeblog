@@ -72,6 +72,9 @@ resources :password_resets,     only: [:new, :create, :edit, :update]
 #パスワード再設定
  
 resources :users
+
+resources :makers,     only: [:index, :new, :create, :destroy]
+
 # do
 #     member do
 #       get :following, :followers
