@@ -11,10 +11,8 @@
   });
 </script>
 
-
 <%= form_for(@safe, url: "/safes") do |f| %>
 <%= render 'shared/error_message', object: f.object %>
-
 
 
 
@@ -50,7 +48,7 @@
 <p>在庫名
 <b style="color:red;">*</b>
 <br>
-<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name], class: 'form-control' ,:required => true %>
+<%= f.text_field :name , :placeholder => '例：海物語', :value => session[:name], class: 'form-control' ,:required => true, data: { behavior: "autocomplete" } %>
 </p>
 
 <p>入り先
@@ -102,7 +100,6 @@
 <!--<br><br>-->
 <%= f.hidden_field :status , :value => "在庫中" %>
 <%= f.hidden_field :staff , :value => current_user.name %>
-
 
 
 

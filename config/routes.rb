@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # resources :machine
+  # root to: "main#index"
+
+
 # get '/signup', to: 'users#new'
 # post '/signup', to: 'users#create'
 # #signup
@@ -7,6 +11,7 @@ Rails.application.routes.draw do
 get '/login', to:'sessions#new'
 post '/login', to:'sessions#create'
 delete '/logout', to:'sessions#destroy'
+get :search, controller: :search
 
 
 # get 'inquiry' => 'inquiry#index'              # 入力画面
