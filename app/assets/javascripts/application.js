@@ -4,6 +4,8 @@
 //= require jquery_ujs
 //= require popper
 //= require turbolinks
+//= require jquery.easy-autocomplete
+//= require search_machine.js
 // require jquery.turbolinks
 //= require_tree .
 //= require bootstrap
