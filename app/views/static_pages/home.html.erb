@@ -1,6 +1,124 @@
 <% provide(:title,"トップページ") %>
 
 <% if logged_in? %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+     <h1 class="text-center" style="margin-bottom: 30px;">管理者用</h1>
+      <div class="col-lg-3">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <a href="/zaiko">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-list-alt fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-6 center-block">
+                  <h2 class="text-center">一覧<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+         <div class="panel panel-warning">
+          <div class="panel-heading">
+            <a href="/users">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-user-o fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">ユーザー<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <a href="/safes/new">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-sign-in fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">入庫<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3">
+          <div class="panel panel-success">
+          <div class="panel-heading">
+            <a href="/safe_before">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-sign-out fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">出庫<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="panel panel-success">
+          <div class="panel-heading">
+            <a href="/safe_before">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-gears fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">機器名追加<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div><!-- /.row -->
+    </div>
+
+
+<!--
 <center>
 
 <% if current_user.admin? %>
@@ -28,13 +146,17 @@
   <br>
   </center>
   
-  
+-->
+
 <% else %>
+<footer>
 <div class="center jumbotron">
 <center>
 
 <%= link_to "ログイン", login_path, class:"btn btn-lg btn-primary" %>
 <!--未ログインの場合に-->
 </center>
+
 </div>
+</footer>
 <% end %>
