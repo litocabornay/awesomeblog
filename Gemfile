@@ -30,6 +30,7 @@ gem 'fog', '1.40.0'
 # Pagenation
 gem 'kaminari'
 
+gem 'jquery-ui-rails'
 
 # gem 'zbar', '~> 0.2.2'
 

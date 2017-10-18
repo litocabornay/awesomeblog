@@ -1,11 +1,15 @@
 class MakersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :show, :update]
-  before_action :correct_user, only:[:index, :edit, :show, :update]
-  before_action :admin_user, only: [:index, :edit, :show, :update]
+  before_action :logged_in_user, only: [:index, :delete, :new, :create]
+  # before_action :correct_user, only:[:index, :edit, :show, :update]
+  before_action :admin_user, only: [:index, :delete, :new, :create]
    
    
   def index
     @makers =Maker.paginate(page: params[:page]) 
+    @maker = Maker.new
+    
+  
+    
   end
   
   def new
@@ -13,32 +17,33 @@ class MakersController < ApplicationController
     #@makers =Maker.paginate(page: params[:page]) 
   end
   
-  def edit
-    @maker = Maker.find(params[:id])
-  end
+  # def edit
+  #   @maker = Maker.find(params[:id])
+  # end
   
   def create
-    @maker = Maker.new(maker) #通常、セキュリティ入れる
+    @maker = Maker.new(maker_params) #通常、セキュリティ入れる
     #@maker = current_user.makers.build(maker_params)
     
     
     if @maker.save
       #sessionヘルパーで定義したやつ
-      redirect_to root_url 
+       redirect_to "/makers"
       flash[:success] = "投稿されました。"
+
     else
-       render 'new'
+      redirect_to "/makers/"
     end
   end
   
-  def update
-    @maker = Maker.find(params[:id])
-    if @maker.update(detail_params) #通常、セキュリティ入れる
-      redirect_to root_url
-    else
-      render 'edit'
-    end
-  end
+  # def update
+  #   @maker = Maker.find(params[:id])
+  #   if @maker.update(detail_params) #通常、セキュリティ入れる
+  #     redirect_to root_url
+  #   else
+  #     render 'edit'
+  #   end
+  # end
   
   def destroy
     @maker = Maker.find(params[:id])
