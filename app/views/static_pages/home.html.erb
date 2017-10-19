@@ -2,12 +2,11 @@
 
 <% if logged_in? %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
-     <h1 class="text-center" style="margin-bottom: 30px;">管理者用</h1>
+     <h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-desktop" style="margin-right: 10px;"></i>管理者用</h1>
+     <hr class="featurette-divider"></hr>
       <div class="col-lg-3">
         <div class="panel panel-info">
           <div class="panel-heading">
@@ -114,39 +113,28 @@
           </a>
         </div>
       </div>
+      <div class="col-lg-3">
+          <div class="panel panel-warning">
+          <div class="panel-heading">
+            <a href="/makers">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-question-circle-o fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">設定<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div><!-- /.row -->
     </div>
-
-
-<!--
-<center>
-
-<% if current_user.admin? %>
-  <h1>管理者用</h1>
-<% else %>
-  <h1>登録者用</h1>
-<% end %>
-
-<% if current_user.admin? %>
-  <%= link_to "一覧", "/zaiko/", class:"btn btn-lg btn-primary" %>
-  <br>  <br>
-    <%= link_to "ユーザー", "/users/", class:"btn btn-lg btn-primary" %>
-  <br>  <br>
-<% end %>
-
-
-  <%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
-  <br>  <br>
-
-
-  <%= link_to "出庫", "/safe_before", class:"btn btn-lg btn-primary" %>
-  <br>  <br>
-    <%= link_to "機器名追加", "/makers", class:"btn btn-lg btn-primary" %>
-  
-  <br>
-  </center>
-  
--->
 
 <% else %>
 <footer>
