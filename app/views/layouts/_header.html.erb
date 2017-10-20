@@ -7,14 +7,33 @@
       
         <div id="app" class="container-fullwidth">
             <nav class="navbar navbar-expand-lg navbar-light bg-faded navbar_color1">
-                <a class="navbar-brand" href="/">在庫管理</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> 在庫管理</a>
                 
                 
                 <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
                 <!--    <span class="navbar-toggler-icon"></span>-->
                 <!--</button>-->
                 <div id="navbarNavDropdown" class="navbar-collapse collapse">
+
+                <% if logged_in? %>
+
                     <ul class="navbar-nav mr-auto">
+                      <li class="right_menu menu_box"><a rel="nofollow" href="/zaiko"><button class="btn btn-lg btn-default"><i class='fa fa-list-alt'></i> 一覧</button></a></li>
+
+                        <li class="right_menu menu_box"><a rel="nofollow" href="/users"><button class="btn btn-lg btn-default"><i class='fa fa-user-o'></i> ユーザー</button></a></li>
+
+                        <li class="right_menu menu_box"><a rel="nofollow" href="/safes/new"><button class="btn btn-lg btn-default"><i class='fa fa-sign-in'></i> 入庫</button></a></li>
+
+                        <li class="right_menu menu_box"><a rel="nofollow" href="/safe_before"><button class="btn btn-lg btn-default"><i class='fa fa-sign-out'></i> 出庫</button></a></li>
+
+                        <li class="right_menu menu_box"><a rel="nofollow" href="/makers"><button class="btn btn-lg btn-default"><i class='fa fa-gears'></i> 機器名追加</button></a></li>
+
+                         <li class="right_menu menu_box"><a rel="nofollow" href="#"><button class="btn btn-lg btn-default"><i class='fa fa-sliders'></i> 設定</button></a></li>
+
+
+                    </ul>
+
+                    <ul class="navbar-nav mr-auto navbar-right">
                       
                 <!--      <%# if logged_in? %>-->
                 <!--      <li class="nav-item money_box">-->
@@ -30,8 +49,6 @@
                       
                 <!--    </ul>-->
                 <!--    <ul class="navbar-nav">-->
-                      
-                      <% if logged_in? %>
                       
                       <!--<%# if current_user.admin? %>-->
                         <!--<li class="right_menu menu_box"><%#= link_to "管理画面", "/admin" %></li> -->
@@ -50,13 +67,16 @@
                       
                 <!--      <li class="right_menu padding nav-item menu_box"><%#= link_to "設定", edit_user_path(current_user) %></li>-->
                             
-                       <li class="right_menu menu_box"><%= link_to "ログアウト", logout_path , method: :delete %></li>
+                       <li class="right_menu menu_box"><a rel="nofollow" data-method="delete" href="/logout"><button class="btn btn-lg btn-default"><i class='fa fa-sign-out'></i> ログアウト</button></a></li>
+
+                     <!--   <li class="right_menu menu_box"><%= link_to "ログアウト", logout_path , method: :delete %></li> -->
                         <!--  </ul>-->
                         <!--</li>-->
         
-                      <% else %>    
+                      <% else %>
+                      <li class="right_menu menu_box"><a rel="nofollow" href="/login"><button class="btn btn-lg btn-default"><i class='fa fa-sign-in'></i> ログイン</button></a></li>
         
-                        <li><%= link_to "Log in", login_path %></li>
+                        <!-- <li><%= link_to "Log in", login_path %></li> -->
                       
                       <% end %>
                     </ul>
