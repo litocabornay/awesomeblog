@@ -163,6 +163,12 @@ ActiveRecord::Schema.define(version: 20171018073925) do
     t.string   "maker"
     t.string   "year_of_manufacture"
     t.string   "month_of_manufacture"
+    t.date     "date_of_verification"
+    t.date     "date_of_removal"
+    t.string   "color_of_panel"
+    t.string   "number_of_frame"
+    t.string   "number_of_foundation"
+    t.string   "string"
   end
 
   create_table "sells", force: :cascade do |t|

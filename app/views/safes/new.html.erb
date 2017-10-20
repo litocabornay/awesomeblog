@@ -20,6 +20,64 @@
 
 
 
+<p>機種
+<b style="color:red;">*</b>
+<br>
+<div>
+			<label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked /></label>　
+			<label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>
+</div>
+</p>
+
+
+
+<div id="secondBox">
+<p>機器番号(QR)
+<b style="color:red;">*</b>
+<br>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="qrcode-text-btn zoom2">
+<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+</label>
+</p>
+</div>
+
+
+
+<div id="firstBox">
+<p>セル番号(QR)
+<b style="color:red;">*</b>
+<br>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="qrcode-text-btn zoom2">
+<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+</label>
+</p>
+<p>枠番号(QR)
+<b style="color:red;">*</b>
+<br>
+<%= f.text_field :number_of_frame , :class => 'qrcode-text', :placeholder => '例：P0SS160135622', class: 'form-control' %>
+<label class="qrcode-text-btn zoom2">
+<%= f.file_field :number_of_frame , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+</label>
+</p>
+
+<p>基盤番号(QR)
+<b style="color:red;">*</b>
+<br>
+<%= f.text_field :number_of_foundation , :class => 'qrcode-text', :placeholder => '例：P2SS160135622', class: 'form-control'%>
+<label class="qrcode-text-btn zoom2">
+<%= f.file_field :number_of_foundation , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+</label>
+</p>
+</div>
+
+<br><br>
+
 
 <!--<p>機種-->
 <!--<b style="color:red;">*</b>-->
@@ -96,9 +154,23 @@
 <!--<%#= f.text_field :to , :placeholder => '例：タイヨー', class: "width20vw"%></p>-->
 <!--<br>-->
 
+
+<div id="firstNotice">
+<%= f.submit "登録1", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, name: "pachinko" %>
+</div>
+
+<div id="secondNotice">
+<%= f.submit "登録2", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
+</div>
+
+<% end %>     
+
+
+
 <button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
 <%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none' %>
 </button>
+
 
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
 

@@ -20,9 +20,16 @@ html{
 }
 
 #firstBox{
-  display:none;
+  display:display;
 }
 #secondBox{
+  display:none;
+}
+
+#firstNotice{
+  display:display;
+}
+#secondNotice{
   display:none;
 }
 
