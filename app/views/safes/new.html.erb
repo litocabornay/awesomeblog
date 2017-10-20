@@ -59,8 +59,8 @@
 <label style="margin-top: 10px;">種別<span style="color:red; font-weight: bold;">*</span></label>
 
 <div class="radio" style="margin-bottom: 10px;">
-本社 <%= f.radio_button :place, "本社", :value => @place %>
-菊水 <%= f.radio_button :place, "菊水", :value => @place2 %>
+<label><%= f.radio_button :place, "本社", :value => @place %>本社</label>
+<label><%= f.radio_button :place, "菊水", :value => @place2 %>菊水</label>
 
 </div>
 <!-- 表示非表示切り替え -->
@@ -95,12 +95,14 @@
 <!--<p>TO<br>-->
 <!--<%#= f.text_field :to , :placeholder => '例：タイヨー', class: "width20vw"%></p>-->
 <!--<br>-->
-<button class="btn btn-lg btn-info" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
+
+<button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
 <%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none' %>
 </button>
-<% end %>     
 
-<%= link_to '戻る', "/", :class => "btn btn-lg btn-primary big_botton btnred" %>
+<a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-save'></i> 戻る</a>
+
+<% end %>     
 
 </div>
 </div>
