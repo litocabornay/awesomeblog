@@ -1,13 +1,14 @@
+/*
+ *= require jquery-ui
+ * require easy-autocomplete
+ * require easy-autocomplete.themes
+*/
+
 @import "bootstrap";
 @import "layouts/_paginate.scss";
 
-// *= require jquery-ui
-
-
 body {
   -webkit-text-size-adjust : 100%!important ;
-
-  
   
 }
 
@@ -238,6 +239,10 @@ footer {
 
 /* header */
 
+.navbar-nav>li>a {
+  text-decoration: none;
+}
+
 .navbar-brand{
   
 padding: 0 0 0 7%;
@@ -289,10 +294,13 @@ padding: 0 7% 0 0;
   font-size: 14px;
   // padding-left: 60px;
   // padding-right: 80px;
+
 }
 
 .navbar_color1 {
-  background-color: #e9573f;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-bottom: solid 5px #0080c5 !important;
 }
 
 .navbar_color2 {
@@ -322,7 +330,7 @@ padding: 0 7% 0 0;
 
 
 .navbar a {
-  color: #D5D5D5;
+  color: #5e5e5e;;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -343,7 +351,7 @@ padding: 0 7% 0 0;
 }
 
 .navbar-light .navbar-brand {
-  color: #ffffff;
+  color: #5e5e5e;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -710,4 +718,15 @@ line-height : 1.7 ; }
 
 .sumaho600{
 max-width:600px; text-align:center;
+}
+
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }

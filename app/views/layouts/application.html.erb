@@ -8,6 +8,8 @@
 </script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -15,22 +17,19 @@
   
 <% if current_user && current_user.admin? %>
   <%= render "layouts/header" %>
-  <div class="container top_padding">
+  <!-- <div class="container top_padding"> -->
     <div>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
     </div>
     <%= yield %>
-  </div>
+<!--  </div> -->
   <%= render "layouts/footer" %>
 </div>
 
 <% else %>
 
-
-
-  <div class="sumaho600">
   <%= render "layouts/header" %>
   <div class="container top_padding">
     <div>
@@ -42,7 +41,9 @@
   </div>
   <%= render "layouts/footer" %>
 </div>
+
 <% end %>
+
   
 </body>
 </html>
