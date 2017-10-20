@@ -34,7 +34,7 @@
 <%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control', :required => true, :id => 'number' %>
 
 <h5 style="padding-bottom: 0px;">QRコードを使用する</h5>
-<label class="col-md-12"><i class="fa fa-qrcode fa-5x col-md-12" style="margin-top: 10px;"></i>
+<label class="col-md-12"><i class="fa fa-qrcode fa-5x col-md-12" style="margin-top: 10px; text-align: center;"></i>
   <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
 
