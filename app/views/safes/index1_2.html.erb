@@ -3,8 +3,8 @@
 <div class="row">
 <div style="width:100%;">
   
-<h3>在庫</h3>
-<h4>本体(全揃い)</h4>
+<h3>履歴</h3>
+<h4>スロット</h4>
 <br> 
 <%= link_to "本体(全揃い)", "/zaiko/", class:"btn btn-lg btn-primary" %>
 <%= link_to "セルのみ", "/zaiko-cell/", class:"btn btn-lg btn-primary" %>
@@ -109,6 +109,7 @@
        <td class="width5vw">
         <b><%= safe.status %></b>
         <%#= link_to '出庫', editbot_safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
+
       <%= link_to "出庫", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" %>
        </td>
       <% end %> 
@@ -123,8 +124,7 @@
         <%= link_to "P", @url, :class => "btn btn-primary" %>
        </td>
        
-       
-
+     
  
  
       </tr>
@@ -139,7 +139,7 @@
 </div>
 
 
-<%= link_to "CSV出力(在庫中のみ)",csv_output_two_safes_path(format: :csv), :class => "btn btn-primary" %>
+<%= link_to "CSV出力",csv_output_safes_path(format: :csv), :class => "btn btn-primary" %>
 
 <br>
 <br>

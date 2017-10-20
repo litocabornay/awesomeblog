@@ -19,18 +19,23 @@
 			document.getElementById('secondBox').style.display = "none";
 			//特典
 			document.getElementById('firstNotice').style.display = "block";
+			document.getElementById('secondNotice').style.display = "none";
 		}else if(radio[1].checked) {
 			//フォーム
 			document.getElementById('firstBox').style.display = "none";
 			document.getElementById('secondBox').style.display = "block";
 			//特典
 			document.getElementById('firstNotice').style.display = "none";
+			document.getElementById('secondNotice').style.display = "block";
 		}else {
 			//フォーム
-			document.getElementById('firstBox').style.display = "none";
+			document.getElementById('firstBox').style.display = "block";
 			document.getElementById('secondBox').style.display = "none";
 			//特典
-			document.getElementById('firstNotice').style.display = "none";
+			document.getElementById('firstNotice').style.display = "block";
+			document.getElementById('secondNotice').style.display = "none";
+			
+			
 		}
 	}
 	//オンロードさせ、リロード時に選択を保持

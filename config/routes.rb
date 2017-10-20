@@ -102,14 +102,28 @@ resources :safes  do
       get 'csv_output_two'
     end
   end
-  
+# post '/safes/create2', to: 'safes#create2'
   
 
 # get '/safes/safe', to: 'safes#safe', as:'safe'
 
 get 'safe_before' => 'safes#safe'  
 get 'safe_after' => 'safes#after'  
+
+
+# get 'zaiko-cell' => 'safes#index2_2'  
+# get 'zaiko-flame' => 'safes#index2_3'  
+# get 'zaiko-foundation' => 'safes#index2_4'  
+# get 'zaiko-slot' => 'safes#index2_5'  
+
+get 'slot_history' => 'safes#index1_2'  
+
 get 'zaiko' => 'safes#index2'  
+get 'zaiko-cell' => 'safes#index2_2'  
+get 'zaiko-flame' => 'safes#index2_3'  
+get 'zaiko-foundation' => 'safes#index2_4'  
+get 'zaiko-slot' => 'safes#index2_5'  
+
 
 
 # # patch '/safes/:id', to:'safes#update'

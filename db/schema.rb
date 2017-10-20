@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011130712) do
+ActiveRecord::Schema.define(version: 20171020070622) do
 
   create_table "adds", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -158,6 +158,12 @@ ActiveRecord::Schema.define(version: 20171011130712) do
     t.string   "maker"
     t.string   "year_of_manufacture"
     t.string   "month_of_manufacture"
+    t.date     "date_of_verification"
+    t.date     "date_of_removal"
+    t.string   "color_of_panel"
+    t.string   "number_of_frame"
+    t.string   "number_of_foundation"
+    t.string   "string"
   end
 
   create_table "sells", force: :cascade do |t|

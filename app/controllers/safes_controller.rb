@@ -21,11 +21,31 @@ class SafesController < ApplicationController
     
 
   # helper_method :sort_column, :sort_direction
+  
+  
+  
 def index2
-  @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
-  
-  
-  
+  @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index2_2
+  @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index2_3
+  @safes = Safe.where("type_machine = '枠'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index2_4
+  @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index2_5
+  @safes = Safe.where("machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index
+  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+def index1_2
+  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+end
+
 # @sjis = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
 # # @sjis = @str.encode "SJIS"
 # @utf8 = @sjis.encode("cp932", :invalid => :replace, :undef => :replace)
@@ -35,12 +55,20 @@ def index2
   # @str = "attr=" + "ＣＲ八代亜紀　心の故郷帰りませんかＫＴＷ【甘デジ】"
   # @params = URI.decode_www_form(@str, Encoding::Shift_JIS)
   
-end
-  
-  
-def index
-  @safes = Safe.paginate(page: params[:page])
-  
+
+# def index1_2
+#   @safes = Safe.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+# end
+# def index1_3
+#   @safes = Safe.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+# end
+# def index1_4
+#   @safes = Safe.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+# end
+# def index1_5
+#   @safes = Safe.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+# end
+
   
     # respond_to do |format|
     #   format.html
@@ -96,7 +124,7 @@ def index
 
   # one_safes = Safe.find(:all, :conditions => ["status > :status", { :status => 1 }])
   # @one_safes = one_safes.all
-end
+
 
   
  def safe
@@ -144,60 +172,177 @@ end
 def create
 
  
-    @safe = Safe.new(safe_params)
+  @safe = Safe.new(safe_params)
 
-    if session[:place] == "本社"
-      @place = true
-    elsif session[:place] == "菊水"
-      @place2 = true
-    end
-    
-    
-    if @safe.save
-      
-    session[:name] = @safe.name
-    # session[:staff] = @safe.staff
-    # session[:type_machine] = @safe.type_machine
-    session[:from] = @safe.from
-    session[:price_from] = @safe.price_from
-    session[:remarks] = @safe.remarks
-    session[:place] = @safe.place
-    
-    if @safe.number.start_with?("P0") == true
-        @machine = "パチンコ"
-        @type_machine = "枠"
-    elsif @safe.number.start_with?("P1") == true
-        @machine = "パチンコ"
-        @type_machine = "セル"
-    elsif @safe.number.start_with?("P2") == true
-        @machine = "パチンコ"
-        @type_machine = "基盤"
-    else
-        @machine = "スロット"
-    end
-    
-    # if @safe.type_machine == "本体" or @safe.type_machine == "セル"
-    #     @machine = "パチンコ"
-    # elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
-    #     @machine = "スロット"
-    # else
-    #     @machine = ""
-    # end
-    
-    @safe.update(:type_machine => @type_machine)
-    @safe.update(:machine => @machine)
-    
-    flash[:success] = "登録完了"
-
-    redirect_to "/"
-    else
-      render 'new'
-    end
-    
-
+  @safe2 = Safe.new(safe_params)
+  @safe3 = Safe.new(safe_params)
+  @safe4 = Safe.new(safe_params)
   
+  
+  if session[:place] == "本社"
+    @place = true
+  elsif session[:place] == "菊水"
+    @place2 = true
+  end
+  
+  
+  
+  
+  
+  if params[:pachinko]
+    
+                session[:name] = @safe.name
+                # session[:staff] = @safe.staff
+                # session[:type_machine] = @safe.type_machine
+                session[:from] = @safe.from
+                session[:price_from] = @safe.price_from
+                session[:remarks] = @safe.remarks
+                session[:place] = @safe.place
+                
+                
+                flash[:success] = "登録完了"
+                
+    
+                            unless @safe.number.blank?
+                            
+                                    if @safe.number.start_with?("P0") == true
+                                    @machine = "パチンコ"
+                                    @type_machine = "枠"
+                                    elsif @safe.number.start_with?("P1") == true
+                                    @machine = "パチンコ"
+                                    @type_machine = "セル"
+                                    elsif @safe.number.start_with?("P2") == true
+                                    @machine = "パチンコ"
+                                    @type_machine = "基盤"
+                                    else
+                                    @machine = "スロット"
+                                    end
+                                    
+                                    # if @safe.type_machine == "本体" or @safe.type_machine == "セル"
+                                    #     @machine = "パチンコ"
+                                    # elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
+                                    #     @machine = "スロット"
+                                    # else
+                                    #     @machine = ""
+                                    # end
+                                    
+                                    @safe.update(:type_machine => @type_machine)
+                                    @safe.update(:machine => @machine)
+                
+
+                            end
+            
+            
+                            unless @safe.number_of_frame.blank?
+                                @safe2.save
+                                if @safe2.number_of_frame.start_with?("P0") == true
+                                    @machine2 = "パチンコ"
+                                    @type_machine2 = "枠"
+                                elsif @safe2.number_of_frame.start_with?("P1") == true
+                                    @machine2 = "パチンコ"
+                                    @type_machine2 = "セル"
+                                elsif @safe2.number_of_frame.start_with?("P2") == true
+                                    @machine2 = "パチンコ"
+                                    @type_machine2 = "基盤"
+                                else
+                                    @machine2 = "スロット"
+                                end
+                                @safe2.update(:type_machine => @type_machine2)
+                                @safe2.update(:machine => @machine2)
+                                
+                            end
+                            
+                            
+                            unless @safe.number_of_foundation.blank?  
+                                @safe3.save
+                                if @safe3.number_of_foundation.start_with?("P0") == true
+                                    @machine3 = "パチンコ"
+                                    @type_machine3 = "枠"
+                                elsif @safe3.number_of_foundation.start_with?("P1") == true
+                                    @machine3 = "パチンコ"
+                                    @type_machine3 = "セル"
+                                elsif @safe3.number_of_foundation.start_with?("P2") == true
+                                    @machine3 = "パチンコ"
+                                    @type_machine3 = "基盤"
+                                else
+                                    @machine3 = "スロット"
+                                end
+                                @safe3.update(:type_machine => @type_machine3)
+                                @safe3.update(:machine => @machine3)
+                            end
+            
+            
+            
+                            unless ( @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
+                                @safe4.save
+            
+                                    @machine4 = "パチンコ"
+                                    @type_machine4 = "本体"
+            
+                                @safe4.update(:type_machine => @type_machine4)
+                                @safe4.update(:machine => @machine4)
+                            end
+            
+            
+                redirect_to "/"
+
+                  
+
+                
+                
+                
+                
+  else
+                
+                
+                
+                @safe = Safe.new(safe_params)
+            
+                
+                
+                if session[:place] == "本社"
+                  @place = true
+                elsif session[:place] == "菊水"
+                  @place2 = true
+                end
+                
+                
+                if @safe.save
+                  
+                session[:name] = @safe.name
+                # session[:staff] = @safe.staff
+                # session[:type_machine] = @safe.type_machine
+                session[:from] = @safe.from
+                session[:price_from] = @safe.price_from
+                session[:remarks] = @safe.remarks
+                session[:place] = @safe.place
+                
+                    @machine = "スロット"
+                    @type_machine = "なし"
+            
+                @safe.update(:type_machine => @type_machine)
+                @safe.update(:machine => @machine)
+                
+                flash[:success] = "登録完了"
+            
+            
+                redirect_to "/"
+                else
+                  render 'new'
+                end
+                
+  end
   
 end
+
+
+
+
+
+
+
+
+
 
 
 def editbot
@@ -600,7 +745,7 @@ end
    
    
   def safe_params
-    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture)
+    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :number_of_frame, :number_of_foundation, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture, :color_of_panel, :date_of_removal, :date_of_verification)
   end
   
   # def safe_params2
@@ -608,13 +753,13 @@ end
   # end
   
   
-  # def sort_column
-  #     Safe.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  # end
+  def sort_column
+      Safe.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
   
-  # def sort_direction
-  #   %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
-  # end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
 
 
 end
