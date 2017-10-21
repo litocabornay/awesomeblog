@@ -23,18 +23,19 @@
 </div>
 
 <div id="secondBox">
-<p>機器番号(QR)
-<b style="color:red;">*</b>
-<br>
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
-<label class="qrcode-text-btn zoom2">
-<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
-<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
+<label for="number" style="margin-bottom: 20px;">機器番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
+<div class="col-md-4 col-xs-4">
+<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+  <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
-</p>
 </div>
 
-
+<div class="col-md-8 col-xs-8">
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control', :required => true, :id => 'number' %>
+</div>
+</div>
+</div>
 
 <div id="firstBox">
 
@@ -151,16 +152,18 @@
 
 
 <div id="secondNotice">
-<%= f.submit "登録2", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
+<button class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
+<%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none' %>
+</button>
+<a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
 </div>
 
 <div id="firstNotice">
 <button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
 <%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none', name: "pachinko" %>
 </button>
-</div>
-
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
+</div>
 
 <% end %>     
 
