@@ -1,27 +1,36 @@
 <% provide(:title,"在庫") %>
 
 <div class="row">
-<div style="width:100%;">
-  
-<h3>履歴</h3>
+<div class="container">
+
+<h3>履歴 test 1</h3>
 <h4>パチンコ</h4>
 <br> 
-<%= link_to "本体(全揃い)", "/zaiko/", class:"btn btn-lg btn-primary" %>
-<%= link_to "セルのみ", "/zaiko-cell/", class:"btn btn-lg btn-primary" %>
-<%= link_to "枠のみ", "/zaiko-flame/", class:"btn btn-lg btn-primary" %>
-<%= link_to "基盤のみ", "/zaiko-foundation/", class:"btn btn-lg btn-primary" %>
 
-<br> <br> 
-<%= link_to "パチンコ履歴", "/safes/", class:"btn btn-lg btn-primary" %>
-<%= link_to "スロット履歴", "/slot_history/", class:"btn btn-lg btn-primary" %>
+<div class="row">
+<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
+<a href="/zaiko/" class="btn btn-danger"><span class="badge">ALL</span> 本体(全揃い)</a>
+<a href="/zaiko-cell/" class="btn btn-primary"><span class="badge">1</span> セルのみ</a>
+<a href="/zaiko-flame/" class="btn btn-primary"><span class="badge">2</span> 枠のみ</a>
+<a href="/zaiko-foundation/" class="btn btn-primary"><span class="badge">3</span> 基盤のみ</a>
+</div>
+</div>
 
+<div class="row" style="margin-top: 20px;">
+<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
+<a href="/safes/" class="btn btn-primary"><span class="badge">1</span> パチンコ履歴</a>
+<a href="/slot_history/" class="btn btn-success"><span class="badge">2</span> スロット履歴</a>
+</div>
+</div>
 
-<br> <br> 
-<%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
-<%= link_to "出庫", "/safe_before/", class:"btn btn-lg btn-primary" %>
-<br> <br> 
+<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
+<a href="/safes/new" class="btn btn-primary"><i class="fa fa-sign-in"></i> 入庫</a>
+<a href="/safe_before/" class="btn btn-success"><i class="fa fa-sign-out"></i> 出庫</a>
+</div>
+</div>
 
-
+<div class="container-fluid">
 <div class="width_container">
 <div style="width:100%; min-width:1000px">
 <div class="width_table">
