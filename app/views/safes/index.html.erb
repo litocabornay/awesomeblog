@@ -11,6 +11,9 @@
 <%= link_to "枠のみ", "/zaiko-flame/", class:"btn btn-lg btn-primary" %>
 <%= link_to "基盤のみ", "/zaiko-foundation/", class:"btn btn-lg btn-primary" %>
 
+<%= link_to "スロット", "/zaiko-slot/", class:"btn btn-lg btn-primary" %>
+
+
 <br> <br> 
 <%= link_to "パチンコ履歴", "/safes/", class:"btn btn-lg btn-primary" %>
 <%= link_to "スロット履歴", "/slot_history/", class:"btn btn-lg btn-primary" %>
@@ -32,8 +35,15 @@
      
       <th class="width3vw">ID</th>
       <th class="width3vw">機種</th>
+      
       <th class="width3vw">種別</th>
-      <th class="width3vw">機器番号</th>
+      
+      
+      <th class="width3vw">セル番号</th>
+      <th class="width3vw">枠番号</th>
+      <th class="width3vw">基盤番号</th>
+      
+      
       <th class="width3vw">入庫日時</th>
       <th class="width3vw">出庫日時</th>
       <th class="width10vw">機種名</th>
@@ -76,6 +86,8 @@
         <td class="width5vw"><%= safe.type_machine %></td>
         
         <td class="width5vw"><%= safe.number %></td>
+        <td class="width5vw"><%= safe.number_of_frame %></td>
+        <td class="width5vw"><%= safe.number_of_foundation %></td>
         
         <td class="width3vw"><%= safe.created_at.strftime("%m/%d") %></td>
 

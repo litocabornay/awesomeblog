@@ -391,6 +391,8 @@ def update
     
     @safe.update(safe_params)
     
+    session[:to] = @safe.to
+    
     flash[:success] = "出庫完了"
     redirect_to root_url
   else
