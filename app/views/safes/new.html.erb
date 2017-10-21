@@ -24,9 +24,9 @@
 
 <div id="secondBox">
 <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
-<label for="number" style="margin-bottom: 20px;">機器番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
+<label for="number">機器番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
-<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
 </div>
@@ -39,8 +39,8 @@
 
 <div id="firstBox">
 
-<div class="container-fluid" style="border: 1px dashed red; padding-top: 30px;">
-<label for="number" style="margin-bottom: 20px;">セル番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
+<div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px;">
+<label for="number" class="form-margin">セル番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
 <label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
@@ -52,7 +52,7 @@
 </div>
 </div>
 
-<div class="container-fluid" style="border: 1px dashed red; padding-top: 30px; margin-top: 30px;">
+<div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px;">
 <label for="number" style="margin-bottom: 20px;">枠番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
 <label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
@@ -65,7 +65,7 @@
 </div>
 </div>
 
-<div class="container-fluid" style="border: 1px dashed red; padding-top: 30px; margin-top: 30px;">
+<div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px;">
 <label for="number" style="margin-bottom: 20px;">基盤番号「QR」<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
 <label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>

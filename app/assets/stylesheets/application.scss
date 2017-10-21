@@ -731,8 +731,24 @@ max-width:600px; text-align:center;
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
-@media only screen and (min-width: 300px) and (max-width: 600px)  {
+.form-margin {
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 600px)  {
 .fa-qrcode {
   font-size: 5em !important;
-    }
   }
+  }
+
+@media only screen and (min-width: 300px) and (max-width: 374px)  {
+.fa-qrcode {
+  font-size: 3em !important;
+  }
+.form-margin {
+  margin: 0 !important;
+    }
+.form-control {
+  width: 115% !important;
+  }
+}
