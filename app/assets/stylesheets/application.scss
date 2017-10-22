@@ -752,3 +752,16 @@ max-width:600px; text-align:center;
   width: 115% !important;
   }
 }
+
+
+.compact{
+  display:block;
+}
+
+.compact:target{
+  display:none;
+}
+
+.compact:not(:target){
+  display:block;
+}
