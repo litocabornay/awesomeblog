@@ -1,5 +1,7 @@
 <% provide(:title,"トップページ") %>
 
+
+
 <% if logged_in? %>
 <div class="container">
      <h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-desktop" style="margin-right: 10px;"></i>管理者用</h1>
@@ -134,14 +136,16 @@
     </div>
 
 <% else %>
-<footer>
+
 <div class="center jumbotron">
-<center>
+
+  
+<h1 class="text-center" style="margin-bottom: 30px; font-family: 'Audiowide', cursive;"><i class="fa fa-cubes" style="margin-right: 10px;"></i>ZAIKO</h1>
 
 <%= link_to "ログイン", login_path, class:"btn btn-lg btn-primary" %>
 <!--未ログインの場合に-->
-</center>
+
 
 </div>
-</footer>
+
 <% end %>
