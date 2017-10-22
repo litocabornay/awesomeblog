@@ -13,6 +13,10 @@
 
 <%= link_to "スロット", "/zaiko-slot/", class:"btn btn-primary" %>
 
+<%= link_to "COMPACT", "?t=c", class:"btn btn-primary" %>
+<%= link_to "FULL", "?t=f", class:"btn btn-primary" %>
+
+
 <%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-primary" %>
 
 
@@ -25,29 +29,51 @@
     <tr scope="row">
      
       <th class="width3vw">ID</th>
+
       
       <!--<th class="width3vw">状況</th>-->
       
       <!--<th class="width3vw">機種</th>-->
       
+      <% if !(params[:t] == "c") %>
       <th class="width10vw">機器番号</th>
-
-      <th class="width10vw">機種名</th>
+      <% end %>
       
+      <th class="width20vw">機種名</th>
+      
+      <% if !(params[:t] == "c") %>
       <th class="width10vw">入庫先</th>
-      <th class="width5vw">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <% end %>
 
+      <% if !(params[:t] == "c") %>
+      <th class="width5vw">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <% end %>
+      
+      
       <th class="width5vw">仕入価格</th>
 
+      <% if !(params[:t] == "c") %>
       <th class="width5vw">撤去日</th>
+      <% end %>
+      <% if !(params[:t] == "c") %>
       <th class="width5vw">検定日</th>
+      <% end %>
+      
       
       <th class="width3vw">倉庫</th>
+      
+      <% if !(params[:t] == "c") %>
       <th class="width3vw">パネル色</th>
+      <% end %>
       
-      
+      <% if !(params[:t] == "c") %>
       <th class="width10vw">備考</th>
+      <% end %>
+      
+      <% if !(params[:t] == "c") %>
       <th class="width5vw">画像</th>
+      <% end %>
+      
       
       <th class="width3vw">編集</th>
       <th class="width3vw">出庫</th>
@@ -70,23 +96,25 @@
        
         <td class="width3vw"><%= safe.id %></td>
 
+      <% if !(params[:t] == "c") %>
         <td class="width10vw">
          <%= safe.number_slot %>
-
         </td>
-
+      <% end %>
+      
         <td class="width10vw"><%= safe.name %></td>
 
+      <% if !(params[:t] == "c") %>
         <td class="width5vw">
        <%= safe.created_at.strftime("%m/%d") %> <%= safe.from %>
         </td>
-        
-        <td class="width5vw">
-
-       <%= safe.staff %> <br>
-
-      </td>
+      <% end %>
       
+      <% if !(params[:t] == "c") %>
+        <td class="width5vw">
+       <%= safe.staff %> <br>
+      </td>
+      <% end %>
 
       
       <% unless safe.price_from.blank? %>
@@ -94,19 +122,23 @@
         <% else %>
         <td class="width5vw"><%= safe.price_from %> 円</td>
         <% end %>
-
+        
+      <% if !(params[:t] == "c") %>
         <td class="width5vw"><%= safe.date_of_removal %></td>
         <td class="width5vw"><%= safe.date_of_verification %></td>
-        
+      <% end %>
+      
+      
         <td class="width3vw"><%= safe.place %></td>
+        
+      <% if !(params[:t] == "c") %>
         <td class="width5vw"><%= safe.color_of_panel %></td>
-        
         <td class="width10vw"><%= safe.remarks %></td>
-        
         <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
-        
+      <% end %>
+      
+      
         <td class="width5vw">
-        
         <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
         <i class="fa fa-pencil-square-o"></i>
         <% end %>
@@ -131,6 +163,10 @@
       
       
       
+
+      
+      
+      
        <td class="width3vw">
         <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
         <% @utf8 = ERB::Util.url_encode(@utf81) %>
@@ -139,6 +175,7 @@
        </td>
        
        
+
        <td class="width3vw">
       <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
         <i class="fa fa-bitbucket"></i>
