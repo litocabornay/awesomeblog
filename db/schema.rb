@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020070622) do
+ActiveRecord::Schema.define(version: 20171022025710) do
 
   create_table "adds", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20171020070622) do
     t.string   "number_of_frame"
     t.string   "number_of_foundation"
     t.string   "string"
+    t.date     "date_of_out"
+    t.integer  "number_slot"
   end
 
   create_table "sells", force: :cascade do |t|

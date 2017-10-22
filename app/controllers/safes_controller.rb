@@ -1,7 +1,7 @@
 class SafesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   # before_action :correct_user, only: [:index, :show, :new, :create, :edit, :edit, :update]
-  before_action :admin_user, only: [:index]
+  before_action :admin_user, only: [:index, :show, :destroy]
   # before_action :set_current_user, only: [:index]
   
 # def set_current_user
@@ -26,6 +26,8 @@ class SafesController < ApplicationController
   
 def index2
   @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  # @safe2 = safe.where(:number_of_foundation => safe.number_of_foundation).where(:status => "在庫中")
+  # @safe3 = safe.where(:number_of_frame => safe.number_of_frame).where(:status => "在庫中")
 end
 def index2_2
   @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
@@ -172,11 +174,7 @@ end
 def create
 
  
-  @safe = Safe.new(safe_params)
 
-  @safe2 = Safe.new(safe_params)
-  @safe3 = Safe.new(safe_params)
-  @safe4 = Safe.new(safe_params)
   
   
   if session[:place] == "本社"
@@ -191,6 +189,13 @@ def create
   
   if params[:pachinko]
     
+    
+  @safe = Safe.new(safe_params)
+  @safe2 = Safe.new(safe_params)
+  @safe3 = Safe.new(safe_params)
+  @safe4 = Safe.new(safe_params)
+  
+  
                 session[:name] = @safe.name
                 # session[:staff] = @safe.staff
                 # session[:type_machine] = @safe.type_machine
@@ -204,7 +209,7 @@ def create
                 
     
                             unless @safe.number.blank?
-                            
+                                @safe.save
                                     if @safe.number.start_with?("P0") == true
                                     @machine = "パチンコ"
                                     @type_machine = "枠"
@@ -228,8 +233,9 @@ def create
                                     
                                     @safe.update(:type_machine => @type_machine)
                                     @safe.update(:machine => @machine)
-                
+                                    
 
+                                    
                             end
             
             
@@ -273,9 +279,9 @@ def create
             
             
             
-                            unless ( @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
+                            unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
                                 @safe4.save
-            
+             
                                     @machine4 = "パチンコ"
                                     @type_machine4 = "本体"
             
@@ -296,7 +302,7 @@ def create
                 
                 
                 
-                @safe = Safe.new(safe_params)
+                @safeslot = Safe.new(safe_params)
             
                 
                 
@@ -307,21 +313,19 @@ def create
                 end
                 
                 
-                if @safe.save
+                if @safeslot.save
                   
-                session[:name] = @safe.name
-                # session[:staff] = @safe.staff
-                # session[:type_machine] = @safe.type_machine
-                session[:from] = @safe.from
-                session[:price_from] = @safe.price_from
-                session[:remarks] = @safe.remarks
-                session[:place] = @safe.place
                 
-                    @machine = "スロット"
-                    @type_machine = "なし"
-            
-                @safe.update(:type_machine => @type_machine)
-                @safe.update(:machine => @machine)
+                session[:name] = @safeslot.name
+                session[:from] = @safeslot.from
+                session[:price_from] = @safeslot.price_from
+                session[:remarks] = @safeslot.remarks
+                session[:place] = @safeslot.place
+                
+                 @machine = "スロット"
+                 @type_machine = "なし"
+                 @safeslot.update(:type_machine => @type_machine)
+                 @safeslot.update(:machine => @machine)
                 
                 flash[:success] = "登録完了"
             
@@ -345,28 +349,54 @@ end
 
 
 
-def editbot
-  @safe = Safe.find(params[:id])
-   
-  if @safe.status == "在庫中"
+# def editbot
+#   @safe = Safe.find(params[:id])
+#   @safe1 = Safe.where("number = @safe.number")
+#   @safe2 = Safe.where("number_of_frame = @safe.number_of_frame")
+#   @safe3 = Safe.where("number_of_foundation = @safe.number_of_foundation")
+  
+  
+# if @safe.type_machine == "本体"
+  
+#   if @safe.status == "在庫中"
+#     @status = "出庫済"
+#     @safe.update(:status => @status)
+#     @safe1.update(:status => @status)
+#     @safe2.update(:status => @status)
+#     @safe3.update(:status => @status)
+    
+#     @staff_two= current_user.name
+#     @safe.update(:staff_two => @staff_two)
+#     @safe1.update(:staff_two => @staff_two)
+#     @safe2.update(:staff_two => @staff_two)
+#     @safe3.update(:staff_two => @staff_two)
+    
+#     flash[:success] = "出庫完了"
+#     redirect_to root_url
+#   else
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to root_url
+#   end
 
-    @status = "出庫済"
-    @safe.update(:status => @status)
-    
-    @staff_two= current_user.name
-    @safe.update(:staff_two => @staff_two)
+# else
   
-    flash[:success] = "出庫完了"
-    redirect_to root_url
+#   if @safe.status == "在庫中"
+#     @status = "出庫済"
+#     @safe.update(:status => @status)
     
-  else
-    
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to root_url
-    
-  end
+#     @staff_two= current_user.name
+#     @safe.update(:staff_two => @staff_two)
   
-end
+#     flash[:success] = "出庫完了"
+#     redirect_to root_url
+#   else
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to root_url
+#   end
+  
+# end
+  
+# end
 
 
 
@@ -376,32 +406,124 @@ def edit
 end
 
 
-
+def edit2
+    @safe = Safe.find(params[:id])
+end
 
 def update
 
 @safe = Safe.find(params[:id])
+@id2 = @safe.id - 3
+@id3 = @safe.id - 2
+@id4 = @safe.id - 1
+@safe2 = Safe.find(@id2)
+@safe3 = Safe.find(@id3)
+@safe4 = Safe.find(@id4)
 
 
-  if @safe.status && (@safe.status == "在庫中")
-    # if  @who_now == @who_seller
+  if params[:edit]
     
-    @staff = current_user.name
-    @safe.update(:staff_two => @staff )
     
-    @safe.update(safe_params)
+              
+            if @safe.type_machine == "本体"
+                if @safe.status && (@safe.status == "在庫中")
+                  
+                      if @safe.update(safe_params)
+                        @safe2.update(safe_params)
+                        @safe3.update(safe_params)
+                        @safe4.update(safe_params)
+                        
+                        
+                        # @safe.update(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+                        # Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place, :photo =>  @safe.photo)
+                        # Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+                        # Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+                        
+                        
+                       
+              
+                        flash[:success] = "編集完了。"
+                        redirect_to root_url
+                      else
+                        flash[:danger] = "未入力項目があります。"
+                        redirect_to root_url
+                      end
+                      
+                else
+                  flash[:danger] = "権限がないか、既に完了したアクションです。"
+                  redirect_to root_url
+                end
+                
+            else  
+              
+                if @safe.status && (@safe.status == "在庫中")
+
+                  @safe.update(safe_params)
+                  
+                  flash[:success] = "出庫完了"
+                  redirect_to root_url
+                else
+                  flash[:danger] = "権限がないか、既に完了したアクションです。"
+                  redirect_to root_url
+                end
+                
+            end 
     
-    session[:to] = @safe.to
-    
-    flash[:success] = "出庫完了"
-    redirect_to root_url
   else
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to root_url
+
+              if @safe.type_machine == "本体"
+                
+                if @safe.status && (@safe.status == "在庫中")
+              
+                  @safe.update(safe_params)
+                  
+                  Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(safe_params)
+                  Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(safe_params)
+                  Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(safe_params)
+              
+                  @staff = current_user.name
+                  Safe.where(:number => @safe.number).where(:status => "在庫中").update_all(:staff_two => @staff )
+                  Safe.where(:number_of_frame => @safe.number_of_frame).where(:status => "在庫中").update_all(:staff_two => @staff )
+                  Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:status => "在庫中").update_all(:staff_two => @staff )
+                  
+                  
+                  session[:to] = @safe.to
+                  
+                  flash[:success] = "出庫完了"
+                  redirect_to root_url
+                  
+                else
+                  flash[:danger] = "権限がないか、既に完了したアクションです。"
+                  redirect_to root_url
+                end
+                
+              else
+              
+                if @safe.status && (@safe.status == "在庫中")
+                  # if  @who_now == @who_seller
+                  
+                  
+                  @staff = current_user.name
+                  @safe.update(:staff_two => @staff )
+                  
+                  @safe.update(safe_params)
+                  
+                  session[:to] = @safe.to
+
+                  Safe.where(:number => @safe.number).where(:type_machine => "本体").where(:status => "在庫中").update_all(safe_params)
+                  
+                  flash[:success] = "出庫完了"
+                  redirect_to root_url
+                else
+                  flash[:danger] = "権限がないか、既に完了したアクションです。"
+                  redirect_to root_url
+                end
+                
+              end
+
   end
-  
-  
-  
+
+end  
   
 # @safe_id = @safe.id
 
@@ -619,72 +741,72 @@ def update
     
     
   
-end  
+
   
-def rejection
+# def rejection
   
-@safe = Safe.find(params[:id])
-@safe_id = @safe.id
+# @safe = Safe.find(params[:id])
+# @safe_id = @safe.id
 
-@buyer_id = @safe.buyer_id
-@seller_id = @safe.seller_id
-@sell_id = @safe.sell_id
+# @buyer_id = @safe.buyer_id
+# @seller_id = @safe.seller_id
+# @sell_id = @safe.sell_id
 
-@buyer = User.find(@buyer_id)
-@seller = User.find(@seller_id)
-@sell = Sell.find(@sell_id)
+# @buyer = User.find(@buyer_id)
+# @seller = User.find(@seller_id)
+# @sell = Sell.find(@sell_id)
 
-@commission_of_price = 1.02
-@pricee = @safe.confirm_price
-@commission = (@pricee * @commission_of_price).floor
+# @commission_of_price = 1.02
+# @pricee = @safe.confirm_price
+# @commission = (@pricee * @commission_of_price).floor
 
 
-@who_now = current_user.id
-@who_buyer = @safe.buyer_id
-@who_seller = @safe.seller_id
+# @who_now = current_user.id
+# @who_buyer = @safe.buyer_id
+# @who_seller = @safe.seller_id
 
-#必要な情報を準備して
-  if @safe.status == "one" or @safe.status == "two"
-    if  @who_now == @who_seller
-      @status = "rejection"
-      @safe.update(:status => @status)
-      #DBに入れる！
-        flash[:success] = "希望を却下しました。"
-        redirect_to seller_user_path(current_user) 
-    elsif @who_now == @who_buyer
-      @status = "rejection"
-      @safe.update(:status => @status)
-      #DBに入れる！
-        flash[:success] = "購入を取りやめました。"
-        redirect_to buyer_user_path(current_user) 
-    else
-      @status = "archive"
-      @safe.update(:archive => @status)
-      #DBに入れる！
-      flash[:danger] = "権限がないか、既に完了したアクションです。"
-      redirect_to buyer_user_path(current_user) 
-    end
-  else
-    @status = "archive"
-    @safe.update(:archive => @status)
-    #DBに入れる！
-    flash[:danger] = "権限がないか、既に完了したアクションです。"
-    redirect_to buyer_user_path(current_user) 
-  end
+# #必要な情報を準備して
+#   if @safe.status == "one" or @safe.status == "two"
+#     if  @who_now == @who_seller
+#       @status = "rejection"
+#       @safe.update(:status => @status)
+#       #DBに入れる！
+#         flash[:success] = "希望を却下しました。"
+#         redirect_to seller_user_path(current_user) 
+#     elsif @who_now == @who_buyer
+#       @status = "rejection"
+#       @safe.update(:status => @status)
+#       #DBに入れる！
+#         flash[:success] = "購入を取りやめました。"
+#         redirect_to buyer_user_path(current_user) 
+#     else
+#       @status = "archive"
+#       @safe.update(:archive => @status)
+#       #DBに入れる！
+#       flash[:danger] = "権限がないか、既に完了したアクションです。"
+#       redirect_to buyer_user_path(current_user) 
+#     end
+#   else
+#     @status = "archive"
+#     @safe.update(:archive => @status)
+#     #DBに入れる！
+#     flash[:danger] = "権限がないか、既に完了したアクションです。"
+#     redirect_to buyer_user_path(current_user) 
+#   end
   
-end  
+# end  
 
-    #DBに入れたい特定の情報(パッケージ)を作って
+#     #DBに入れたい特定の情報(パッケージ)を作って
       
-    # if @safe.update
-      # flash[:success] = "設定されました。"
-      # #redirect_back_or(buyer_user_path(current_user))]
-      # redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
+#     # if @safe.update
+#       # flash[:success] = "設定されました。"
+#       # #redirect_back_or(buyer_user_path(current_user))]
+#       # redirect_to buyer_user_path(current_user) #通常、redirect_to ★url_path
       
-    # else
-    #   flash[:danger] = "未入力項目があります。"
-    #   redirect_back_or(buyer_user_path(current_user))
-    # end
+#     # else
+#     #   flash[:danger] = "未入力項目があります。"
+#     #   redirect_back_or(buyer_user_path(current_user))
+#     # end
   
   
   
@@ -724,7 +846,11 @@ end
   # end 
   
   
-  
+  def destroy
+    @safe = Safe.find(params[:id])
+    @safe.destroy
+      redirect_to safes_path
+  end
 
 
   private
@@ -747,9 +873,9 @@ end
    
    
   def safe_params
-    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :number_of_frame, :number_of_foundation, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture, :color_of_panel, :date_of_removal, :date_of_verification)
+    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :number_of_frame, :number_slot, :number_of_foundation, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture, :color_of_panel, :date_of_removal, :date_of_verification)
   end
-  
+
   # def safe_params2
   #   params.require(:safe).permit(:archive, :status)
   # end

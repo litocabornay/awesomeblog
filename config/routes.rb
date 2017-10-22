@@ -123,6 +123,10 @@ get 'safe_after' => 'safes#after'
 
 get 'slot_history' => 'safes#index1_2'  
 
+# get 'editing' => 'safes#edit2'  
+get '/safes/:id/editing', to:'safes#edit2', as:'edit2_safes'
+
+
 get 'zaiko' => 'safes#index2'  
 get 'zaiko-cell' => 'safes#index2_2'  
 get 'zaiko-flame' => 'safes#index2_3'  

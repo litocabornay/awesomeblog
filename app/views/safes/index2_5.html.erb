@@ -3,27 +3,17 @@
 <div class="row">
 <div style="width:100%;">
   
-<h3>在庫中</h3>
-<h4>スロット</h4>
+<h3>在庫</h3>
+<h4>本体(全揃い)</h4>
 <br> 
-<%= link_to "本体(全揃い)", "/zaiko/", class:"btn btn-lg btn-primary" %>
-<%= link_to "セルのみ", "/zaiko-cell/", class:"btn btn-lg btn-primary" %>
-<%= link_to "枠のみ", "/zaiko-flame/", class:"btn btn-lg btn-primary" %>
-<%= link_to "基盤のみ", "/zaiko-foundation/", class:"btn btn-lg btn-primary" %>
+<%= link_to "本体(全揃い)", "/zaiko/", class:"btn  btn-primary" %>
+<%= link_to "セルのみ", "/zaiko-cell/", class:"btn btn-primary" %>
+<%= link_to "枠のみ", "/zaiko-flame/", class:"btn  btn-primary" %>
+<%= link_to "基盤のみ", "/zaiko-foundation/", class:"btn btn-primary" %>
 
-<%= link_to "スロット", "/zaiko-slot/", class:"btn btn-lg btn-primary" %>
+<%= link_to "スロット", "/zaiko-slot/", class:"btn btn-primary" %>
 
-
-<br> <br> 
-<%= link_to "パチンコ履歴", "/safes/", class:"btn btn-lg btn-primary" %>
-<%= link_to "スロット履歴", "/slot_history/", class:"btn btn-lg btn-primary" %>
-
-
-<br> <br> 
-<%= link_to "入庫", new_safe_path, class:"btn btn-lg btn-primary" %>
-<%= link_to "出庫", "/safe_before/", class:"btn btn-lg btn-primary" %>
-<br> <br> 
-
+<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-primary" %>
 
 
 <div class="width_container">
@@ -35,29 +25,35 @@
     <tr scope="row">
      
       <th class="width3vw">ID</th>
-      <th class="width3vw">機種</th>
-      <th class="width3vw">種別</th>
-      <th class="width3vw">機器番号</th>
-      <th class="width3vw">入庫日時</th>
-      <th class="width3vw">出庫日時</th>
+      
+      <!--<th class="width3vw">状況</th>-->
+      
+      <!--<th class="width3vw">機種</th>-->
+      
+      <th class="width10vw">機器番号</th>
+
       <th class="width10vw">機種名</th>
       
+      <th class="width10vw">入庫先</th>
+      <th class="width5vw">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+
+      <th class="width5vw">仕入価格</th>
+
+      <th class="width5vw">撤去日</th>
+      <th class="width5vw">検定日</th>
+      
       <th class="width3vw">倉庫</th>
-      
-      <th class="width3vw">入庫登録者</th>
-      <th class="width3vw">出庫登録者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      
-      <th class="width3vw">入庫先</th>
-      <th class="width3vw">出庫先</th>
+      <th class="width3vw">パネル色</th>
       
       
-      <th class="width3vw">価格</th>
-      <th class="width3vw">備考</th>
+      <th class="width10vw">備考</th>
       <th class="width5vw">画像</th>
       
-      
-      <th class="width5vw">状況</th>
+      <th class="width3vw">編集</th>
+      <th class="width3vw">出庫</th>
       <th class="width3vw">p-sensor</th>
+      
+      <th class="width3vw">削除</th>
       
     </tr>
   </thead>
@@ -65,8 +61,6 @@
 
 <% @safes.each do |safe| %>
 
-   <%# @sell_staff = Sell.find(safe.sell_id)  %>
-   <%# @user_staff = User.find(safe.buyer_id)  %>
    
       <tr scope="row">
        
@@ -75,52 +69,69 @@
        
        
         <td class="width3vw"><%= safe.id %></td>
-        
-        <td class="width5vw"><%= safe.machine %></td>
-        <td class="width5vw"><%= safe.type_machine %></td>
-        
-        <td class="width5vw"><%= safe.number %></td>
-        
-        <td class="width3vw"><%= safe.created_at.strftime("%m/%d") %></td>
 
-        <td class="width3vw"><%= safe.updated_at.strftime("%m/%d") %></td>
+        <td class="width10vw">
+         <%= safe.number_slot %>
 
-        <td class="width5vw"><%= safe.name %></td>
+        </td>
 
-        <td class="width3vw"><%= safe.place %></td>
+        <td class="width10vw"><%= safe.name %></td>
+
+        <td class="width5vw">
+       <%= safe.created_at.strftime("%m/%d") %> <%= safe.from %>
+        </td>
         
-        <td class="width3vw"><%= safe.staff %></td>
-        <td class="width3vw"><%= safe.staff_two %></td>
+        <td class="width5vw">
+
+       <%= safe.staff %> <br>
+
+      </td>
       
-        <td class="width5vw"><%= safe.from %></td>
-        <td class="width5vw"><%= safe.to %></td>
+
       
       <% unless safe.price_from.blank? %>
-        <td class="width5vw"><%= safe.price_from.to_s(:delimited) %></td>
+        <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
         <% else %>
-        <td class="width5vw"><%= safe.price_from %></td>
+        <td class="width5vw"><%= safe.price_from %> 円</td>
         <% end %>
+
+        <td class="width5vw"><%= safe.date_of_removal %></td>
+        <td class="width5vw"><%= safe.date_of_verification %></td>
         
-        <td class="width5vw"><%= safe.remarks %></td>
+        <td class="width3vw"><%= safe.place %></td>
+        <td class="width5vw"><%= safe.color_of_panel %></td>
+        
+        <td class="width10vw"><%= safe.remarks %></td>
         
         <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        
+        <td class="width5vw">
+        
+        <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
+        <i class="fa fa-pencil-square-o"></i>
+        <% end %>
+        </td>
+        
         
       <% if safe.status == "出庫済" %>
        <td class="width5vw">
         <b>出庫済</b>
        </td>
       <% else %>
-       <td class="width5vw">
-        <b><%= safe.status %></b>
-        <%#= link_to '出庫', editbot_safe_path(safe) , :class => 'btn btn-primary small-zoom' %>
-      <%= link_to "出庫", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" %>
+      
+       <td class="width3vw">
+        <%= link_to edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" do %>
+        <i class="fa fa-sign-out"></i>
+        <% end %>
        </td>
+       
+       
+       
       <% end %> 
       
       
       
        <td class="width3vw">
-       <br>
         <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
         <% @utf8 = ERB::Util.url_encode(@utf81) %>
         <% @url = "https://www.p-sensor.co.jp/php/search_sale.php?&item=" + @utf8 %>
@@ -128,7 +139,11 @@
        </td>
        
        
-
+       <td class="width3vw">
+      <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
+        <i class="fa fa-bitbucket"></i>
+        <% end %>
+       </td>
  
  
       </tr>
@@ -143,10 +158,6 @@
 </div>
 
 
-<%= link_to "CSV出力(在庫中のみ)",csv_output_two_safes_path(format: :csv), :class => "btn btn-primary" %>
-
-<br>
-<br>
 
 <%= paginate @safes %>
 

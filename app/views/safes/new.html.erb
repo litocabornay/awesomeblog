@@ -2,7 +2,7 @@
 
 <div class="col-md-offset-3 col-md-6" style="border: 1px dashed #0080c5; border-radius: 10px; padding:20px 20px 60px 20px;">
 
-<h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-folder-open-o" style="margin-right: 10px;"></i>管理者用</h1>
+<h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-folder-open-o" style="margin-right: 10px;"></i>入庫</h1>
 
 <script type="text/javascript">
   $('#micropost_picture').bind('change', function() {
@@ -39,12 +39,12 @@
 <label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
 <label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
-  <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
+  <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
 </div>
 
 <div class="col-md-8 col-xs-8">
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
 </div>
 </div>
 </div>
@@ -109,7 +109,7 @@
 
 <label for="picture" class="col-md-12" style="padding-left: 0">写真<i class="fa fa-picture-o"></i>
 
-      <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png', class: 'form-control'  %>
+      <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png', class: 'form-control' %>
 
 </label>
 <label for="machine_name" style="margin-top: 10px;">機器名<span style="color:red; font-weight: bold;">*</span></label>
@@ -157,6 +157,8 @@
 <%= f.hidden_field :status , :value => "在庫中" %>
 <%= f.hidden_field :staff , :value => current_user.name %>
 
+
+
 <!--<p>FROM<br>-->
 <!--<%#= f.text_field :from , :placeholder => '例：藤商事', class: "width20vw"%></p>-->
 <!--<br>-->
@@ -168,7 +170,7 @@
 
 <div id="secondNotice">
 <button class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
-<%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none' %>
+<%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none', name: "slot"  %>
 </button>
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
 </div>
