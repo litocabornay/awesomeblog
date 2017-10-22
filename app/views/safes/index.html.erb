@@ -1,52 +1,27 @@
 <% provide(:title,"在庫") %>
 
 <div class="row">
-<div class="container">
+<div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
+<h3>在庫</h3>
+<h4>本体(全揃い)</h4>
+<br> 
 
-<h3>履歴 test 1</h3>
-<h4>パチンコ</h4>
-
-<%= link_to "パチンコ履歴", "/safes/", class:"btn  btn-primary" %>
-<%= link_to "スロット履歴", "/slot_history/", class:"btn btn-primary" %>
-
-<%= link_to "COMPACT", "?t=c", class:"btn btn-primary" %>
-<%= link_to "FULL", "?t=f", class:"btn btn-primary" %>
-
-<%= link_to "CSV出力",csv_output_safes_path(format: :csv), :class => "btn btn-primary" %>
-
-
-<div class="row">
-<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
-<a href="/zaiko/" class="btn btn-danger"><span class="badge">ALL</span> 本体(全揃い)</a>
-<a href="/zaiko-cell/" class="btn btn-primary"><span class="badge">1</span> セルのみ</a>
-<a href="/zaiko-flame/" class="btn btn-primary"><span class="badge">2</span> 枠のみ</a>
-<a href="/zaiko-foundation/" class="btn btn-primary"><span class="badge">3</span> 基盤のみ</a>
-</div>
-</div>
-
-<div class="row" style="margin-top: 20px;">
-<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
-<a href="/safes/" class="btn btn-primary"><span class="badge">1</span> パチンコ履歴</a>
-<a href="/slot_history/" class="btn btn-success"><span class="badge">2</span> スロット履歴</a>
-</div>
+<div class="btn-group" >
+<a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ履歴</a>
+<a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> セルのみ</a>
 </div>
 
 
+<div class="btn-group float-right">
 
+<a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
+<a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
 
-<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-<div class="btn-group" style="border: 1px solid; padding: 10px; box-shadow: 10px 10px 5px #888888;">
-<a href="/safes/new" class="btn btn-primary"><i class="fa fa-sign-in"></i> 入庫</a>
-<a href="/safe_before/" class="btn btn-success"><i class="fa fa-sign-out"></i> 出庫</a>
+<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
+
 </div>
-</div>
 
-<div class="container-fluid">
-<div class="width_container">
-<div style="width:100%; min-width:1000px">
-<div class="width_table">
-
-<table class="table font-small2 sampleTable">
+<table class="table table-bordered table-hover font-small2 sampleTable" style="margin-top: 30px;">
   <thead class="thead-inverse">
     <tr scope="row">
      
