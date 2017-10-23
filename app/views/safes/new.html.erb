@@ -13,8 +13,13 @@
   });
 </script>
 
-<%= form_for(@safe, url: "/safes", html: {:class => 'form-group'}) do |f| %>
+<%= form_for(@safe, url: "/safes", html: {:class => 'form-group', :multipart => 'true'}) do |f| %>
+<% if @safe.errors.any? %>
+<h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+<% end %>
+
 <%= render 'shared/error_message', object: f.object %>
+
 
 <!--<div class="radio center-block text-center" style="margin-bottom: 10px;">-->
 <!--  <h4 style="margin-top: 10px;">機種<span style="color:red; font-weight: bold;">*</span></h4>-->
@@ -57,7 +62,10 @@
 <label for="number" class="form-margin">セル</label>
 <div class="col-md-4 col-xs-4">
 <label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
-  <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
+  <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', :style => 'display:none;' %>
+<div class="col-md-8 col-xs-8">
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
+</div>
 </label>
 </div>
 

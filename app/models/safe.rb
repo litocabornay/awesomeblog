@@ -31,7 +31,7 @@ include ActionView::Helpers
   # 画像アップのための準備
 
   
-  validate  :photo
+  validate :photo
   #画像のサイズについての制限
   #以下、private内のmethodを実行してる
 

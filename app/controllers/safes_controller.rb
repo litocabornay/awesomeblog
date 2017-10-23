@@ -173,10 +173,6 @@ end
 
 def create
 
- 
-
-  
-  
   if session[:place] == "本社"
     @place = true
   elsif session[:place] == "菊水"

@@ -4,7 +4,6 @@
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>在庫</h3>
 <h4>本体(全揃い)</h4>
-<br> 
 
 <div class="btn-group" >
 <a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体(全揃い)</a>
@@ -111,7 +110,7 @@
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
-        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        <td class="text-center"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="40px"></a></td>
       <% end %>
       
         
