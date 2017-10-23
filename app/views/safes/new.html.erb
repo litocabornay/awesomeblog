@@ -102,8 +102,8 @@
 <!--<b style="color:red;">*</b>-->
 <!--<br>-->
 <!--<div>-->
-<!--			<label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" /></label>　-->
-<!--			<label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>-->
+<!--      <label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" /></label>　-->
+<!--      <label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>-->
 <!--</div>-->
 <!--</p>-->
 
@@ -189,8 +189,19 @@
 
 <% end %>     
 
-</div>
-</div>
-</div>
+<% if @safe.errors.any? %>
+    <% puts @safe.errors.full_messages.inspect.to_s %>
+    <ul>
+      <% @safe.errors.full_messages.each do |msg| %>
+        <% puts 'errors ared' + msg.to_s %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
 
+<%= @safe.errors.full_messages.first if @safe.errors.any? %>
+
+</div>
+</div>
+</div>
 
