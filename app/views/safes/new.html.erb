@@ -35,33 +35,19 @@
 
 
 <div id="secondBox">
+  
 <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
 <label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
+    <%= f.text_field :number_slot , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
 <label class="form-margin qrcode-text-btn">
-  <%= f.text_field :number_slot , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
-  <!--<i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>-->
+  <i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 5em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
-
 </label>
 </div>
-
-<div class="col-md-8 col-xs-8">
-
-</div>
-</div>
 </div>
 
-
-<p>機器番号
-<b style="color:red;">*</b>
-<br>
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' ,:required => true %>
-<label class="qrcode-text-btn zoom2">
-<%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
-<!--<input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1>-->
-</label>
-</p>
+</div>
 
 
 
@@ -69,6 +55,39 @@
 
 <label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 
+
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
+<label for="number">セル<span style="color: red; font-weight: bold;">*</span></label>
+<div class="col-md-4 col-xs-4">
+    <%= f.text_field :number , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="form-margin qrcode-text-btn">
+  <i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 5em;"></i>
+  <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+</label>
+</div>
+</div>
+
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
+<label for="number">枠<span style="color: red; font-weight: bold;">*</span></label>
+<div class="col-md-4 col-xs-4">
+    <%= f.text_field :number_of_frame , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="form-margin qrcode-text-btn">
+  <i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 5em;"></i>
+  <%= f.file_field :number_of_frame , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+</label>
+</div>
+</div>
+
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
+<label for="number">基盤<span style="color: red; font-weight: bold;">*</span></label>
+<div class="col-md-4 col-xs-4">
+    <%= f.text_field :number_of_foundation , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="form-margin qrcode-text-btn">
+  <i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 5em;"></i>
+  <%= f.file_field :number_of_foundation , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
+</label>
+</div>
+</div>
 
 </div>
 
