@@ -13,7 +13,7 @@
   });
 </script>
 
-<%= form_for(@safe, url: "/safes", html: { :class => 'form-group'}) do |f| %>
+<%= form_for(@safe, url: "/safes", html: {:class => 'form-group'}) do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
 <!--<div class="radio center-block text-center" style="margin-bottom: 10px;">-->
@@ -102,8 +102,8 @@
 <!--<b style="color:red;">*</b>-->
 <!--<br>-->
 <!--<div>-->
-<!--			<label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" /></label>　-->
-<!--			<label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>-->
+<!--      <label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" /></label>　-->
+<!--      <label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>-->
 <!--</div>-->
 <!--</p>-->
 
@@ -192,5 +192,4 @@
 </div>
 </div>
 </div>
-
 
