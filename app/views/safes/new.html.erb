@@ -39,13 +39,16 @@
 <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
 <label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
-    <%= f.text_field :number_slot , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control' %>
+    <%= f.text_field :number_slot , :class => "qrcode-text" , :placeholder => '例：P1SS160135622', class: 'form-control', :onkeyup => "ShowLength(value);" %>
 <label class="form-margin qrcode-text-btn">
   <i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 5em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
 </label>
 </div>
 </div>
+
+<p id="targetTextArea">0文字</p>
+
 
 </div>
 
