@@ -19,7 +19,8 @@ gem 'will_paginate', '3.1.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 #画像アップロードのためーーー
-gem 'carrierwave', '1.1.0'
+# gem 'carrierwave', '1.1.0'
+gem 'carrierwave', '~> 0.11.2'
 #アップロード
 gem 'mini_magick', '4.7.0'
 #リサイズ
@@ -104,7 +105,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'mysql', '~> 2.9', '>= 2.9.1'
   gem 'rails_12factor'
   
   gem 'puma', '2.11.1'
