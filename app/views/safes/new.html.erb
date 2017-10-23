@@ -38,14 +38,14 @@
 <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
 <label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 <div class="col-md-4 col-xs-4">
-<label class="form-margin qrcode-text-btn"><i class="fa fa-qrcode qrcode-text-btn" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
-  <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80'%>
-<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
+<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+  <%= f.file_field :number_slot , :accept => 'image/*',:class => "qrcode-text-btn", :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;'%>
+
 </label>
 </div>
 
 <div class="col-md-8 col-xs-8">
-
+<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
 </div>
 </div>
 </div>
