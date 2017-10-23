@@ -195,7 +195,6 @@ def create
   @safe3 = Safe.new(safe_params)
   @safe4 = Safe.new(safe_params)
   
-  
                 session[:name] = @safe.name
                 # session[:staff] = @safe.staff
                 # session[:type_machine] = @safe.type_machine
@@ -290,7 +289,7 @@ def create
                             end
             
             
-                redirect_to "/"
+                redirect_to "/safes/new"
 
                   
 
