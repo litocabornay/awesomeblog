@@ -37,7 +37,7 @@ gem 'jquery-ui-rails'
 # gem 'zbar', '~> 0.2.2'
 
 
-gem 'jp_prefecture'
+# gem 'jp_prefecture'
 
 #gemの追加後は、バンドルのインストール
 
@@ -105,7 +105,7 @@ group :development do
 end
 
 group :production do
-  gem 'mysql', '~> 2.9', '>= 2.9.1'
+  gem 'sqlite3'
   gem 'rails_12factor'
   
   gem 'puma', '2.11.1'
