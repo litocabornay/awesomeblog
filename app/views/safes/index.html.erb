@@ -20,65 +20,64 @@
 
 </div>
 
-<table class="table table-bordered table-hover font-small2 sampleTable" style="margin-top: 30px;">
+<table class="table table-bordered table-hover" style="margin-top: 30px;">
   <thead class="thead-inverse">
+
+<% if (params[:t] == "f") %>
+<table class="table table-bordered table-hover table-condensed" style="font-size:70%;">
+  <thead class="thead-default">
+<% end %>
+
     <tr scope="row">
-     
-      <th class="width3vw">ID</th>
-     
+
+      <th class="col-md-1">ID</th>
+      <th class="col-md-1">機種</th>
       
-      <th class="width3vw">機種</th>
-      
-      
-      <!--<th class="width3vw">状況</th>-->
-      
-      <!--<th class="width3vw">機種</th>-->
-      
-      <% if !(params[:t] == "c") %>
-      <th class="width10vw">機器番号</th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-2">機器番号</th>
       <% end %>
       
-      <th class="width20vw">機種名</th>
+      <th class="col-md-4">機種名</th>
       
-      <% if !(params[:t] == "c") %>
-      <th class="width10vw">取引先</th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-2">取引先</th>
       <% end %>
 
-      <% if !(params[:t] == "c") %>
-      <th class="width5vw">担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-2">担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
       <% end %>
       
       
-      <th class="width5vw">仕入価格</th>
+      <th class="col-md-1">仕入価格</th>
 
-      <% if !(params[:t] == "c") %>
-      <th class="width5vw">撤去日</th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">撤去日</th>
       <% end %>
-      <% if !(params[:t] == "c") %>
-      <th class="width5vw">検定日</th>
-      <% end %>
-      
-      
-      <th class="width3vw">倉庫</th>
-      
-      <% if !(params[:t] == "c") %>
-      <th class="width3vw">パネル色</th>
-      <% end %>
-      
-      <% if !(params[:t] == "c") %>
-      <th class="width10vw">備考</th>
-      <% end %>
-      
-      <% if !(params[:t] == "c") %>
-      <th class="width5vw">画像</th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">検定日</th>
       <% end %>
       
       
-      <th class="width3vw">編集</th>
-      <th class="width3vw">出庫</th>
-      <th class="width3vw">p-sensor</th>
+      <th class="col-md-1">倉庫</th>
       
-      <th class="width3vw">削除</th>
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">パネル色</th>
+      <% end %>
+      
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">備考</th>
+      <% end %>
+      
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">画像</th>
+      <% end %>
+      
+      
+      <th class="col-md-1">編集</th>
+      <th class="col-md-1">出庫</th>
+      <th class="col-md-1">p-sensor</th>
+      
+      <th class="col-md-1">削除</th>
       
     </tr>
   </thead>
@@ -90,11 +89,6 @@
    <%# @user_staff = User.find(safe.buyer_id)  %>
    
       <tr scope="row">
-       
-       
-
-       
-       
         <td class="width3vw"><%= safe.id %></td>
         <!--<td class="width3vw"><%#= safe.status %></td>-->
         <td class="width5vw"><%= safe.type_machine %></td>
@@ -113,7 +107,7 @@
         <td class="width10vw"><%= safe.name %></td>
 
 
-      <% if !(params[:t] == "c") %>
+      <% if (params[:t] == "f") %>
         <td class="width5vw">
         <% if safe.status == "出庫済" %>
         入：<%= safe.created_at.strftime("%m/%d") %> <%= safe.from %><br>
@@ -142,7 +136,7 @@
         <td class="width5vw"><%= safe.price_from %> 円</td>
         <% end %>
 
-      <% if !(params[:t] == "c") %>
+      <% if (params[:t] == "f") %>
         <td class="width5vw"><%= safe.date_of_removal %></td>
         <td class="width5vw"><%= safe.date_of_verification %></td>
       <% end %>
@@ -150,12 +144,12 @@
       
         <td class="width3vw"><%= safe.place %></td>
         
-      <% if !(params[:t] == "c") %>
+      <% if (params[:t] == "f") %>
         <td class="width5vw"><%= safe.color_of_panel %></td>
         <td class="width10vw"><%= safe.remarks %></td>
       <% end %>
       
-      <% if !(params[:t] == "c") %>
+      <% if (params[:t] == "f") %>
         <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
       <% end %>
       
@@ -195,15 +189,6 @@
         <i class="fa fa-bitbucket"></i>
         <% end %>
        </td>
-       
-       
-       
-      
-      
-
-      
-      
- 
  
       </tr>
 
