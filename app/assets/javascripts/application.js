@@ -12,6 +12,23 @@
 
 
 
+      // function onButtonClick() {
+      //   checkbox1 = document.getElementById("Checkbox1");
+      //   checkbox2 = document.getElementById("Checkbox2");
+
+      //   target = document.getElementById("output");
+      //   if (checkbox1.checked == true) {
+      //     target.innerHTML = ('<div style="margin-bottom: 10px;"><label for="price" style="margin-top: 10px;">検定日</label><%= f.date_select :date_of_verification , class: "form-control", :style => "margin-bottom:10px", :value => @safe.date_of_verification  %></div>');
+      //   } else {
+      //     target.innerHTML = "";
+      //   }
+      //   if (checkbox2.checked == true) {
+      //     target.innerHTML += "チェック項目2がチェックされています。<br/>";
+      //   } else {
+      //     target.innerHTML += "";
+      //   }
+      // }
+
 
 
 	function entryChange1(){

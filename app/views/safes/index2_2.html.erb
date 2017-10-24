@@ -3,7 +3,7 @@
 <div class="row">
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>在庫</h3>
-<h4>本体(全揃い)</h4>
+<h4>セルのみ</h4>
 <br> 
 
 <div class="btn-group" >
@@ -20,7 +20,9 @@
 <a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
 <a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
 
-<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
+
+
+<%= link_to "CSV出力",csv_output_three_safes_path(format: :csv), :class => "btn btn-danger" %>
 
 </div>
 
@@ -111,7 +113,11 @@
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
-        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+      <% unless safe.photo.blank? %>
+        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        <% else %>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
+        <% end %>
       <% end %>
       
         

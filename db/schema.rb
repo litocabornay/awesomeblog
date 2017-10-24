@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20171022025710) do
     t.string   "number_of_foundation"
     t.string   "string"
     t.date     "date_of_out"
-    t.integer  "number_slot"
+    t.string   "number_slot"
   end
 
   create_table "sells", force: :cascade do |t|

@@ -1,21 +1,48 @@
+
+
+
+
+
+<div class="col-md-offset-3 col-md-6" style="border: 1px dashed #0080c5; border-radius: 10px; padding:20px 20px 60px 20px;">
 <% @safes.each do |safe| %>
+
+
+<%
+    if safe.type_machine == "本体"
+              @out = "３点一括出庫"
+@color = 'btn btn-primary big_botton btn-info'
+                       elsif safe.type_machine == "セル"
+                      @out = "セルのみ出庫"
+@color = 'btn btn-primary big_botton btn-success'
+                         elsif safe.type_machine == "枠"
+                      @out = "枠のみ出庫"
+@color = 'btn btn-primary big_botton btn-success'
+                      elsif safe.type_machine == "基盤"
+                      @out = "基盤のみ出庫"
+@color = 'btn btn-primary big_botton btn-success'
+                      end
+%>
+
+
+
 <%#= form_for(@safe, safe_path) do |f| %>
 <%#= form_for(@safe, url: safe_path ) do |f| %>
+<br>
+<div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; ">
+<div style="padding: 20px;" class="center-block">
+<p>機器：　<%= safe.machine %></p>
+<p>機種：　<%= safe.type_machine %></p>
+<p>在庫名：　<%= safe.name %></p>
 
-
-<center>
-<h5>機器番号：　<%= safe.number %></h5>
-<h5>在庫名：　<%= safe.name %></h5>
-
-<h5>出庫先：　<%= params[:staff] %></h5>
+<!--<h5>出庫先：　<%#= params[:staff] %></h5>-->
 <!--<h5>機種：　<%#= safe.machine %></h5>-->
 <!--<h5>種別：　<%#= safe.type_machine %></h5>-->
 <!--<h5>価格：　<%#= safe.price_from %></h5>-->
 <!--<h5>備考：　<%#= safe.remarks %></h5>-->
-<h5>画像：　<img src="<%= safe.photo %>" width="100"></imag></h5>
-</center>
+<p>画像：　<img src="<%= safe.photo %>" width="100"></p>
 
-<%= link_to "出庫する", edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary big_botton" %>
+
+<%= link_to @out, edit_safe_path(safe, params: { safe: { status: "出庫済"} } ) , :class => @color %>
 
 <%#= link_to '出庫する', edit_safe_path(safe), class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
 
@@ -25,12 +52,12 @@
 <%#= f.submit "登録", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' } %>
 <%# end %>
 
-
-
+</div>
+</div>
 <%#= link_to "出庫する", safe_path(safe), :class => "btn btn-primary big_botton" %>
 <%#= link_to '出庫する', safe_path(safe), method: :put, :class => "btn btn-primary big_botton" %>
 <%#= link_to "出庫する", safe_path(safe, params: { safe: { status: "出庫済", to: params[:staff] , staff_two: @staff } } ), :method => :put, :class => "btn btn-primary big_botton" %>
-
+<br>
 <% end %>
-
+</div>
 <%= link_to '戻る', "/", :class => "btn btn-primary big_botton btnred" %>

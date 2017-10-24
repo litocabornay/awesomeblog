@@ -18,7 +18,7 @@
 <%= link_to "パチンコ履歴", "/safes/", class:"btn  btn-primary" %>
 <%= link_to "スロット履歴", "/slot_history/", class:"btn btn-primary" %>
 
-<%= link_to "CSV出力",csv_output_safes_path(format: :csv), :class => "btn btn-primary" %>
+<%= link_to "CSV出力",csv_output_seven_safes_path(format: :csv), :class => "btn btn-primary" %>
 
 
 <div class="width_container">
@@ -156,7 +156,11 @@
       <% end %>
       
       <% if !(params[:t] == "c") %>
+      <% unless safe.photo.blank? %>
         <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        <% else %>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
+        <% end %>
       <% end %>
       
 
