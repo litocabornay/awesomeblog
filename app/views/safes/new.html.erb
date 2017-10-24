@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-<div class="col-md-offset-3 col-md-6" style="border: 1px dashed #0080c5; border-radius: 10px; padding:20px 20px 60px 20px;">
+<div class="col-md-offset-3 col-md-6 col-xs-12">
 
 <h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-folder-open-o" style="margin-right: 10px;"></i>入庫</h1>
 
@@ -13,10 +13,11 @@
   });
 </script>
 
-<%= form_for(@safe, url: "/safes", html: {:class => 'form-group'}) do |f| %>
+<div class="form-group">
+<%= form_for(@safe, url: "/safes") do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
-<label style="margin-top: 10px;">機種<span style="color:red; font-weight: bold;">*</span></label>
+<label>機種<span style="color:red; font-weight: bold;">*</span></label>
 
 <div class="radio" style="margin-bottom: 10px;">
     <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　
@@ -31,7 +32,7 @@
 
 <%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
 
-<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+<label><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
 
@@ -84,6 +85,8 @@
 </div>
 </div>
 </div>
+
+<div class="col-md-12">
 
 <label for="picture" class="col-md-12" style="padding-left: 0; margin-top: 20px;">写真<i class="fa fa-picture-o"></i>
 
@@ -167,19 +170,9 @@
 
 <% end %>     
 
-<% if @safe.errors.any? %>
-    <% puts @safe.errors.full_messages.inspect.to_s %>
-    <ul>
-      <% @safe.errors.full_messages.each do |msg| %>
-        <% puts 'errors ared' + msg.to_s %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-<% end %>
+</div>
+</div>
+</div>
+</div>
 
-<%= @safe.errors.full_messages.first if @safe.errors.any? %>
-
-</div>
-</div>
-</div>
 
