@@ -6,11 +6,8 @@
 <h4>本体(全揃い)</h4>
 
 <div class="btn-group" >
-<a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体(全揃い)</a>
-<a href="/zaiko-cell" class="btn btn-default"><i class="fa fa-bolt"></i> セルのみ</a>
-<a href="/zaiko-flame" class="btn btn-default"><i class="fa fa-clone"></i> 枠のみ</a>
-<a href="/zaiko-foundation" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>
-<a href="/zaiko-slot" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
+<a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ履歴</a>
+<a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> セルのみ</a>
 </div>
 
 
@@ -24,36 +21,43 @@
 </div>
 
 <table class="table table-bordered table-hover" style="margin-top: 30px;">
-  <thead class="thead-default">
+  <thead class="thead-inverse">
 
 <% if (params[:t] == "f") %>
-<table class="table table-bordered table-hover table-condensed" style="margin-top: 30px; font-size:70%;">
+<table class="table table-bordered table-hover table-condensed" style="font-size:70%;">
   <thead class="thead-default">
 <% end %>
 
- <tr scope="row">
-     
-      <th class="col-md-1">ID</th>    
+    <tr scope="row">
+
+      <th class="col-md-1">ID</th>
       <th class="col-md-2">メーカー</th>
-
-      <th class="col-md-3">機種名</th>
-
-
-      <th class="col-md-1">仕入価格</th>
-      <th class="col-md-1">倉庫</th>
-
+      <th class="col-md-2">機械のタイプ</th>
+      <th class="col-md-2">機種名</th>
+   
       <% if (params[:t] == "f") %>
       <th class="col-md-2">機器番号</th>
-      <th class="col-md-1">入庫先</th>
-      <th class="col-md-1" style="font-size: 90%;">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      <th class="col-md-1">撤去日</th>
-      <th class="col-md-1">検定日</th>    
-      <th class="col-md-1">パネル色</th>
-      <th class="col-md-2">備考</th>
-      <th class="col-md-1">画像</th>
-      
+      <th class="col-md-2">取引先</th>
+      <th class="col-md-2">担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
       <% end %>
       
+      
+      <th class="col-md-1">仕入価格</th>
+
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">撤去日</th>
+      <th class="col-md-1">検定日</th>
+      <% end %>
+      
+      
+      <th class="col-md-1">倉庫</th>
+      
+      <% if (params[:t] == "f") %>
+      <th class="col-md-1">パネル色</th>
+      <th class="col-md-3">備考</th>
+      <th class="col-md-1">画像</th>
+      <% end %>
+        
       <th class="col-md-1 text-center">編集</th>
       <th class="col-md-1 text-center">出庫</th>
 
@@ -61,59 +65,85 @@
       <th class="col-md-1 text-center">p-sensor</th>
       <th class="col-md-1 text-center">削除</th>
       <% end %>
-      
+
     </tr>
   </thead>
 <tbody>
 
 <% @safes.each do |safe| %>
 
-  <tr scope="row">
+
+<% if safe.type_machine == "セル"
+      @cell = safe.number
+
+      elsif safe.type_machine == "枠"
+      @cell = safe.number_of_frame
+
+      elsif safe.type_machine == "基盤"
+      @cell = safe.number_of_foundation
+      
+      else
+      @cell = ""
+      end %>
+
+
+      <tr scope="row">
         <td><%= safe.id %></td>
-        <td><%= safe.maker %></td>        
+        <td><%= safe.maker %></td>
+        <td><%= safe.type_machine %></td>
         <td><%= safe.name %></td>
-      
-       <% if (params[:t] == "f") %>
-        <% unless safe.price_from.blank? %>
-        <td><%= safe.price_from.to_s(:delimited) %> 円</td>
+
+      <% if (params[:t] == "f") %>
+      <td><%= @cell %></td>
+      <% end %>
+
+      <% if (params[:t] == "f") %>
+        <td>
+        <% if safe.status == "出庫済" %>
+        入：<%= safe.created_at.strftime("%m/%d") %> <%= safe.from %><br>
+        出：<%= safe.updated_at.strftime("%m/%d") %> <%= safe.to %>
         <% else %>
-        <td><%= safe.price_from %> 円</td>
+        入：<%= safe.created_at.strftime("%m/%d") %> <%= safe.from %><br>
+        出： --- ---
         <% end %>
-       <% end %>
-
-
-       <% if (params[:t] == "f") %>
-       <td><%= safe.place %></td>
-       <td><%= safe.number_slot %></td>
-       <td><%= safe.created_at.strftime("%m/%d") %> <%= safe.from %></td>
-       <td><%= safe.staff %></td>
-       <% end %>
-
+        </td>
+        
+        <td>
+        <% if safe.status == "出庫済" %>
+        入：<%= safe.staff %> <br>
+        出：<%= safe.staff_two %>
+        <% else %>
+        入：<%= safe.staff %> <br>
+        出： ---
+        <% end %>
+      </td>
+      <% end %>
       
-      <% if !(params[:t] == "f") %>
+      
       <% unless safe.price_from.blank? %>
         <td><%= safe.price_from.to_s(:delimited) %> 円</td>
         <% else %>
         <td><%= safe.price_from %> 円</td>
         <% end %>
-       <% end %>
-        
+
       <% if (params[:t] == "f") %>
         <td><%= safe.date_of_removal %></td>
         <td><%= safe.date_of_verification %></td>
       <% end %>
       
-      <% if !(params[:t] == "f") %>
+      
         <td><%= safe.place %></td>
-      <% end %>
-
+        
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
-        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
       <% end %>
       
-        
+      <% if (params[:t] == "f") %>
+        <td>
+      <% end %>
+      
+
         <td class="text-center">
         <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
         <i class="fa fa-pencil-square-o"></i>
@@ -122,36 +152,34 @@
         
         
       <% if safe.status == "出庫済" %>
-       <td>出庫済</td>
+       <td>
+        <b>出庫済</b>
+       </td>
       <% else %>
-      
        <td class="text-center">
         <%= link_to edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" do %>
         <i class="fa fa-sign-out"></i>
         <% end %>
        </td>
+       <% end %>
+
        
-       
-       
-      <% end %> 
-      
        <% if (params[:t] == "f") %>
-       <td class="text-center">
+       <td>
         <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
         <% @utf8 = ERB::Util.url_encode(@utf81) %>
         <% @url = "https://www.p-sensor.co.jp/php/search_sale.php?&item=" + @utf8 %>
         <%= link_to "P", @url, :class => "btn btn-primary" %>
        </td>
-       <% end %>
-
-       <% if (params[:t] == "f") %>
-       <td class="text-center">
+       
+       
+       <td>
       <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
         <i class="fa fa-trash-o"></i>
         <% end %>
        </td>
        <% end %>
- 
+
       </tr>
 
 
@@ -162,7 +190,6 @@
 </div>
 </div>
 </div>
-
 
 
 <%= paginate @safes %>
