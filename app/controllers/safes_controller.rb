@@ -289,7 +289,7 @@ def create
                             end
             
             
-                redirect_to "/safes/new"
+                redirect_to "/"
 
                   
 
