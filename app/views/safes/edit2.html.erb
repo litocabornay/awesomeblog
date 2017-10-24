@@ -1,3 +1,7 @@
+
+    
+    
+
 <div class="container-fluid">
 
 <div class="col-md-offset-3 col-md-6" style="border: 1px dashed #0080c5; border-radius: 10px; padding:20px 20px 60px 20px;">
@@ -45,11 +49,26 @@
 
 <div style="margin-bottom: 10px;">
 <label for="price" style="margin-top: 10px;">撤去日</label>
+
+<%= f.check_box :month_of_manufacture , { checked: true }, 'yes', 'no' %>
+<br>
+<!--<input id="Checkbox1" type="checkbox" onclick="onButtonClick();" /><label for="Checkbox1">チェック項目1</label><br />-->
+<!--  <input id="Checkbox2" type="checkbox" onclick="onButtonClick();" /><label for="Checkbox2">チェック項目2</label><br />-->
+
+<%#= check_box("puppy", "commands", {:multiple => true}, "sit", nil) %>
+
+<%#= f.check_box :month_of_manufacture, { checked: true }, 'yes', 'no'  %>
 <%= f.date_select :date_of_removal , class: 'form-control', :style => 'margin-bottom:10px', :value => @safe.date_of_removal %>
 </div>
 
+
+
+
 <div style="margin-bottom: 10px;">
 <label for="price" style="margin-top: 10px;">検定日</label>
+
+<%= f.check_box :year_of_manufacture , { checked: true }, 'yes', 'no' %>
+<br>
 <%= f.date_select :date_of_verification , class: 'form-control', :style => 'margin-bottom:10px', :value => @safe.date_of_verification  %>
 </div>
 

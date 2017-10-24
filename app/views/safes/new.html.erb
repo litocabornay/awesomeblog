@@ -29,7 +29,7 @@
     <div class="col-md-12 text-center">
 <label for="number" class="col-md-12">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
 
-<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
+<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：1T-5-094/000048', class: 'form-control'%>
 
 <label><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
@@ -37,6 +37,7 @@
 
     </div>
   </div>
+
 </div>
 
 <div id="firstBox">

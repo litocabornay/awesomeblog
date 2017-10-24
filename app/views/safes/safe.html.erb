@@ -1,13 +1,19 @@
 <div class="padding1-20"> 
 <%= form_tag("/safe_after", method: "get") do %>
 
-<p>QR
-<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
 
-<label class="qrcode-text-btn zoom2 helf2">
-<%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);' %>
-</label>
-</p>
+
+<div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px;">
+<label for="number" class="form-margin">QR検索</label>
+<div class="col-md-4 col-xs-4">
+<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+  <%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', :style => 'display:none;' %>
+</div>
+
+<div class="col-md-8 col-xs-8">
+<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
+</div>
+</div>
 
 
 

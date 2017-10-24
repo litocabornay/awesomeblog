@@ -16,7 +16,7 @@
 <a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
 <a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
 
-<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
+<%= link_to "CSV出力",csv_output_safes_path(format: :csv), :class => "btn btn-danger" %>
 
 </div>
 
@@ -140,10 +140,13 @@
       <% end %>
       
       <% if (params[:t] == "f") %>
-        <td>
+        <% unless safe.photo.blank? %>
+        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="40px"></a></td>
+        <% else %>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
+        <% end %>
       <% end %>
-      
-
+ 
         <td class="text-center">
         <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
         <i class="fa fa-pencil-square-o"></i>
