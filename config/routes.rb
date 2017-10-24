@@ -105,6 +105,11 @@ resources :safes  do
     collection do
       get 'csv_output'
       get 'csv_output_two'
+      get 'csv_output_three'
+      get 'csv_output_four'
+      get 'csv_output_five'
+      get 'csv_output_six'
+      get 'csv_output_seven'
     end
   end
 # post '/safes/create2', to: 'safes#create2'

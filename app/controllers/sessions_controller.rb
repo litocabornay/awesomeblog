@@ -69,7 +69,7 @@ class SessionsController < ApplicationController
           #showページに飛ぶ
           #↓↓↓↓↓↓↓
           #after
-          redirect_back_or user
+          redirect_back_or root_url
           #redirect_to root_url
           #元々行きたかった場所に飛ぶ。なければdefaultはshowページ
         else

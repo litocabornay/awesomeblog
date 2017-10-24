@@ -129,7 +129,11 @@
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
-        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+      <% unless safe.photo.blank? %>
+        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        <% else %>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
+        <% end %>
       <% end %>
       
       
