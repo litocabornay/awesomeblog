@@ -1,7 +1,7 @@
 class SafesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :create, :edit, :update, :destroy, :csv_output_two, :csv_output_three, :csv_output_four, :csv_output_five, :csv_output_six, :csv_output, :csv_output_seven, :index2, :index2_2, :index2_3, :index2_4, :index2_5, :index1_2, :safe, :after, :edit2]
   # before_action :correct_user, only: [:index, :show, :new, :create, :edit, :edit, :update]
-  before_action :admin_user, only: [:index, :show, :destroy]
+  before_action :admin_user, only: [:index, :show, :destroy, :csv_output_two, :csv_output_three, :csv_output_four, :csv_output_five, :csv_output_six, :csv_output, :csv_output_seven, :index2, :index2_2, :index2_3, :index2_4, :index2_5, :index1_2, :edit2]
   # before_action :set_current_user, only: [:index]
   
 
@@ -92,13 +92,7 @@ end
 
   
  def safe
-   
-    if params[:number]
-     @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page])
-    else
-     @safes = Safe.where("status = '在庫中'").paginate(page: params[:page])
-    end
-    
+
  end
  
  
@@ -106,11 +100,19 @@ end
 
   # @safe = Safe.where(:number => params[:number])
   
-    if params[:number]
-    @safes = Safe.where("status = '在庫中'").where(number: params[:number]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+
+
+    if params[:number][0].start_with?("P1") == true
+         @safes = Safe.where("status = '在庫中'").where(number: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+    elsif params[:number][0].start_with?("P0") == true
+         @safes = Safe.where("status = '在庫中'").where(number_of_frame: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+    elsif params[:number][0].start_with?("P2") == true
+         @safes = Safe.where("status = '在庫中'").where(number_of_foundation: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     else
-    @safes = Safe.where("status = '在庫中'").paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+        @safes = Safe.where("status = '在庫中'").where(number_slot: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     end
+
+
 
     
  end
