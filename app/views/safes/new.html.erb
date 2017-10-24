@@ -109,8 +109,17 @@
 <label style="margin-top: 10px;">種別<span style="color:red; font-weight: bold;">*</span></label>
 
 <div class="radio" style="margin-bottom: 10px;">
-<label><%= f.radio_button :place, "本社", :value => @place %>本社</label>
+
+<% if(session[:place]) != "菊水" %>
+<label><%= f.radio_button :place, "本社", :value => @place, :checked => "checked" %>本社</label>
 <label><%= f.radio_button :place, "菊水", :value => @place2 %>菊水</label>
+
+<% else %>
+
+<label><%= f.radio_button :place, "本社", :value => @place %>本社</label>
+<label><%= f.radio_button :place, "菊水", :value => @place2, :checked => "checked" %>菊水</label>
+
+<% end %>
 
 </div>
 <!-- 表示非表示切り替え -->
