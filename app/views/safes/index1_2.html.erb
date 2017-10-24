@@ -32,7 +32,7 @@
 
       <th class="col-md-1">ID</th>
       <th class="col-md-2">メーカー</th>
-      <th class="col-md-2">機械のタイプ</th>
+      <th class="col-md-1">タイプ</th>
       <th class="col-md-2">機種名</th>
    
       <% if (params[:t] == "f") %>
@@ -42,7 +42,7 @@
       <% end %>
       
       
-      <th class="col-md-1">仕入価格</th>
+      <th class="col-md-2">仕入価格</th>
 
       <% if (params[:t] == "f") %>
       <th class="col-md-1">撤去日</th>
@@ -120,11 +120,27 @@
       <% end %>
       
       
+      <% 
+      if safe.id > 1
+      if safe.type_machine = "枠"
+      @safe2 = Safe.find(safe.id - 1)
+      end
+      end
+      if safe.id > 2
+      if safe.type_machine = "基盤"
+      @safe2 = Safe.find(safe.id - 2)
+      end
+      end
+      %>
       <% unless safe.price_from.blank? %>
-        <td><%= safe.price_from.to_s(:delimited) %> 円</td>
-        <% else %>
-        <td><%= safe.price_from %> 円</td>
-        <% end %>
+      <% if safe.price_from == 0 %>
+      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from.to_s(:delimited) %>円)</td>
+      <% else %>
+      <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
+      <% end %>
+      <% else %>
+      <td><%= safe.price_from %> 円</td>
+      <% end %>
 
       <% if (params[:t] == "f") %>
         <td><%= safe.date_of_removal %></td>
