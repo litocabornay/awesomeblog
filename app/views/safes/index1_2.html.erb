@@ -32,7 +32,7 @@
 
       <th class="col-md-1">ID</th>
       <th class="col-md-2">メーカー</th>
-      <th class="col-md-1">タイプ</th>
+
       <th class="col-md-2">機種名</th>
    
       <% if (params[:t] == "f") %>
@@ -83,14 +83,14 @@
       @cell = safe.number_of_foundation
       
       else
-      @cell = ""
+      @cell = safe.number_slot
       end %>
 
 
       <tr scope="row">
         <td><%= safe.id %></td>
         <td><%= safe.maker %></td>
-        <td><%= safe.type_machine %></td>
+
         <td><%= safe.name %></td>
 
       <% if (params[:t] == "f") %>
@@ -153,12 +153,14 @@
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
+              <% unless safe.photo.blank? %>
+        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+        <% else %>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
+        <% end %>
       <% end %>
       
-      <% if (params[:t] == "f") %>
-        <td>
-      <% end %>
-      
+
 
         <td class="text-center">
         <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
