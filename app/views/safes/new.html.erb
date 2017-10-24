@@ -16,14 +16,6 @@
 <%= form_for(@safe, url: "/safes", html: {:class => 'form-group'}) do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
-<!--<div class="radio center-block text-center" style="margin-bottom: 10px;">-->
-<!--  <h4 style="margin-top: 10px;">機種<span style="color:red; font-weight: bold;">*</span></h4>-->
-<!--    <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　-->
-<!--    <label><input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" />スロット</label>-->
-<!--</div>-->
-
-
-
 <label style="margin-top: 10px;">機種<span style="color:red; font-weight: bold;">*</span></label>
 
 <div class="radio" style="margin-bottom: 10px;">
@@ -32,82 +24,68 @@
 
 </div>
 
-
-
 <div id="secondBox">
-<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
-<label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
-<div class="col-md-4 col-xs-4">
+  <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px;">
+    <div class="col-md-12 text-center">
+<label for="number" class="col-md-12">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
+
+<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
+
 <label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
-</div>
 
-<div class="col-md-8 col-xs-8">
-<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
 <div id="firstBox">
-
-<label for="number">機器番号(QR)<span style="color: red; font-weight: bold;">*</span></label>
+<h4 class="text-center">機器番号(QR) <span style="color: red; font-weight: bold;">*</span></h4>
 
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px;">
-<label for="number" class="form-margin">セル</label>
-<div class="col-md-4 col-xs-4">
-<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+
+<div class="col-md-12 text-center">
+<label for="number" class="col-md-12">セル<span style="color: red; font-weight: bold;">*</span></label>
+
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
+
+<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
-</div>
 
-<div class="col-md-8 col-xs-8">
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control' %>
 </div>
 </div>
-
 
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px;">
-<label for="number" style="margin-bottom: 20px;">枠</label>
-<div class="col-md-4 col-xs-4">
-<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+
+<div class="col-md-12 text-center">
+<label for="number" class="col-md-12">枠</label>
+
+<%= f.text_field :number_of_frame , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
+
+<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_of_frame , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
-</div>
 
-<div class="col-md-8 col-xs-8">
-<%= f.text_field :number_of_frame , :class => 'qrcode-text', :placeholder => '例：P0SS160135622', class: 'form-control' %>
 </div>
 </div>
 
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px;">
-<label for="number" style="margin-bottom: 20px;">基盤</label>
-<div class="col-md-4 col-xs-4">
-<label style="margin-bottom: 20px;"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+
+<div class="col-md-12 text-center">
+<label for="number" class="col-md-12">基盤</label>
+
+<%= f.text_field :number_of_foundation , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control'%>
+
+<label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_of_foundation , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
 </label>
-</div>
 
-<div class="col-md-8 col-xs-8">
-<%= f.text_field :number_of_foundation , :class => 'qrcode-text', :placeholder => '例：P2SS160135622', class: 'form-control' %>
+</div>
 </div>
 </div>
 
-</div>
-
-<br><br>
-
-
-<!--<p>機種-->
-<!--<b style="color:red;">*</b>-->
-<!--<br>-->
-<!--<div>-->
-<!--      <label>パチンコ <input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" /></label>　-->
-<!--      <label>スロット <input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" /></label>-->
-<!--</div>-->
-<!--</p>-->
-
-<label for="picture" class="col-md-12" style="padding-left: 0">写真<i class="fa fa-picture-o"></i>
+<label for="picture" class="col-md-12" style="padding-left: 0; margin-top: 20px;">写真<i class="fa fa-picture-o"></i>
 
       <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png', class: 'form-control' %>
 
