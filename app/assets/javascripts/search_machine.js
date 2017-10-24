@@ -5,19 +5,19 @@ $input = $("[data-behavior='autocomplete']")
 
     categories: [{
         listLocation: "machine",
-        header: "Machine Name"
+        header: "Choose Machine:"
     }],
 
     getValue: function(element) {
         return element.name;
     },
 
-    template: {
-        type: "description",
-        fields: {
-            description: "name"
-        }
-    },
+    // template: {
+    //     type: "description",
+    //     fields: {
+    //         description: "description"
+    //     }
+    // },
 
     list: {
         maxNumberOfElements: 8,
@@ -26,8 +26,20 @@ $input = $("[data-behavior='autocomplete']")
         },
         sort: {
             enabled: true
+        },
+    
+        showAnimation: {
+            type: "fade", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        hideAnimation: {
+            type: "slide", //normal|slide|fade
+            time: 400,
+            callback: function() {}
         }
-    },
+},
 
     theme: "square"
 };

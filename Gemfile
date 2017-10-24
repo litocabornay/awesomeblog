@@ -19,7 +19,8 @@ gem 'will_paginate', '3.1.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 #画像アップロードのためーーー
-gem 'carrierwave', '1.1.0'
+# gem 'carrierwave', '1.1.0'
+gem 'carrierwave', '~> 0.11.2'
 #アップロード
 gem 'mini_magick', '4.7.0'
 #リサイズ
@@ -36,7 +37,7 @@ gem 'jquery-ui-rails'
 # gem 'zbar', '~> 0.2.2'
 
 
-gem 'jp_prefecture'
+# gem 'jp_prefecture'
 
 #gemの追加後は、バンドルのインストール
 
@@ -104,7 +105,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'sqlite3'
   gem 'rails_12factor'
   
   gem 'puma', '2.11.1'

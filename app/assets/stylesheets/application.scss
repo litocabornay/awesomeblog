@@ -1,7 +1,7 @@
 /*
  *= require jquery-ui
- * require easy-autocomplete
- * require easy-autocomplete.themes
+ *= require easy-autocomplete
+ *= require easy-autocomplete.themes
 */
 
 @import "bootstrap";
@@ -764,4 +764,8 @@ max-width:600px; text-align:center;
 
 .compact:not(:target){
   display:block;
+}
+
+div.easy-autocomplete.eac-square.eac-description {
+  width: 100% !important;
 }
