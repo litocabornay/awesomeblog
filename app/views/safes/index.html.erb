@@ -126,7 +126,7 @@
       <% 
       if safe.id > 1
       if safe.type_machine = "枠"
-        if Safe.find(safe.id - 1).nil?
+        if Safe.find_by_id(safe.id - 1).nil?
         @safe2 = Safe.find_by_id(safe.id)
         else
         @safe2 = Safe.find_by_id(safe.id - 1)
