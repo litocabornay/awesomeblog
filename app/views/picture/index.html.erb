@@ -1,32 +1,13 @@
-<% provide(:title,"在庫") %>
+<% provide(:title,"履歴") %>
 
-<%     session.delete(:fowarding_url)
-    store_location
-    %>
-    
-    
 <div class="row">
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
-<h3>スロット在庫の履歴</h3>
+<h3>パチンコ在庫の履歴</h3>
 
-
-
-
-<% if (params[:t] == "f") %>
-<div class="btn-group" >
-<a href="/safes?t=f" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
-<a href="/slot_history?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
-</div>
-<% else%>
 <div class="btn-group" >
 <a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
 <a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
 </div>
-<% end %>
-
-
-
-
 
 
 <div class="btn-group float-right">
@@ -50,7 +31,7 @@
 
       <th class="col-md-1">ID</th>
       <th class="col-md-2">メーカー</th>
-
+      <th class="col-md-1">タイプ</th>
       <th class="col-md-2">機種名</th>
    
       <% if (params[:t] == "f") %>
@@ -101,14 +82,14 @@
       @cell = safe.number_of_foundation
       
       else
-      @cell = safe.number_slot
+      @cell = ""
       end %>
 
 
       <tr scope="row">
         <td><%= safe.id %></td>
         <td><%= safe.maker %></td>
-
+        <td><%= safe.type_machine %></td>
         <td><%= safe.name %></td>
 
       <% if (params[:t] == "f") %>
@@ -152,7 +133,7 @@
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品<%= safe.price_from %>円<br>(本体<%= safe.price_from %>円)</td>
+      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from.to_s(:delimited) %>円)</td>
       <% else %>
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
       <% end %>
@@ -179,6 +160,7 @@
       <% end %>
       
 
+      
 
         <td class="text-center">
         <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
@@ -218,16 +200,13 @@
 
 
 <% end %>
-
-
-
-
 </tbody>
 </table>
 <%= paginate @safes %>
 </div>
 </div>
 </div>
+
 
 
 

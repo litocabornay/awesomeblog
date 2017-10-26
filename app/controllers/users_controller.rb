@@ -21,7 +21,6 @@ before_action :admin_user
       flash[:success] = "成功！"
     redirect_to root_url
    else
-      flash[:danger] = "未入力項目があります。"
      render 'new'
    end
   end
@@ -57,7 +56,7 @@ before_action :admin_user
   private
 
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :activated)
      
   end
   

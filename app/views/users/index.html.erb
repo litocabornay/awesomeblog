@@ -1,4 +1,10 @@
 <% provide(:title,"ユーザー一覧") %>
+
+<%     session.delete(:fowarding_url)
+    store_location
+    %>
+    
+    
 <div class="container">
 
 
@@ -11,7 +17,7 @@
 <thead>
 
   <th class="col-md-2">名前</th>
-  <th class="col-md-3">ID(メールアドレス)</th> 
+  <th class="col-md-3">ログインID</th> 
   <th class="col-md-3">権限</th>
   <th colspan="2" class="col-md-2 text-center">Actions</th>
 

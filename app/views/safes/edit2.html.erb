@@ -32,14 +32,25 @@
 </label>
 <% end %>
 
-<label for="machine_name" style="margin-top: 10px;">機器名<span style="color:red; font-weight: bold;">*</span></label>
-<%= f.text_field :name , :placeholder => '例：海物語', class: 'form-control' ,:required => true, data: { behavior: "autocomplete" }, :autocomplete =>"off",:readonly => true, :style => 'margin-bottom: 10px;' %>
+<label for="machine_name" style="margin-top: 10px;">メーカー<span style="color:red; font-weight: bold;">*</span></label>
+<%= f.text_field :maker , :placeholder => '例：京楽', class: 'form-control' ,:required => true, data: { behavior: "autocomplete" }, :autocomplete =>"off", :style => 'margin-bottom: 10px;' %>
+
+
+
+<label for="machine_name" style="margin-top: 10px;">機種名<span style="color:red; font-weight: bold;">*</span></label>
+<%= f.text_field :name , :placeholder => '例：CRぱちんこ必殺仕事人Ⅴ-S4', class: 'form-control' ,:required => true, data: { behavior: "autocomplete" }, :autocomplete =>"off", :style => 'margin-bottom: 10px;' %>
+
+
+
 
 <label for="from" style="margin-top: 10px;">入庫先<span style="color:red; font-weight: bold;">*</span></label>
-<%= f.text_field :from , :placeholder => '例：タイヨー', class: 'form-control', :required => true,:readonly => true, :style => 'margin-bottom: 10px;' %>
+<%= f.text_field :from , :placeholder => '例：新和(東苗穂)', class: 'form-control', :style => 'margin-bottom: 10px;' %>
+
+
+
 
 <label for="price" style="margin-top: 10px;">仕入価格<span style="color:red; font-weight: bold;">*</span><small>（半角英数字)</small></label>
-<%= f.text_field :price_from , :placeholder => '例：300000', class: 'form-control' ,:required => true,:readonly => true, :style => 'margin-bottom:10px'%>
+<%= f.text_field :price_from , :placeholder => '例：300000', class: 'form-control' , :style => 'margin-bottom:10px'%>
 
 <label style="margin-top: 10px;">倉庫<span style="color:red; font-weight: bold;">*</span></label>
 <div class="radio" style="margin-bottom: 10px;">

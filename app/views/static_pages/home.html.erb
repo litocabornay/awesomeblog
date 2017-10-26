@@ -1,9 +1,14 @@
 <% provide(:title,"トップページ") %>
 
-
+<%     session.delete(:fowarding_url)
+    store_location
+    %>
 
 <% if logged_in? %>
+
 <div class="container">
+<% if current_user.admin? %>
+
      <h1 class="text-center" style="margin-bottom: 30px;"><i class="fa fa-desktop" style="margin-right: 10px;"></i>管理者用</h1>
      <hr class="featurette-divider"></hr>
       <div class="col-lg-3">
@@ -112,28 +117,77 @@
           </a>
         </div>
       </div>
-      <div class="col-lg-3">
-          <div class="panel panel-warning">
+    <!--  <div class="col-lg-3">-->
+    <!--      <div class="panel panel-warning">-->
+    <!--      <div class="panel-heading">-->
+    <!--        <a href="#">-->
+    <!--        <div class="row">-->
+    <!--          <div class="col-xs-6 center-block text-center">-->
+    <!--            <i class="fa fa-sliders fa-5x"></i>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--        <div class="panel-footer announcement-bottom">-->
+    <!--          <div class="row">-->
+    <!--            <div class="col-xs-12 center-block">-->
+    <!--              <h2 class="text-center">設定<i class="fa fa-arrow-circle-right"></i></h2>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </a>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</div><!-- /.row -->
+    <!--</div>-->
+<% else %>
+
+
+    <div class="col-lg-3">
+        <div class="panel panel-danger">
           <div class="panel-heading">
-            <a href="#">
+            <a href="/safes/new">
             <div class="row">
               <div class="col-xs-6 center-block text-center">
-                <i class="fa fa-sliders fa-5x"></i>
+                <i class="fa fa-sign-in fa-5x"></i>
               </div>
             </div>
           </div>
             <div class="panel-footer announcement-bottom">
               <div class="row">
                 <div class="col-xs-12 center-block">
-                  <h2 class="text-center">設定<i class="fa fa-arrow-circle-right"></i></h2>
+                  <h2 class="text-center">入庫<i class="fa fa-arrow-circle-right"></i></h2>
                 </div>
               </div>
             </div>
           </a>
         </div>
       </div>
-    </div><!-- /.row -->
-    </div>
+
+
+
+      <div class="col-lg-3">
+          <div class="panel panel-success">
+          <div class="panel-heading">
+            <a href="/safe_before">
+            <div class="row">
+              <div class="col-xs-6 center-block text-center">
+                <i class="fa fa-sign-out fa-5x"></i>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <h2 class="text-center">出庫<i class="fa fa-arrow-circle-right"></i></h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+<% end %>
+</div>
 
 <% else %>
 
