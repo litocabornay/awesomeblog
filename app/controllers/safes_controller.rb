@@ -43,13 +43,13 @@ class SafesController < ApplicationController
   
     #履歴パチンコ
   def csv_output
-    @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction)
+    @safes = Safe.where("machine = 'パチンコ'").where("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
     send_data render_to_string, filename: "履歴_パチンコ.csv", type: :csv
   end
   
     #履歴スロット
   def csv_output_seven
-    @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction)
+    @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
     send_data render_to_string, filename: "履歴_スロット.csv", type: :csv
   end
   
@@ -80,13 +80,13 @@ def index2_5
   @safes = Safe.where("machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 end
 def index
-  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 
 
 
 end
 def index1_2
-  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 end
 
 
@@ -165,7 +165,7 @@ def create
                 session[:from] = @safe.from
                 session[:price_from] = @safe.price_from
                 session[:remarks] = @safe.remarks
-                session[:place] = @safe.place
+                # session[:place] = @safe.place
                 
                 
                 flash[:success] = "登録完了"
@@ -173,18 +173,27 @@ def create
     
                             unless @safe.number.blank?
                                 @safe.save
-                                    if @safe.number.start_with?("P0") == true
-                                    @machine = "パチンコ"
-                                    @type_machine = "枠"
-                                    elsif @safe.number.start_with?("P1") == true
+                                
+                                
+                                #Do not delete yet
+                                    # if @safe.number.start_with?("P0") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "枠"
+                                    # elsif @safe.number.start_with?("P1") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "セル"
+                                    # elsif @safe.number.start_with?("P2") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "基盤"
+                                    # else
+                                    # @machine = "スロット"
+                                    # end
+                                    
+                                    
+                                    
                                     @machine = "パチンコ"
                                     @type_machine = "セル"
-                                    elsif @safe.number.start_with?("P2") == true
-                                    @machine = "パチンコ"
-                                    @type_machine = "基盤"
-                                    else
-                                    @machine = "スロット"
-                                    end
+
 
                                     
                                     if @safe.number.include?("AM") == true
@@ -262,6 +271,7 @@ def create
                                     end
                                     
                                     
+                                    
                                     # if @safe.type_machine == "本体" or @safe.type_machine == "セル"
                                     #     @machine = "パチンコ"
                                     # elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
@@ -270,7 +280,7 @@ def create
                                     #     @machine = ""
                                     # end
 
-                                    
+
                                     @safe.update(:type_machine => @type_machine)
                                     @safe.update(:machine => @machine)
                                     @safe.update(:maker => @maker)
@@ -281,18 +291,27 @@ def create
             
                             unless @safe.number_of_frame.blank?
                                 @safe2.save
-                                if @safe2.number_of_frame.start_with?("P0") == true
-                                    @machine2 = "パチンコ"
-                                    @type_machine2 = "枠"
-                                elsif @safe2.number_of_frame.start_with?("P1") == true
-                                    @machine2 = "パチンコ"
-                                    @type_machine2 = "セル"
-                                elsif @safe2.number_of_frame.start_with?("P2") == true
-                                    @machine2 = "パチンコ"
-                                    @type_machine2 = "基盤"
-                                else
-                                    @machine2 = "スロット"
-                                end
+                                
+                                
+                                
+                                #Do not delete yet
+                                    # if @safe.number.start_with?("P0") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "枠"
+                                    # elsif @safe.number.start_with?("P1") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "セル"
+                                    # elsif @safe.number.start_with?("P2") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "基盤"
+                                    # else
+                                    # @machine = "スロット"
+                                    # end
+                                    
+                                    
+                                    
+                                    @machine = "パチンコ"
+                                    @type_machine = "枠"
                                 
       
                                   
@@ -370,9 +389,10 @@ def create
                                     @machine = "未"
                                     end
                                 
+
+                                @safe2.update(:type_machine => @type_machine)
+                                @safe2.update(:machine => @machine)
                                 
-                                @safe2.update(:type_machine => @type_machine2)
-                                @safe2.update(:machine => @machine2)
                                 @safe2.update(:maker => @maker2)
                                 
                             end
@@ -380,18 +400,28 @@ def create
                             
                             unless @safe.number_of_foundation.blank?  
                                 @safe3.save
-                                if @safe3.number_of_foundation.start_with?("P0") == true
-                                    @machine3 = "パチンコ"
-                                    @type_machine3 = "枠"
-                                elsif @safe3.number_of_foundation.start_with?("P1") == true
-                                    @machine3 = "パチンコ"
-                                    @type_machine3 = "セル"
-                                elsif @safe3.number_of_foundation.start_with?("P2") == true
-                                    @machine3 = "パチンコ"
-                                    @type_machine3 = "基盤"
-                                else
-                                    @machine3 = "スロット"
-                                end
+
+
+                                #Do not delete yet
+                                    # if @safe.number.start_with?("P0") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "枠"
+                                    # elsif @safe.number.start_with?("P1") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "セル"
+                                    # elsif @safe.number.start_with?("P2") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "基盤"
+                                    # else
+                                    # @machine = "スロット"
+                                    # end
+                                    
+                                    
+                                    
+                                    @machine = "パチンコ"
+                                    @type_machine = "基盤"
+                                    
+                                    
                                 
 
                                     
@@ -466,11 +496,12 @@ def create
                                     elsif @safe3.number_of_foundation.include?("CC") == true
                                     @maker3 = "メーシー"
                                     else
-                                    @machine = "未"
+                                    @maker3 = "未"
                                     end
-                                
-                                @safe3.update(:type_machine => @type_machine3)
-                                @safe3.update(:machine => @machine3)
+
+                                @safe3.update(:type_machine => @type_machine)
+                                @safe3.update(:machine => @machine)
+
                                 @safe3.update(:maker => @maker3)
                                 
                                 
@@ -481,9 +512,25 @@ def create
                             unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
                                 @safe4.save
              
-                                    @machine4 = "パチンコ"
-                                    @type_machine4 = "本体"
-
+                                #Do not delete yet
+                                    # if @safe.number.start_with?("P0") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "枠"
+                                    # elsif @safe.number.start_with?("P1") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "セル"
+                                    # elsif @safe.number.start_with?("P2") == true
+                                    # @machine = "パチンコ"
+                                    # @type_machine = "基盤"
+                                    # else
+                                    # @machine = "スロット"
+                                    # end
+                                    
+                                    
+                                    @machine = "パチンコ"
+                                    @type_machine = "本体"
+                                    
+                                    
                                     
                                     if @safe4.number.include?("AM") == true
                                     @maker5 = "アムテックス"
@@ -559,9 +606,9 @@ def create
                                     @machine = "未"
                                     end
                                     
-                                    
-                                @safe4.update(:type_machine => @type_machine4)
-                                @safe4.update(:machine => @machine4)
+
+                                @safe4.update(:type_machine => @type_machine)
+                                @safe4.update(:machine => @machine)
 
                                 @safe4.update(:maker => @maker5)
 
@@ -573,7 +620,7 @@ def create
                             end
             
             
-                redirect_to "/"
+                redirect_back_or root_url
 
                   
 
@@ -671,7 +718,7 @@ def create
                 flash[:success] = "登録完了"
             
             
-                redirect_to "/"
+                redirect_back_or root_url
                 else
                   render 'new'
                 end
@@ -743,23 +790,26 @@ end
                         @safe4.update(:date_of_verification => "null")
                         end
                         
-                        
 
+                                @safe3.update(:price_from => 0)
+                                @safe4.update(:price_from => 0)
+                                
+                                
                         flash[:success] = "編集完了。"
-                        redirect_to root_url
+                        redirect_back_or root_url
                       else
                         flash[:danger] = "未入力項目があります。"
-                        redirect_to root_url
+                        redirect_back_or root_url
                       end
                       
                 else
                   flash[:danger] = "権限がないか、既に完了したアクションです。"
-                  redirect_to root_url
+                  redirect_back_or root_url
                 end
                 
             else  
     #以下単体
-                if @safe.status && (@safe.status == "在庫中")
+                if @safe.status
 
                   @safe.update(safe_params)
                   
@@ -772,10 +822,10 @@ end
                         end
                   
                   flash[:success] = "出庫完了"
-                  redirect_to root_url
+                  redirect_back_or root_url
                 else
                   flash[:danger] = "権限がないか、既に完了したアクションです。"
-                  redirect_to root_url
+                  redirect_back_or root_url
                 end
                 
             end 
@@ -804,11 +854,11 @@ end
                           session[:to] = @safe.to
                           
                           flash[:success] = "出庫完了"
-                          redirect_to root_url
+                          redirect_back_or root_url
                           
                         else
                           flash[:danger] = "権限がないか、既に完了したアクションです。"
-                          redirect_to root_url
+                          redirect_back_or root_url
                         end
                 
               else
@@ -829,10 +879,10 @@ end
                         Safe.where(:number => @safe.number).where(:type_machine => "本体").where(:status => "在庫中").update_all(safe_params)
                         
                         flash[:success] = "出庫完了"
-                        redirect_to root_url
+                        redirect_back_or root_url
                       else
                         flash[:danger] = "権限がないか、既に完了したアクションです。"
-                        redirect_to root_url
+                        redirect_back_or root_url
                       end
                 
               end
@@ -846,7 +896,7 @@ end
   def destroy
     @safe = Safe.find(params[:id])
     @safe.destroy
-      redirect_to safes_path
+      redirect_back_or root_url
   end
 
 

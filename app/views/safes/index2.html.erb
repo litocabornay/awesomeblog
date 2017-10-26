@@ -1,18 +1,32 @@
 <% provide(:title,"在庫") %>
 
+<%     session.delete(:fowarding_url)
+    store_location
+    %>
+    
+    
 <div class="row">
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
-<h3>在庫</h3>
-<h4>本体(全揃い)</h4>
+<h3>本体の在庫</h3>
 
+<% if (params[:t] == "c") %>
 <div class="btn-group" >
-<a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体(全揃い)</a>
-<a href="/zaiko-cell" class="btn btn-default"><i class="fa fa-bolt"></i> セルのみ</a>
-<a href="/zaiko-flame" class="btn btn-default"><i class="fa fa-clone"></i> 枠のみ</a>
-<a href="/zaiko-foundation" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>
+<a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
+<a href="/zaiko-cell" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
+<a href="/zaiko-flame" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
+<!--<a href="/zaiko-foundation" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
 <a href="/zaiko-slot" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
 </div>
-
+<% end %>
+<% if (params[:t] == "f") %>
+<div class="btn-group" >
+<a href="/zaiko?t=f" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
+<a href="/zaiko-cell?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
+<a href="/zaiko-flame?t=f" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
+<!--<a href="/zaiko-foundation?t=f" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
+<a href="/zaiko-slot?t=f" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
+</div>
+<% end %>
 
 <div class="btn-group float-right">
 
@@ -82,15 +96,15 @@
       @safe2 = Safe.find(safe.id - 1)
       end
       end
-      if safe.id > 2
-      if safe.type_machine = "基盤"
-      @safe2 = Safe.find(safe.id - 2)
-      end
-      end
+      # if safe.id > 2
+      # if safe.type_machine = "基盤"
+      # @safe2 = Safe.find(safe.id - 2)
+      # end
+      # end
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from.to_s(:delimited) %>円)</td>
+      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from %>円)</td>
       <% else %>
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
       <% end %>
@@ -198,17 +212,17 @@
 </tbody>
 </table>
 
-</div>
-</div>
-</div>
-
-
-
-
-<br>
-<br>
 
 <%= paginate @safes %>
+
+</div>
+</div>
+</div>
+
+
+
+
+
 
 
 </div>

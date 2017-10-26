@@ -1,14 +1,19 @@
 <% provide(:title,"在庫") %>
 
+<%     session.delete(:fowarding_url)
+    store_location
+    %>
+    
+    
 <div class="row">
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
-<h3>在庫</h3>
-<h4>本体(全揃い)</h4>
+<h3>スロット在庫の履歴</h3>
 
 <div class="btn-group" >
-<a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ履歴</a>
-<a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> セルのみ</a>
+<a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
+<a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
 </div>
+
 
 
 <div class="btn-group float-right">
@@ -134,7 +139,7 @@
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from.to_s(:delimited) %>円)</td>
+      <td class="width5vw">付属品<%= safe.price_from %>円<br>(本体<%= safe.price_from %>円)</td>
       <% else %>
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
       <% end %>
@@ -200,15 +205,18 @@
 
 
 <% end %>
+
+
+
+
 </tbody>
 </table>
-
-</div>
-</div>
-</div>
-
-
 <%= paginate @safes %>
+</div>
+</div>
+</div>
+
+
 
 
 </div>

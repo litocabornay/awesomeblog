@@ -1,38 +1,21 @@
-<% provide(:title,"在庫") %>
+<% provide(:title,"履歴") %>
 
-<%     session.delete(:fowarding_url)
-    store_location
-    %>
-    
 <div class="row">
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
-<h3>スロットの在庫</h3>
+<h3>パチンコ在庫の履歴</h3>
 
-<% if (params[:t] == "c") %>
 <div class="btn-group" >
-<a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
-<a href="/zaiko-cell" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
-<a href="/zaiko-flame" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
-<!--<a href="/zaiko-foundation" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
-<a href="/zaiko-slot" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
+<a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
+<a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
 </div>
-<% end %>
-<% if (params[:t] == "f") %>
-<div class="btn-group" >
-<a href="/zaiko?t=f" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
-<a href="/zaiko-cell?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
-<a href="/zaiko-flame?t=f" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
-<!--<a href="/zaiko-foundation?t=f" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
-<a href="/zaiko-slot?t=f" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
-</div>
-<% end %>
+
 
 <div class="btn-group float-right">
 
 <a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
 <a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
 
-<%= link_to "CSV出力",csv_output_six_safes_path(format: :csv), :class => "btn btn-danger" %>
+<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
 
 </div>
 
@@ -48,7 +31,7 @@
 
       <th class="col-md-1">ID</th>
       <th class="col-md-2">メーカー</th>
-
+      <th class="col-md-1">タイプ</th>
       <th class="col-md-2">機種名</th>
    
       <% if (params[:t] == "f") %>
@@ -99,14 +82,14 @@
       @cell = safe.number_of_foundation
       
       else
-      @cell = safe.number_slot
+      @cell = ""
       end %>
 
 
       <tr scope="row">
         <td><%= safe.id %></td>
         <td><%= safe.maker %></td>
-
+        <td><%= safe.type_machine %></td>
         <td><%= safe.name %></td>
 
       <% if (params[:t] == "f") %>
@@ -136,8 +119,7 @@
       <% end %>
       
       
-      <% unless safe.price_from.blank? %>
-        <% 
+      <% 
       if safe.id > 1
       if safe.type_machine = "枠"
       @safe2 = Safe.find(safe.id - 1)
@@ -151,14 +133,13 @@
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from %>円)</td>
+      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from.to_s(:delimited) %>円)</td>
       <% else %>
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
       <% end %>
       <% else %>
       <td><%= safe.price_from %> 円</td>
       <% end %>
-        <% end %>
 
       <% if (params[:t] == "f") %>
         <td><%= safe.date_of_removal %></td>
@@ -171,15 +152,14 @@
       <% if (params[:t] == "f") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
-      <% end %>
-      
-      <% if (params[:t] == "f") %>
-       <% unless safe.photo.blank? %>
-        <td><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
+              <% unless safe.photo.blank? %>
+        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
         <% else %>
-        <td><img src="assets/No-image-found.jpg" width="50"></td>
+        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
         <% end %>
       <% end %>
+      
+
       
 
         <td class="text-center">
@@ -190,9 +170,7 @@
         
         
       <% if safe.status == "出庫済" %>
-       <td>
-        <b>出庫済</b>
-       </td>
+       <td class="text-center">出庫済</td>
       <% else %>
        <td class="text-center">
         <%= link_to edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" do %>
@@ -228,6 +206,8 @@
 </div>
 </div>
 </div>
+
+
 
 
 

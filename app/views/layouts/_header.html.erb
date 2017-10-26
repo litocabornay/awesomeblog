@@ -6,23 +6,33 @@
                 
                 <div id="navbarNavDropdown" class="navbar-collapse collapse">
 
+
+
                 <% if logged_in? %>
 
+
+
+
+
+
                     <ul class="navbar-nav mr-auto">
+                     
+<% if current_user.admin? %>
                       <li class="right_menu menu_box"><a rel="nofollow" href="/zaiko"><button class="btn btn-lg btn-default"><i class='fa fa-cube'></i> 在庫</button></a></li>
 
                       <li class="right_menu menu_box"><a rel="nofollow" href="/safes"><button class="btn btn-lg btn-default"><i class='fa fa-history'></i> 履歴</button></a></li>
                       
                         <li class="right_menu menu_box"><a rel="nofollow" href="/users"><button class="btn btn-lg btn-default"><i class='fa fa-user-o'></i> ユーザー</button></a></li>
-
+<% end %>
                         <li class="right_menu menu_box"><a rel="nofollow" href="/safes/new"><button class="btn btn-lg btn-default"><i class='fa fa-sign-in'></i> 入庫</button></a></li>
 
                         <li class="right_menu menu_box"><a rel="nofollow" href="/safe_before"><button class="btn btn-lg btn-default"><i class='fa fa-sign-out'></i> 出庫</button></a></li>
 
+<% if current_user.admin? %>
                         <li class="right_menu menu_box"><a rel="nofollow" href="/makers"><button class="btn btn-lg btn-default"><i class='fa fa-gears'></i> 機器名追加</button></a></li>
 
-                         <li class="right_menu menu_box"><button class="btn btn-lg btn-default" data-toggle="modal" data-target="#about"><i class='fa fa-sliders'></i> 設定</button></li>
-
+                         <!--<li class="right_menu menu_box"><button class="btn btn-lg btn-default" data-toggle="modal" data-target="#about"><i class='fa fa-sliders'></i> 設定</button></li>-->
+<% end %>
                     </ul>
 
                     <ul class="navbar-nav mr-auto navbar-right">
@@ -32,6 +42,14 @@
                      <!--   <li class="right_menu menu_box"><%= link_to "ログアウト", logout_path , method: :delete %></li> -->
                         <!--  </ul>-->
                         <!--</li>-->
+        
+        
+        
+
+                      
+                       
+                      
+        
         
                       <% else %>
                       <li class="right_menu menu_box"><a rel="nofollow" href="/login"><button class="btn btn-lg btn-default"><i class='fa fa-sign-in'></i> ログイン</button></a></li>
