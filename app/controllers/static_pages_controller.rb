@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
     
   def home
    
-    @all = "not_all"
+    # @all = "not_all"
     
     #@sells = Sell.all.order(sort_column + ' ' + sort_direction)
     #@users =User.where(all: ort_column + ' ' + sort_direction)   
@@ -31,14 +31,14 @@ class StaticPagesController < ApplicationController
     # end
     
     
-    if params[:sell]
-     @sells = Sell.where("content_type = 'パチンコ'").where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    elsif params[:name]
-     @sells = Sell.where("content_type = 'パチンコ'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    else
-     @sells = Sell.where("content_type = 'パチンコ'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    end
-    store_location
+    # if params[:sell]
+    #  @sells = Sell.where("content_type = 'パチンコ'").where(maker: params[:sell][:maker].downcase).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    # elsif params[:name]
+    #  @sells = Sell.where("content_type = 'パチンコ'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    # else
+    #  @sells = Sell.where("content_type = 'パチンコ'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    # end
+    # store_location
     
     #1
     #@micropost = current_user.microposts.build if logged_in?

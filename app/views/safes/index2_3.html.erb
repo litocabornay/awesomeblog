@@ -95,11 +95,11 @@
       @safe2 = Safe.find(safe.id - 1)
       end
       end
-      if safe.id > 2
-      if safe.type_machine = "基盤"
-      @safe3 = Safe.find(safe.id - 2)
-      end
-      end
+      # if safe.id > 2
+      # if safe.type_machine = "基盤"
+      # @safe3 = Safe.find(safe.id - 2)
+      # end
+      # end
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
@@ -129,12 +129,12 @@
       #セルの価格取得
       end
       end
-      if safe.id > 2
-      if safe.type_machine = "基盤"
-      @safe3 = Safe.find(safe.id - 2)
-      #セルの価格取得
-      end
-      end
+      # if safe.id > 2
+      # if safe.type_machine = "基盤"
+      # @safe3 = Safe.find(safe.id - 2)
+      # #セルの価格取得
+      # end
+      # end
       %>
       <% unless safe.price_from.blank? %>
       <% if safe.price_from == 0 %>
