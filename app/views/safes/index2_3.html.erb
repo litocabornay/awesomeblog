@@ -88,29 +88,31 @@
         <td><%= safe.maker %></td>        
         <td><%= safe.name %></td>
       
-       <% if (params[:t] == "f") %>
-        <% 
-      if safe.id > 1
-      if safe.type_machine = "枠"
-      @safe3 = Safe.find(safe.id - 1)
-      end
-      end
+       <%# if (params[:t] == "f") %>
+        <%# 
+      # if safe.id > 1
+      # if safe.type_machine = "枠"
+      # @safe3 = Safe.find(safe.id - 1)
+      # end
+      # end
       # if safe.id > 2
       # if safe.type_machine = "基盤"
       # @safe3 = Safe.find(safe.id - 2)
       # end
       # end
       %>
+      
+      
       <% unless safe.price_from.blank? %>
-      <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe3.price_from %>円)</td>
-      <% else %>
+
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
-      <% end %>
+
+      
+      
       <% else %>
       <td><%= safe.price_from %> 円</td>
       <% end %>
-       <% end %>
+
 
 
        <% if (params[:t] == "f") %>
@@ -120,32 +122,7 @@
        <td><%= safe.staff %></td>
        <% end %>
 
-      
-      <% if !(params[:t] == "f") %>
-        <% 
-      if safe.id > 1
-      if safe.type_machine = "枠"
-      @safe2 = Safe.find(safe.id - 1)
-      #セルの価格取得
-      end
-      end
-      # if safe.id > 2
-      # if safe.type_machine = "基盤"
-      # @safe3 = Safe.find(safe.id - 2)
-      # #セルの価格取得
-      # end
-      # end
-      %>
-      <% unless safe.price_from.blank? %>
-      <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from %>円)</td>
-      <% else %>
-      <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
-      <% end %>
-      <% else %>
-      <td><%= safe.price_from %> 円</td>
-      <% end %>
-       <% end %>
+
         
       <% if (params[:t] == "f") %>
         <td><%= safe.date_of_removal %></td>

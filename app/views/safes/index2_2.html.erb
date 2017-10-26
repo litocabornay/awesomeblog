@@ -95,14 +95,12 @@
        <% if (params[:t] == "f") %>
 
       <% unless safe.price_from.blank? %>
-      <% if safe.price_from == 0 %>
-      <td class="width5vw">付属品0円<br>(本体<%= @safe2.price_from %>円)</td>
-      <% else %>
+      
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
-      <% end %>
       <% else %>
       <td><%= safe.price_from %> 円</td>
       <% end %>
+      
        <% end %>
 
 

@@ -43,13 +43,13 @@ class SafesController < ApplicationController
   
     #履歴パチンコ
   def csv_output
-    @safes = Safe.where("machine = 'パチンコ'").where("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
+    @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
     send_data render_to_string, filename: "履歴_パチンコ.csv", type: :csv
   end
   
     #履歴スロット
   def csv_output_seven
-    @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
+    @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction)
     send_data render_to_string, filename: "履歴_スロット.csv", type: :csv
   end
   
@@ -80,13 +80,13 @@ def index2_5
   @safes = Safe.where("machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 end
 def index
-  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 
 
 
 end
 def index1_2
-  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '本体'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 end
 
 
@@ -171,26 +171,116 @@ def create
                 flash[:success] = "登録完了"
                 
     
-                            unless @safe.number.blank?
+
+
+            
+                            unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
+                                @safe4.save
+             
+     
+                                   
+                                    @machine = "パチンコ"
+                                    @type_machine = "本体"
+                                    
+                                    
+                                    
+                                    if @safe4.number.include?("AM") == true
+                                    @maker5 = "アムテックス"
+                                    elsif @safe4.number.include?("AD") == true
+                                    @maker5 = "エース電研"
+                                    elsif @safe4.number.include?("EE") == true
+                                    @maker5 = "EXCITE"
+                                    elsif @safe4.number.include?("OZ") == true
+                                    @maker5 = "オーイズミ"
+                                    elsif @safe4.number.include?("OM") == true
+                                    @maker5 = "奥村遊戯"
+                                    elsif @safe4.number.include?("AA") == true
+                                    @maker5 = "オッケー"
+                                    elsif @safe4.number.include?("OL") == true
+                                    @maker5 = "オリンピア"
+                                    elsif @safe4.number.include?("BB") == true
+                                    @maker5 = "京楽産業"
+                                    elsif @safe4.number.include?("GZ") == true
+                                    @maker5 = "銀座"
+                                    elsif @safe4.number.include?("SS") == true
+                                    @maker5 = "サミー"
+                                    elsif @safe4.number.include?("SA") == true
+                                    @maker5 = "SANKYO"
+                                    elsif @safe4.number.include?("ST") == true
+                                    @maker5 = "サンスリー"
+                                    elsif @safe4.number.include?("WW") == true
+                                    @maker5 = "サンセイアールアンドディ"
+                                    elsif @safe4.number.include?("SY") == true
+                                    @maker5 = "三洋物産"
+                                    elsif @safe4.number.include?("JJ") == true
+                                    @maker5 = "JFJ"
+                                    elsif @safe4.number.include?("JB") == true
+                                    @maker5 = "ジェイビー"
+                                    elsif @safe4.number.include?("SP") == true
+                                    @maker5 = "ソフィア"
+                                    elsif @safe4.number.include?("DS") == true
+                                    @maker5 = "大一商会"
+                                    elsif @safe4.number.include?("DT") == true
+                                    @maker5 = "大都技研"
+                                    elsif @safe4.number.include?("TA") == true
+                                    @maker5 = "タイヨーエレック"
+                                    elsif @safe4.number.include?("DW") == true
+                                    @maker5 = "大和製作所"
+                                    elsif @safe4.number.include?("TU") == true
+                                    @maker5 = "高尾"
+                                    elsif @safe4.number.include?("AB") == true
+                                    @maker5 = "高砂電器産業"
+                                    elsif @safe4.number.include?("TK") == true
+                                    @maker5 = "竹屋"
+                                    elsif @safe4.number.include?("DL") == true
+                                    @maker5 = "デイ・ライト"
+                                    elsif @safe4.number.include?("TO") == true
+                                    @maker5 = "豊丸産業"
+                                    elsif @safe4.number.include?("NS") == true
+                                    @maker5 = "七匠"
+                                    elsif @safe4.number.include?("EX") == true
+                                    @maker5 = "ニューギン"
+                                    elsif @safe4.number.include?("DA") == true
+                                    @maker5 = "ビスティ"
+                                    elsif @safe4.number.include?("FJ") == true
+                                    @maker5 = "藤商事"
+                                    elsif @safe4.number.include?("HC") == true
+                                    @maker5 = "平和"
+                                    elsif @safe4.number.include?("BE") == true
+                                    @maker5 = "ベルコ"
+                                    elsif @safe4.number.include?("MH") == true
+                                    @maker5 = "マルホン"
+                                    elsif @safe4.number.include?("MZ") == true
+                                    @maker5 = "ミズホ"
+                                    elsif @safe4.number.include?("CC") == true
+                                    @maker5 = "メーシー"
+                                    else
+                                    @machine = "未"
+                                    end
+                                    
+
+                                @safe4.update(:type_machine => @type_machine)
+                                @safe4.update(:machine => @machine)
+
+                                @safe4.update(:maker => @maker5)
+
+                                
+
+
+                                
+                                
+                              else
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                                            unless @safe.number.blank?
                                 @safe.save
                                 
-                                
-                                #Do not delete yet
-                                    # if @safe.number.start_with?("P0") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "枠"
-                                    # elsif @safe.number.start_with?("P1") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "セル"
-                                    # elsif @safe.number.start_with?("P2") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "基盤"
-                                    # else
-                                    # @machine = "スロット"
-                                    # end
-                                    
-                                    
-                                    
                                     @machine = "パチンコ"
                                     @type_machine = "セル"
 
@@ -270,15 +360,7 @@ def create
                                     @machine = "未"
                                     end
                                     
-                                    
-                                    
-                                    # if @safe.type_machine == "本体" or @safe.type_machine == "セル"
-                                    #     @machine = "パチンコ"
-                                    # elsif @safe.type_machine == "シリンダー有" or @safe.type_machine == "シリンダー無"
-                                    #     @machine = "スロット"
-                                    # else
-                                    #     @machine = ""
-                                    # end
+           
 
 
                                     @safe.update(:type_machine => @type_machine)
@@ -291,24 +373,7 @@ def create
             
                             unless @safe.number_of_frame.blank?
                                 @safe2.save
-                                
-                                
-                                
-                                #Do not delete yet
-                                    # if @safe.number.start_with?("P0") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "枠"
-                                    # elsif @safe.number.start_with?("P1") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "セル"
-                                    # elsif @safe.number.start_with?("P2") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "基盤"
-                                    # else
-                                    # @machine = "スロット"
-                                    # end
-                                    
-                                    
+
                                     
                                     @machine = "パチンコ"
                                     @type_machine = "枠"
@@ -396,237 +461,13 @@ def create
                                 @safe2.update(:maker => @maker2)
                                 
                             end
-                            
-                            
-                            unless @safe.number_of_foundation.blank?  
-                                @safe3.save
 
-
-                                #Do not delete yet
-                                    # if @safe.number.start_with?("P0") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "枠"
-                                    # elsif @safe.number.start_with?("P1") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "セル"
-                                    # elsif @safe.number.start_with?("P2") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "基盤"
-                                    # else
-                                    # @machine = "スロット"
-                                    # end
-                                    
-                                    
-                                    
-                                    @machine = "パチンコ"
-                                    @type_machine = "基盤"
-                                    
-                                    
-                                
-
-                                    
-                                    if @safe3.number_of_foundation.include?("AM") == true
-                                    @maker3 = "アムテックス"
-                                    elsif @safe3.number_of_foundation.include?("AD") == true
-                                    @maker3 = "エース電研"
-                                    elsif @safe3.number_of_foundation.include?("EE") == true
-                                    @maker3 = "EXCITE"
-                                    elsif @safe3.number_of_foundation.include?("OZ") == true
-                                    @maker3 = "オーイズミ"
-                                    elsif @safe3.number_of_foundation.include?("OM") == true
-                                    @maker3 = "奥村遊戯"
-                                    elsif @safe3.number_of_foundation.include?("AA") == true
-                                    @maker3 = "オッケー"
-                                    elsif @safe3.number_of_foundation.include?("OL") == true
-                                    @maker3 = "オリンピア"
-                                    elsif @safe3.number_of_foundation.include?("BB") == true
-                                    @maker3 = "京楽産業"
-                                    elsif @safe3.number_of_foundation.include?("GZ") == true
-                                    @maker3 = "銀座"
-                                    elsif @safe3.number_of_foundation.include?("SS") == true
-                                    @maker3 = "サミー"
-                                    elsif @safe3.number_of_foundation.include?("SA") == true
-                                    @maker3 = "SANKYO"
-                                    elsif @safe3.number_of_foundation.include?("ST") == true
-                                    @maker3 = "サンスリー"
-                                    elsif @safe3.number_of_foundation.include?("WW") == true
-                                    @maker3 = "サンセイアールアンドディ"
-                                    elsif @safe3.number_of_foundation.include?("SY") == true
-                                    @maker3 = "三洋物産"
-                                    elsif @safe3.number_of_foundation.include?("JJ") == true
-                                    @maker3 = "JFJ"
-                                    elsif @safe3.number_of_foundation.include?("JB") == true
-                                    @maker3 = "ジェイビー"
-                                    elsif @safe3.number_of_foundation.include?("SP") == true
-                                    @maker3 = "ソフィア"
-                                    elsif @safe3.number_of_foundation.include?("DS") == true
-                                    @maker3 = "大一商会"
-                                    elsif @safe3.number_of_foundation.include?("DT") == true
-                                    @maker3 = "大都技研"
-                                    elsif @safe3.number_of_foundation.include?("TA") == true
-                                    @maker3 = "タイヨーエレック"
-                                    elsif @safe3.number_of_foundation.include?("DW") == true
-                                    @maker3 = "大和製作所"
-                                    elsif @safe3.number_of_foundation.include?("TU") == true
-                                    @maker3 = "高尾"
-                                    elsif @safe3.number_of_foundation.include?("AB") == true
-                                    @maker3 = "高砂電器産業"
-                                    elsif @safe3.number_of_foundation.include?("TK") == true
-                                    @maker3 = "竹屋"
-                                    elsif @safe3.number_of_foundation.include?("DL") == true
-                                    @maker3 = "デイ・ライト"
-                                    elsif @safe3.number_of_foundation.include?("TO") == true
-                                    @maker3 = "豊丸産業"
-                                    elsif @safe3.number_of_foundation.include?("NS") == true
-                                    @maker3 = "七匠"
-                                    elsif @safe3.number_of_foundation.include?("EX") == true
-                                    @maker3 = "ニューギン"
-                                    elsif @safe3.number_of_foundation.include?("DA") == true
-                                    @maker3 = "ビスティ"
-                                    elsif @safe3.number_of_foundation.include?("FJ") == true
-                                    @maker3 = "藤商事"
-                                    elsif @safe3.number_of_foundation.include?("HC") == true
-                                    @maker3 = "平和"
-                                    elsif @safe3.number_of_foundation.include?("BE") == true
-                                    @maker3 = "ベルコ"
-                                    elsif @safe3.number_of_foundation.include?("MH") == true
-                                    @maker3 = "マルホン"
-                                    elsif @safe3.number_of_foundation.include?("MZ") == true
-                                    @maker3 = "ミズホ"
-                                    elsif @safe3.number_of_foundation.include?("CC") == true
-                                    @maker3 = "メーシー"
-                                    else
-                                    @maker3 = "未"
-                                    end
-
-                                @safe3.update(:type_machine => @type_machine)
-                                @safe3.update(:machine => @machine)
-
-                                @safe3.update(:maker => @maker3)
-                                
-                                
-                            end
-            
-            
-            
-                            unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
-                                @safe4.save
-             
-                                #Do not delete yet
-                                    # if @safe.number.start_with?("P0") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "枠"
-                                    # elsif @safe.number.start_with?("P1") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "セル"
-                                    # elsif @safe.number.start_with?("P2") == true
-                                    # @machine = "パチンコ"
-                                    # @type_machine = "基盤"
-                                    # else
-                                    # @machine = "スロット"
-                                    # end
-                                    
-                                    
-                                    @machine = "パチンコ"
-                                    @type_machine = "本体"
-                                    
-                                    
-                                    
-                                    if @safe4.number.include?("AM") == true
-                                    @maker5 = "アムテックス"
-                                    elsif @safe4.number.include?("AD") == true
-                                    @maker5 = "エース電研"
-                                    elsif @safe4.number.include?("EE") == true
-                                    @maker5 = "EXCITE"
-                                    elsif @safe4.number.include?("OZ") == true
-                                    @maker5 = "オーイズミ"
-                                    elsif @safe4.number.include?("OM") == true
-                                    @maker5 = "奥村遊戯"
-                                    elsif @safe4.number.include?("AA") == true
-                                    @maker5 = "オッケー"
-                                    elsif @safe4.number.include?("OL") == true
-                                    @maker5 = "オリンピア"
-                                    elsif @safe4.number.include?("BB") == true
-                                    @maker5 = "京楽産業"
-                                    elsif @safe4.number.include?("GZ") == true
-                                    @maker5 = "銀座"
-                                    elsif @safe4.number.include?("SS") == true
-                                    @maker5 = "サミー"
-                                    elsif @safe4.number.include?("SA") == true
-                                    @maker5 = "SANKYO"
-                                    elsif @safe4.number.include?("ST") == true
-                                    @maker5 = "サンスリー"
-                                    elsif @safe4.number.include?("WW") == true
-                                    @maker5 = "サンセイアールアンドディ"
-                                    elsif @safe4.number.include?("SY") == true
-                                    @maker5 = "三洋物産"
-                                    elsif @safe4.number.include?("JJ") == true
-                                    @maker5 = "JFJ"
-                                    elsif @safe4.number.include?("JB") == true
-                                    @maker5 = "ジェイビー"
-                                    elsif @safe4.number.include?("SP") == true
-                                    @maker5 = "ソフィア"
-                                    elsif @safe4.number.include?("DS") == true
-                                    @maker5 = "大一商会"
-                                    elsif @safe4.number.include?("DT") == true
-                                    @maker5 = "大都技研"
-                                    elsif @safe4.number.include?("TA") == true
-                                    @maker5 = "タイヨーエレック"
-                                    elsif @safe4.number.include?("DW") == true
-                                    @maker5 = "大和製作所"
-                                    elsif @safe4.number.include?("TU") == true
-                                    @maker5 = "高尾"
-                                    elsif @safe4.number.include?("AB") == true
-                                    @maker5 = "高砂電器産業"
-                                    elsif @safe4.number.include?("TK") == true
-                                    @maker5 = "竹屋"
-                                    elsif @safe4.number.include?("DL") == true
-                                    @maker5 = "デイ・ライト"
-                                    elsif @safe4.number.include?("TO") == true
-                                    @maker5 = "豊丸産業"
-                                    elsif @safe4.number.include?("NS") == true
-                                    @maker5 = "七匠"
-                                    elsif @safe4.number.include?("EX") == true
-                                    @maker5 = "ニューギン"
-                                    elsif @safe4.number.include?("DA") == true
-                                    @maker5 = "ビスティ"
-                                    elsif @safe4.number.include?("FJ") == true
-                                    @maker5 = "藤商事"
-                                    elsif @safe4.number.include?("HC") == true
-                                    @maker5 = "平和"
-                                    elsif @safe4.number.include?("BE") == true
-                                    @maker5 = "ベルコ"
-                                    elsif @safe4.number.include?("MH") == true
-                                    @maker5 = "マルホン"
-                                    elsif @safe4.number.include?("MZ") == true
-                                    @maker5 = "ミズホ"
-                                    elsif @safe4.number.include?("CC") == true
-                                    @maker5 = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-                                    
-
-                                @safe4.update(:type_machine => @type_machine)
-                                @safe4.update(:machine => @machine)
-
-                                @safe4.update(:maker => @maker5)
-
-                                
-                                @safe2.update(:price_from => 0)
-                                @safe3.update(:price_from => 0)
-
-                                
                             end
             
             
                 redirect_back_or root_url
 
-                  
-
-                
-                
-                
+ 
                 
   else
                 
@@ -761,53 +602,53 @@ end
     #以下ノーマルedit
     
               
-            if @safe.type_machine == "本体"
-                if @safe.status && (@safe.status == "在庫中")
+            # if @safe.type_machine == "本体"
+            #     if @safe.status && (@safe.status == "在庫中")
                   
-                      if @safe.update(safe_params)
-                        @safe2.update(safe_params)
-                        @safe3.update(safe_params)
-                        @safe4.update(safe_params)
+            #           if @safe.update(safe_params)
+            #             @safe2.update(safe_params)
+            #             @safe3.update(safe_params)
+            #             @safe4.update(safe_params)
                         
 
                         
-                        # @safe.update(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
-                        # Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place, :photo =>  @safe.photo)
-                        # Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
-                        # Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+            #             # @safe.update(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+            #             # Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place, :photo =>  @safe.photo)
+            #             # Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
+            #             # Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(:date_of_removal =>  @safe.date_of_removal , :date_of_verification =>  @safe.date_of_verification , :color_of_panel =>  @safe.color_of_panel , :remarks =>  @safe.remarks , :place =>  @safe.place , :photo =>  @safe.photo)
                         
-                        if @safe.month_of_manufacture == "no"
-                        @safe.update(:date_of_removal => "null")
-                        @safe2.update(:date_of_removal => "null")
-                        @safe3.update(:date_of_removal => "null")
-                        @safe4.update(:date_of_removal => "null")
-                        end
+            #             if @safe.month_of_manufacture == "no"
+            #             @safe.update(:date_of_removal => "null")
+            #             @safe2.update(:date_of_removal => "null")
+            #             @safe3.update(:date_of_removal => "null")
+            #             @safe4.update(:date_of_removal => "null")
+            #             end
                         
-                        if @safe.year_of_manufacture == "no"
-                        @safe.update(:date_of_verification => "null")
-                        @safe2.update(:date_of_verification => "null")
-                        @safe3.update(:date_of_verification => "null")
-                        @safe4.update(:date_of_verification => "null")
-                        end
+            #             if @safe.year_of_manufacture == "no"
+            #             @safe.update(:date_of_verification => "null")
+            #             @safe2.update(:date_of_verification => "null")
+            #             @safe3.update(:date_of_verification => "null")
+            #             @safe4.update(:date_of_verification => "null")
+            #             end
                         
 
-                                @safe3.update(:price_from => 0)
-                                @safe4.update(:price_from => 0)
+            #                     @safe3.update(:price_from => 0)
+            #                     @safe4.update(:price_from => 0)
                                 
                                 
-                        flash[:success] = "編集完了。"
-                        redirect_back_or root_url
-                      else
-                        flash[:danger] = "未入力項目があります。"
-                        redirect_back_or root_url
-                      end
+            #             flash[:success] = "編集完了。"
+            #             redirect_back_or root_url
+            #           else
+            #             flash[:danger] = "未入力項目があります。"
+            #             redirect_back_or root_url
+            #           end
                       
-                else
-                  flash[:danger] = "権限がないか、既に完了したアクションです。"
-                  redirect_back_or root_url
-                end
+            #     else
+            #       flash[:danger] = "権限がないか、既に完了したアクションです。"
+            #       redirect_back_or root_url
+            #     end
                 
-            else  
+            # else  
     #以下単体
                 if @safe.status
 
@@ -828,40 +669,40 @@ end
                   redirect_back_or root_url
                 end
                 
-            end 
+            # end 
     
   else
     #以下出庫作業
 
-              if @safe.type_machine == "本体"
+              # if @safe.type_machine == "本体"
                 
               
                         
-                        if @safe.status && (@safe.status == "在庫中")
+              #           if @safe.status && (@safe.status == "在庫中")
                       
-                          @safe.update(safe_params)
+              #             @safe.update(safe_params)
                           
-                          Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(safe_params)
-                          Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(safe_params)
-                          Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(safe_params)
+              #             Safe.where(:number => @safe.number).where(:type_machine => "セル").where(:status => "在庫中").update_all(safe_params)
+              #             Safe.where(:number_of_frame => @safe.number_of_frame).where(:type_machine => "枠").where(:status => "在庫中").update_all(safe_params)
+              #             Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:type_machine => "基盤").where(:status => "在庫中").update_all(safe_params)
                       
-                          @staff = current_user.name
-                          Safe.where(:number => @safe.number).where(:status => "在庫中").update_all(:staff_two => @staff )
-                          Safe.where(:number_of_frame => @safe.number_of_frame).where(:status => "在庫中").update_all(:staff_two => @staff )
-                          Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:status => "在庫中").update_all(:staff_two => @staff )
+              #             @staff = current_user.name
+              #             Safe.where(:number => @safe.number).where(:status => "在庫中").update_all(:staff_two => @staff )
+              #             Safe.where(:number_of_frame => @safe.number_of_frame).where(:status => "在庫中").update_all(:staff_two => @staff )
+              #             Safe.where(:number_of_foundation => @safe.number_of_foundation).where(:status => "在庫中").update_all(:staff_two => @staff )
                           
                           
-                          session[:to] = @safe.to
+              #             session[:to] = @safe.to
                           
-                          flash[:success] = "出庫完了"
-                          redirect_back_or root_url
+              #             flash[:success] = "出庫完了"
+              #             redirect_back_or root_url
                           
-                        else
-                          flash[:danger] = "権限がないか、既に完了したアクションです。"
-                          redirect_back_or root_url
-                        end
+              #           else
+              #             flash[:danger] = "権限がないか、既に完了したアクションです。"
+              #             redirect_back_or root_url
+              #           end
                 
-              else
+              # else
               
                         if @safe.status && (@safe.status == "在庫中")
                         # if  @who_now == @who_seller
@@ -885,7 +726,7 @@ end
                         redirect_back_or root_url
                       end
                 
-              end
+              # end
 
   end
 
