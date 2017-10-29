@@ -112,8 +112,6 @@ end
         @safes = Safe.where("status = '在庫中'").where(number_slot: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     end
 
-
-
     
  end
  
@@ -128,10 +126,31 @@ end
 def new
   @safe = Safe.new
   
+  if session[:hontai] == "true"
+    @hontai =  { :checked => "checked"}
+    @hontai2 =  { }
+  elsif session[:hontai] == "false"
+    @hontai =  { }
+    @hontai2 =  { :checked => "checked"}
+  end
+  
   # session.delete(:name)
   # session.delete(:staff)
   # session.delete(:type_machine)
   
+end
+
+
+def newclear
+
+  session.delete(:name)
+  session.delete(:from)
+  session.delete(:price_from)
+  session.delete(:remarks)
+  session.delete(:hontai)
+  
+redirect_to new_safe_path
+
 end
 
 
@@ -159,12 +178,16 @@ def create
   @safe3 = Safe.new(safe_params)
   @safe4 = Safe.new(safe_params)
   
+
+  
                 session[:name] = @safe.name
-                # session[:staff] = @safe.staff
-                # session[:type_machine] = @safe.type_machine
                 session[:from] = @safe.from
                 session[:price_from] = @safe.price_from
                 session[:remarks] = @safe.remarks
+                session[:place] = @safe.place
+                session[:hontai] = @safe.hontai
+
+                
                 # session[:place] = @safe.place
                 
                 
@@ -172,6 +195,11 @@ def create
                 
     
 
+
+
+                                  
+                                  
+    
 
             
                             unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
@@ -264,10 +292,7 @@ def create
 
                                 @safe4.update(:maker => @maker5)
 
-                                
 
-
-                                
                                 
                               else
                                 
@@ -278,7 +303,7 @@ def create
                                 
                                 
                                 
-                                                            unless @safe.number.blank?
+                                unless @safe.number.blank?
                                 @safe.save
                                 
                                     @machine = "パチンコ"
@@ -366,6 +391,10 @@ def create
                                     @safe.update(:type_machine => @type_machine)
                                     @safe.update(:machine => @machine)
                                     @safe.update(:maker => @maker)
+
+                                if @safe.hontai == "true"
+                                  @safe.update(:type_machine => "本体")
+                                end
 
                                     
                             end
@@ -459,11 +488,15 @@ def create
                                 @safe2.update(:machine => @machine)
                                 
                                 @safe2.update(:maker => @maker2)
+
+                                if @safe2.hontai == "true"
+                                  @safe2.update(:type_machine => "本体")
+                                end
                                 
                             end
 
                             end
-            
+                   
             
                 redirect_back_or root_url
 
@@ -547,6 +580,7 @@ def create
                 session[:price_from] = @safeslot.price_from
                 session[:remarks] = @safeslot.remarks
                 session[:place] = @safeslot.place
+                session[:hontai] = @safeslot.hontai
                 
                  @machine = "スロット"
                  @type_machine = "なし"
@@ -756,7 +790,7 @@ end
    
    
   def safe_params
-    params.require(:safe).permit(:name, :staff, :staff2, :type_machine, :number, :number_of_frame, :number_slot, :number_of_foundation, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture, :color_of_panel, :date_of_removal, :date_of_verification)
+    params.require(:safe).permit(:hontai, :name, :staff, :staff2, :type_machine, :number, :number_of_frame, :number_slot, :number_of_foundation, :status, :from, :to, :machine, :price_from, :remarks, :photo, :place, :maker, :year_of_manufacture, :month_of_manufacture, :color_of_panel, :date_of_removal, :date_of_verification)
   end
 
   # def safe_params2

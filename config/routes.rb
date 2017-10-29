@@ -110,10 +110,14 @@ resources :safes  do
       get 'csv_output_five'
       get 'csv_output_six'
       get 'csv_output_seven'
+      get 'newclear'
     end
   end
-# post '/safes/create2', to: 'safes#create2'
-  
+
+# get 'clear' => 'safes#newclear'  
+# get :newclear, controller: :safe, action: :newclear
+
+
 
 # get '/safes/safe', to: 'safes#safe', as:'safe'
 
