@@ -943,7 +943,7 @@ end
                         @safe.update(:date_of_verification => "null")
                         end
                   
-                  flash[:success] = "出庫完了"
+                  flash[:success] = "編集完了"
                   redirect_back_or root_url
                 else
                   flash[:danger] = "権限がないか、既に完了したアクションです。"
