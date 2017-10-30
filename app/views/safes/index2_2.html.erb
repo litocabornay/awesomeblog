@@ -24,7 +24,7 @@
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>セルの在庫</h3>
 
-<% if (params[:t] == "f") %>
+<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
 <div class="btn-group" >
 <a href="/zaiko?t=f" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
 <a href="/zaiko-cell?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
@@ -58,7 +58,7 @@
 <table class="table table-bordered table-hover" style="margin-top: 30px;">
   <thead class="thead-default">
 
-<% if (params[:t] == "f") %>
+<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
 <table class="table table-bordered table-hover table-condensed" style="margin-top: 30px; font-size:70%;">
   <thead class="thead-default">
 <% end %>
@@ -74,7 +74,7 @@
       <th class="col-md-2">仕入価格</th>
       <th class="col-md-1">倉庫</th>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-2">機器番号</th>
       <th class="col-md-1">入庫先</th>
       <th class="col-md-1" style="font-size: 90%;">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
@@ -89,7 +89,7 @@
       <th class="col-md-1 text-center">編集</th>
       <th class="col-md-1 text-center">出庫</th>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-1 text-center">p-sensor</th>
       <th class="col-md-1 text-center">削除</th>
       <% end %>
@@ -108,19 +108,16 @@
         <td><%= safe.maker %></td>        
         <td><%= safe.name %></td>
       
-       <% if (params[:t] == "f") %>
-
+       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <% unless safe.price_from.blank? %>
-      
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
       <% else %>
       <td><%= safe.price_from %> 円</td>
       <% end %>
-      
        <% end %>
 
 
-       <% if (params[:t] == "f") %>
+       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
        <td><%= safe.place %></td>
        
        
@@ -147,7 +144,7 @@
         <% end %>
        <% end %>
         
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
         <td><%= safe.date_of_removal %></td>
         <td><%= safe.date_of_verification %></td>
       <% end %>
@@ -156,7 +153,7 @@
         <td><%= safe.place %></td>
       <% end %>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
       <% unless safe.photo.blank? %>
@@ -188,7 +185,7 @@
        
       <% end %> 
       
-       <% if (params[:t] == "f") %>
+       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
        <td class="text-center">
         <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
         <% @utf8 = ERB::Util.url_encode(@utf81) %>
@@ -197,7 +194,7 @@
        </td>
        <% end %>
 
-       <% if (params[:t] == "f") %>
+       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
        <td class="text-center">
       <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
         <i class="fa fa-trash-o"></i>

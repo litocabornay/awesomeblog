@@ -31,7 +31,7 @@
 
 
 
-<% if (params[:t] == "f") %>
+<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
 <div class="btn-group" >
 <a href="/safes?t=f" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
 <a href="/slot_history?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
@@ -60,7 +60,7 @@
 <table class="table table-bordered table-hover" style="margin-top: 30px;">
   <thead class="thead-inverse">
 
-<% if (params[:t] == "f") %>
+<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
 <table class="table table-bordered table-hover table-condensed" style="font-size:70%;">
   <thead class="thead-default">
 <% end %>
@@ -72,7 +72,7 @@
 
       <th class="col-md-2">機種名</th>
    
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-2">機器番号</th>
       <th class="col-md-2">取引先</th>
       <th class="col-md-2">担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
@@ -81,7 +81,7 @@
       
       <th class="col-md-2">仕入価格</th>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-1">撤去日</th>
       <th class="col-md-1">検定日</th>
       <% end %>
@@ -89,7 +89,7 @@
       
       <th class="col-md-1">倉庫</th>
       
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-1">パネル色</th>
       <th class="col-md-3">備考</th>
       <th class="col-md-1">画像</th>
@@ -98,7 +98,7 @@
       <th class="col-md-1 text-center">編集</th>
       <th class="col-md-1 text-center">出庫</th>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <th class="col-md-1 text-center">p-sensor</th>
       <th class="col-md-1 text-center">削除</th>
       <% end %>
@@ -130,11 +130,11 @@
 
         <td><%= safe.name %></td>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
       <td><%= @cell %></td>
       <% end %>
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
         <td>
         <% if safe.status == "出庫済" %>
         入：<%= safe.created_at.strftime("%m/%d") %> <%= safe.from %><br>
@@ -168,7 +168,7 @@
       
       
 
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
         <td><%= safe.date_of_removal %></td>
         <td><%= safe.date_of_verification %></td>
       <% end %>
@@ -176,7 +176,7 @@
       
         <td><%= safe.place %></td>
         
-      <% if (params[:t] == "f") %>
+      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
         <td><%= safe.color_of_panel %></td>
         <td><%= safe.remarks %></td>
               <% unless safe.photo.blank? %>
@@ -206,7 +206,7 @@
        <% end %>
 
        
-       <% if (params[:t] == "f") %>
+       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
        <td>
         <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
         <% @utf8 = ERB::Util.url_encode(@utf81) %>
