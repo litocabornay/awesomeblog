@@ -6,8 +6,33 @@
     
     
 <div class="row">
+ 
+ 
+<div class="padding1-20"> 
+<%= form_tag("/zaiko", method: "get") do %>
+<%= label_tag :maker, "メーカー検索" %>
+<%= text_field_tag :maker, params[:maker] %>
+<%= submit_tag "検索" %>
+<% end %>
+
+<%= form_tag("/zaiko", method: "get") do %>
+<%= label_tag :name, "機器名検索" %>
+<%= text_field_tag :name, params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+
+
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>本体の在庫</h3>
+
+ 
+
+ 
+ 
+
+
 
 
 <% if (params[:t] == "f") %>
@@ -29,6 +54,9 @@
 <% end %>
 
 <div class="btn-group float-right">
+ 
+ 
+
 
 <a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
 <a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
@@ -38,6 +66,7 @@
 </div>
 
 <table class="table table-bordered table-hover" style="margin-top: 30px;">
+
   <thead class="thead-default">
 
 <% if (params[:t] == "f") %>

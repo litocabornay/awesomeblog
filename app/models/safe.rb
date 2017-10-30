@@ -117,5 +117,21 @@ include ActionView::Helpers
   # scope :seller_correct_user, -> { where(buyer_id: :user_id) }
   # scope :buyer_correct_user, -> { where(seller_id: :user_id) }
 
+
+  #ユーザー名による絞り込み 
+  scope :get_by_name, ->(name) {
+  where("name like ?", "%#{name}%")
+  }
+  
+  #ユーザー名による絞り込み 
+  scope :get_by_maker, ->(maker) {
+  where("maker like ?", "%#{maker}%")
+  }
+  
+  
+  # #メーカーによる絞り込み
+  # scope :get_by_maker, ->(maker) {
+  # where(maker: maker)
+  # }
   
 end

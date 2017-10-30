@@ -32,6 +32,23 @@
 </label>
 <% end %>
 
+
+
+
+<label style="margin-top: 10px;">タイプ<span style="color:red; font-weight: bold;">*</span></label>
+<div class="radio" style="margin-bottom: 10px;">
+<label><%= f.radio_button :type_machine, "本体" %>本体</label>
+<label><%= f.radio_button :type_machine, "セル" %>セル</label>
+<label><%= f.radio_button :type_machine, "枠" %>枠</label>
+<label><%= f.radio_button :type_machine, "スロット" %>スロット</label>
+</div>
+
+
+
+
+
+
+
 <label for="machine_name" style="margin-top: 10px;">メーカー<span style="color:red; font-weight: bold;">*</span></label>
 <%= f.text_field :maker , :placeholder => '例：京楽', class: 'form-control' ,:required => true, data: { behavior: "autocomplete" }, :autocomplete =>"off", :style => 'margin-bottom: 10px;' %>
 
@@ -52,11 +69,21 @@
 <label for="price" style="margin-top: 10px;">仕入価格<span style="color:red; font-weight: bold;">*</span><small>（半角英数字)</small></label>
 <%= f.text_field :price_from , :placeholder => '例：300000', class: 'form-control' , :style => 'margin-bottom:10px'%>
 
+
+
+
+
 <label style="margin-top: 10px;">倉庫<span style="color:red; font-weight: bold;">*</span></label>
 <div class="radio" style="margin-bottom: 10px;">
 <label><%= f.radio_button :place, "本社" %>本社</label>
 <label><%= f.radio_button :place, "菊水" %>菊水</label>
 </div>
+
+
+
+
+
+
 
 <div style="margin-bottom: 10px;">
 <label for="price" style="margin-top: 10px;">撤去日</label>
