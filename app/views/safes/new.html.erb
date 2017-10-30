@@ -32,7 +32,6 @@
 <div class="radio" style="margin-bottom: 10px;">
     <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　
     <label><input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" />スロット</label>
-
 </div>
 
 <div id="secondBox">
@@ -192,17 +191,26 @@
 
 <div id="secondNotice">
 <button class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;"> <i class='fa fa-save'></i> 登録
-<%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none', name: "slot"  %>
+<%= f.submit :style => 'display:none', name: "slot", id: "slot"  %>
 </button>
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
+
+<FORM>
+<INPUT type="button" value="登録+別タブ" onClick="open_win()" class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;">
+</FORM>
 </div>
 
 <div id="firstNotice">
 <button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;" name="pachinko"> <i class='fa fa-save'></i> 登録
 <%#= f.submit "登録1", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, name: "pachinko" %>
-<%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none', name: "pachinko" %>
+<%= f.submit :style => 'display:none', name: "pachinko", id: "pachinko" %>
 </button>
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
+
+<FORM>
+<INPUT type="button" value="登録+別タブ" onClick="open_win2()" class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;">
+</FORM>
+
 </div>
 
 <div style="display:none;">
@@ -211,9 +219,7 @@
 </button>
 </div>
 
-<FORM>
-<INPUT type="button" value="登録+別タブ" onClick="open_win()" class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;">
-</FORM>
+
 
 
 <% end %>     
