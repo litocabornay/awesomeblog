@@ -90,23 +90,6 @@ class SellsController < ApplicationController
     
   end
   
-  
-  
-  # #  @sell = current_user.sells.find(sell_params)
-  #   @division = @sell.price / @sell.number
-  #   #@details = Details.all
-  #   # @detail = Sell.detail.find(params[:id])
-
-  # def show_slot
-  #   @sell = Sell.find(params[:id])
-  # end
-  
-  # def show_extra
-  #   @sell = Sell.find(params[:id])
-  # end
-  
-
-
 
 
 
