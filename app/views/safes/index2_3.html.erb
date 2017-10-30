@@ -1,5 +1,5 @@
 
-<% provide(:title,"在庫") %>
+<% provide(:title,"枠の在庫") %>
 
 <%     session.delete(:fowarding_url)
     store_location
@@ -88,27 +88,9 @@
         <td><%= safe.maker %></td>        
         <td><%= safe.name %></td>
       
-       <%# if (params[:t] == "f") %>
-        <%# 
-      # if safe.id > 1
-      # if safe.type_machine = "枠"
-      # @safe3 = Safe.find(safe.id - 1)
-      # end
-      # end
-      # if safe.id > 2
-      # if safe.type_machine = "基盤"
-      # @safe3 = Safe.find(safe.id - 2)
-      # end
-      # end
-      %>
-      
       
       <% unless safe.price_from.blank? %>
-
       <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
-
-      
-      
       <% else %>
       <td><%= safe.price_from %> 円</td>
       <% end %>
@@ -117,7 +99,19 @@
 
        <% if (params[:t] == "f") %>
        <td><%= safe.place %></td>
-       <td><%= safe.number_of_frame %></td>
+       
+       
+       <td>
+         枠：<%= safe.number_of_frame %><br>
+         基盤：<%= safe.number_of_foundation %>
+       
+       
+       </td>
+       
+       
+       
+       
+       
        <td><%= safe.created_at.strftime("%m/%d") %> <%= safe.from %></td>
        <td><%= safe.staff %></td>
        <% end %>

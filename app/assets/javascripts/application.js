@@ -30,6 +30,19 @@
       // }
 
 
+function OnLinkClick() {
+	
+  window.open('http://example.com/', '_blank', 'width=640, height=480, toolbar=no')
+	
+  target = document.getElementById("targetLink2");
+  
+  // $('#targetLink')[0].click();  // ←コレがポイント
+
+  }
+
+
+
+
 document.getElementById('file-input').onchange = function (e) {
     loadImage(
         e.target.files[0],

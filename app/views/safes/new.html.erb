@@ -25,7 +25,7 @@
 <%= link_to "全消し", newclear_safes_url , :class => "btn btn-primary"%>
 </div>
   
-<%= form_for(@safe3_1, url: "/safes") do |f| %>
+<%= form_for(@safe, url: "/safes", name: "pachi") do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
 <label>機種<span style="color:red; font-weight: bold;">*</span></label>
@@ -198,18 +198,26 @@
 </div>
 
 <div id="firstNotice">
-  
-  
 <button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;" name="pachinko"> <i class='fa fa-save'></i> 登録
 <%#= f.submit "登録1", class: "btn btn-primary", data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, name: "pachinko" %>
 <%= f.submit data: { disable_with: "登録中...", confirm: '本当に登録しますか？' }, :style => 'display:none', name: "pachinko" %>
 </button>
-
-
 <a class="btn btn-lg btn-danger col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5" style="margin-top: 20px;" href="/"><i class='fa fa-mail-reply'></i> 戻る</a>
 </div>
 
+<div style="display:none;">
+<button class="btn btn-lg btn-info col-md-5 col-xs-5" style="margin-top: 20px;" name="pachinko2" id ="targetLink"> <i class='fa fa-save'></i> 登録して、まだ登録
+<%= f.submit :style => 'display:none', name: "pachinko2", id: "pachinko2" %>
+</button>
+</div>
+
+<FORM>
+<INPUT type="button" value="登録+別タブ" onClick="open_win()" class="btn btn-lg btn-success col-md-5 col-xs-5" style="margin-top: 20px;">
+</FORM>
+
+
 <% end %>     
+
 
 </div>
 </div>
