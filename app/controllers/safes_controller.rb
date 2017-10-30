@@ -15,7 +15,16 @@ class SafesController < ApplicationController
   def csv_output_two
     @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction)
     send_data render_to_string, filename: "在庫_パチンコ_本体(３点セット).csv", type: :csv
+    
+
+    
   end
+  
+  
+  
+  
+  
+  
   
     #セル
   def csv_output_three
@@ -60,34 +69,95 @@ class SafesController < ApplicationController
   
   
 def index2
-  @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  # @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
   # @safe2 = safe.where(:number_of_foundation => safe.number_of_foundation).where(:status => "在庫中")
   # @safe3 = safe.where(:number_of_frame => safe.number_of_frame).where(:status => "在庫中")
-  
+    if params[:maker]
+     @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
 
   
 end
 def index2_2
-  @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+  
+  
+    if params[:maker]
+     @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("type_machine = 'セル'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+  
 end
+
+
+
 def index2_3
-  @safes = Safe.where("type_machine = '枠'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    if params[:maker]
+     @safes = Safe.where("type_machine = '枠'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("type_machine = '枠'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("type_machine = '枠'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
 end
+
+
+
 def index2_4
-  @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    if params[:maker]
+     @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
 end
+
+
 def index2_5
-  @safes = Safe.where("machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    if params[:maker]
+     @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
 end
+
+
+
 def index
-  @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
 
-
+    if params[:maker]
+     @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("machine = 'パチンコ'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
 
 end
 def index1_2
-  @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+ 
+     if params[:maker]
+     @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    elsif params[:name]
+      @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    else
+     @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    end
+
 end
+
+
+
+
 
 
   

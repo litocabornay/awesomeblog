@@ -6,6 +6,25 @@
     %>
     
 <div class="row">
+ 
+ 
+  <div class="padding1-20"> 
+<%= form_tag("/zaiko-flame", method: "get") do %>
+<%= label_tag :maker, "メーカー検索" %>
+<%= text_field_tag :maker, params[:maker] %>
+<%= submit_tag "検索" %>
+<% end %>
+
+<%= form_tag("/zaiko-flame", method: "get") do %>
+<%= label_tag :name, "機器名検索" %>
+<%= text_field_tag :name, params[:name] %>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+
+
+
+
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>枠の在庫</h3>
 
