@@ -134,9 +134,8 @@ def new
     @hontai2 =  { :checked => "checked"}
   end
   
-  # session.delete(:name)
-  # session.delete(:staff)
-  # session.delete(:type_machine)
+  @safe2_1 = Safe.new
+  @safe3_1 = Safe.new
   
 end
 
@@ -156,30 +155,13 @@ end
 
 def create
 
- 
-
-  
-  
-  if session[:place] == "本社"
-    @place = true
-  elsif session[:place] == "菊水"
-    @place2 = true
-  end
-  
-  
-  
-  
-  
   if params[:pachinko]
-    
     
   @safe = Safe.new(safe_params)
   @safe2 = Safe.new(safe_params)
   @safe3 = Safe.new(safe_params)
   @safe4 = Safe.new(safe_params)
-  
 
-  
                 session[:name] = @safe.name
                 session[:from] = @safe.from
                 session[:price_from] = @safe.price_from
@@ -192,25 +174,11 @@ def create
                 
                 
                 flash[:success] = "登録完了"
-                
-    
 
-
-
-                                  
-                                  
-    
-
-            
                             unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
                                 @safe4.save
-             
-     
-                                   
                                     @machine = "パチンコ"
                                     @type_machine = "本体"
-                                    
-                                    
                                     
                                     if @safe4.number.include?("AM") == true
                                     @maker5 = "アムテックス"
@@ -285,32 +253,18 @@ def create
                                     else
                                     @machine = "未"
                                     end
-                                    
 
                                 @safe4.update(:type_machine => @type_machine)
                                 @safe4.update(:machine => @machine)
-
                                 @safe4.update(:maker => @maker5)
 
-
-                                
                               else
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+     
                                 unless @safe.number.blank?
                                 @safe.save
-                                
                                     @machine = "パチンコ"
                                     @type_machine = "セル"
 
-
-                                    
                                     if @safe.number.include?("AM") == true
                                     @maker = "アムテックス"
                                     elsif @safe.number.include?("AD") == true
@@ -385,9 +339,6 @@ def create
                                     @machine = "未"
                                     end
                                     
-           
-
-
                                     @safe.update(:type_machine => @type_machine)
                                     @safe.update(:machine => @machine)
                                     @safe.update(:maker => @maker)
@@ -395,19 +346,13 @@ def create
                                 if @safe.hontai == "true"
                                   @safe.update(:type_machine => "本体")
                                 end
-
                                     
                             end
-            
-            
                             unless @safe.number_of_frame.blank?
                                 @safe2.save
-
                                     
                                     @machine = "パチンコ"
                                     @type_machine = "枠"
-                                
-      
                                   
                                     if @safe2.number_of_frame.include?("AM") == true
                                     @maker2 = "アムテックス"
@@ -483,7 +428,6 @@ def create
                                     @machine = "未"
                                     end
                                 
-
                                 @safe2.update(:type_machine => @type_machine)
                                 @safe2.update(:machine => @machine)
                                 
@@ -492,22 +436,13 @@ def create
                                 if @safe2.hontai == "true"
                                   @safe2.update(:type_machine => "本体")
                                 end
-                                
                             end
-
                             end
                    
-            
                 redirect_back_or root_url
-
- 
-                
   else
                 
   @safeslot = Safe.new(safe_params)
-                
-                
-                
                 unless ( @safeslot.number_slot.blank? )
 
                 if session[:place] == "本社"
@@ -519,7 +454,6 @@ def create
                  @safeslot.update(:number => @safeslot.number_slot )
                 
                 if @safeslot.save
-              
                                     
                                     if @safeslot.number.include?("1A") == true
                                     @maker4 = "高砂電器産業"
@@ -585,22 +519,18 @@ def create
                  @machine = "スロット"
                  @type_machine = "なし"
                  
-                 
                  @safeslot.update(:type_machine => @type_machine)
                  @safeslot.update(:machine => @machine)     
                  @safeslot.update(:maker => @maker4)
                 
                 flash[:success] = "登録完了"
             
-            
                 redirect_back_or root_url
                 else
                   render 'new'
                 end
                 end
-              
   end
-  
 end
 
 
