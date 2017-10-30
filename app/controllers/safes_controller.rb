@@ -69,9 +69,7 @@ class SafesController < ApplicationController
   
   
 def index2
-  # @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-  # @safe2 = safe.where(:number_of_foundation => safe.number_of_foundation).where(:status => "在庫中")
-  # @safe3 = safe.where(:number_of_frame => safe.number_of_frame).where(:status => "在庫中")
+
     if params[:maker]
      @safes = Safe.where("type_machine = '本体'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     elsif params[:name]
@@ -145,7 +143,7 @@ def index
 end
 def index1_2
  
-     if params[:maker]
+    if params[:maker]
      @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     elsif params[:name]
       @safes = Safe.where("machine = 'スロット'").where.not("type_machine = '基盤'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
@@ -920,14 +918,6 @@ def update
 
 @safe = Safe.find(params[:id])
 
-if  @safe.id > 3
-@id2 = @safe.id - 3
-@id3 = @safe.id - 2
-@id4 = @safe.id - 1
-@safe2 = Safe.find(@id2)
-@safe3 = Safe.find(@id3)
-@safe4 = Safe.find(@id4)
-end
 
   if params[:edit]
  
