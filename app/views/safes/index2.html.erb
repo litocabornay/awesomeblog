@@ -154,7 +154,7 @@
       </td>
       <% end %>
 
-      <% if !(params[:t] == "f") %>
+      <% if !(params[:t] == "f") and !(params[:utf8] == "✓") %>
       <% unless safe.price_from.blank? %>
         <td><%= safe.price_from.to_s(:delimited) %> 円</td>
         <% else %>
@@ -168,7 +168,7 @@
         <td><%= safe.date_of_verification %></td>
       <% end %>
       
-      <% if !(params[:t] == "f") %>
+      <% if !(params[:t] == "f") and !(params[:utf8] == "✓") %>
         <td><%= safe.place %></td>
       <% end %>
 
