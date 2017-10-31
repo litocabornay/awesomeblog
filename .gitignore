@@ -12,7 +12,8 @@
 /db/*.sqlite3-journal
 /config/database.yml
 /config/database.yml2
-public/uploads/*
+/public/uploads/*
+/config/database.*
 Gemfile
 Gemfile.lock
 

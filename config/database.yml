@@ -15,7 +15,11 @@ development:
   # database: db/development.sqlite3
   adapter: mysql2
   encoding: utf8
+<<<<<<< HEAD
   database: zaiko_dev
+=======
+  database: zaiko_cloud
+>>>>>>> dbb743e35d912fb81afbe528e552fe9f159aedd2
   pool: 5
   username: zaiko
   password: caster39
