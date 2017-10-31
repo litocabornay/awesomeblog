@@ -135,7 +135,7 @@
         <td><%= safe.date_of_verification %></td>
       <% end %>
       
-      <% if !(params[:t] == "f") %>
+      <% if !(params[:t] == "f") and !(params[:utf8] == "✓") %>
         <td><%= safe.place %></td>
       <% end %>
 
