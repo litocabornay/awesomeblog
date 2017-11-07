@@ -956,9 +956,7 @@ def update
                         @safe.update(safe_params)
                         
                         session[:to] = @safe.to
-      
-                        Safe.where(:number => @safe.number).where(:type_machine => "本体").where(:status => "在庫中").update_all(safe_params)
-                        
+                              
                         flash[:success] = "出庫完了"
                         redirect_back_or root_url
                       else
