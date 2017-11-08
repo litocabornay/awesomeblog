@@ -119,12 +119,14 @@ end
 
 
 def index2_5
+  # なし
+  # スロット
     if params[:maker]
-     @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+     @safes = Safe.where("type_machine = 'なし'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     elsif params[:name]
-      @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+      @safes = Safe.where("type_machine = 'なし'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     else
-     @safes = Safe.where("type_machine = 'スロット'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+     @safes = Safe.where("type_machine = 'なし'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
     end
 end
 
