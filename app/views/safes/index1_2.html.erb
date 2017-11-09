@@ -8,7 +8,7 @@
 <div class="row">
   
   
-    <div class="padding1-20"> 
+<div class="padding1-20"> 
 <%= form_tag("/slot_history", method: "get") do %>
 <%= label_tag :maker, "メーカー検索" %>
 <%= text_field_tag :maker, params[:maker] %>
@@ -23,12 +23,8 @@
 </div>
 
 
-
-
 <div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
 <h3>スロット在庫の履歴</h3>
-
-
 
 
 <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
@@ -36,16 +32,13 @@
 <a href="/safes?t=f" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
 <a href="/slot_history?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
 </div>
+
 <% else%>
 <div class="btn-group" >
 <a href="/safes" class="btn btn-default"><i class="fa fa-bars"></i> パチンコ</a>
 <a href="/slot_history" class="btn btn-default"><i class="fa fa-bolt"></i> スロット</a>
 </div>
 <% end %>
-
-
-
-
 
 
 <div class="btn-group float-right">
@@ -131,7 +124,7 @@
         <td><%= safe.name %></td>
 
       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-      <td><%= @cell %></td>
+        <td><%= safe.number_slot %></td>
       <% end %>
 
       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>

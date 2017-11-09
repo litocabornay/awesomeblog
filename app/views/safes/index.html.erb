@@ -115,7 +115,11 @@
         <td><%= safe.name %></td>
 
       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-      <td><%= @cell %></td>
+      <td>
+         セル：<%= safe.number %><br>
+         枠：<%= safe.number_of_frame %><br>
+         基盤：<%= safe.number_of_foundation %>
+      </td>
       <% end %>
 
       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
