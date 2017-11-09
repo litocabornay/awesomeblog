@@ -3,8 +3,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   
-  # include CarrierWave::MiniMagick
-  # process resize_to_limit: [400, 400]
+  include CarrierWave::MiniMagick
+  process resize_to_fit: [1200, 1200]
   #400x400のサイズにリサイズ
   
   #先に以下３つのコマンドしておく必要あり。
@@ -39,8 +39,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
+  # version :photo do
+  # process resize_to_fit: [50, 50]
   # end
 
 
