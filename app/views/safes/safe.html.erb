@@ -48,7 +48,7 @@
 <div class="col-md-12 text-center">
 <label for="number" class="col-md-12">QR検索<span style="color: red; font-weight: bold;">*</span></label>
 
-<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
+<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true, :readonly => true %>
 
 <label><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', :style => 'display:none;' %>
