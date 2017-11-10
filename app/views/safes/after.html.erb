@@ -32,19 +32,18 @@
 <div style="padding: 20px;" class="center-block">
 <%if !safe.number.nil? %>
 <p>セル：　<%= safe.number %></p>
+<% end %>
 
-
-<%elsif !safe.number_of_frame.nil? %>
+<%if !safe.number_of_frame.nil? %>
 <p>枠：　<%= safe.number_of_frame %></p>
+<% end %>
 
-
-<%elsif !safe.number_of_foundation.nil? %>
+<%if !safe.number_of_foundation.nil? %>
 <p>基盤：　<%= safe.number_of_foundation %></p>
+<% end %>
 
-
-<%elsif !safe.number_slot.nil? %>
+<%if !safe.number_slot.nil? %>
 <p>スロット：　<%= safe.number_slot %></p>
-
 <% end %>
 
 <p>機器：　<%= safe.machine %></p>

@@ -15,12 +15,12 @@
 <%= form_tag("/safe_after", method: "get") do %>
 
 <% @user.each do |u| %>
-	<% if u.super_admin == true %>
+	<% if u.super_admin == "super" %>
 
 
 <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
     <div class="col-md-12 text-center">
-<label for="qnumber_" class="col-md-12">6 Digits 検索</label>
+<label for="qnumber_" class="col-md-12"> クイック検索</label>
 
 <%= text_field :qnumber, params[:qnumber], :class => 'qrcode-text form-control helf1' %>
 

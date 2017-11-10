@@ -174,8 +174,8 @@ end
    
    if !(params[:qnumber][0]).nil?
 
-   qry = params[:qnumber][0]
-   @safes = Safe.where("number LIKE (?)", "%#{qry}%").where("status = '在庫中'").paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+   @qry = params[:qnumber][0]
+   @safes = Safe.where("number LIKE :search OR number_of_foundation LIKE :search OR number_of_frame LIKE :search OR number_slot LIKE :search", search: "%#{@qry}%").where("status = '在庫中'").paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
 
  else
 
@@ -188,7 +188,7 @@ end
     else
         @safes = Safe.where("status = '在庫中'").where(number_slot: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     end
-end
+  end
     
  end
  
