@@ -30,6 +30,9 @@ before_action :admin_user
   
   def edit
     @user = User.find(params[:id])
+
+  user_logged = current_user.id
+  @super = User.where(:id => user_logged).where("admin = 1")
   end
   
   def update

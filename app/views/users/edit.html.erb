@@ -1,5 +1,8 @@
 <% provide(:title, "USER編集") %>
 
+<% @super.each do |u| 
+  if u.super_admin == 'super' %>
+
   <div class="col-md-6">
    
    
@@ -38,7 +41,49 @@
 
       <%= f.submit "変更する", class: "btn btn-primary" %>
     <% end %>
-    
+  
+  <% else %>
+
+    <div class="col-md-6">
+   
+   
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_message', object: f.object %>
+
+  <br>
+     <%= f.label :ユーザーネーム %>
+      <%#= f.label :name %>
+     <b style="color:red;">*</b>
+      <%= f.text_field :name, class: 'form-control',:readonly => true %>
+
+  <br>
+     <%= f.label :ログインID %>
+      <%#= f.label :email %>
+     <b style="color:red;">*</b>
+      <%= f.email_field :email, class: 'form-control', :readonly => true %>
+      
+
+  <br>
+     <%= f.label :パスワード %>
+      <%#= f.label :password %>
+
+      <%= f.password_field :password, class: 'form-control', :readonly => true %>
+<!-- -- --> 
+  <br>
+     <%= f.label :確認用パスワード %>
+
+      <%#= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control',:readonly => true %>
+<!-- -- --> 
+  <br>
+     <br><br><br>
+
+      <%= f.submit "変更する", class: "btn btn-primary" %>
+    <% end %>
+
+  <% end %>
+
+<% end %>
     
   </div>
 </div>
