@@ -90,5 +90,12 @@ before_action :admin_user
   end
     #アクセス権限可能性②
   
- 
+ def super_admin
+
+   @user = User.find(params[:id])
+   if @user.admin == "1"
+    flash[:danger] = "working"
+  end
+ end
+
 end

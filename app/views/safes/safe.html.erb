@@ -3,8 +3,6 @@
 <%     session.delete(:fowarding_url)
     store_location
     %>
-    
-    
 
 <div class="container-fluid" style="padding-left: 0; padding-right: 0;">
 
@@ -16,12 +14,38 @@
 <div class="padding1-20"> 
 <%= form_tag("/safe_after", method: "get") do %>
 
+<% @user.each do |u| %>
+	<% if u.super_admin == true %>
 
 
-
-
-  <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
     <div class="col-md-12 text-center">
+<label for="qnumber_" class="col-md-12">6 Digits 検索</label>
+
+<%= text_field :qnumber, params[:qnumber], :class => 'qrcode-text form-control helf1' %>
+
+
+	</div>
+
+<div class="col-md-12 text-center">
+<label for="number" class="col-md-12">QR検索</label>
+
+<%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1' %>
+
+<label><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
+  <%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', :style => 'display:none;' %>
+
+</label>
+
+    </div>
+  </div>
+
+ 	<% else %>
+
+<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
+    <div class="col-md-12 text-center">
+
+<div class="col-md-12 text-center">
 <label for="number" class="col-md-12">QR検索<span style="color: red; font-weight: bold;">*</span></label>
 
 <%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1', :required => true %>
@@ -33,12 +57,12 @@
 
     </div>
   </div>
-  
-  
-
+</div>
+<% end %>
+<% end %>
 
 <br><br>
-<%= submit_tag "検索", :class => 'btn btn-primary' %>
+<%= submit_tag "検索", :class => 'btn btn-primary btn-lg' %>
 <% end %>
 </div>
 

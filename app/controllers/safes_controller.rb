@@ -8,7 +8,6 @@ class SafesController < ApplicationController
 
 
 
-
     
     
     #本体
@@ -163,25 +162,33 @@ end
   
  def safe
 
+  user_logged = current_user.id
+  @user = User.where(:id => user_logged).where("admin = 1")
+
  end
  
  
  def after
 
   # @safe = Safe.where(:number => params[:number])
-  
+   
+   if !(params[:qnumber][0]).nil?
 
+   qry = params[:qnumber][0]
+   @safes = Safe.where("number LIKE (?)", "%#{qry}%").where("status = '在庫中'").paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
 
-    if params[:number][0].start_with?("P1") == true
-         @safes = Safe.where("status = '在庫中'").where(number: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
-    elsif params[:number][0].start_with?("P0") == true
-         @safes = Safe.where("status = '在庫中'").where(number_of_frame: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
-    elsif params[:number][0].start_with?("P2") == true
-         @safes = Safe.where("status = '在庫中'").where(number_of_foundation: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+ else
+
+   if params[:number][0].start_with?("P1") == true
+       @safes = Safe.where("status = '在庫中'").where(number: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+   elsif params[:number][0].start_with?("P0") == true
+   @safes = Safe.where("status = '在庫中'").where(number_of_frame: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
+  elsif params[:number][0].start_with?("P2") == true
+   @safes = Safe.where("status = '在庫中'").where(number_of_foundation: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     else
         @safes = Safe.where("status = '在庫中'").where(number_slot: params[:number][0]).paginate(page: params[:page]).order(sort_column + ' ' + sort_direction)
     end
-
+end
     
  end
  

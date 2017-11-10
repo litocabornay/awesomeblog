@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def super_admin
+
+
+  end
 
 
 
