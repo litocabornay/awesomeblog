@@ -18,7 +18,7 @@
 	<% if u.super_admin == "super" %>
 
 
-<div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
+<div class="container-fluid" style="border: 1px dashed green; padding: 30px;">
     <div class="col-md-12 text-center">
 <label for="qnumber_" class="col-md-12"> クイック検索</label>
 
@@ -27,7 +27,7 @@
 
 	</div>
 
-<div class="col-md-12 text-center">
+<!-- <div class="col-md-12 text-center">
 <label for="number" class="col-md-12">QR検索</label>
 
 <%= text_field :number, params[:number] , :class => 'qrcode-text form-control helf1' %>
@@ -36,8 +36,8 @@
   <%= file_field :number, params[:number] , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', :style => 'display:none;' %>
 
 </label>
+ -->
 
-    </div>
   </div>
 
  	<% else %>
