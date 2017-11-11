@@ -12,4 +12,16 @@ class SearchController < ApplicationController
       }
     end
   end
+
+    def check
+    # @safe_check = Safe.search(params[:number])
+    @safe_check = Safe.all
+      respond_to do |format|
+      format.html {}
+      format.json {
+      render :json => { exist: @safe.present? }
+
+      }
+     end
+    end
 end

@@ -12,7 +12,7 @@ get '/login', to:'sessions#new'
 post '/login', to:'sessions#create'
 delete '/logout', to:'sessions#destroy'
 get :search, controller: :search
-
+get :check, controller: :search
 
 # get 'inquiry' => 'inquiry#index'              # 入力画面
 # post 'inquiry/confirm' => 'inquiry#confirm'   # 確認画面

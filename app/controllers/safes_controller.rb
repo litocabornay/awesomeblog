@@ -211,6 +211,11 @@ def new
     @hontai2 =  { :checked => "checked"}
   end
 
+  @safe_check = Safe.search(params[:number])
+  respond_to do |format|
+      format.html {}
+      format.json { render :json => { record_exists: @safe_check.present?}}
+  end
   
 end
 
