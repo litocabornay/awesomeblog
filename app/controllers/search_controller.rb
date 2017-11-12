@@ -14,14 +14,14 @@ class SearchController < ApplicationController
   end
 
     def check
-    # @safe_check = Safe.search(params[:number])
-    @safe_check = Safe.all
+    @safe = Safe.where(number: params[:q])
+
       respond_to do |format|
       format.html {}
       format.json {
-      render :json => { exist: @safe.present? }
-
+       @safe = @safe.limit(100)
       }
      end
     end
+
 end
