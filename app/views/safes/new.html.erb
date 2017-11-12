@@ -17,70 +17,98 @@
     }
   });
 
-  function checkRecord() {
+  function checkNumber() {
     var q = document.getElementById('safe_number').value;
     $.ajax({
         type: "GET",
         url: "/check?q=" + q,
         dataType: "json",
-     //   data: {'keyword': q},
         success: function(result){
-        // if((result.safe).indexOf(q) >= 0) {
-        //   alert(q);
-        //   alert("success!");
-        // } else {
-        //   alert("failed!");
-        // }
-
-
-                // for (var index = 0; index < result.length; ++index) {
-
-                //  var machine = result[index];
-
-                //  if(machine.number == "P1SS160135622"){
-                // $("#test").append("there is a match!");
-                //    break;
-                //  } else {
-                //   $("#test").append("there is no match!");
-                // }}
     
              for(term in result) {
               var check = JSON.stringify(result[term]);
               if (check.indexOf(q) >=0) {
-                alert("success!");
+                $("#number_status").html(" <i class='fa fa-close' style='color:red;'></i>");
+
               } else {
-                alert("failed!");
+                $("#number_status").html(" <i class='fa fa-check' style='color:green;'></i>");
               }
-
-             // alert(term);
-             //  if(term.number == "P1SS160135622"){
-
-              
-             // } else {
-
-             //  $("#test").append("there is no match!");
-
-             //  }
             
              }
 
-            // $("#categories").remove();
-            // $("#cat_search").after('<ul id="categories"></ul>');
-            // render = true;
-            // $("#categories").on("click", "li", function(){
-            //     $("#book_category_id").val($(this).data('id'));
-            //     $(".book_search").val($(this).text());
-            //     $("#categories").remove();
-            // });
-            // for(term in result){
-            //     render = false;
-            //     $("#categories").append("<li data-id="+result[term].id+">" + result[term].keyword + "</li>");
-            // }
         }
   })
   };
-  //   })
-  // };  
+
+  function checkFrame() {
+    var qframe = document.getElementById('safe_number_of_frame').value;
+    $.ajax({
+        type: "GET",
+        url: "/check?qframe=" + qframe,
+        dataType: "json",
+        success: function(result){
+    
+             for(term in result) {
+              var check = JSON.stringify(result[term]);
+              if (check.indexOf(qframe) >=0) {
+                $("#frame_status").html(" <i class='fa fa-close' style='color:red;'></i>");
+
+              } else {
+                $("#frame_status").html(" <i class='fa fa-check' style='color:green;'></i>");
+              }
+            
+             }
+
+        }
+  })
+  };
+
+  function checkFoundation() {
+    var qfoundation = document.getElementById('safe_number_of_foundation').value;
+    $.ajax({
+        type: "GET",
+        url: "/check?qfoundation=" + qfoundation,
+        dataType: "json",
+        success: function(result){
+    
+             for(term in result) {
+              var check = JSON.stringify(result[term]);
+              if (check.indexOf(qfoundation) >=0) {
+                $("#foundation_status").html(" <i class='fa fa-close' style='color:red;'></i>");
+
+              } else {
+                $("#foundation_status").html(" <i class='fa fa-check' style='color:green;'></i>");
+              }
+            
+             }
+
+        }
+  })
+  };
+
+    function checkSlot() {
+    var qslot = document.getElementById('safe_number_slot').value;
+    $.ajax({
+        type: "GET",
+        url: "/check?qslot=" + qslot,
+        dataType: "json",
+        success: function(result){
+    
+             for(term in result) {
+              var check = JSON.stringify(result[term]);
+              if (check.indexOf(qslot) >=0) {
+                $("#slot_status").html(" <i class='fa fa-close' style='color:red;'></i>");
+
+              } else {
+                $("#slot_status").html(" <i class='fa fa-check' style='color:green;'></i>");
+              }
+            
+             }
+
+        }
+  })
+  };
+
 </script>
 <div class="form-group">
 
@@ -91,7 +119,7 @@
 <%= form_for(@safe, url: "/safes", name: "pachi") do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
-<label id="test">機種<span style="color:red; font-weight: bold;">*</span></label>
+<label>機種<span style="color:red; font-weight: bold;">*</span></label>
 <div class="radio" style="margin-bottom: 10px;">
     <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　
     <label><input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" />スロット</label>
@@ -100,9 +128,9 @@
 <div id="secondBox">
   <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
     <div class="col-md-12 text-center">
-<label for="number" class="col-md-12">機器番号(QR)</label>
+<label for="number" class="col-md-12">機器番号(QR)<span style="font-size: 25px; " id="slot_status"></label>
 
-<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：1T-5-094/000048', class: 'form-control'%>
+<%= f.text_field :number_slot , :class => 'qrcode-text', :placeholder => '例：1T-5-094/000048', class: 'form-control', :onchange => 'checkSlot()' %>
 
 <label><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_slot , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
@@ -121,9 +149,9 @@
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; padding-right: 30px;">
 
 <div class="col-md-12 text-center">
-<label for="number" class="col-md-12">セル</label>
+<label for="number" class="col-md-12">セル<span style="font-size: 25px; " id="number_status"></span></label>
 
-<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control', :onchange => 'checkRecord()' %>
+<%= f.text_field :number , :class => 'qrcode-text', :placeholder => '例：P1SS160135622', class: 'form-control', :onchange => 'checkNumber()' %>
 
 <label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
@@ -135,9 +163,9 @@
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px; padding-right: 30px;">
 
 <div class="col-md-12 text-center">
-<label for="number" class="col-md-12">枠</label>
+<label for="number" class="col-md-12">枠<span style="font-size: 25px; " id="frame_status"></span></label>
 
-<%= f.text_field :number_of_frame , :class => 'qrcode-text', :placeholder => '例：P0SS160135622', class: 'form-control'%>
+<%= f.text_field :number_of_frame , :class => 'qrcode-text', :placeholder => '例：P0SS160135622', class: 'form-control', :onchange => 'checkFrame()'%>
 
 <label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_of_frame , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
@@ -149,9 +177,9 @@
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; margin-top: 30px; padding-right: 30px;">
 
 <div class="col-md-12 text-center">
-<label for="number" class="col-md-12">基盤</label>
+<label for="number" class="col-md-12">基盤<span style="font-size: 25px; " id="foundation_status"></span></label>
 
-<%= f.text_field :number_of_foundation , :class => 'qrcode-text', :placeholder => '例：P2SS160135622', class: 'form-control'%>
+<%= f.text_field :number_of_foundation , :class => 'qrcode-text', :placeholder => '例：P2SS160135622', class: 'form-control', :onchange => 'checkFoundation()' %>
 
 <label class="form-margin"><i class="fa fa-qrcode" style="margin-top: 10px; text-align: center; font-size: 10em;"></i>
   <%= f.file_field :number_of_foundation , :accept => 'image/*', :capture => 'environment', :onchange => 'openQRCamera(this);', class: 'width80', :style => 'display:none;' %>
