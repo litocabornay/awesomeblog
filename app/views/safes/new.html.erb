@@ -109,6 +109,32 @@
   })
   };
 
+function generateAll() {
+
+var number_cell = document.getElementById('safe_number').value;
+var number_frame = document.getElementById('safe_number_of_frame').value;
+var number_foundation = document.getElementById('safe_number_of_foundation').value;
+
+if (number_cell) {
+var base_number = number_cell.slice(2);
+} else if (number_frame) {
+var base_number = number_frame.slice(2);
+} else {
+  base_number = number_foundation.slice(2);
+}
+
+var number_cell = "P1" + base_number;
+var number_frame = "P0" + base_number;
+var number_foundation = "P2" + base_number;
+document.getElementById('safe_number').value = number_cell;
+document.getElementById('safe_number_of_frame').value = number_frame;
+document.getElementById('safe_number_of_foundation').value = number_foundation;
+
+checkNumber();
+checkFrame();
+checkFoundation();
+}
+
 </script>
 <div class="form-group">
 
@@ -124,6 +150,7 @@
     <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　
     <label><input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" />スロット</label>
 </div>
+
 
 <div id="secondBox">
   <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
@@ -147,7 +174,8 @@
 
 
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; padding-right: 30px;">
-
+<button type="button" class="btn btn-default" onclick="generateAll()"><i class="fa fa-barcode"></i> ALL</button>
+<button type="reset" class="btn btn-default"><i class="fa fa-trash"></i> CLEAR</button>
 <div class="col-md-12 text-center">
 <label for="number" class="col-md-12">セル<span style="font-size: 25px; " id="number_status"></span></label>
 
