@@ -135,6 +135,13 @@ checkFrame();
 checkFoundation();
 }
 
+function removeStatus() {
+  $("#number_status").html("");
+  $("#frame_status").html("");
+  $("#foundation_status").html("");
+
+}
+
 </script>
 <div class="form-group">
 
@@ -175,7 +182,7 @@ checkFoundation();
 
 <div class="container-fluid" style="border: 1px dashed red; padding-top: 20px; padding-bottom: 10px; padding-right: 30px;">
 <button type="button" class="btn btn-default" onclick="generateAll()"><i class="fa fa-barcode"></i> ALL</button>
-<button type="reset" class="btn btn-default"><i class="fa fa-trash"></i> CLEAR</button>
+<button type="reset" class="btn btn-default" onclick="removeStatus()"><i class="fa fa-trash"></i> CLEAR</button>
 <div class="col-md-12 text-center">
 <label for="number" class="col-md-12">セル<span style="font-size: 25px; " id="number_status"></span></label>
 
