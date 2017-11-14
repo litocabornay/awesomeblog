@@ -30,7 +30,27 @@ include ActionView::Helpers
   mount_uploader :photo, PictureUploader
   # 画像アップのための準備
 
-  
+
+# validates :number, {uniqueness: true}
+# validates :number_of_frame, {uniqueness: true}
+# validates :number_of_foundation, {uniqueness: true}
+# validate :number
+# validate :number_of_frame
+# validate :number_of_foundation
+
+# validates :number, uniqueness: true
+
+
+
+  validates_uniqueness_of :number,
+  uniqueness: { scope: :status, case_sensitive: false, message: "should happen once per year" }
+
+
+# validates :number, uniqueness: { scope: :number,
+# message: "should happen once per year" }
+
+
+
   validate  :photo
   #画像のサイズについての制限
   #以下、private内のmethodを実行してる
@@ -44,7 +64,8 @@ include ActionView::Helpers
       end
     end
   # 画像が重いとエラーだす。
-  
+
+
   
   # validates :machine, presence: true, length:{ maximum: 10 }
   

@@ -152,12 +152,14 @@ function removeStatus() {
 <%= form_for(@safe, url: "/safes", name: "pachi") do |f| %>
 <%= render 'shared/error_message', object: f.object %>
 
+
+
+
 <label>機種<span style="color:red; font-weight: bold;">*</span></label>
 <div class="radio" style="margin-bottom: 10px;">
     <label><input type="radio" name="type_machine" value="hoge1" onclick="entryChange1();" checked />パチンコ</label>　
     <label><input type="radio" name="type_machine" value="hoge2" onclick="entryChange1();" />スロット</label>
 </div>
-
 
 <div id="secondBox">
   <div class="container-fluid" style="border: 1px dashed green; padding-top: 30px; padding-right: 30px;">
@@ -176,6 +178,14 @@ function removeStatus() {
 </div>
 
 <div id="firstBox">
+
+<label>タイプ<span style="color:red; font-weight: bold;">*</span></label>
+<div class="radio" style="margin-bottom: 10px;">
+  <label><%= f.radio_button :type_machine, "本体" , :checked => "checked" %>本体</label>
+  <label><%= f.radio_button :type_machine, "セル"  %>セル</label>
+  <label><%= f.radio_button :type_machine, "枠"  %>枠</label>
+</div>
+
 
 <label>機器番号(QR)</label>
 

@@ -6,7 +6,7 @@ class SafesController < ApplicationController
   
 
 
-
+  helper_method :sort_column, :sort_direction
 
     
     
@@ -37,11 +37,11 @@ class SafesController < ApplicationController
     send_data render_to_string, filename: "在庫_パチンコ_枠のみ.csv", type: :csv
   end
   
-    #基盤
-  def csv_output_five
-    @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction)
-    send_data render_to_string, filename: "在庫_パチンコ_基盤のみ.csv", type: :csv
-  end
+  #   #基盤
+  # def csv_output_five
+  #   @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction)
+  #   send_data render_to_string, filename: "在庫_パチンコ_基盤のみ.csv", type: :csv
+  # end
 
     #スロット
   def csv_output_six
@@ -106,15 +106,15 @@ end
 
 
 
-def index2_4
-    if params[:maker]
-     @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    elsif params[:name]
-      @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    else
-     @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
-    end
-end
+# def index2_4
+#     if params[:maker]
+#      @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("maker like ?", "%#{ params[:maker]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+#     elsif params[:name]
+#       @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").where("name like ?", "%#{ params[:name]}%").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+#     else
+#      @safes = Safe.where("type_machine = '基盤'").where("status = '在庫中'").order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+#     end
+# end
 
 
 def index2_5
@@ -234,684 +234,257 @@ redirect_to new_safe_path
 end
 
 
+
+
+
+
+
+
+
+
+
+
 def create
+#0
 
-  if params[:pachinko]
-    
+if params[:pachinko]
+#1
+
   @safe = Safe.new(safe_params)
-  @safe2 = Safe.new(safe_params)
-  @safe3 = Safe.new(safe_params)
-  @safe4 = Safe.new(safe_params)
+  @machine = "パチンコ"
+  session[:name] = @safe.name
+  session[:from] = @safe.from
+  session[:price_from] = @safe.price_from
+  session[:remarks] = @safe.remarks
+  session[:place] = @safe.place
+  session[:hontai] = @safe.hontai
 
-                session[:name] = @safe.name
-                session[:from] = @safe.from
-                session[:price_from] = @safe.price_from
-                session[:remarks] = @safe.remarks
-                session[:place] = @safe.place
-                session[:hontai] = @safe.hontai
-
-                
-                # session[:place] = @safe.place
-                
-                
-                flash[:success] = "登録完了"
-
-                            unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
-                                @safe4.save
-                                    @machine = "パチンコ"
-                                    @type_machine = "本体"
-                                    
-                                    if @safe4.number.include?("AM") == true
-                                    @maker5 = "アムテックス"
-                                    elsif @safe4.number.include?("AD") == true
-                                    @maker5 = "エース電研"
-                                    elsif @safe4.number.include?("EE") == true
-                                    @maker5 = "EXCITE"
-                                    elsif @safe4.number.include?("OZ") == true
-                                    @maker5 = "オーイズミ"
-                                    elsif @safe4.number.include?("OM") == true
-                                    @maker5 = "奥村遊戯"
-                                    elsif @safe4.number.include?("AA") == true
-                                    @maker5 = "オッケー"
-                                    elsif @safe4.number.include?("OL") == true
-                                    @maker5 = "オリンピア"
-                                    elsif @safe4.number.include?("BB") == true
-                                    @maker5 = "京楽産業"
-                                    elsif @safe4.number.include?("GZ") == true
-                                    @maker5 = "銀座"
-                                    elsif @safe4.number.include?("SS") == true
-                                    @maker5 = "サミー"
-                                    elsif @safe4.number.include?("SA") == true
-                                    @maker5 = "SANKYO"
-                                    elsif @safe4.number.include?("ST") == true
-                                    @maker5 = "サンスリー"
-                                    elsif @safe4.number.include?("WW") == true
-                                    @maker5 = "サンセイアールアンドディ"
-                                    elsif @safe4.number.include?("SY") == true
-                                    @maker5 = "三洋物産"
-                                    elsif @safe4.number.include?("JJ") == true
-                                    @maker5 = "JFJ"
-                                    elsif @safe4.number.include?("JB") == true
-                                    @maker5 = "ジェイビー"
-                                    elsif @safe4.number.include?("SP") == true
-                                    @maker5 = "ソフィア"
-                                    elsif @safe4.number.include?("DS") == true
-                                    @maker5 = "大一商会"
-                                    elsif @safe4.number.include?("DT") == true
-                                    @maker5 = "大都技研"
-                                    elsif @safe4.number.include?("TA") == true
-                                    @maker5 = "タイヨーエレック"
-                                    elsif @safe4.number.include?("DW") == true
-                                    @maker5 = "大和製作所"
-                                    elsif @safe4.number.include?("TU") == true
-                                    @maker5 = "高尾"
-                                    elsif @safe4.number.include?("AB") == true
-                                    @maker5 = "高砂電器産業"
-                                    elsif @safe4.number.include?("TK") == true
-                                    @maker5 = "竹屋"
-                                    elsif @safe4.number.include?("DL") == true
-                                    @maker5 = "デイ・ライト"
-                                    elsif @safe4.number.include?("TO") == true
-                                    @maker5 = "豊丸産業"
-                                    elsif @safe4.number.include?("NS") == true
-                                    @maker5 = "七匠"
-                                    elsif @safe4.number.include?("EX") == true
-                                    @maker5 = "ニューギン"
-                                    elsif @safe4.number.include?("DA") == true
-                                    @maker5 = "ビスティ"
-                                    elsif @safe4.number.include?("FJ") == true
-                                    @maker5 = "藤商事"
-                                    elsif @safe4.number.include?("HC") == true
-                                    @maker5 = "平和"
-                                    elsif @safe4.number.include?("BE") == true
-                                    @maker5 = "ベルコ"
-                                    elsif @safe4.number.include?("MH") == true
-                                    @maker5 = "マルホン"
-                                    elsif @safe4.number.include?("MZ") == true
-                                    @maker5 = "ミズホ"
-                                    elsif @safe4.number.include?("CC") == true
-                                    @maker5 = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-
-                                @safe4.update(:type_machine => @type_machine)
-                                @safe4.update(:machine => @machine)
-                                @safe4.update(:maker => @maker5)
-
-                              else
-     
-                                unless @safe.number.blank?
-                                @safe.save
-                                    @machine = "パチンコ"
-                                    @type_machine = "セル"
-
-                                    if @safe.number.include?("AM") == true
-                                    @maker = "アムテックス"
-                                    elsif @safe.number.include?("AD") == true
-                                    @maker = "エース電研"
-                                    elsif @safe.number.include?("EE") == true
-                                    @maker = "EXCITE"
-                                    elsif @safe.number.include?("OZ") == true
-                                    @maker = "オーイズミ"
-                                    elsif @safe.number.include?("OM") == true
-                                    @maker = "奥村遊戯"
-                                    elsif @safe.number.include?("AA") == true
-                                    @maker = "オッケー"
-                                    elsif @safe.number.include?("OL") == true
-                                    @maker = "オリンピア"
-                                    elsif @safe.number.include?("BB") == true
-                                    @maker = "京楽産業"
-                                    elsif @safe.number.include?("GZ") == true
-                                    @maker = "銀座"
-                                    elsif @safe.number.include?("SS") == true
-                                    @maker = "サミー"
-                                    elsif @safe.number.include?("SA") == true
-                                    @maker = "SANKYO"
-                                    elsif @safe.number.include?("ST") == true
-                                    @maker = "サンスリー"
-                                    elsif @safe.number.include?("WW") == true
-                                    @maker = "サンセイアールアンドディ"
-                                    elsif @safe.number.include?("SY") == true
-                                    @maker = "三洋物産"
-                                    elsif @safe.number.include?("JJ") == true
-                                    @maker = "JFJ"
-                                    elsif @safe.number.include?("JB") == true
-                                    @maker = "ジェイビー"
-                                    elsif @safe.number.include?("SP") == true
-                                    @maker = "ソフィア"
-                                    elsif @safe.number.include?("DS") == true
-                                    @maker = "大一商会"
-                                    elsif @safe.number.include?("DT") == true
-                                    @maker = "大都技研"
-                                    elsif @safe.number.include?("TA") == true
-                                    @maker = "タイヨーエレック"
-                                    elsif @safe.number.include?("DW") == true
-                                    @maker = "大和製作所"
-                                    elsif @safe.number.include?("TU") == true
-                                    @maker = "高尾"
-                                    elsif @safe.number.include?("AB") == true
-                                    @maker = "高砂電器産業"
-                                    elsif @safe.number.include?("TK") == true
-                                    @maker = "竹屋"
-                                    elsif @safe.number.include?("DL") == true
-                                    @maker = "デイ・ライト"
-                                    elsif @safe.number.include?("TO") == true
-                                    @maker = "豊丸産業"
-                                    elsif @safe.number.include?("NS") == true
-                                    @maker = "七匠"
-                                    elsif @safe.number.include?("EX") == true
-                                    @maker = "ニューギン"
-                                    elsif @safe.number.include?("DA") == true
-                                    @maker = "ビスティ"
-                                    elsif @safe.number.include?("FJ") == true
-                                    @maker = "藤商事"
-                                    elsif @safe.number.include?("HC") == true
-                                    @maker = "平和"
-                                    elsif @safe.number.include?("BE") == true
-                                    @maker = "ベルコ"
-                                    elsif @safe.number.include?("MH") == true
-                                    @maker = "マルホン"
-                                    elsif @safe.number.include?("MZ") == true
-                                    @maker = "ミズホ"
-                                    elsif @safe.number.include?("CC") == true
-                                    @maker = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-                                    
-                                    @safe.update(:type_machine => @type_machine)
-                                    @safe.update(:machine => @machine)
-                                    @safe.update(:maker => @maker)
-
-                                if @safe.hontai == "true"
-                                  @safe.update(:type_machine => "本体")
-                                end
-                                    
-                            end
-                            unless @safe.number_of_frame.blank?
-                                @safe2.save
-                                    
-                                    @machine = "パチンコ"
-                                    @type_machine = "枠"
-                                  
-                                    if @safe2.number_of_frame.include?("AM") == true
-                                    @maker2 = "アムテックス"
-                                    elsif @safe2.number_of_frame.include?("AD") == true
-                                    @maker2 = "エース電研"
-                                    elsif @safe2.number_of_frame.include?("EE") == true
-                                    @maker2 = "EXCITE"
-                                    elsif @safe2.number_of_frame.include?("OZ") == true
-                                    @maker2 = "オーイズミ"
-                                    elsif @safe2.number_of_frame.include?("OM") == true
-                                    @maker2 = "奥村遊戯"
-                                    elsif @safe2.number_of_frame.include?("AA") == true
-                                    @maker2 = "オッケー"
-                                    elsif @safe2.number_of_frame.include?("OL") == true
-                                    @maker2 = "オリンピア"
-                                    elsif @safe2.number_of_frame.include?("BB") == true
-                                    @maker2 = "京楽産業"
-                                    elsif @safe2.number_of_frame.include?("GZ") == true
-                                    @maker2 = "銀座"
-                                    elsif @safe2.number_of_frame.include?("SS") == true
-                                    @maker2 = "サミー"
-                                    elsif @safe2.number_of_frame.include?("SA") == true
-                                    @maker2 = "SANKYO"
-                                    elsif @safe2.number_of_frame.include?("ST") == true
-                                    @maker2 = "サンスリー"
-                                    elsif @safe2.number_of_frame.include?("WW") == true
-                                    @maker2 = "サンセイアールアンドディ"
-                                    elsif @safe2.number_of_frame.include?("SY") == true
-                                    @maker2 = "三洋物産"
-                                    elsif @safe2.number_of_frame.include?("JJ") == true
-                                    @maker2 = "JFJ"
-                                    elsif @safe2.number_of_frame.include?("JB") == true
-                                    @maker2 = "ジェイビー"
-                                    elsif @safe2.number_of_frame.include?("SP") == true
-                                    @maker2 = "ソフィア"
-                                    elsif @safe2.number_of_frame.include?("DS") == true
-                                    @maker2 = "大一商会"
-                                    elsif @safe2.number_of_frame.include?("DT") == true
-                                    @maker2 = "大都技研"
-                                    elsif @safe2.number_of_frame.include?("TA") == true
-                                    @maker2 = "タイヨーエレック"
-                                    elsif @safe2.number_of_frame.include?("DW") == true
-                                    @maker2 = "大和製作所"
-                                    elsif @safe2.number_of_frame.include?("TU") == true
-                                    @maker2 = "高尾"
-                                    elsif @safe2.number_of_frame.include?("AB") == true
-                                    @maker2 = "高砂電器産業"
-                                    elsif @safe2.number_of_frame.include?("TK") == true
-                                    @maker2 = "竹屋"
-                                    elsif @safe2.number_of_frame.include?("DL") == true
-                                    @maker2 = "デイ・ライト"
-                                    elsif @safe2.number_of_frame.include?("TO") == true
-                                    @maker2 = "豊丸産業"
-                                    elsif @safe2.number_of_frame.include?("NS") == true
-                                    @maker2 = "七匠"
-                                    elsif @safe2.number_of_frame.include?("EX") == true
-                                    @maker2 = "ニューギン"
-                                    elsif @safe2.number_of_frame.include?("DA") == true
-                                    @maker2 = "ビスティ"
-                                    elsif @safe2.number_of_frame.include?("FJ") == true
-                                    @maker2 = "藤商事"
-                                    elsif @safe2.number_of_frame.include?("HC") == true
-                                    @maker2 = "平和"
-                                    elsif @safe2.number_of_frame.include?("BE") == true
-                                    @maker2 = "ベルコ"
-                                    elsif @safe2.number_of_frame.include?("MH") == true
-                                    @maker2 = "マルホン"
-                                    elsif @safe2.number_of_frame.include?("MZ") == true
-                                    @maker2 = "ミズホ"
-                                    elsif @safe2.number_of_frame.include?("CC") == true
-                                    @maker2 = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-                                
-                                @safe2.update(:type_machine => @type_machine)
-                                @safe2.update(:machine => @machine)
-                                
-                                @safe2.update(:maker => @maker2)
-
-                                if @safe2.hontai == "true"
-                                  @safe2.update(:type_machine => "本体")
-                                end
-                            end
-                            end
-                   
-                redirect_back_or root_url
-                
-  elsif params[:slot]
-                
-  @safeslot = Safe.new(safe_params)
-                unless ( @safeslot.number_slot.blank? )
-
-                if session[:place] == "本社"
-                  @place = true
-                elsif session[:place] == "菊水"
-                  @place2 = true
-                end
-                
-                 @safeslot.update(:number => @safeslot.number_slot )
-                
-                if @safeslot.save
-                                    
-                                    if @safeslot.number.include?("1A") == true
-                                    @maker4 = "高砂電器産業"
-                                    elsif @safeslot.number.include?("1P") == true
-                                    @maker4 = "パイオニア"
-                                    elsif @safeslot.number.include?("1F") == true
-                                    @maker4 = "岡崎産業"
-                                    elsif @safeslot.number.include?("1S") == true
-                                    @maker4 = "サミー"
-                                    elsif @safeslot.number.include?("1U") == true
-                                    @maker4 = "ユニバーサルエンターテイメント"
-                                    elsif @safeslot.number.include?("1O") == true
-                                    @maker4 = "オリンピア"
-                                    elsif @safeslot.number.include?("1N") == true
-                                    @maker4 = "ネット"
-                                    elsif @safeslot.number.include?("1K") == true
-                                    @maker4 = "北電子"
-                                    elsif @safeslot.number.include?("1C") == true
-                                    @maker4 = "メーシー"
-                                    elsif @safeslot.number.include?("1Y") == true
-                                    @maker4 = "山佐"
-                                    elsif @safeslot.number.include?("1V") == true
-                                    @maker4 = "バルテック"
-                                    elsif @safeslot.number.include?("1E") == true
-                                    @maker4 = "大都技研"
-                                    elsif @safeslot.number.include?("1B") == true
-                                    @maker4 = "ロデオ"
-                                    elsif @safeslot.number.include?("1G") == true
-                                    @maker4 = "ベルコ"
-                                    elsif @safeslot.number.include?("1J") == true
-                                    @maker4 = "アリストクラークテクノロジーズ"
-                                    elsif @safeslot.number.include?("1R") == true
-                                    @maker4 = "オーイズミ"
-                                    elsif @safeslot.number.include?("1Q") == true
-                                    @maker4 = "ジェイビーエス"
-                                    elsif @safeslot.number.include?("1X") == true
-                                    @maker4 = "KPE"
-                                    elsif @safeslot.number.include?("2S") == true
-                                    @maker4 = "スパイキー"
-                                    elsif @safeslot.number.include?("2Y") == true
-                                    @maker4 = "ヤーマ"
-                                    elsif @safeslot.number.include?("2P") == true
-                                    @maker4 = "SNKプレイモア"
-                                    elsif @safeslot.number.include?("2A") == true
-                                    @maker4 = "アイ電子"
-                                    elsif @safeslot.number.include?("2C") == true
-                                    @maker4 = "中京遊技"
-                                    elsif @safeslot.number.include?("2D") == true
-                                    @maker4 = "DAXEL"
-                                    elsif @safeslot.number.include?("2E") == true
-                                    @maker4 = "エンタープライズ"
-                                    else
-                                    @maker4 = "未"
-                                    end
-                                    
-                session[:name] = @safeslot.name
-                session[:from] = @safeslot.from
-                session[:price_from] = @safeslot.price_from
-                session[:remarks] = @safeslot.remarks
-                session[:place] = @safeslot.place
-                session[:hontai] = @safeslot.hontai
-                
-                 @machine = "スロット"
-                 @type_machine = "なし"
-                 
-                 @safeslot.update(:type_machine => @type_machine)
-                 @safeslot.update(:machine => @machine)     
-                 @safeslot.update(:maker => @maker4)
-                
-                flash[:success] = "登録完了"
-            
-                redirect_back_or root_url
-                else
-                  render 'new'
-                end
-                end
-                
-                
-                
-  else
-  
-  
-  @safe = Safe.new(safe_params)
-  @safe2 = Safe.new(safe_params)
-  @safe3 = Safe.new(safe_params)
-  @safe4 = Safe.new(safe_params)
-
-                session[:name] = @safe.name
-                session[:from] = @safe.from
-                session[:price_from] = @safe.price_from
-                session[:remarks] = @safe.remarks
-                session[:place] = @safe.place
-                session[:hontai] = @safe.hontai
-
-                
-                # session[:place] = @safe.place
-                
-                
-                flash[:success] = "登録完了"
-
-                            unless ( @safe.number.blank? || @safe.number_of_frame.blank? || @safe.number_of_foundation.blank? )
-                                @safe4.save
-                                    @machine = "パチンコ"
-                                    @type_machine = "本体"
-                                    
-                                    if @safe4.number.include?("AM") == true
-                                    @maker5 = "アムテックス"
-                                    elsif @safe4.number.include?("AD") == true
-                                    @maker5 = "エース電研"
-                                    elsif @safe4.number.include?("EE") == true
-                                    @maker5 = "EXCITE"
-                                    elsif @safe4.number.include?("OZ") == true
-                                    @maker5 = "オーイズミ"
-                                    elsif @safe4.number.include?("OM") == true
-                                    @maker5 = "奥村遊戯"
-                                    elsif @safe4.number.include?("AA") == true
-                                    @maker5 = "オッケー"
-                                    elsif @safe4.number.include?("OL") == true
-                                    @maker5 = "オリンピア"
-                                    elsif @safe4.number.include?("BB") == true
-                                    @maker5 = "京楽産業"
-                                    elsif @safe4.number.include?("GZ") == true
-                                    @maker5 = "銀座"
-                                    elsif @safe4.number.include?("SS") == true
-                                    @maker5 = "サミー"
-                                    elsif @safe4.number.include?("SA") == true
-                                    @maker5 = "SANKYO"
-                                    elsif @safe4.number.include?("ST") == true
-                                    @maker5 = "サンスリー"
-                                    elsif @safe4.number.include?("WW") == true
-                                    @maker5 = "サンセイアールアンドディ"
-                                    elsif @safe4.number.include?("SY") == true
-                                    @maker5 = "三洋物産"
-                                    elsif @safe4.number.include?("JJ") == true
-                                    @maker5 = "JFJ"
-                                    elsif @safe4.number.include?("JB") == true
-                                    @maker5 = "ジェイビー"
-                                    elsif @safe4.number.include?("SP") == true
-                                    @maker5 = "ソフィア"
-                                    elsif @safe4.number.include?("DS") == true
-                                    @maker5 = "大一商会"
-                                    elsif @safe4.number.include?("DT") == true
-                                    @maker5 = "大都技研"
-                                    elsif @safe4.number.include?("TA") == true
-                                    @maker5 = "タイヨーエレック"
-                                    elsif @safe4.number.include?("DW") == true
-                                    @maker5 = "大和製作所"
-                                    elsif @safe4.number.include?("TU") == true
-                                    @maker5 = "高尾"
-                                    elsif @safe4.number.include?("AB") == true
-                                    @maker5 = "高砂電器産業"
-                                    elsif @safe4.number.include?("TK") == true
-                                    @maker5 = "竹屋"
-                                    elsif @safe4.number.include?("DL") == true
-                                    @maker5 = "デイ・ライト"
-                                    elsif @safe4.number.include?("TO") == true
-                                    @maker5 = "豊丸産業"
-                                    elsif @safe4.number.include?("NS") == true
-                                    @maker5 = "七匠"
-                                    elsif @safe4.number.include?("EX") == true
-                                    @maker5 = "ニューギン"
-                                    elsif @safe4.number.include?("DA") == true
-                                    @maker5 = "ビスティ"
-                                    elsif @safe4.number.include?("FJ") == true
-                                    @maker5 = "藤商事"
-                                    elsif @safe4.number.include?("HC") == true
-                                    @maker5 = "平和"
-                                    elsif @safe4.number.include?("BE") == true
-                                    @maker5 = "ベルコ"
-                                    elsif @safe4.number.include?("MH") == true
-                                    @maker5 = "マルホン"
-                                    elsif @safe4.number.include?("MZ") == true
-                                    @maker5 = "ミズホ"
-                                    elsif @safe4.number.include?("CC") == true
-                                    @maker5 = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-
-                                @safe4.update(:type_machine => @type_machine)
-                                @safe4.update(:machine => @machine)
-                                @safe4.update(:maker => @maker5)
-
-                              else
-     
-                                unless @safe.number.blank?
-                                @safe.save
-                                    @machine = "パチンコ"
-                                    @type_machine = "セル"
-
-                                    if @safe.number.include?("AM") == true
-                                    @maker = "アムテックス"
-                                    elsif @safe.number.include?("AD") == true
-                                    @maker = "エース電研"
-                                    elsif @safe.number.include?("EE") == true
-                                    @maker = "EXCITE"
-                                    elsif @safe.number.include?("OZ") == true
-                                    @maker = "オーイズミ"
-                                    elsif @safe.number.include?("OM") == true
-                                    @maker = "奥村遊戯"
-                                    elsif @safe.number.include?("AA") == true
-                                    @maker = "オッケー"
-                                    elsif @safe.number.include?("OL") == true
-                                    @maker = "オリンピア"
-                                    elsif @safe.number.include?("BB") == true
-                                    @maker = "京楽産業"
-                                    elsif @safe.number.include?("GZ") == true
-                                    @maker = "銀座"
-                                    elsif @safe.number.include?("SS") == true
-                                    @maker = "サミー"
-                                    elsif @safe.number.include?("SA") == true
-                                    @maker = "SANKYO"
-                                    elsif @safe.number.include?("ST") == true
-                                    @maker = "サンスリー"
-                                    elsif @safe.number.include?("WW") == true
-                                    @maker = "サンセイアールアンドディ"
-                                    elsif @safe.number.include?("SY") == true
-                                    @maker = "三洋物産"
-                                    elsif @safe.number.include?("JJ") == true
-                                    @maker = "JFJ"
-                                    elsif @safe.number.include?("JB") == true
-                                    @maker = "ジェイビー"
-                                    elsif @safe.number.include?("SP") == true
-                                    @maker = "ソフィア"
-                                    elsif @safe.number.include?("DS") == true
-                                    @maker = "大一商会"
-                                    elsif @safe.number.include?("DT") == true
-                                    @maker = "大都技研"
-                                    elsif @safe.number.include?("TA") == true
-                                    @maker = "タイヨーエレック"
-                                    elsif @safe.number.include?("DW") == true
-                                    @maker = "大和製作所"
-                                    elsif @safe.number.include?("TU") == true
-                                    @maker = "高尾"
-                                    elsif @safe.number.include?("AB") == true
-                                    @maker = "高砂電器産業"
-                                    elsif @safe.number.include?("TK") == true
-                                    @maker = "竹屋"
-                                    elsif @safe.number.include?("DL") == true
-                                    @maker = "デイ・ライト"
-                                    elsif @safe.number.include?("TO") == true
-                                    @maker = "豊丸産業"
-                                    elsif @safe.number.include?("NS") == true
-                                    @maker = "七匠"
-                                    elsif @safe.number.include?("EX") == true
-                                    @maker = "ニューギン"
-                                    elsif @safe.number.include?("DA") == true
-                                    @maker = "ビスティ"
-                                    elsif @safe.number.include?("FJ") == true
-                                    @maker = "藤商事"
-                                    elsif @safe.number.include?("HC") == true
-                                    @maker = "平和"
-                                    elsif @safe.number.include?("BE") == true
-                                    @maker = "ベルコ"
-                                    elsif @safe.number.include?("MH") == true
-                                    @maker = "マルホン"
-                                    elsif @safe.number.include?("MZ") == true
-                                    @maker = "ミズホ"
-                                    elsif @safe.number.include?("CC") == true
-                                    @maker = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-                                    
-                                    @safe.update(:type_machine => @type_machine)
-                                    @safe.update(:machine => @machine)
-                                    @safe.update(:maker => @maker)
-
-                                if @safe.hontai == "true"
-                                  @safe.update(:type_machine => "本体")
-                                end
-                                    
-                                end
-                            
-                            
-                                unless @safe.number_of_frame.blank?
-                                @safe2.save
-                                    
-                                    @machine = "パチンコ"
-                                    @type_machine = "枠"
-                                  
-                                    if @safe2.number_of_frame.include?("AM") == true
-                                    @maker2 = "アムテックス"
-                                    elsif @safe2.number_of_frame.include?("AD") == true
-                                    @maker2 = "エース電研"
-                                    elsif @safe2.number_of_frame.include?("EE") == true
-                                    @maker2 = "EXCITE"
-                                    elsif @safe2.number_of_frame.include?("OZ") == true
-                                    @maker2 = "オーイズミ"
-                                    elsif @safe2.number_of_frame.include?("OM") == true
-                                    @maker2 = "奥村遊戯"
-                                    elsif @safe2.number_of_frame.include?("AA") == true
-                                    @maker2 = "オッケー"
-                                    elsif @safe2.number_of_frame.include?("OL") == true
-                                    @maker2 = "オリンピア"
-                                    elsif @safe2.number_of_frame.include?("BB") == true
-                                    @maker2 = "京楽産業"
-                                    elsif @safe2.number_of_frame.include?("GZ") == true
-                                    @maker2 = "銀座"
-                                    elsif @safe2.number_of_frame.include?("SS") == true
-                                    @maker2 = "サミー"
-                                    elsif @safe2.number_of_frame.include?("SA") == true
-                                    @maker2 = "SANKYO"
-                                    elsif @safe2.number_of_frame.include?("ST") == true
-                                    @maker2 = "サンスリー"
-                                    elsif @safe2.number_of_frame.include?("WW") == true
-                                    @maker2 = "サンセイアールアンドディ"
-                                    elsif @safe2.number_of_frame.include?("SY") == true
-                                    @maker2 = "三洋物産"
-                                    elsif @safe2.number_of_frame.include?("JJ") == true
-                                    @maker2 = "JFJ"
-                                    elsif @safe2.number_of_frame.include?("JB") == true
-                                    @maker2 = "ジェイビー"
-                                    elsif @safe2.number_of_frame.include?("SP") == true
-                                    @maker2 = "ソフィア"
-                                    elsif @safe2.number_of_frame.include?("DS") == true
-                                    @maker2 = "大一商会"
-                                    elsif @safe2.number_of_frame.include?("DT") == true
-                                    @maker2 = "大都技研"
-                                    elsif @safe2.number_of_frame.include?("TA") == true
-                                    @maker2 = "タイヨーエレック"
-                                    elsif @safe2.number_of_frame.include?("DW") == true
-                                    @maker2 = "大和製作所"
-                                    elsif @safe2.number_of_frame.include?("TU") == true
-                                    @maker2 = "高尾"
-                                    elsif @safe2.number_of_frame.include?("AB") == true
-                                    @maker2 = "高砂電器産業"
-                                    elsif @safe2.number_of_frame.include?("TK") == true
-                                    @maker2 = "竹屋"
-                                    elsif @safe2.number_of_frame.include?("DL") == true
-                                    @maker2 = "デイ・ライト"
-                                    elsif @safe2.number_of_frame.include?("TO") == true
-                                    @maker2 = "豊丸産業"
-                                    elsif @safe2.number_of_frame.include?("NS") == true
-                                    @maker2 = "七匠"
-                                    elsif @safe2.number_of_frame.include?("EX") == true
-                                    @maker2 = "ニューギン"
-                                    elsif @safe2.number_of_frame.include?("DA") == true
-                                    @maker2 = "ビスティ"
-                                    elsif @safe2.number_of_frame.include?("FJ") == true
-                                    @maker2 = "藤商事"
-                                    elsif @safe2.number_of_frame.include?("HC") == true
-                                    @maker2 = "平和"
-                                    elsif @safe2.number_of_frame.include?("BE") == true
-                                    @maker2 = "ベルコ"
-                                    elsif @safe2.number_of_frame.include?("MH") == true
-                                    @maker2 = "マルホン"
-                                    elsif @safe2.number_of_frame.include?("MZ") == true
-                                    @maker2 = "ミズホ"
-                                    elsif @safe2.number_of_frame.include?("CC") == true
-                                    @maker2 = "メーシー"
-                                    else
-                                    @machine = "未"
-                                    end
-                                
-                                    @safe2.update(:type_machine => @type_machine)
-                                    @safe2.update(:machine => @machine)
-                                    
-                                    @safe2.update(:maker => @maker2)
-    
-                                    if @safe2.hontai == "true"
-                                      @safe2.update(:type_machine => "本体")
-                                    end
-                                end
-                            end
-                   
-                redirect_back_or root_url
-                
-                
-                
-                
-                
-  
-  
+  if session[:place] == "本社"
+    @place = true
+  elsif session[:place] == "菊水"
+    @place2 = true
   end
+
+
+      if @safe.save
+      # 2 
+
+        flash[:success] = "登録完了"
+        
+          if @safe.number.include?("AM") == true
+            @maker5 = "アムテックス"
+            elsif @safe.number.include?("AD") == true
+            @maker5 = "エース電研"
+            elsif @safe.number.include?("EE") == true
+            @maker5 = "EXCITE"
+            elsif @safe.number.include?("OZ") == true
+            @maker5 = "オーイズミ"
+            elsif @safe.number.include?("OM") == true
+            @maker5 = "奥村遊戯"
+            elsif @safe.number.include?("AA") == true
+            @maker5 = "オッケー"
+            elsif @safe.number.include?("OL") == true
+            @maker5 = "オリンピア"
+            elsif @safe.number.include?("BB") == true
+            @maker5 = "京楽産業"
+            elsif @safe.number.include?("GZ") == true
+            @maker5 = "銀座"
+            elsif @safe.number.include?("SS") == true
+            @maker5 = "サミー"
+            elsif @safe.number.include?("SA") == true
+            @maker5 = "SANKYO"
+            elsif @safe.number.include?("ST") == true
+            @maker5 = "サンスリー"
+            elsif @safe.number.include?("WW") == true
+            @maker5 = "サンセイアールアンドディ"
+            elsif @safe.number.include?("SY") == true
+            @maker5 = "三洋物産"
+            elsif @safe.number.include?("JJ") == true
+            @maker5 = "JFJ"
+            elsif @safe.number.include?("JB") == true
+            @maker5 = "ジェイビー"
+            elsif @safe.number.include?("SP") == true
+            @maker5 = "ソフィア"
+            elsif @safe.number.include?("DS") == true
+            @maker5 = "大一商会"
+            elsif @safe.number.include?("DT") == true
+            @maker5 = "大都技研"
+            elsif @safe.number.include?("TA") == true
+            @maker5 = "タイヨーエレック"
+            elsif @safe.number.include?("DW") == true
+            @maker5 = "大和製作所"
+            elsif @safe.number.include?("TU") == true
+            @maker5 = "高尾"
+            elsif @safe.number.include?("AB") == true
+            @maker5 = "高砂電器産業"
+            elsif @safe.number.include?("TK") == true
+            @maker5 = "竹屋"
+            elsif @safe.number.include?("DL") == true
+            @maker5 = "デイ・ライト"
+            elsif @safe.number.include?("TO") == true
+            @maker5 = "豊丸産業"
+            elsif @safe.number.include?("NS") == true
+            @maker5 = "七匠"
+            elsif @safe.number.include?("EX") == true
+            @maker5 = "ニューギン"
+            elsif @safe.number.include?("DA") == true
+            @maker5 = "ビスティ"
+            elsif @safe.number.include?("FJ") == true
+            @maker5 = "藤商事"
+            elsif @safe.number.include?("HC") == true
+            @maker5 = "平和"
+            elsif @safe.number.include?("BE") == true
+            @maker5 = "ベルコ"
+            elsif @safe.number.include?("MH") == true
+            @maker5 = "マルホン"
+            elsif @safe.number.include?("MZ") == true
+            @maker5 = "ミズホ"
+            elsif @safe.number.include?("CC") == true
+            @maker5 = "メーシー"
+            else
+            @machine = "未"
+          end
+
+            @safe.update(:machine => @machine)
+            @safe.update(:maker => @maker)
+
+            redirect_back_or root_url
+
+            # if @safe.hontai == "true"
+            #   @safe.update(:type_machine => "本体")
+            # end
+
+      else
+      # if @safe.save
+      # 2 
+
+        flash[:danger] = "既に登録済みか、何かしら問題があります。原因が不明な場合お問い合わせください"
+        redirect_to "/safes/new"
+
+      end
+      # if @safe.save
+      # 2
+
+                
+elsif params[:slot]
+# if params[:pachinko]
+# 1
+
+  @safeslot = Safe.new(safe_params)
+  @machine = "スロット"
+  @type_machine = "なし"
+  session[:name] = @safeslot.name
+  session[:from] = @safeslot.from
+  session[:price_from] = @safeslot.price_from
+  session[:remarks] = @safeslot.remarks
+  session[:place] = @safeslot.place
+  session[:hontai] = @safeslot.hontai
+
+  if session[:place] == "本社"
+    @place = true
+  elsif session[:place] == "菊水"
+    @place2 = true
+  end
+                
+                 
+      
+      if @safeslot.save
+      # 2 
+                          
+        if @safeslot.number.include?("1A") == true
+          @maker4 = "高砂電器産業"
+          elsif @safeslot.number.include?("1P") == true
+          @maker4 = "パイオニア"
+          elsif @safeslot.number.include?("1F") == true
+          @maker4 = "岡崎産業"
+          elsif @safeslot.number.include?("1S") == true
+          @maker4 = "サミー"
+          elsif @safeslot.number.include?("1U") == true
+          @maker4 = "ユニバーサルエンターテイメント"
+          elsif @safeslot.number.include?("1O") == true
+          @maker4 = "オリンピア"
+          elsif @safeslot.number.include?("1N") == true
+          @maker4 = "ネット"
+          elsif @safeslot.number.include?("1K") == true
+          @maker4 = "北電子"
+          elsif @safeslot.number.include?("1C") == true
+          @maker4 = "メーシー"
+          elsif @safeslot.number.include?("1Y") == true
+          @maker4 = "山佐"
+          elsif @safeslot.number.include?("1V") == true
+          @maker4 = "バルテック"
+          elsif @safeslot.number.include?("1E") == true
+          @maker4 = "大都技研"
+          elsif @safeslot.number.include?("1B") == true
+          @maker4 = "ロデオ"
+          elsif @safeslot.number.include?("1G") == true
+          @maker4 = "ベルコ"
+          elsif @safeslot.number.include?("1J") == true
+          @maker4 = "アリストクラークテクノロジーズ"
+          elsif @safeslot.number.include?("1R") == true
+          @maker4 = "オーイズミ"
+          elsif @safeslot.number.include?("1Q") == true
+          @maker4 = "ジェイビーエス"
+          elsif @safeslot.number.include?("1X") == true
+          @maker4 = "KPE"
+          elsif @safeslot.number.include?("2S") == true
+          @maker4 = "スパイキー"
+          elsif @safeslot.number.include?("2Y") == true
+          @maker4 = "ヤーマ"
+          elsif @safeslot.number.include?("2P") == true
+          @maker4 = "SNKプレイモア"
+          elsif @safeslot.number.include?("2A") == true
+          @maker4 = "アイ電子"
+          elsif @safeslot.number.include?("2C") == true
+          @maker4 = "中京遊技"
+          elsif @safeslot.number.include?("2D") == true
+          @maker4 = "DAXEL"
+          elsif @safeslot.number.include?("2E") == true
+          @maker4 = "エンタープライズ"
+          else
+          @maker4 = "未"
+        end                             
+       
+         @safeslot.update(:type_machine => @type_machine)
+         @safeslot.update(:machine => @machine)     
+         @safeslot.update(:maker => @maker4)
+         @safeslot.update(:number => @safeslot.number_slot )
+        
+        flash[:success] = "登録完了"
+    
+        redirect_back_or root_url
+
+      else
+      # if @safe.save
+      # 2 
+
+        flash[:danger] = "既に登録済みか、何かしら問題があります。原因が不明な場合お問い合わせください"
+        redirect_to "/safes/new"
+
+      end
+      # if @safe.save
+      # 2
+
+                
+  
 end
+# if params[:pachinko]
+# if params[:slot]
+# 1
+
+end
+# def create
+# 0
+
+
+
+
+
+
+
+
+
+
 
 
 

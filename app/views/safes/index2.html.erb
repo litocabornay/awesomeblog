@@ -1,245 +1,147 @@
-<% provide(:title,"本体の在庫") %>
+<% provide(:title,"本体在庫") %>
 
-<%     session.delete(:fowarding_url)
-    store_location
-    %>
+<% 
+session.delete(:fowarding_url)
+store_location 
+%>
     
     
 <div class="row">
- 
- 
-<div class="padding1-20"> 
-<%= form_tag("/zaiko", method: "get") do %>
-<%= label_tag :maker, "メーカー検索" %>
-<%= text_field_tag :maker, params[:maker] %>
-<%= submit_tag "検索" %>
-<% end %>
-
-<%= form_tag("/zaiko", method: "get") do %>
-<%= label_tag :name, "機器名検索" %>
-<%= text_field_tag :name, params[:name] %>
-<%= submit_tag "検索" %>
-<% end %>
-</div>
 
 
+<div class="container-fluid" style="margin-right: 20px; margin-left: 20px;"> 
+<h3 class="float-left" style="margin-top: -5px; " ><b>　<i class='fa fa-cube'></i> 本体在庫</b></h3>
 
-<div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
-<h3>本体の在庫</h3>
+<div class="float-right" style="margin-right: 40px;" >
 
- 
-
- 
- 
-
-
-
-
-<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-<div class="btn-group" >
-<a href="/zaiko?t=f" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
-<a href="/zaiko-cell?t=f" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
-<a href="/zaiko-flame?t=f" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
-<!--<a href="/zaiko-foundation?t=f" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
-<a href="/zaiko-slot?t=f" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
-</div> 
-<% else%>
-<div class="btn-group" >
+<div class="btn-group float-left" style="margin-right: 40px;"  >
 <a href="/zaiko" class="btn btn-default"><i class="fa fa-bars"></i> 本体</a>
 <a href="/zaiko-cell" class="btn btn-default"><i class="fa fa-bolt"></i> セル</a>
 <a href="/zaiko-flame" class="btn btn-default"><i class="fa fa-clone"></i> 枠</a>
-<!--<a href="/zaiko-foundation" class="btn btn-default"><i class="fa fa-cubes"></i> 基盤のみ</a>-->
 <a href="/zaiko-slot" class="btn btn-default"><i class="fa fa-plus"></i> スロット</a>
 </div>
+
+<div class="padding1-20 float-left"> 
+<%= form_tag("/zaiko", method: "get") do %>
+<%= label_tag :maker, "メーカー検索" %>
+<%= text_field_tag :maker, params[:maker], :style => "height:35px;" %>
+<%= submit_tag "検索" %>
 <% end %>
-
-<div class="btn-group float-right">
- 
- 
-
-
-<a href="?t=c" class="btn btn-default"><i class="fa fa-eye-slash"></i> Compact View</a>
-<a href="?t=f" class="btn btn-default"><i class="fa fa-eye"></i> Full View</a>
-
-<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
-
 </div>
 
-<table class="table table-bordered table-hover" style="margin-top: 30px;">
-
-  <thead class="thead-default">
-
-<% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-<table class="table table-bordered table-hover table-condensed" style="margin-top: 30px; font-size:70%;">
-  <thead class="thead-default">
+<div class="padding1-20 float-left" style="margin-right: 20px;" > 
+<%= form_tag("/zaiko", method: "get") do %>
+<%= label_tag :name, "機器名検索" %>
+<%= text_field_tag :name, params[:name], :style => "height:35px;" %>
+<%= submit_tag "検索" %>
 <% end %>
+</div>
 
+<div class="btn-group float-left">
+<%= link_to "CSV出力",csv_output_two_safes_path(format: :csv), :class => "btn btn-danger" %>
+</div>
+
+</div>
+</div>
+
+<div class="container-fluid" style="margin-right: 20px; margin-left: 20px;">  
+
+
+<table class="table table-bordered table-hover table-condensed" style="margin-top: 30px; font-size:60%;">
+  <thead class="thead-default">
     <tr scope="row">
-     
-      <th class="col-md-1">ID</th>    
-      <th class="col-md-2">メーカー</th>
-
-      <th class="col-md-3">機種名</th>
-
-
-      <th class="col-md-2">仕入価格</th>
-      <th class="col-md-1">倉庫</th>
-
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-      <th class="col-md-3">機器番号</th>
-      <th class="col-md-1">入庫先</th>
-      <th class="col-md-1" style="font-size: 90%;">入庫担当者<%#= sortable "confirm_price", "確定価格(全込)" %></th>
-      <th class="col-md-1">撤去日</th>
-      <th class="col-md-1">検定日</th>    
-      <th class="col-md-1">パネル色</th>
-      <th class="col-md-1">備考</th>
-      <th class="col-md-1">画像</th>
-      
-      <% end %>
-      
+      <th class="col-md-1"><%= sortable "id", "ID" %></th>    
+      <th class="col-md-2"><%= sortable "maker", "メーカー" %></th>
+      <th class="col-md-3"><%= sortable "name", "機種名" %></th>
+      <th class="col-md-2"><%= sortable "price_from", "仕入価格" %></th>
+      <th class="col-md-1"><%= sortable "place", "倉庫" %></th>
+      <th class="col-md-2"><%= sortable "number", "機器番号(QR)" %></th>
+      <th class="col-md-1"><%= sortable "created_at", "入庫日" %></th>
+      <th class="col-md-2"><%= sortable "from", "入庫先" %></th>
+      <th class="col-md-1"><%= sortable "staff", "入庫担当" %></th>
+      <th class="col-md-1"><%= sortable "date_of_removal", "撤去日" %></th>
+      <th class="col-md-1"><%= sortable "date_of_verification", "検定日" %></th>    
+      <th class="col-md-1"><%= sortable "color_of_panel", "パネル" %></th>
+      <th class="col-md-2"><%= sortable "remarks", "備考" %></th>
+      <th class="col-md-1"><%= sortable "photo", "画像" %></th>
       <th class="col-md-1 text-center">編集</th>
       <th class="col-md-1 text-center">出庫</th>
-
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-      <th class="col-md-1 text-center">p-sensor</th>
+      <th class="col-md-1 text-center">ピーセン</th>
       <th class="col-md-1 text-center">削除</th>
-      <% end %>
-      
     </tr>
   </thead>
-<tbody>
+  <tbody>
 
-<% @safes.each do |safe| %>
+  <% @safes.each do |safe| %>
+        <tr scope="row">
+          <td><%= safe.id %></td>
+          <td><%= safe.maker %></td>        
+          <td><%= safe.name %></td>
+      
+          <% unless safe.price_from.blank? %>
+          <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
+          <% else %>
+          <td><%= safe.price_from %> 円</td>
+          <% end %>
+        
+          <td><%= safe.place %></td>
 
+          <td>
+           セ：<%= safe.number[-6..-1] %><br>
+           枠：<%= safe.number_of_frame[-6..-1] %><br>
+           基：<%= safe.number_of_foundation[-6..-1] %>
+          </td>
+
+          <td><%= safe.created_at.strftime("%m/%d") %></td>
+          <td><%= safe.from %></td>
+          <td><%= safe.staff %></td>
+          <td><%= safe.date_of_removal %></td>
+          <td><%= safe.date_of_verification %></td>
+          <td><%= safe.color_of_panel %></td>
+          <td><%= safe.remarks %></td>
+
+          <% unless safe.photo.blank? %>
+          <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="40"></a></td>
+          <% else %>
+          <td class="width5vw"><img src="assets/No-image-found.jpg" width="40"></td>
+          <% end %>
+        
+          <td class="text-center">
+          <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
+          <i class="fa fa-pencil-square-o"></i>
+          <% end %>
+          </td>
+          
+          <% if safe.status == "出庫済" %>
+            <td>出庫済</td>
+          <% else %>
+            <td class="text-center">
+            <%= link_to edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" do %>
+            <i class="fa fa-sign-out"></i>
+          <% end %>
+            </td>
+          <% end %>
+         
+         <td class="text-center">
+          <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
+          <% @utf8 = ERB::Util.url_encode(@utf81) %>
+          <% @url = "https://www.p-sensor.co.jp/php/search_sale.php?&item=" + @utf8 %>
+          <%= link_to "P", @url, :class => "btn btn-primary" %>
+         </td>
+
+         <td class="text-center">
+          <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
+          <i class="fa fa-trash-o"></i>
+          <% end %>
+         </td>
    
-      <tr scope="row">
-
-        <td><%= safe.id %></td>
-        <td><%= safe.maker %></td>        
-        <td><%= safe.name %></td>
-      
-       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-
-      <% unless safe.price_from.blank? %>
-      
-      <td class="width5vw"><%= safe.price_from.to_s(:delimited) %> 円</td>
-      <% else %>
-      <td><%= safe.price_from %> 円</td>
-      <% end %>
-      
-       <% end %>
-
-       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-       <td><%= safe.place %></td>
-       <% end %>
-
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-        <td>
-         セル：<%= safe.number %><br>
-         枠　：<%= safe.number_of_frame %><br>
-         基盤：<%= safe.number_of_foundation %>
-        </td>
-      <% end %>
-
-
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-        <td>
-       <%= safe.created_at.strftime("%m/%d") %> <%= safe.from %>
-        </td>
-      <% end %>
-      
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-        <td>
-       <%= safe.staff %> <br>
-      </td>
-      <% end %>
-
-      <% if !(params[:t] == "f") and !(params[:utf8] == "✓") %>
-      <% unless safe.price_from.blank? %>
-        <td><%= safe.price_from.to_s(:delimited) %> 円</td>
-        <% else %>
-        <td><%= safe.price_from %> 円</td>
-        <% end %>
-       <% end %>
-      
-        
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-        <td><%= safe.date_of_removal %></td>
-        <td><%= safe.date_of_verification %></td>
-      <% end %>
-      
-      <% if !(params[:t] == "f") and !(params[:utf8] == "✓") %>
-        <td><%= safe.place %></td>
-      <% end %>
-
-      <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-        <td><%= safe.color_of_panel %></td>
-        <td><%= safe.remarks %></td>
-      <% unless safe.photo.blank? %>
-        <td class="width5vw"><a href="<%= safe.photo %>" ><img src="<%= safe.photo %>" width="50"></a></td>
-        <% else %>
-        <td class="width5vw"><img src="assets/No-image-found.jpg" width="50"></td>
-        <% end %>
-      <% end %>
-      
-      
-        <td class="text-center">
-        <%= link_to edit2_safes_path(safe), :class => "btn btn-primary" do %>
-        <i class="fa fa-pencil-square-o"></i>
-        <% end %>
-        </td>
-        
-        
-      <% if safe.status == "出庫済" %>
-       <td>出庫済</td>
-      <% else %>
-      
-       <td class="text-center">
-        <%= link_to edit_safe_path(safe, params: { safe: { status: "出庫済"} } ), :class => "btn btn-primary" do %>
-        <i class="fa fa-sign-out"></i>
-        <% end %>
-       </td>
-       
-       
-       
-      <% end %> 
-      
-       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-       <td class="text-center">
-        <% @utf81 = safe.name.encode(Encoding::SJIS, :invalid => :replace, :undef => :replace) %>
-        <% @utf8 = ERB::Util.url_encode(@utf81) %>
-        <% @url = "https://www.p-sensor.co.jp/php/search_sale.php?&item=" + @utf8 %>
-        <%= link_to "P", @url, :class => "btn btn-primary" %>
-       </td>
-       <% end %>
-
-       <% if (params[:t] == "f") || (params[:utf8] == "✓") %>
-       <td class="text-center">
-      <%= link_to  safe ,method: :delete, data: { confirm: "本当にこの在庫データを削除しますか？" }, :class => "btn btn-primary" do %>
-        <i class="fa fa-trash-o"></i>
-        <% end %>
-       </td>
-       <% end %>
- 
-      </tr>
-
-
-<% end %>
-</tbody>
+        </tr>
+  <% end %>
+  </tbody>
 </table>
 
 
 <%= paginate @safes %>
-
-</div>
-</div>
-</div>
-
-
-
-
-
-
 
 </div>
 </div>

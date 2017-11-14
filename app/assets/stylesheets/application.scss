@@ -9,7 +9,7 @@
 
 body {
   -webkit-text-size-adjust : 100%!important ;
-  
+  overflow-x: hidden;
 }
 
 .container { overflow : hidden ; }
@@ -515,7 +515,7 @@ thead{
 
 tbody, tr, td{
   border: 1px solid #ccc;
-
+  font-size:6px;
 }
 
 
@@ -535,7 +535,7 @@ tbody, tr, td{
 }
 
 .font-small2{
-  font-size:8px;
+  font-size:6px;
 }
 
 .sampleTable {
@@ -752,6 +752,25 @@ max-width:600px; text-align:center;
   width: 115% !important;
   }
 }
+
+
+
+
+th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+th .asc {
+  background-image: url(/images/up_arrow.png);
+}
+
+th .desc {
+  background-image: url(/images/down_arrow.png);
+}
+
+
 
 
 .compact{
